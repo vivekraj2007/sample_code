@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Spoorty :: <%= @page_title %> :: The Easiest way to manage your Sports Team</title>
+<%= stylesheet_link_tag "style_new" %>
+<% if params[:controller] == 'home' && params[:action] != 'index'  %>
+<%= javascript_include_tag "login", "recruite" %>
+<% end %>
+<%= javascript_include_tag :defaults %>
+  <%#= stylesheet_link_tag 'trr', :media => 'all' %>
+  <%= javascript_include_tag 'http://static.ak.connect.facebook.com/js/api_lib/v0.4/FeatureLoader.js.php' %>
+  <%= yield :javascripts %>
+</head>
+<body>
+ 
+<center>
+  <!--main-->
+  <div id="main">
+    <!--top-->
+    <div class="clouds">
+      <!--main logo-->
+      <div class="middle">
+        <!--header start-->
+        <%= render :partial => 'layouts/header' %>
+        <!--header end-->
+        <!--middle start-->
+	    <%= yield %>
+        <!--middle end-->
+  	    <%= render :partial => 'layouts/footer' %>
+	  </div>
+      <!--main logo end-->
+      </div>
+    <!--top end-->
+  </div>
+  <!--main end-->
+</center>
+ <%#= javascript_tag "window.api_key = '#{Facebooker['development']['api_key']}';" %>  
+ <%= javascript_tag "window.api_key = '#{Facebooker.api_key}';" %>
+ <%= javascript_tag "window.xd_receiver_location = '#{ENV['XD_RECEIVER_LOCATION']}';" %>
+ <%= javascript_tag "window.facebook_authenticate_location = '#{ENV['FACEBOOK_AUTHENTICATE_LOCATION']}';" %>
+ <%= javascript_include_tag 'facebook_require' %>
+</body>
+</html>

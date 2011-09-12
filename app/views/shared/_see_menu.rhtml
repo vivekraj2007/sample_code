@@ -1,0 +1,83 @@
+<div class="see_nav" onmouseover="show_this('see');" onmouseout="hide_this('see');">
+													
+													<div class="nav_green22">
+													
+													<div style="float:left;">
+			 
+			<% if params[:controller] == 'see/videos' ||  params[:controller] == 'see/photos' ||  params[:controller] == 'see/people' %>
+			 <% def class_on(c)
+            params[:controller].to_s == c ? "current_see1" : ""
+            end %>	
+			<% else %>
+			<% def class_on(c)
+            params[:controller].to_s == c ? "current_see" : ""
+            end %>	
+			<% end %>
+			 <%# def class_on_ul(c)
+            #params[:controller].to_s == c ? "current" : ""
+            #end %>	
+							
+							
+													
+				<div  style="width:630px; float:left; background-image:url(/images/home/see_navbar.gif); background-repeat:no-repeat; position:relative; left:-43px;">
+					
+				<% if params[:controller] == 'see/videos' ||  params[:controller] == 'see/photos' ||  params[:controller] == 'see/people' %>
+				<ul class="seemenu1">
+				<% else %>
+							<ul class="seemenu"> <% end %>
+						
+							<li class=<%= class_on('see/people') %>>
+<!--							<span><b><%#= link_to "Stories",{:controller => 'share/stories'}, { :class => class_on('share/stories'),:title => "Stories"} %></b></span><em></em> -->
+
+							<a href="<%= people_url %>" title="People"><b>People</b><em></em> </a>
+							</li>
+							
+							<li class=<%= class_on('see/photos') %>>
+<!--						<span><b><%#= link_to "Travelogs",{:controller => 'share/travelogs'}, { :class => class_on('share/travelogs'),:title => "Travelogs"} %></b></span><em></em> -->
+					<a href="<%= see_photos_url %>" title="Photos" ><b>Photos</b><em></em></a>
+							</li>
+							
+							<li class=<%= class_on('see/map') %>>
+						    <a href="<%= see_map_url %>" title="Maps"><b>Maps</b><em></em></a>
+							</li>
+							<!--<li class=<%#= class_on('see/videos') %>>
+							<a href="<%#= see_videos_url %>" title="Video"><b>Videos</b><em></em></a>
+							</li>-->
+							<!--<li class=<%#= class_on('see/travelogs') %>>
+						    <a href="<%#= see_travelogs_url %>" title="Travelog">Travelogs<em></em></a>
+							</li>		-->				
+							<!--<li class=<%#= class_on('see/reviews') %>>
+			          
+							<a href="<%#= see_reviews_url %>" title="Reviews" class="selected">Reviews <em></em></a></li>
+							-->
+							<li class=<%= class_on('see/stories') %>>
+						
+							<a href="<%= see_stories_url %>" title="Stories"><b>Stories</b><em></em></a>
+							</li>
+							
+							<!--<li class=<%#= class_on('see/events') %>>
+						
+							<a href="" title="Events">Events Calendar<em></em></a>
+							</li>-->
+							
+							  
+							
+					
+							</ul>
+							<br style="clear: left;" />
+					</div>
+											
+													
+									
+													
+													
+													</div>
+													
+														<%= render :partial => "shared/login"%>
+													
+													
+													</div>
+													
+													
+													
+											</div>

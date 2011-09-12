@@ -1,0 +1,20 @@
+
+<div class="login">
+  <% if flash[:login_falied] %>
+  <% @div_height_val = 0 %>
+  <% else %>
+  <% @div_height_val = 1 %>
+  <% end %>
+  <div class="signin_main" align="center">
+    <div class="Register_main">
+  <%= link_to_if((params[:action] != 'register') && (params[:action] != 'create') , "Register", {:controller => "/account", :action => "register"}, {:class => "Register",:title => "Click here to create a free account" })%> </div>
+    <div class="Register_main1">
+      <div style="float:left; padding-top:1px; width:auto;" align="center"> <a href="javascript:logindiv(<%= @div_height_val %>)" title="Click here to Login"> <%= image_tag "/images/home/sign_in.jpg", :style => "padding-bottom:1px;"%></a> </div>
+      <div style="float:left; width:auto;"> <a href="javascript:logindiv(<%= @div_height_val %>)" class="login" style="padding-left:5px;" title="Click here to Sign In">Sign In</a></div>
+    </div>
+  </div>
+</div>
+
+
+
+

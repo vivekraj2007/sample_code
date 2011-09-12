@@ -1,0 +1,110 @@
+
+<script type="text/javascript">
+check_photoset()
+
+</script>
+
+
+<div class="photosat_rightbar_inner_story" style="display:block;">
+  
+  
+  
+  <!--  navigation divs-->
+    <div style="float:left; width:180px;">
+	
+	 <%# if params[:value] != 'map' %>
+     <div class="photosat_friend" id="photoset_div" style="display:block;"> <%# else %>
+     <!--<div class="photosat_friend" id="photoset_div" style="display:none;">-->
+     <%# end %>
+		
+		
+        <div class="friends_flo">							
+			<div class="videoset_images"></div>
+		</div>
+		
+		
+        <div class="top_images11">
+			 <%= link_to image_tag("/images/home/photos/black_comment.gif"), {:controller => 'myworld/videos', :action => 'comments', :id => @video.videosets.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this Videoset" }%>	
+		
+		</div>
+		  
+        <div class="top_images12">
+          <!--	<a href="javascript://" onclick="Element.show('photoset_map');Element.show('map_div');Element.hide('photoset_image');Element.hide('photoset_div');">-->
+          <div class="stories_map_1">
+            <!--<img src="/images/home/photos/black_map.gif" />-->
+          </div>
+          <!--</a>-->
+        </div>
+		
+		
+      </div>
+    </div>
+	  <!--  navigation divs end -->
+	
+	
+	
+	
+    <div class="photoset_select_story">
+		<% form_for :myworld, :url =>{ :controller =>'/myworld/videos', :action => 'search'} do %>		
+		<select  id="id" name="id" onchange="this.form.submit();" class="photoset_select_story">
+		<option value="">Choose a Videoset...</option>
+		<%= options_from_collection_for_select @user_videosets, "permalink", 'sliced_title' %>
+		</select>
+		<% end %>	
+    </div>
+	
+	
+    <div class="photos_right">
+	  <img src="/images/home/photos/full_screen.gif" alt="stories_box" />&nbsp;
+	  <img src="/images/home/photos/email.gif" alt="stories_mail" />&nbsp; 
+	  <img src="/images/home/photos/print.gif" alt="stories_print" />&nbsp;
+      <% if session[:user_id] == @video.videosets.user_id %>
+				<%= link_to image_tag ("/images/home/photos/edit.gif"), {:controller => "/share/videos", :action => "add_video_to_set",:id =>@video.videosets.permalink},{ :title => "Click here to edit this videoset"} %> 
+				<% end %>
+    </div>
+	
+ </div>
+<div class="clear"></div>
+<div class="photoset_rightbar_inner1">
+  
+    <div class="story_cal1 friends_flo">
+	 <%= @video.title.titlecase if !@video.title.blank?  %>
+	 </div>
+	 
+    <div style="float:right;">
+      <div  style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:12px;  color:#5F5F5F; text-align:left; height:24px; line-height:24px; padding-right:20px;"><%= @video.videosets.title.titlecase if !@video.videosets.blank? %></div>
+      <div  style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:13px; font-weight:bold; color:#ab0300; text-align:left; height:24px; line-height:24px;"><span id="nag">s</span>&nbsp;of&nbsp;<%= @video.videosets.videos.size %></div>
+    </div>
+	
+
+			  
+    <div style="clear:both;"></div>
+	
+    <%# if params[:value] != 'map' %>
+    <div  id="photoset_image" style="display:block;">
+	<%# else %>
+    <!--<div id="photoset_image" style="display:none;">-->
+    <%# end %>
+	
+	
+    <div align="center" style="width:600px; height:490px;" >
+        <div align="center" style="width:600px; height:450px;" onmouseover="show_title();", onmouseout="hide_title();">
+          <% if !@video.videosets.covervideo_id.nil? %>
+ <%= media_player({:file =>  "/video/videofile/#{@video.videosets.covervideo_id}/flv_file/#{@video.videosets.covervideo_id}.flv"}, {:width =>"600px;",:height =>"450px",:autostart => true} )%>
+          <% end %>
+        </div>
+		<div id="show_title" style="display:none; background-color:#242422; width:600px; height:auto;" align="center">
+          <div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#FFFFFF; text-align:left; padding:5px 10px 5px 10px;"> <%= @video.caption.titlecase if !@video.caption.blank? %> </div>
+        </div>
+		
+        
+      </div>
+	  
+	  
+	  
+    </div>
+	
+	</div>
+
+
+	

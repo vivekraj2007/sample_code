@@ -1,0 +1,192 @@
+<script type="text/javascript">
+function show()
+{
+
+document.getElementById('video_show').style.display = 'block';
+}
+</script>
+
+
+<div class="story_title" > 
+<div class="story_font"><%= link_to 'Videosets' ,{:controller => 'admin/Videosets',:action => 'index' }, :style => 'text-decoration:none'%> > <%= @videoset.title.titlecase %> Details</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div><br/>
+
+<div class="stories_rightbar_inner1"><img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+
+<!--photosets div end-->
+
+<!--videoset div start-->
+
+<!--videoset div end-->
+
+<!--Reviews div start-->
+
+
+</div><br/>
+
+<div class="story_title1">
+<div style="float:left;">
+<div style="float:left; width:500px;">
+<div style="float:left;">
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;"><%= check_blank_condition(@videoset.title) %></div>
+</div>
+
+<div class="clearer"></div>
+
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Location </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;"><%= check_blank_condition(@videoset.location) %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Tags </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;"><%= check_blank_condition(@videoset.tag) %></div>
+</div>
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Created On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;"><%= myworld_dateformat(@videoset.created_on) %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Updated On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;"><%= myworld_dateformat(@videoset.updated_on) %></div>
+</div>
+</div>
+</div>
+<div style="float:left; padding-left:10px; width:100px;">
+ <% if @videoset.covervideo_id != 0 %>
+ <% vid = Video.find_by_id(@videoset.covervideo_id) %>
+        <% if !vid.blank? %>
+		<%= image_tag("/video/videofile/#{vid.id}/thumb/#{vid.video_image}",:style => "width:97px; height:97px;")%>
+		 <% else %>
+		<%= image_tag "/images/home/no-image_tumb.gif",:style => "border:1px solid #e1ae62; width:97px; height:97px;" %>
+		 <% end %>
+<% else %>	
+		<%= image_tag "/images/home/no-image_tumb.gif",:style => "border:1px solid #e1ae62; width:97px; height:97px;" %>
+		 <% end %>	 
+</div>
+<div class="story_place_font" style="float:left; padding-left:15px; width:100px; padding-top:10px;">
+Cover Image
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Description </div>
+<div class="story_place_flo">:</div>
+
+<div class="story_place_flo story_place_font1">
+<div style="width:400px; overflow:hidden; float:left;">
+
+<%= check_blank_condition(@videoset.description) %>
+</div>
+</div>
+</div>
+<div class="clearer"></div>
+<div id="video_show">
+xvxvx
+</div>
+<div class="clearer"></div><br/>
+
+<div>
+
+
+
+<% if @videos.size > 2 %>
+<div style="width:550px;height:240px; overflow-y:scroll; overflow-x:hidden; border:0px solid #663366; float:left;">
+<% else %>
+<div style="width:550px;height:240px; border:0px solid #663366; float:left;">
+<% end %>
+<div class="story_place_font story_place_flo">Videos</div>
+<% if !@videos.blank? %>
+<% for video in @videos %>
+<div  style="width:550px; float:left; padding:10px 0px 10px 0px;">
+
+<div style="width:120px; height:97px; float:left;">
+<% if !video.video_image.blank? %>
+<%#= image_tag("/video/videofile/#{video.id}/thumb/#{video.video_image}",:style => "width:97px; height:97px;",:onclick =>"show();") %>
+
+<%= link_to_remote  image_tag("/video/videofile/#{video.id}/thumb/#{video.video_image}",:style => "width:97px; height:97px;"), 
+:url => {:action=> 'show',:id => video.id}, 
+:update => 'video_show',
+:before => "Element.show('insurance_kit');",
+:complete => "Element.hide('insurance_kit');" %>
+<%= image_tag 'kit.gif', :id=>'insurance_kit', :class=>"kit", :style=>"display:none; border:none;" %>
+
+
+<% else %>
+<%= image_tag "/images/home/no-image_tumb.gif",:style => "border:1px solid #e1ae62; width:97px; height:97px;" %>
+<% end %>
+</div>
+<div style="width:auto; height:97px; float:left;">
+
+<div style="width:auto; float:left;">
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding:0px 0px 5px 15px; font-weight:600; float:left; width:100px;">Title</div>
+<div style="float:left;">:</div>
+<div style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding-left:20px;"><%= check_blank_condition(video.title) %></div>
+
+</div>
+<div style="clear:both;"></div>
+<div style="width:auto;float:left;">
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding:0px 0px 5px 15px; font-weight:600; float:left;  width:100px;">Caption </div>
+<div style="float:left;">:</div>
+<div style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding-left:20px;"><%= check_blank_condition(video.caption) %></div>
+</div>
+<div style="clear:both;"></div>
+<div style="width:auto;float:left;">
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding:0px 0px 5px 15px; font-weight:600; float:left;  width:100px;">Uploaded On </div>
+<div style="float:left;">:</div>
+<div style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding-left:20px;"><%= myworld_dateformat(video.created_on) %></div>
+</div>
+
+</div>
+
+</div>
+
+
+
+
+
+
+
+<% end %>
+<div style="clear:both;"></div>
+<% end %>
+</div>
+
+
+
+
+</div>
+
+
+<div class="clearer"></div>
+
+
+
+
+
+
+
+
+<div>
+<div class="story_place_font story_place_flo">&nbsp; </div>
+<div class="story_place_flo">&nbsp;</div>
+<div  class="story_place_flo story_place_font1">
+<div><%#= link_to "Edit", {:controller => 'admin/stories', :action => 'edit',:id => @story.id},:class => 'story_place_font' %>
+<%= link_to "Back to List", {:controller => 'admin/videosets', :action => 'index'},:class => 'story_place_font' %></div>
+</div>
+</div>
+</div>

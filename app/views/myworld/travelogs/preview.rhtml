@@ -1,0 +1,358 @@
+
+<!--script for print option-->
+
+<script type="text/javascript">
+function print1()
+{
+window.print();
+}
+</script>
+
+<% if !@travelog.added_videos.blank? %>
+
+
+
+<% elsif !@travelog.slideshow_id.blank? && @travelog.slideshow_id != 0 %>
+<!--image slide show-->
+<SCRIPT LANGUAGE="JavaScript">
+var timeDelay = 2; // change delay time in seconds
+var Pix = new Array
+<% varart = Array.new %>
+<% totalphotos = Photo.find(:all, :conditions =>["photoset_id like ?",@travelog.slideshow_id])%>
+<% for photoadded in totalphotos %>
+<% orgpath = '"' %>		
+<% orgpath << "http://greatdividemedia.com"+url_for_file_column(photoadded, 'image','main')%>	
+<% orgpath << '"' %>
+<% varart << orgpath %>
+<% end %>
+(<%= varart.join(',') %>);
+var howMany = Pix.length;
+timeDelay *= 1000;
+var PicCurrentNum = 0;
+var PicCurrent = new Image();
+PicCurrent.src = Pix[PicCurrentNum];
+function startPix() {
+setInterval("slideshow()", timeDelay);
+}
+function slideshow() {
+PicCurrentNum++;
+if (PicCurrentNum == howMany) {
+PicCurrentNum = 0;
+}
+PicCurrent.src = Pix[PicCurrentNum];
+document["ChangingPix"].src = PicCurrent.src;
+}
+
+</script>
+<!--image slide show end-->
+
+<% elsif !@travelog.added_images.blank? %>		
+<!--image slide show-->
+<SCRIPT LANGUAGE="JavaScript">
+var timeDelay = 2; // change delay time in seconds
+var Pix = new Array
+<% varart = Array.new %>
+<% for travelogid in @travelog.added_images.split(',') %>
+<% photoadded = Photo.find(travelogid)%> 	
+<% orgpath = '"' %>		
+<% orgpath << "http://greatdividemedia.com"+url_for_file_column(photoadded, 'image','main')%>	
+<% orgpath << '"' %>
+<% varart << orgpath %>
+<% end %>
+(<%= varart.join(',') %>);
+var howMany = Pix.length;
+timeDelay *= 1000;
+var PicCurrentNum = 0;
+var PicCurrent = new Image();
+PicCurrent.src = Pix[PicCurrentNum];
+function startPix() {
+setInterval("slideshow()", timeDelay);
+}
+function slideshow() {
+PicCurrentNum++;
+if (PicCurrentNum == howMany) {
+PicCurrentNum = 0;
+}
+PicCurrent.src = Pix[PicCurrentNum];
+document["ChangingPix"].src = PicCurrent.src;
+}
+
+</script>
+<!--image slide show end-->
+
+<% end %>
+
+
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+						<div class="left_bar_stories">
+						
+						
+						<!--advertisement-div-start-->
+						
+						
+						<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">.
+		  	<%# if @story.story_adv.topadv_id != 0 &&  !@story.story_adv.topadv_id.blank? %>								
+								<%#= @story.story_adv.top_adv.script %>								
+								<% #else %>
+								<%#= @top_adv.script %>
+								<%# end %>
+		  
+		  
+		  </div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement">
+		  
+		      <%# if @story.story_adv.bottomadv_id != 0 &&  !@story.story_adv.bottomadv_id.blank? %>								
+								<%#= @story.story_adv.bottom_adv.script %>								
+								<%# else %>
+								<%#= @bottom_adv.script %>
+								<%# end %>
+		  
+		  </div>
+      
+      </div>
+    </div>
+							
+						<!--advertisement-div-end-->
+						<!--stories start-->
+						<div class="stories_rightbar">
+						
+						<!--top select-->
+						
+						<% if params[:value] == 'map' %>
+								<div class="stories_rightbar_inner_story" id="story" style="display:none;">
+								<% else %>
+								<div class="stories_rightbar_inner_story" id="story" style="display:block;">
+								<% end %>
+						<div class="story_cal1_story121_new">
+						
+							<div class="friends_flo"><div class="stories_images"></div></div>
+							
+						<div class="top_images11">
+							<%= link_to image_tag("/images/home/stories/comment_black.gif"), {:controller => '/myworld/travelogs', :action => 'comments', :id => @travelog.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this Travelog" }%>
+							</div>	
+							
+					<div class="top_images12">		
+		<a href="javascript://" onclick="Element.show('map'); Element.show('story_map');Element.hide('image'); Element.hide('story');"><div class="stories_map_1"  title="Click here to view location of the story"><img src="/images/home/stories/map_black.gif" /></div></a>					
+							
+							</div>	
+						
+						</div>
+						
+						
+								
+							
+								
+								<div class="photoset_select_story">
+								<% form_for :myworld, :url =>{ :controller =>'/myworld/travelogs', :action => 'preview'} do %>		
+								<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+								<option value="">Choose a Travelog...</option>
+								<%#= options_from_collection_for_select @user_stories_published, "permalink", 'title' %>
+								</select>
+						        <% end %>						 	
+								</div>
+								
+							
+								
+								
+								
+				<div class="stories_right">
+				
+				<img src="/images/home/stories/stories_box.gif" alt="stories_box" />&nbsp;
+				<img src="/images/home/stories/stories_mail.gif" alt="stories_mail" />&nbsp;
+				<img src="/images/home/stories/stories_print.gif" alt="stories_print" />&nbsp;
+				<% if session[:user_id] == @travelog.user.id %>
+				<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/travelogs", :action => "edit_travelog",:id => @travelog.permalink},{ :title => "Click here to edit this travelog"} %> 
+				<% end %>			
+				</div>
+				</div>
+				
+				
+			<!--	map start-->
+				<% if params[:value] == 'map' %>
+				<div class="stories_rightbar_inner_story" id="story_map" style="display:block;">
+				<% else %>
+						<div class="stories_rightbar_inner_story" id="story_map" style="display:none;">
+				<% end %>				
+								<div class="story_cal1_story121_new">
+								
+								<div class="top_images12"><a href="javascript://" onclick="Element.show('image'); Element.show('story');Element.hide('map'); Element.hide('story_map');"><div class="stories_map_2" title="Click here view the story"><img src="/images/home/stories/story_black.gif"/></div></a></div>
+								
+								<div class="top_images10"><%= link_to image_tag("/images/home/stories/comment_black.gif"), {:controller => '/myworld/travelogs', :action => 'comments', :id => @travelog.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this travelog" }%></div>
+								
+								<div class="friends_flo"><a href="javascript://" onclick="Element.show('map'); Element.show('story_map');Element.hide('image'); Element.hide('story');"><div class="stories_map_images121"></div></a></div>
+					
+						
+								</div>
+	
+								<div class="story_select_story">
+								<% form_for :myworld, :url =>{ :controller =>'/myworld/travelogs', :action => 'preview'} do %>		
+								<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+								<option value="">Choose a Travelog...</option>
+								<%#= options_from_collection_for_select @user_stories_published, "permalink", 'title' %>
+								</select>
+						        <% end %>						 	
+								</div>
+								
+		
+								
+				<div class="stories_right">
+				
+				<img src="/images/home/stories/stories_box.gif" alt="stories_box" />&nbsp;
+				<img src="/images/home/stories/stories_mail.gif" alt="stories_mail" />&nbsp;
+				<img src="/images/home/stories/stories_print.gif" alt="stories_print" />&nbsp;
+				<% if session[:user_id] == @travelog.user.id %>
+				<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/travelogs", :action => "edit_travelog",:id => @travelog.permalink},{ :title => "Click here to edit this travelog"} %> 
+				<% end %>			
+				</div>
+				</div>
+								
+				
+					<!--	map end-->
+			
+				
+				
+				
+									<!--top select end-->
+		<!--stories content start-->	
+				<div class="stories_rightbar_inner1">
+				
+				
+				<div class="stories_paintball">
+				<%= title_slice(@travelog.title,50) %></div>
+				<div class="clear"></div>
+				<div class="stories_shooting"><%= title_slice(@travelog.tag,50) %></div>
+				<div class="clear"></div>
+				
+				<div class="stories_date">
+				<div class="friends_flo">
+				<%= myworld_dateformat(@travelog.created_at) %>
+				<span class="home">
+				<%= @travelog.travelog_comments.length %> Comments
+				</span>
+				</div>
+				<div class="stories_rating" id ="star-ratings-block">
+				<% if @travelog.rated_by_user?(session[:user_id]) %>
+			     <%= render :partial => 'myworld/travelogs/ratee'%>						
+				<% else %>
+				<%= render :partial => 'myworld/travelogs/rating'%>						
+				<% end %>
+				</div>
+				</div>
+				
+										
+
+				<div class="clear"></div>
+				
+				<% if params[:value] == 'map' %>
+				<div class="stories_rightbar_inner1" id="image" style="display:none;">
+				<% else %>
+				<div class="stories_rightbar_inner1" id="image" style="display:block;">
+				<% end %>
+				
+				<% if !@travelog.added_videos.blank? || !@travelog.added_videos.nil? %>
+				
+				<% vid_id = @travelog.added_videos.split(',') %>
+				<% vid = Video.find_by_id(vid_id[0]) %>
+				
+				<% if vid %>
+				<%= media_player({:file =>  url_for_file_column(vid, "videofile")}, {:width =>522,:height => 392,:autostart => false} )%>		
+				<% end %>
+				
+				<% elsif !@travelog.slideshow_id.blank? && @travelog.slideshow_id != 0 %>
+				<img name="ChangingPix" src="/images/home/stories/stories_mainimage.gif"  border=0 >
+				
+				
+				<% elsif !@travelog.added_images.blank? %>								
+				<img name="ChangingPix" src="/images/home/stories/stories_mainimage.gif"  border=0 >
+				
+				
+				<% else %>
+				<img src="/images/home/stories/stories_mainimage.gif"  border=0>
+				
+				
+				<% end %>
+
+				</div>
+				
+				<% if params[:value] != 'map'%>
+				<div class="stories_rightbar_inner1" id="map" style="display:none;">
+				<% else %>
+				<div class="stories_rightbar_inner1" id="map" style="display:block;">
+				<% end %>
+								
+				<%= render :partial => '/myworld/travelogs/map' %>
+				
+				</div>
+				
+				
+	<!--	image thumbnail slide start here	-->	
+				
+				
+		<% if !@travelog.slideshow_id.blank? && @travelog.slideshow_id != 0 %>
+		
+     
+	    <% totalphotos = Photo.find(:all, :conditions =>["photoset_id like ?",@travelog.slideshow_id]) %>
+		
+		<% if totalphotos.size > 8 %>	
+		    <div style="width:500px; overflow-x:scroll; overflow-y:hidden; height:70px; float:left">		
+            <div style="padding-left:5px; float:left;border:1px solid #000000; height:10px; width:1000px; ">
+		    <% for photoimages in totalphotos %>
+		    <%= image_tag(url_for_file_column(photoimages, "image","thumbnail"))%>
+			<% end %>
+		   </div>
+           </div>
+		
+		<% end %>
+		
+		
+		
+		
+	    
+		
+		
+        <% elsif !@travelog.added_images.blank? %>
+        <div class="stories_rightbar_inner2">
+          <% for travelogid in @travelog.added_images.split(',') %>
+          <% photoadded = Photo.find_by_id(travelogid) %>
+		  <% if photoadded %>
+          <% if !photoadded.image.blank? %>
+          <div style="padding-left:5px; float:left;">
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %>
+		    </div>
+          <% end %>
+		  <% end %>
+          <% end %>
+        </div>
+        <% end %>
+				
+			<!--	image thumbnail slide end here	-->	
+				
+				<div class="stories_tag_text">
+				<%= @travelog.tellus %>
+				</div>
+				
+				</div>
+				
+				
+				
+			<!--stories content end-->	
+								
+						
+						</div>
+						<!--stories end-->
+						
+						</div>
+						<!--left stories end-->
+						</div>
+	
+				

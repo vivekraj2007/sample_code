@@ -1,0 +1,210 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<% if @page_title %>
+<title>Uncharted - <%= @page_title %></title>
+<% else %>
+<!--<title>UNCHARTED - MYWORLD - WORLD'S FIRST GEO-SOCIAL MEDIA AGENCY </title>-->
+<title>Uncharted - Explore. Live. Feel. </title>
+<% end %>
+
+
+
+<%= javascript_include_tag :defaults %>
+<%= stylesheet_link_tag 'style11' , 'myworld_style' %>
+<%= javascript_include_tag 'login_dropdown' %>
+<%= javascript_include_tag 'myworld' %>
+<%= javascript_include_tag 'home' %>
+
+<%= javascript_include_tag 'rounded_corners_lite' %>
+
+<%= javascript_include_tag 'field_sets' %>
+<%= javascript_include_tag 'ufo' %>
+<%#= stylesheet_link_tag 'njquery' %>
+<%#= javascript_include_tag 'profile_image' %>
+<%#= javascript_include_tag 'validations' %>
+
+
+
+
+<!--for prototype window-->
+<%#= stylesheet_link_tag 'default' %> 
+<%#= stylesheet_link_tag "alphacube", :media => "all" %>
+<%#= javascript_include_tag 'window'%>
+<%#= javascript_include_tag "hikita.js" %>
+
+<!--google map API key-->
+<script src="http://maps.google.com/maps?file=api&v=2&markers=21.796875,31.952162,blues|21.796875,31.952162,tinygreen&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+	
+<script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+<!--google map API key-->
+
+
+
+
+<script>
+window.onload=function()
+{
+
+<% if flash[:login_falied] %>
+logindiv(0);
+<% end %>
+
+tab_image(document.getElementById('image_tab').value);
+
+<% if params[:controller] == 'myworld/stories' %>
+ 
+   		 	<% if params[:action] == 'preview' ||  params[:action] == 'comments' %>
+			preview_map();
+			popup_div();
+		   <% end %>
+			
+<% elsif params[:controller] == 'myworld/photos' %>
+			<% if params[:action] == 'preview' ||  params[:action] == 'comments' %>
+			coverimage_div();
+			popup_div();
+			<% end %>
+			
+<% elsif params[:controller] == 'myworld/videos' %>
+			<% if params[:action] == 'preview' %>
+			coverimage_div();
+			<% end %>			
+			
+<% elsif params[:controller] == 'account' %>
+          latlongload();			
+		  
+		  
+<% elsif params[:controller] == 'myworld/map' %>			
+         initialize();
+		 
+		 
+<% end %>
+}
+ </script>
+ 
+<!-- end fo all onload functions-->
+
+
+
+
+</head>
+<body>
+
+<!--main-->
+<%= hidden_field_tag 'image_tab', 'myworld', :id => 'image_tab' %>
+<div class="see_ad_top" align="center" >
+		<div class="see_ad_top_main" align="center">
+			<%#= render :partial => 'shared/adverticements', :locals => { :ad_id => 17} %>	
+			<% if !@header_adv.blank? %>
+			<%= @header_adv %>
+			<% end %>
+		</div>
+</div>
+
+<div id="main">
+
+
+<!--header-->
+<%= render :partial => 'shared/header' %>
+<!--header-div-end-->
+
+<!--content start-->
+
+<div class="content">
+
+
+ <!--menu-->
+    <div id="default"> 
+	  <%= render :partial => 'shared/account_menu'%> 
+	 </div>
+	 
+    <div id="go" class="my_world_display">
+	 <%= render :partial => 'shared/go_menu'%>
+	  </div>
+	  
+    <div id="see" class="my_world_display">
+	 <%= render :partial => 'shared/see_menu'%>
+	  </div>
+	  
+    <div id="do" class="my_world_display"> 
+	<%= render :partial => 'shared/do_menu'%> 
+	</div>
+	
+	
+	<div id="share" class="my_world_display">
+	 <%= render :partial => 'shared/share_menu'%>
+	 </div>
+	 
+	 
+    <div class="clear"></div>
+	
+    <!--menu-div-end-->
+
+
+
+  <div class="clear"></div>
+  
+
+<% if params[:controller] == 'myworld/friends' || params[:controller] == 'myworld/photos' || params[:controller] == 'myworld/videos'%>
+<div class="black_top3">
+<% else %>
+   <div class="content_new">
+<% end %>
+  
+  
+      <div class="left_bar1" >
+        <% if flash[:notice] %>
+        <div align="center" class="see_ad_text"> <%= flash[:notice]  %> </div>
+        <% end %>
+		
+		
+        <%= yield %>
+		</div>
+		
+	
+      <!--right block-->
+	   <% if !@user_profile.blank? %>
+		   <% if params[:controller] == 'myworld/friends' || params[:controller] == 'myworld/photos' || params[:controller] == 'myworld/videos' %>		
+		   <%= render :partial => "/shared/user_profile"%>	
+		   <% else %>
+		    <div class="right_1">
+			<div class="inner_div">
+			<div class="cornerbg"></div>
+			<%= render :partial => "/shared/user_profile"%>		
+			</div>		 
+			</div>
+		   <% end %>
+	  
+	   	
+	   <% else %>
+	   <%= render :partial => "/shared/see_right_block" %>
+	   <% end %>
+       <!--rightblock-div-end-->
+	   
+
+</div></div>
+
+	
+    <div style="clear:both;"></div>
+	
+      <!--	footer start here-->
+    <div class="see_ad_bg">
+	      <%= render :partial => 'layouts/footer' %>
+    </div>
+	<!--	footer end here-->
+	</div>
+
+ 
+</div>
+ <!--content-div-end-->
+
+</div>
+<!--main-div-end-->
+<%= render :partial => 'shared/google_analytics_code' %>
+</body>
+</html>

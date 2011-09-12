@@ -1,0 +1,2 @@
+module Myworld::SroriesHelper
+end

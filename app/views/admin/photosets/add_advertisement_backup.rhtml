@@ -1,0 +1,54 @@
+
+<div style="color:#444e02; padding:0px;width:600px; margin:0px; font-size:20px;"  class="admin_font" > 
+<div style="margin-bottom:8px;" align="center">Add Advertisement to this photoset > <%= @photoset.title %></div> 
+
+<% form_for :adv do %>
+
+
+<div style="width:550px;">
+<div style="width:120px; font-size:12px; float:left; text-align:right">Header Top Ad &nbsp;:&nbsp; </div>
+<div style="float:left;padding-left:3px; font-size:12px; float:left; text-align:right">
+<% header = Advertisement.find(:all, :conditions => ["parient_id LIKE ?",17]) %>
+<% if !header.blank? %>
+<%= select("adv", "headeradv_id", header.collect {|p| [ "#{p.sponser_name}", p.id] }, {:prompt => "Choose Advertisement"}) %>
+<% else %>
+There are no Ads in this category. click here to add new Ad in this category <%= link_to "Add New Ad", :controller => "/admin/ads_management" %>
+<% end %>
+</div>
+<div style="clear:both; "></div>
+</div>
+
+
+
+<div style="width:550px; margin-top:5px;">
+<div style="width:120px; font-size:12px; float:left; text-align:right">Left Top Ad &nbsp;:&nbsp; </div>
+<div style="float:left;padding-left:3px; font-size:12px; float:left; text-align:right">
+<% left_top = Advertisement.find(:all, :conditions => ["parient_id LIKE ?",1]) %>
+<% if !left_top.blank? %>
+<%= select("adv", "topadv_id", left_top.collect {|p| [ "#{p.sponser_name}", p.id] }, {:prompt => "Choose Advertisement"}) %>
+<% else %>
+There are no Ads in this category. click here to add new Ad in this category <%= link_to "Add New Ad", :controller => "/admin/ads_management" %>
+<% end %>
+</div>
+<div style="clear:both; "></div>
+</div>
+
+
+
+<div  style="width:120px; margin-top:5px; font-size:12px; float:left; text-align:right">Left Bottom Ad &nbsp;:&nbsp;</div> 
+<div style="float:left;padding-left:3px;margin-top:5px; font-size:12px; float:left; text-align:right">
+<% left_bottom = Advertisement.find(:all, :conditions => ["parient_id LIKE ? ",6]) %>
+<% if !left_bottom.blank? %>
+<%= select("adv", "bottomadv_id", left_bottom.collect {|p| [ "#{p.sponser_name}", p.id] }, {:prompt => "Choose Advertisement"}) %>
+<% else %>
+There are no Ads in this category. click here to add new Ad in this category <%= link_to "Add New Ad", :controller => "/admin/ads_management" %>
+<% end %>
+</div>
+<div style="clear:both;"></div>
+<div > &nbsp;</div>
+<div align="left" style="padding-top:5px; padding-left:120px;">
+<%= submit_tag 'Add Advertisement' %>
+</div>
+<% end %>
+
+</div>

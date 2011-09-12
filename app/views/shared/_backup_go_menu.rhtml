@@ -1,0 +1,115 @@
+<div class="see_nav">
+
+		<div class="nav_red">
+		
+		
+		<div style="float:left;">
+			 
+			
+			<% def class_on(c)
+            params[:controller].to_s == c ? "current_see" : ""
+            end %>	
+			
+			 <%# def class_on_ul(c)
+            #params[:controller].to_s == c ? "current" : ""
+            #end %>	
+							
+							
+													
+				<div  style=" float:left; margin-left:20px;">
+					
+				
+							<div id="ddtopmenubar" class="mattblackmenu">
+<ul>
+<li><a href="#">No.America</a></li>
+<li><a href="#" rel="ddsubmenu1">So.America</a></li>
+<li><a href="#" rel="ddsubmenu2">Caribbean</a></li>
+<li><a href="http://www.dynamicdrive.com/forums/">Africa</a></li>
+<li><a href="#" rel="ddsubmenu3">Europe</a></li>
+<li><a href="#" rel="ddsubmenu1">Middle East</a></li>
+<li><a href="#" rel="ddsubmenu2">Asia</a></li>
+<li><a href="#">Australia</a></li>
+<li><a href="#" rel="ddsubmenu1">Oceania</a></li>
+<li><a href="#" rel="ddsubmenu2">Most Popular</a></li>
+<!--<li><a href="http://www.dynamicdrive.com/forums/">Forums</a></li>
+<li><a href="#">Home</a></li>-->
+</ul>
+</div>
+
+
+<ul id="ddsubmenu1" class="ddsubmenustyle">
+<li><a href="#">Item 1a</a></li>
+<li><a href="#">Item 2a</a></li>
+<li><a href="#">Item Folder 3a</a>
+  <ul>
+  <li><a href="#">Sub Item 3.1a</a></li>
+  <li><a href="#">Sub Item 3.2a</a></li>
+  <li><a href="#">Sub Item 3.3a</a></li>
+  <li><a href="#">Sub Item 3.4a</a></li>
+  </ul>
+</li>
+<li><a href="#">Item 4a</a></li>
+<li><a href="#">Item Folder 5a</a>
+  <ul>
+  <li><a href="#">Sub Item 5.1a</a></li>
+  <li><a href="#">Item Folder 5.2a</a>
+    <ul>
+    <li><a href="#">Sub Item 5.2.1a</a></li>
+    <li><a href="#">Sub Item 5.2.2a</a></li>
+    <li><a href="#">Sub Item 5.2.3a</a></li>
+    <li><a href="#">Sub Item 5.2.4a</a></li>
+    </ul>
+  </li>
+	</ul>
+</li>
+<li><a href="#">Item 6a</a></li>
+</ul>
+
+
+
+<ul id="ddsubmenu2" class="ddsubmenustyle">
+<li><a href="#">Item 1b</a></li>
+<li><a href="#">Item 2b</a></li>
+<li><a href="#">Item Folder 3b</a>
+  
+</li>
+<li><a href="#">Item 4b</a></li>
+<li><a href="#">Item Folder 5b</a>
+  <ul>
+  <li><a href="#">Sub Item 5.1b</a></li>
+  <li><a href="#">Item Folder 5.2b</a>
+    <ul>
+    <li><a href="#">Sub Item 5.2.1b</a></li>
+    <li><a href="#">Sub Item 5.2.2b</a></li>
+    <li><a href="#">Sub Item 5.2.3b</a></li>
+    </ul>
+  </li>
+  
+	</ul>
+</li>
+<li><a href="#">Item 6b</a></li>
+</ul>
+
+
+<ul id="ddsubmenu3" class="ddsubmenustyle">
+<li><a href="#">Image Optimizer</a></li>
+<li><a href="#">FavIcon Generator</a></li>
+<li><a href="#">Email Riddler</a></li>
+<li><a href="#">htaccess Password</a></li>
+<li><a href="#">htaccess Banning</a></li>
+</ul>
+
+						
+					</div>
+											
+													
+									
+													
+													
+													</div>
+		
+			<%= render :partial => "shared/login"%>
+													
+		</div>
+
+</div>

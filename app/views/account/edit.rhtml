@@ -1,0 +1,551 @@
+<%#= error_messages_for 'profile' %><br/>
+<%#= error_messages_for 'user' %>
+<!--script for fields hint text styles -->
+
+
+<!--google map API KEY-->
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw"
+      type="text/javascript">
+</script>
+
+<script type="text/javascript">
+function showAddress(text)
+	    {
+		geocoder = new GClientGeocoder();
+		address = document.getElementById(text).value;
+		if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert("Unknown location: "+address );
+			   //document.getElementById(text).value = "City, State, Country";
+			   document.getElementById(text).focus();
+			   //change_style(text);
+			 	  }
+            })};	
+			
+		}
+
+
+</script>
+
+
+
+
+<% form_for :user,  :url => { :action => "update"} , :html => {:multipart => true, :onsubmit => "account_edit();"} do  %>
+<div class="left_bar_stories_new1" >
+		
+		
+		
+		<div class="edit_account_mainnew">
+		
+		<div class="edit_story_middle">
+						<div class="inner_story1 stories_paintball121"><img src="/images/home/glob.gif" alt="" style="vertical-align:middle;">&nbsp;&nbsp;Edit My Profile</div>
+						<div class="inner_story2">
+						
+						
+						
+						<div class="worldmap_cal1_story">
+       <div class="top_images">
+		  <%= link_to (image_tag("/images/home/comment2.gif"), profile_url(:id => @user.screen_name.gsub(' ', '_')),:title => "Click here to view latest Posts")%>
+            
+          </div>
+          <div class="top_images">		  
+		  <%= link_to (image_tag("/images/home/profile2.gif"), profilemap_url(:id => @user.screen_name.gsub(' ', '_') ),{:title => "Click here to View profile details"})%>
+		   </div>
+		  <%# if check_login(@user.id) %> 
+          
+		     <div class="friends_flo">
+		   <div class="myworldmap_images_new"></div>
+		    </div>
+			<%# end %>
+        </div>
+						
+						<!--<div class="story_cal1_story121">
+								
+								
+							<div class="story_121">
+							<%#= link_to( image_tag("/images/home/map_img6.jpg"), profile_url(:id => @user.screen_name.gsub(' ', '_')), {:title =>"Click here to View latest posts"})%>
+							</div>
+							
+							<div class="story_121">
+						   <%#= link_to( image_tag("/images/home/map_img2.jpg"), profilemap_url(:id => @user.screen_name.gsub(' ', '_')), {:title =>"Click here to View profile"})%>
+							</div>
+						
+							<div class="friends_flo"><div class="myworldmap_images121"></div></div>
+								</div>-->
+						
+						</div>
+						</div>
+		
+		
+		<div class="edit_account_mainnew">
+		<div class="left_bar_12">
+											
+													
+										<div class="left_bar_13">
+													
+										<div style="overflow:hidden; clear:both; width:260px;">
+													
+													
+								<div class="left_v1">
+								
+					<div class="text_who" >Who I am</div>
+				
+					
+
+<div class="home_new">Name (Private)</div>
+					
+		
+	<div style="width:260px;">		
+
+		<div style=" float:left; padding-left:0px; "><img src="/images/home/arrow.jpg" style=" padding-top:5px;" /></div>
+		<div style=" float:left; padding-left:5px;">
+		<%= text_field 'user', 'first_name' ,:style => "width:92px; height:18px;", :class => 'default_style',  :id=>'first_name' %>
+		</div>
+		
+		
+		
+		<div style="float:left; padding-left:5px;">
+		<%= text_field 'user', 'middle_name' ,:style => "width:21px; height:18px;", :class => 'default_style',:class => 'default_style', :id=>'middle_name' %>
+		</div>
+			
+		
+		<div  style="float:left; padding-left:5px;">
+		<%= text_field 'user', 'last_name' ,:style => "width:92px; height:18px;",:class => 'default_style', :id=>'last_name' %>
+		</div>
+				
+	</div>	
+	
+	<div style="clear:both;"></div>
+<div class="home_new">Email (Private)</div>
+<div style="width:260px; float:left;">
+
+<div style=" float:left; padding-left:0px; padding-top:5px; width:auto;" ><img src="/images/home/arrow.jpg" /></div>
+
+	<div style="padding-left:5px; float:left;">
+	<%= text_field 'user', 'email' ,:style => "width:217px; height:18px; padding:0px; margin:0px;", :class => 'default_style', :id=>'email' %>
+
+		</div>
+</div>
+
+<div class="clear"></div>
+					
+<div class="home_new">Screen Name</div>
+<div style="width:260px; float:left;">
+
+<div style=" float:left; padding-left:0px; padding-top:5px; width:auto;"><img src="/images/home/arrow.jpg" /></div>
+<div style="padding-left:5px; float:left;">
+
+<%= text_field 'user', 'screen_name' ,:style => "width:217px; height:18px; padding:0px; margin:0px;", :class => 'default_style', :id=>'screen_name' %>
+</div>
+
+</div>
+
+<div class="top_feelds">
+
+<div class="top_feelds1 home">
+<%= radio_button('profile','gender','male', :id=>'Gender') %>Male
+<%= radio_button('profile','gender','female', :id=>'Gender') %>Female	
+
+<select name="profile[m_status]" id="m_status" >
+<option value=" " >Status</option>
+<option value="single"  <% if @profile.m_status=="single"%> selected <% end %>>Single</option>
+<option value="taken" <% if @profile.m_status=="taken"%> selected <% end %>>Taken</option>	
+	</select>
+</div>
+			
+				
+</div>
+				
+<div style="clear:both;"></div>
+
+<div class="home">Birthday <%= date_select(:profile, :dob, :order =>[:month,:year], :start_year => 1930, :end_year => 2000) %></div>
+				
+<div class="home">Languages I speak</div>
+							
+<div style="margin:0px 0px 0px 12px;">
+<%= select  ('profile','language_1', Profile::LANGUAGES,:name=>'language_1', :prompt => "Select Primary Language") %>
+</div>
+					
+<div style="margin:4px 0px 0px 12px;" >
+<%= select  ('profile','language_2', Profile::LANGUAGES,:name=>'language_2', :prompt => "Select Second Language") %>
+</div>
+					
+<div style="margin:4px 0px 0px 12px;">
+<%= select  ('profile','language_3', Profile::LANGUAGES,:name=>'language_3', :prompt => "Select Third Language &nbsp;&nbsp;&nbsp;&nbsp;") %>
+</div>
+					
+			
+					
+				
+					<div class="home_new">My Website or Blog</div>
+					<div style="margin-left:12px;">
+					<%= text_field 'profile', 'website' ,:style => "width:217px; height:18px;", :class => 'default_style', :id=>'website' %>
+					</div>
+					
+					
+					
+					<div class="home_new">Mailing Address for free stuff (Private) </div>							
+					<div style="margin-left:12px;">
+					<%= text_field 'user', 'Address1',:style => "width:217px; height:18px;", :class => 'default_style', :id=>'Address1' %>
+					</div>					
+					<div style="margin:10px 0px 0px 12px;" >
+					<%= text_field 'user', 'Address2' ,:style => "width:217px; height:18px;", :class => 'default_style', :id=>'Address2' %>
+					</div>
+										
+<!--				<div >
+					<%#= text_field 'user', 'Address3' ,:style => "width:180px;margin:10px 0px 0px 12px; height:18px;", :class => 'default_style', :id=>'Address3' %>
+					</div>-->
+					
+					<div class="home_new">City </div>					
+					<div style="margin-left:12px;"><%= text_field 'user', 'city',:style => "width:218px; height:18px;", :class => 'default_style', :id=>'state' %>
+					</div>
+					
+					
+
+					<div style="overflow:hidden;">	
+				
+					<div class="home_new">
+					<div style="width:115px; float:left; height:18px;">State</div><div style="width:65px; float:left; height:18px; padding-left:28px;">Zip Code</div></div>		
+					<div style="width:260px; float:left;">
+					
+					<div>
+					<%= text_field 'user', 'state' ,:style => "width:121px; float:left;  margin:0px 10px 0px 12px; height:18px;", :class => 'default_style', :id=>'state' %></div>
+									
+			    <div>
+			<%= text_field 'user', 'zip' ,:style => " width:76px; float:left; margin:0px 10px 0px 2px; height:18px;", :class => 'default_style', :id=>'zip' %>
+		    
+			
+			</div>
+					
+					</div>
+			<div style="clear:both;"></div>
+			
+			<div style="margin:10px 0px 10px 12px;">
+			<% @countries = Country.find(:all) %>
+					
+				<select id="user_country_id" name="user[country_id]" class="text">
+				<option value="<%= @user.country.id %>"><%= @user.country.name %></option>			
+		    	<%= options_from_collection_for_select @countries, "id", 'name', 'params[:country_id]' %>
+				   	</select>
+			</div>
+			<div style="clear:both;"></div>
+			
+			
+			<!--<div style="margin:10px 0px 10px 12px;">
+			<div class="home">
+			<%#= check_box ("user_setting", "profile_privacy",{},"1", "0" ) %>&nbsp;Private(viewable to only friends)</div>
+			</div>-->
+			
+
+	</div>
+												
+													
+													</div>
+												
+													<div style="clear:both;"></div>
+													</div>
+													
+													
+												
+													
+													
+														<div class="home"></div>	
+													</div>			
+											
+										
+											
+											</div>
+											
+											
+											
+						<div style="width:250px; float:left;">
+						
+						
+						
+						
+						<div class="mid">
+		
+		<div class="mid1">
+											
+		<div class="text_who">What I love</div>
+		
+		
+		
+		<div class="home_new">Passions,&nbsp;Hobbies,&nbsp;Sports,&nbsp;Activities</div>	
+		<div style="margin-left:12px;" >
+		<%= text_area 'profile', 'hobbies', :class => 'default_style_textarea_new', :id=>'hobbies', :style => ' width:217px; height:45px;' %>
+	    </div>
+		
+
+		<div class="home_new">Favorite Foods</div>		
+		<div style="margin-left:12px;">
+		<%= text_area 'profile', 'fav_foods', :class => 'default_style_textarea_new', :id=>'fav_foods', :style => ' width:217px; height:45px;' %>
+	   </div>
+
+		
+		<div class="home_new">Books I'm reading, Books I love</div>
+		
+		<div style="margin-left:12px;">
+		<%= text_area 'profile', 'fav_books' , :class => 'default_style_textarea_new', :id=>'fav_books', :style => 'width:217px; height:45px;' %>
+		</div>
+		
+		<div class="home_new">Favorite Music</div>
+		
+		<div style="margin-left:12px;">
+		<%= text_area 'profile', 'fav_music' , :class => 'default_style_textarea_new', :id=>'fav_music' , :style => ' width:217px; height:45px;'%>
+		</div>
+		
+		<div class="home_new">Affiliations, Clubs</div>
+		
+		<div style="margin-left:12px;">
+		<%= text_area 'profile', 'affiliations' ,:class => 'default_style_textarea_new', :id=>'affiliations', :style => 'width:217px; height:45px;' %>		
+		</div>
+
+		
+		
+		
+		
+		<div class="home_new">My favorite places in the whole world</div>
+		
+		<div style="margin-left:12px; margin-bottom:10px;">		
+	<%= text_field 'profile', 'favorite_place_1', :value => !@profile.favorite_place_1.blank? ? @profile.favorite_place_1 : "City, State, Country", :class => 'default_style', :style => !@profile.favorite_place_1.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;", :id => 'favorite_place_1', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id); ", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);" %>	
+	
+		</div>
+		
+		<div style="margin-left:12px; margin-bottom:10px;">		
+		<%= text_field 'profile', 'favorite_place_2', :value => !@profile.favorite_place_2.blank? ? @profile.favorite_place_2 : "City, State, Country", :class => 'default_style', :style => !@profile.favorite_place_2.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;" , :id => 'favorite_place_2', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>		
+		
+		</div>
+		
+		<div style="margin-left:12px; margin-bottom:10px;">		
+			<%= text_field 'profile', 'favorite_place_3', :value => !@profile.favorite_place_3.blank? ? @profile.favorite_place_3 : "City, State, Country", :class => 'default_style', :style => !@profile.favorite_place_3.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;", :id => 'favorite_place_3', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>			
+		</div>
+		
+		
+		
+
+<div class="home_new"> 3 Things I want to do before I die</div>
+
+<div style="margin-left:12px; margin-bottom:10px;">
+<%= text_field 'profile', 'before_die_1', :class => 'default_style', :id => 'before_die_1' , :style => ' width:217px;' %>				
+</div>
+
+<div style="margin-left:12px; margin-bottom:10px;">	
+<%= text_field 'profile', 'before_die_2', :class => 'default_style', :id => 'before_die_2' , :style => ' width:217px;' %>			   		
+</div>
+
+<div style="margin-left:12px; margin-bottom:10px;">
+<%= text_field 'profile', 'before_die_3', :class => 'default_style', :id => 'before_die_3' , :style => ' width:217px;' %>			   			
+</div>
+			
+		
+		</div>
+											
+		</div>
+						
+						
+						
+						
+						</div>					
+											
+											
+											
+						<div style="width:250px; float:left;">
+						<div class="left_bar_13">
+													
+													
+								<div class="mid_right">
+							
+		<div class="mid_right1">
+							
+		<div class="text_who">Why I'm here</div>
+							
+		<div class="text_wid">
+		
+		
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]" value="To find friends and travel buddies" id="find_friend" >
+    <% elsif @profile.description.include?("To find friends and travel buddies")  %>	
+    <input type="checkbox"  name="reason_for_here[]" value="To find friends and travel buddies" id="find_friend" checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]" value="To find friends and travel buddies" id="find_friend" >	
+	<% end %>		
+	To find friends and travel buddies		
+   </div>
+  
+  		
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]" value="To share my adventures" id="share_adventures"  >
+    <% elsif @profile.description.include?("To share my adventures")  %>	
+    <input type="checkbox"  name="reason_for_here[]" value="To share my adventures" id="share_adventures" checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]" value="To share my adventures" id="share_adventures" >	
+	<% end %>		
+	To share my adventures	
+    </div>
+		
+
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]" value="To see other's adventures" id="other's_adventures"  >
+    <% elsif @profile.description.include?("To see other's adventures")  %>	
+    <input type="checkbox"  name="reason_for_here[]" value="To see other's adventures" id="other's_adventures" checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]" value="To see other's adventures" id="other's_adventures" >	
+	<% end %>		
+	To see others' adventures
+    </div>
+
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]" value="To offer travel advice tours" id="travel_advice"  >
+    <% elsif @profile.description.include?("To offer travel advice tours")  %>	
+    <input type="checkbox"  name="reason_for_here[]" value="To offer travel advice tours" id="travel_advice" checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]" value="To offer travel advice tours" id="travel_advice" >	
+	<% end %>		
+	To offer travel advice, tours
+    </div>
+	
+	
+		
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]" value="To get travel ideas, advice and tours" id="ideas_advice"  >
+    <% elsif @profile.description.include?("To get travel ideas, advice and tours")  %>	
+    <input type="checkbox"  name="reason_for_here[]" value="To get travel ideas, advice and tours" id="ideas_advice"  checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]" value="To get travel ideas, advice and tours" id="ideas_advice"  >	
+	<% end %>		
+	To get travel ideas, advice, and tours
+    </div>
+		
+
+
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]"  value="To plan my next big adventure" id="big_adventure"   >
+    <% elsif @profile.description.include?("To plan my next big adventure")  %>	
+    <input type="checkbox"  name="reason_for_here[]"  value="To plan my next big adventure" id="big_adventure"  checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]"  value="To plan my next big adventure" id="big_adventure"  >	
+	<% end %>		
+	To plan my next big adventure
+    </div>
+
+	<div class="home_edit1">		
+    <% if @profile.description.nil? %>					
+    <input type="checkbox"  name="reason_for_here[]"  value="Just browsing" id="browsing"  >
+    <% elsif @profile.description.include?("Just browsing")  %>	
+    <input type="checkbox"  name="reason_for_here[]"  value="Just browsing" id="browsing"  checked="checked">			
+	<% else %>
+	<input type="checkbox"  name="reason_for_here[]"  value="Just browsing" id="browsing" >	
+	<% end %>		
+	Just browsing
+    </div>		
+
+				
+					</div>		
+							
+							
+					<div class="text_who" style="margin-top:15px;">Where I'm going</div>		
+											
+					<div class="text_wid">						
+						
+					<div class="home_new">Places I want to explore next</div>
+					
+					<div style="margin-left:12px; margin-bottom:10px;">		
+					<%= text_field 'profile', 'places_want_to_explore_1', :value => !@profile.places_want_to_explore_1.blank? ? @profile.places_want_to_explore_1 : "City, State, Country", :class => 'default_style', :style => !@profile.places_want_to_explore_1.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;" , :id => 'places_want_to_explore_1', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>			
+					</div>
+					
+					<div style="margin-left:12px; margin-bottom:10px;">		
+					<%= text_field 'profile', 'places_want_to_explore_2', :value => !@profile.places_want_to_explore_2.blank? ? @profile.places_want_to_explore_2 : "City, State, Country", :class => 'default_style', :style => !@profile.places_want_to_explore_2.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;" , :id => 'places_want_to_explore_2', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>			
+					</div>
+										
+					
+					<div style="margin-left:12px; margin-bottom:10px;">		
+					<%= text_field 'profile', 'places_want_to_explore_3', :value => !@profile.places_want_to_explore_3.blank? ? @profile.places_want_to_explore_3 : "City, State, Country", :class => 'default_style', :style => !@profile.places_want_to_explore_3.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;" , :id => 'places_want_to_explore_3', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>			
+					</div>					
+		
+
+
+	<div class="text_who" style="margin-top:15px;">Where I've lived</div>
+	
+	<div class="home_new">Places I've lived</div>
+	
+	
+		
+		<div style="margin-left:12px; margin-bottom:10px;">		
+					<%= text_field 'profile', 'places_lived_1', :value => !@profile.places_lived_1.blank? ? @profile.places_lived_1 : "City, State, Country", :class => 'default_style', :style => !@profile.places_lived_1.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;" , :id => 'places_lived_1', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>			
+					</div>
+		
+			<div style="margin-left:12px; margin-bottom:10px;">		
+					<%= text_field 'profile', 'places_lived_2', :value => !@profile.places_lived_2.blank? ? @profile.places_lived_2 : "City, State, Country", :class => 'default_style', :style => !@profile.places_lived_2.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;", :id => 'places_lived_2', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>			
+					</div>
+					
+					
+					
+			<div style="margin-left:12px; margin-bottom:10px;">		
+					<%= text_field 'profile', 'places_lived_3', :value => !@profile.places_lived_3.blank? ? @profile.places_lived_3 : "City, State, Country", :class => 'default_style', :style => !@profile.places_lived_3.blank? ? "color:black; width:217px; height:18px;" : "color:#cbcbcb; width:217px; height:18px;" , :id => 'places_lived_3', :onfocus => " if(this.value=='City, State, Country') this.value=''; change_style(this.id);", :onBlur =>  "if(this.value=='') this.value='City, State, Country'; change_style(this.id); showAddress(this.id);", :onkeyup => "change_style(this.id);", :onkeydown => "change_style(this.id);"  %>		
+					
+					</div>
+					
+</div>
+						<div style="clear:both;"></div>
+						
+						
+							</div>
+		
+							</div>
+													
+														
+													</div>
+						
+						</div>					
+											
+											
+											
+								
+											
+		
+		</div>
+		
+		
+		
+		</div>
+		
+				
+				
+						
+							
+			</div>
+			
+			<div style="float:right; padding-right:40px;">
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/save_g_n.jpg" type="image">		
+	</div>
+	<div class="clear"></div>
+		
+			
+<% end %>
+<div class="edit_story_middle_line">&nbsp;</div><br>
+
+			<%#= render :partial => 'explored_places' %>
+			
+			<%= render :partial => 'explorer_type' %>
+			
+			&nbsp;
+			
+									
+			
+		
+			<div style="clear:both;"></div>						
+			
+		
+										
+	
+											

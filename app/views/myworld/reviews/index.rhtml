@@ -1,0 +1,200 @@
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories">
+    <!--advertisement-div-start-->
+    <div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+      
+      </div>
+    </div>
+    <!--advertisement-div-end-->
+    <!--stories start-->
+    <div class="stories_rightbar">
+      <div class="stories_rightbar_inner">
+        <div class="story_cal1">
+		<img src="/images/home/review_new.jpg" style="padding-right:5px;"/> My Reviews
+		 
+		 
+        </div>
+		
+		<div style="width:400px; float:left;">
+		<div style="float:left; margin-top:5px; padding-left:40px; ">
+		   <% form_for :myworld, :url =>{ :controller =>'/myworld/reviews', :action => 'index'} do %>
+          <select  id="id" name="id" onchange="this.form.submit();" class="story_sort_story">
+            <option>Sort By...</option>
+			<option value="">Date</option>
+			<option value="">Best</option>
+			<option value="">Worst</option>
+            <option value="">Places to stay</option>
+			<option value="">Places to eat</option>
+			<option value="">Entertainment</option>
+			<option value="">Attractions</option>
+			<option value="">Activities</option>
+          </select>
+          <% end %>
+		</div>
+		
+		
+		
+		
+        <!--SELECT BOX DIV START HERE	-->
+        <div style="float:right; margin-top:5px; padding-left:10px;">
+          <% form_for :myworld, :url =>{ :controller =>'/myworld/reviews', :action => 'preview'} do %>
+          <select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+            <option>Choose a Review...</option>
+            <%#= options_from_collection_for_select @user_reviews_published, "permalink", 'title' %>
+          </select>
+          <% end %>
+        </div>
+        <!--SELECT BOX DIV END HERE	-->
+		</div>
+		
+		
+		
+		
+        <!--SEARCH START HERE	-->
+        <!--<div class="story_search">
+		    <%# form_for :storysearch,:url => {:controller => "/myworld/stories", :action => "search"} , :html => {:onsubmit=>'return storysearch();'} do  %>	
+			<div style="float:left; width:auto;">	
+			<input name="search" id="search" value="" src="/images/home/stories_search.jpg" type="image">
+		    </div>
+			
+			<div>			
+			<input name="search" value="" type="text" id = "search_word" class="input"/>
+			</div>
+			
+			<div style="float:left;">
+			<img src="/images/home/stories_search_right.jpg" alt="" />
+			</div>
+			<%# end %>
+			</div>-->
+        <!--SEARCH END HERE	-->
+		
+		
+		
+      </div>
+	  
+	  
+      <% if !@total.blank? %>
+	  
+	  
+      <% for review in @reviews %>
+	  
+	  
+      <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+	  
+      <!--stories content start-->
+      <div class="stories_rightbar_inner111">
+	  
+        <div class="stories_home"> <%= title_slice(review.title,15) %> <%#= title_tcase(review.location) %> </div>
+		
+        <div> <span class="stories_tag"><%= title_tcase(review.tag) %></span> </div>
+		
+        <div class="stories_date">
+        <div class="friends_flo">
+		 <%= myworld_dateformat(review.created_on) %> <span class="home"> <%= review.review_comments.length %> Comments </span>
+		 </div>
+		 
+          <div class="stories_rating" id ="star-ratings-block"> 
+		  <%= render :partial => 'myworld/reviews/ratee', :locals => {:review => @review = review }%>
+		  </div>
+		   
+          </div><br/>
+		
+		
+        <div class="stories_tag_text">
+		  <%= title_slice_withoutcap(review.how_was_it,460) %>
+		 <% if !review.description.blank? %>
+		<!--  <span class="story_view" style="float:right;">-->
+		  <%= link_to "Read this Review", reviewpermalink_url(:continent =>check_continent(review.continent),:country => check_country(review.country), :state => check_state(review.state), :location => check_location(review.location),:id => review.permalink), {:class => 'story_view',:title =>"Click here to read the review details" } %>
+		 <!-- </span> -->
+		 <% end %>
+		  </div>
+		  
+		  
+		  
+		  
+        <!--slide images start here-->
+		
+  <% if !review.slideshow_id.blank? && review.slideshow_id != 0 %>		
+  <div class="stories_rightbar_inner2" >		
+  <% totalphotos = Photo.find(:all, :conditions =>["photoset_id like ?",review.slideshow_id], :select => "image, id", :limit => 9) %>		 
+          <% for photoimages in totalphotos %>
+		  <% if !photoimages.image.blank? %>
+          <div style="padding-left:5px; float:left;">
+		  <%= image_tag(url_for_file_column(photoimages, "image","thumbnail"))%> 
+		  </div>
+		  <% end %>
+          <% end %>
+	  
+   </div>
+		
+		
+  <% elsif !review.added_images.blank? %>
+   <div class="stories_rightbar_inner2">
+		
+          <% for reviewid in review.added_images.split(',') %>		  
+           <% photoadded = Photo.find_by_id(reviewid) %>
+		   <% if !photoadded.image.blank? %>
+           <div style="padding-left:5px; float:left;"> 
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %> 
+		   </div>
+		   <% end %>
+		   <% end %>	
+		   	   
+  </div>	
+		   	   
+  <% end %>
+		  
+   <!--  slide show end-->
+  </div>
+	  
+	  
+	  
+      <!--stories content end-->
+  <% end %>
+	  
+  <div class="stories_rightbar_inner111"> <img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+	  
+      <div align="center"> <strong>	  
+	   <%= will_paginate (@reviews,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" style=" vertical-align:bottom;" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" style=" vertical-align:bottom;" />'}) %> </strong></div>
+	   
+      <% else %>
+	  
+	  
+         <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+      <div class="stories_rightbar_inner1"><br/>
+        <div class="stories_home">
+          <center>
+            No Reviews
+            <% if @message %>
+            found for your search keyword.
+            <% end %>
+          </center>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <!--stories end-->
+  </div>
+  <!--left stories end-->
+</div>

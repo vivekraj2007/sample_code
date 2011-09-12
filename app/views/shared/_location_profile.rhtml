@@ -1,0 +1,44 @@
+
+<div class="middle_right121">
+  <!--rightblock-->
+  <div class="right_121">
+  
+    <div class="right_bg121">
+	<!--  search drop down start here-->
+	<%= render :partial => '/shared/search' %>
+	<!--  search drop down end here-->   
+	
+
+	<!--login drop down code starts here-->
+    <%= render :partial => 'shared/login_dropdown' %>
+      <!--  <div>-->
+      <div id ="user_profile">
+        <div class="profile_bg1">
+		
+          <div class="right_in">
+            <div class="profileright_in1">
+              <div class="profile_cal1" style="text-decoration:none;"><%= @location.name %></div>
+            </div>
+			
+            
+          </div>
+        </div>        
+      </div>
+	  
+      
+      <div style="clear:both;"></div>
+	  
+	 <!-- user messages-->
+      <%= render :partial => '/shared/location_people' %>
+      <%= render :partial => '/shared/location_photos' %>	  
+	  <%= render :partial => '/shared/location_stories' %>
+      <div class="right_space18">
+        <div class="right_space19"></div>
+        <div><%= render :partial => '/shared/right_bottom' %></div>
+        <div class="right_space19"></div>
+      </div>
+      <!--</div>-->
+    </div>
+  </div>
+  <!--rightblock-div-end-->
+</div>

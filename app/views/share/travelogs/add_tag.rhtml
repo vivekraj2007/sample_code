@@ -1,0 +1,247 @@
+
+<script language>
+  	function addcode(str)
+	{
+		document.travelog_tellus.value +=  str;
+		return false;		
+			}
+  </script>
+  
+  <!--script for text editor start-->
+  
+<script language="javascript" type="text/javascript" src="/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+  mode : 'exact',
+  elements : "travelog_tellus",
+  theme : 'advanced',
+  theme_advanced_buttons1 : "bold,italic,underline",
+  theme_advanced_buttons2 : "",
+  theme_advanced_toolbar_location : "bottom",
+  theme_advanced_toolbar_align : "left",
+  theme_advanced_path_location : "none",
+  debug : false,
+  theme_advanced_path : false
+});
+</script>
+
+<!--script for text editor end-->
+
+<!--MAIN DIV START-->
+<div class="left_bar_1" >
+<div class="nav_box" >
+
+
+<!--LEFT DIV START-->
+ <div class="left_bar_12" >
+	
+<!-- STEP 1 START-->
+	
+      <div class="left_bar_13" >
+         <div class="text_who">1.Create a new Travelog entry</div>
+          <div class="story_select">
+            <% form_for :travelog,:url => {:controller => "/share/travelogs",:action => "edit_travelog"} do  %>
+           <select id="travelogedit" name="travelogedit" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Travelog</option>
+              <%= options_from_collection_for_select @user_travelogs, "permalink", 'sliced_title' %>
+            </select>
+            <% end %>
+          </div>
+		  
+         <div style="clear:both;"></div>
+		  
+          <div class="home">Title</div>
+		  
+          <div style="margin-left:12px;">
+		   <%= text_field 'travelog', 'title', :class => 'default_style', :style => "width:180px; height:18px;", :id=>'title', :disabled => 'disabled' %>
+		    </div>
+			
+          <div style="margin-left:12px;">
+		   <%= error_message_on :travelog, :title, 'Title '%> 
+		   </div>
+		   
+          <div class="home">Description of place of event</div>
+          <div style="margin-left:12px;"> 
+		   <%= text_area 'travelog', 'description', :class => 'default_style_textarea_new', :style=> "height:62px;",:id => 'description',:onfocus => "travelog_fileds();", :onkeyup => "travelog_fileds();" , :disabled => 'disabled' %> 
+		  
+	
+		  </div>
+		  
+          <div style="margin-left:12px;">
+		   <%= error_message_on :travelog, :description, 'description '%> 
+		   </div>
+		   
+          <div class="home">Where?</div>
+		  
+          <div style="margin-left:12px;">
+		   <%= text_area 'travelog', 'where',:class => 'default_style_textarea_h3_new',:style => "height:50px;", :id => 'where_loc', :onclick => "gmap();",  :disabled => 'disabled'%> 
+		  
+  </div>
+  
+          <div style="margin-left:12px;"> 
+		  <%= error_message_on :travelog, :where, 'Where is '%> 
+		  </div>
+		  
+            <div class="home">When did you go ?</div>
+		   
+          <div class="story_text">
+		   <%= date_select(:travelog,:when_did,:order =>[:day,:month,:year],:start_year =>2008,:end_year => 3008) %> </div>
+          <div style="margin-left:12px;"> <%= error_message_on :travelog, :when_did, 'Date went '%>
+		  </div>
+		  
+		   
+          <div style="padding-left:10px; margin-top:10px;">
+		  <%= image_tag ("/images/home/save_n.jpg") %>
+           </div>
+          <div style="clear:both;"></div>
+       
+		
+		
+		
+       
+      </div>
+	  
+<!--STEP 1 END -->	  
+
+
+<div style="clear:both;"></div>
+	  
+	  
+<!--STEP 2 START	  -->
+
+
+ <div class="home">&nbsp;</div>
+	  
+  <% form_for :travelogaddtag, :url => {:action => "add_tag", :id => @travelog.permalink } do %>
+  
+      <div class="left_bar_13">
+	  
+	  
+       <!--  backgroun style for div-->
+        <div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+		
+        <div style="clear:both;"></div>
+		
+        <div class="middile">
+          <!--  backgroun style for div end -->
+         <div class="text_who">2.Tag and Link your Travelog</div>
+         <div class="home4"><%= title_slice(@travelog.title,15)%></div>
+         <div style="margin-left:12px;"> 
+		 <%# if @story.tag.blank? %>
+		 
+		 <%# else %>
+		 <%= text_area 'travelog', 'tag', :value => !@travelog.tag.blank? ? @travelog.tag : "Please Enter Keywords", :class => 'default_style_textarea_new',:style=> "height:62px;", :id => 'tag', :onfocus => " if(this.value=='Please Enter Keywords') this.value=''; travelog_tag_fields();", :onkeyup =>  "travelog_tag_fields();" ,:onBlur =>  "if(this.value=='') this.value='Please Enter Keywords'; travelog_tag_fields();"%>
+		
+		 <%# end %>
+		 </div>
+		
+    <!-- link to set-->
+		
+		<div> 		
+		 <select name="linkset" id="linkset" style="margin-left:12px; margin-top:10px;" onchange="travelog_tag_fields();" >
+		  <% if  !@travelog.linksets.blank?  %>		 
+		   <%= linkset_optionvalue(@travelog.id,'travelog')%>
+		   <% else %>
+		     <option value="">Link this Set to....</option>
+		   <% end %>
+		    
+		    <% if @user_photsets.size != 0 %>
+			<option value="" style="font-weight:bold; color:#AB0300;">Photo Sets</option>
+			 <% for set in @user_photsets %>
+			 <option value="p_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= title_slice(set.title,20) %></option>
+			 <% end %>
+			<% end %>
+			
+			 <% if @user_videosets.size != 0 %>
+			 <option value="" style="font-weight:bold; color:#AB0300;">Video Sets</option>
+			 <% for set in @user_videosets %>
+			 <option value="v_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= title_slice(set.title,20) %></option>
+			 <% end %>
+			 <% end %>
+
+			 <% if @user_reviews .size != 0 %>
+			 <option value="" style="font-weight:bold; color:#AB0300;">Reviews</option>
+			 <% for set in @user_reviews  %>
+			 <option value="r_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= title_slice(set.title,20) %></option>
+			 <% end %>
+			<% end %>	         
+          </select>	  
+		 </div>
+		<!-- link set end -->
+        <div style="padding-left:10px; margin-top:10px;"> 
+		 <input name="travelog_addtag" id="travelog_addtag" value="save" src="/images/home/save_b.jpg" type="image" disabled = true>
+		</div>       
+      </div>
+    <div style="clear:both;"></div>
+	
+		<!--background bottom-->
+        <div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+	  <!--background bottom-->
+	  
+    </div>
+	<% end %>
+	
+	</div>
+<!--STEP 2 END	-->
+
+
+<!--	LEFT DIV END-->
+
+
+
+
+<!--RIGHT DIV START-->	
+	
+	
+	
+	
+    <!--step: 3 start-->
+   <div class="story_step3" >
+	
+      <div class="text_who style_write1" align="left"> 3. Tell us all about your latest adventurer!</div>
+        
+      	<div style="margin:5px auto 0 auto; margin-left:15px; ">
+<div style="top:306px; left:80px; position:relative;z-index:1">
+
+	  <table width="200px" border="0" cellspacing="0" cellpadding="0" style="margin-top:3px;">
+	  <tr><td colspan="4" height"4px"></td></tr>
+  <tr>
+    <td width="80px" height="20px">
+	<img src="/images/home/img_hover.gif" alt="photoset_image" style="padding-left:5px;"/> <img src="/images/home/video_hover.gif"  alt="videoset_image"  style="padding-left:5px;" /></td>
+	
+ </tr>
+</table>
+</div>
+	  
+     <textarea id="travelog_tellus" name="travelog[tellus]" style="width:434px; height:290px; border:1px solid #b7b28c;"></textarea>
+	 <div style="top:0; position:relative;"><%= image_tag ("/images/home/background_bottom.gif")%></div>
+    </div>
+	  
+      <div class="style_write" align="left">
+	  <div class="story_publish">
+	  <%= image_tag ("/images/home/publish_n.gif") %>
+	  </div>
+	  <div class="story_save_n">
+	  <%= image_tag ("/images/home/save_n.jpg") %>
+	  </div>
+	  </div>  
+      
+    </div>
+     <!--step: 3 end -->
+	 
+	 
+   <!--  RIGHT DIV END-->
+	
+ 
+    <!--text area-->
+    <div style="clear:both;"></div>
+  </div>
+</div> 

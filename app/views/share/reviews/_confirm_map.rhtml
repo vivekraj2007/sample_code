@@ -1,0 +1,131 @@
+<html>
+<head>
+<title>Google maps check location</title>
+<!-- This includes the google maps API code. 
+          You need to put your own key here -->
+<script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+            type="text/javascript"></script>
+			
+	<script>
+window.onload=function()
+{
+initialize();
+geo_fileds();
+}	
+</script>		
+			
+<script type="text/javascript">
+	
+	
+      // helper function to create markers
+
+	  
+      function createMarker(point,html)
+	   {
+	   
+      var marker = new GMarker(point, {draggable: true}); 
+
+		GEvent.addListener(marker, "click", function(){marker.openInfoWindowHtml(html);});
+				GEvent.addListener(marker, "dragend", function(){
+       var ctr = marker.getPoint();
+		var lt =ctr.lat();
+		var lng=ctr.lng();
+	    document.getElementById('longt').value = lng;
+	    document.getElementById('lat').value = lt;
+   
+       }
+	   );
+		
+        return marker;
+        }
+      
+      // this is called when the page loads. 
+      // it initializes the map, and creates each marker
+	  
+      function initialize()
+	   {
+     
+     var map = new GMap(document.getElementById("map_canvas"));
+     map.addControl(new GSmallMapControl());
+     map.centerAndZoom(new GPoint(<%= @cart.longt %>,<%= @cart.lat %>),11);           
+        
+		var point = new GPoint(<%= @cart.longt %>,<%= @cart.lat %>);
+		
+      <!--  var marker = createMarker(point,'<div><%#=h  @photoset.title %></div>')-->
+		var marker = createMarker(point,'Title:&nbsp;<%= @cart.map_title %>')
+        map.addOverlay(marker);	       
+        }    
+		
+    </script>
+	
+		
+<script type="text/javascript">
+	function geo_fileds()	
+	{
+	lat = document.getElementById('lat').value
+	longt = document.getElementById('longt').value	
+	locat = document.getElementById('location').value
+	
+	
+	if( (lat =="" || longt =="") && locat=="" )
+	{
+	document.getElementById('geo_tag').src='/images/home/save_b.jpg';
+	document.getElementById('geo_tag').disabled=true;
+	}
+	
+	else
+	{    
+	document.getElementById('geo_tag').src='/images/home/save_g_b.jpg';
+	document.getElementById('geo_tag').disabled=false;	
+	}
+	}	
+	</script>
+	
+	
+<script type='text/javascript'>
+function popclose()
+{
+bpage = document.getElementById('page_action').value
+if(bpage=="index" || bpage=="set_location")
+{
+window.opener.location.href='http://greatdividemedia.com/share/reviews/set_location';
+window.close();
+}
+else
+{
+window.opener.location.href='http://greatdividemedia.com/share/reviews/edit_location';
+window.close();
+}
+}
+</script>
+<%= stylesheet_link_tag 'style_menu','style11' %>
+</head>
+<body onUnload="GUnload()" class="map_back">
+<div class="map_main">
+  <div>
+    <div id="map_canvas" class="share_confirm_map"></div>
+  </div>
+  <div class="clear"></div>
+  <div class="map_main">
+    <% form_for :geotag,:url => {:controller => "/share/reviews", :action => "map" } do  %>
+    <% if flash[:notice] %>
+    <div class="home_map1"> The address you have mentioned is unknown, please enter correct address </div>
+    <% end %>
+    <div class="clear"></div>
+    <div class="home_map">Geo-coord (Latitude, Longitude)</div>
+    <div class="clear"></div>
+    <div class="map_text"> <%= text_field_tag 'lat' , @cart.lat,:style => "width:82px;", :class => 'default_style', :id=>'lat',:onfocus => "geo_fileds();", :onkeyup => "geo_fileds();", :onkeypress=>"return numberonly(event,false);" %> &nbsp; <%= text_field_tag  'longt' ,@cart.longt, :style => "width:82px;", :class => 'default_style', :id=>'longt',:onfocus => "geo_fileds();", :onkeyup => "geo_fileds();",:onkeypress=>"return numberonly(event,false);"   %> &nbsp;
+	 </div>
+    <div class="home_map">(OR)</div>
+    <div class="home">Enter Address, State/Prov, Country </div>
+    <div class="map_text"> <%= text_area_tag 'location' ,@cart.loct,:class => 'default_style_textarea_h3', :id=>'location',:onfocus => "geo_fileds();", :onkeyup => "geo_fileds(); "  %> </div>
+    <div class="map_text1">
+      <input name="geo_tag" id="geo_tag" value="save" src="/images/home/save_b.jpg" type="image" disabled = true >&nbsp;
+	   <%= hidden_field_tag 'page_action', '', :value => "#{@cart.bpage}", :id => 'page_action' %>
+	    <img src="/images/home/done.jpg" onclick="popclose();" style="cursor:pointer;"/>
+    </div>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>

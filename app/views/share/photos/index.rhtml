@@ -1,0 +1,81 @@
+<div class="left_bar_1">
+  <div class="nav_box">
+    <div class="left_bar_12">
+      <div class="left_bar_13">
+        <!--  backgroun style for div-->
+        <div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+        <div class="clear"></div>
+        <div class="middile">
+          <!--  backgroun style for div end -->
+          <div class="text_who">1.Create a new photo set</div>
+          <div class="share_add_set">
+            <% form_for :photos,:url => {:controller => "/share/photos",:action => "edit_photoset"} do  %>
+            <select id="photoset" name="photoset" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Photo Set</option>
+              <%= options_from_collection_for_select @user_photsets, "permalink", 'sliced_title' %>
+            </select>
+            <% end %>
+          </div>
+          <% form_for :photos, :url => {:action => "new_photoset"} do %>
+          <div class="home">Title</div>
+          <div class="my_mar_left"> <%= text_field 'photoset', 'title' ,:style => "width:180px; height:18px;", :class => 'default_style', :id=>'title',:onfocus => "photo_fileds();", :onkeyup => "photo_fileds();" %> </div>
+          <div class="my_mar_left"> <%= error_message_on :photoset, :title, 'Title '%> </div>
+          <div class="home">Description</div>
+          <div class="my_mar_left"> <%= text_area 'photoset', 'description',:class => 'default_style_textarea_new',:style=> "height:62px;", :id => 'description', :onfocus => "photo_fileds();", :onkeyup => "photo_fileds();"%> </div>
+          <div class="my_mar_left"> <%= error_message_on :photoset, :description, 'Description '%> </div>
+          <div class="my_world_preview">
+            <input name="ptotosetsave" id="ptotosetsave" value="save" src="/images/home/save_b.jpg" type="image" disabled = true>
+          </div>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+        <div class="clear"></div>
+        <div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+    <!--	middle content-->
+    <div class="mid" >
+      <div class="mid1">
+        <div class="text_who">2. Add photos to this Set</div>
+        <div class="home">
+          Sets may contain up to 100 photos.</div>
+         <div class="share_add_set1">
+		 <input id="photo_image" type="file" name="file_1" size="8%" >
+		 <%#= file_column_field 'photo', 'image', :size => '8%', :class => 'default_style' %>
+		  </div>
+        <!--user link sets select box-->
+        <div> <%= render :partial => 'shared/link_sets'%> </div>
+        <!--user link sets select box-->
+        <div><img src="/images/home/save1.jpg" alt=""  class="share_add_set"/></div>
+      </div>
+    </div>
+    <!--middle content end-->
+    <!--	right tag -->
+    <div class="middle1">
+      <div class="mid_right1">
+        <div class="text_who">3.Tag,title and caption Photos</div>
+        <div class="home5"></div>
+        <div class="home">Descriptive tags for the whole Set</div>
+        <div class="my_mar_left"> <%= text_area 'photoset', 'tag',:class => 'default_style_textarea_new', :disabled => 'disabled' %> </div>
+        <div class="home">Geo-coord (Latitude, Longitude)</div>
+        <div class="share_column_padding">
+		 <%= text_field 'photoset', 'lat' , :value => @photoset.lat,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'lat',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();", :disabled => 'disabled'  %> &nbsp;
+		 <%= text_field 'photoset', 'longt' , :value => @photoset.longt,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'longt',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();", :disabled => 'disabled'  %> </div>
+        <div class="home">Address, State/Prov, Country </div>
+        <div class="my_mar_left">
+		 <%= text_area 'photoset', 'location' ,:class => 'default_style_textarea_h3_new', :disabled => 'disabled' %> </div>
+        <div><img src="/images/home/save1.jpg" alt=""  class="my_world_preview"/></div>
+      </div>
+    </div>
+    <!--right tag end -->
+  </div>
+  <div class="clear"></div>
+</div>

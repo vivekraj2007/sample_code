@@ -1,0 +1,69 @@
+
+<%= stylesheet_link_tag 'myworld_style' %>
+
+<div class="do_nav" onmouseover="show_this('do');" onmouseout="hide_this('do');">
+													
+													<div class="nav_green22">
+													
+													<div class="friends_flo">
+			 
+			<% if params[:controller] == 'see/videos' ||  params[:controller] == 'see/photos' ||  params[:controller] == 'see/people' %>
+			 <% def class_on(c)
+            params[:controller].to_s == c ? "current_do1" : ""
+            end %>	
+			<% else %>
+			<% def class_on(c)
+            params[:controller].to_s == c ? "current_do" : ""
+            end %>	
+			<% end %>
+			 <%# def class_on_ul(c)
+            #params[:controller].to_s == c ? "current" : ""
+            #end %>	
+							
+							
+													
+				<div  class="shared_do_menu">
+					
+				<% if params[:controller] == 'see/videos' ||  params[:controller] == 'see/photos' ||  params[:controller] == 'see/people' %>
+				<ul class="domenu1">
+				<% else %>
+							<ul class="domenu"> <% end %>
+						
+							<li class=<%= class_on('see/people') %>>
+<!--							<span><b><%#= link_to "Stories",{:controller => 'share/stories'}, { :class => class_on('share/stories'),:title => "Stories"} %></b></span><em></em> -->
+
+							<a><b>This tab is currently under development</b><em></em> </a>
+							</li>
+							
+							<!--<li class=<%#= class_on('see/photos') %>>-->
+<!--						<span><b><%#= link_to "Travelogs",{:controller => 'share/travelogs'}, { :class => class_on('share/travelogs'),:title => "Travelogs"} %></b></span><em></em> -->
+					<!--<a href="<%#= see_photos_url %>" title="Photos" ><b> Festivals</b><em></em></a>
+							</li>-->
+							
+							<!--<li class=<%#= class_on('see/map') %>>
+						    <a href="<%#= see_map_url %>" title="Maps"><b>Events</b><em></em></a>
+							</li>-->
+							<!--<li class=<%#= class_on('see/videos') %>>
+							<a href="<%#= see_videos_url %>" title="Video"><b>Competitions</b><em></em></a>
+							</li>-->
+							<!--<li class=<%#= class_on('see/travelogs') %>>
+						    <a href="<%#= see_travelogs_url %>" title="Travelog"><b>Calendar</b><em></em></a>
+							</li>	-->					
+						    </ul>
+							<br class="shared_clear" />
+					</div>
+											
+													
+									
+													
+													
+													</div>
+													
+														<%= render :partial => "shared/login"%>
+													
+													
+													</div>
+													
+													
+													
+											</div>

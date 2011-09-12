@@ -1,0 +1,23 @@
+<div class="photoinvite" align="left">
+
+       <div class="text_who">Change Photo</div>
+       <% form_for :user,  :url => { :controller => '/account', :action => 'change_photo', :id => @profile.user_id } , :html => {:onsubmit=>'return profileimage();',:multipart => true} do  %>
+	   
+        <div class="home textalignment">Upload Your New Profile Image</div>
+    	 <div class="home">For best results upload a photo that is 171 X 171 pixels, or about 2 inches on each side.</div>
+		 
+		 <div class="clear"></div>
+		  <div style="margin-left:12px; margin-top:25px;">
+		  
+		  
+		<%= file_column_field 'profile', 'profile_image', :size => '8%', :class => 'default_style', :id => 'profile_image' %>
+		  </div>
+		 
+	     <div style="padding-left:10px; margin-top:10px;">
+        	<input name="profileedit" id="profileedit" value="save" src="/images/home/upload_g_n.gif" type="image">&nbsp;&nbsp;
+	<%= link_to image_tag("/images/home/cancel_g_n.gif"),:controller => '/account',:action => 'edit' %>
+        </div>
+        <% end %>
+        <div style="clear:both;"></div>
+			
+</div>

@@ -1,0 +1,199 @@
+<div class="edit_photoset">
+
+	<!--title-->
+	<div class="edit_photoset_top">
+	
+	
+<div class="story_title" > 
+<div class="story_font"> Edit photosets > 
+<%= link_to @photoset.title.titlecase ,{:controller => '/admin/photosets',:action => 'details', :id => @photoset.permalink }, :style => 'text-decoration:none'%>  > uploaded by <%= link_to @photoset.user.screen_name , :controller => 'users', :action => 'profile', :id => @photoset.user.id %> 
+
+	<span>	(<%= link_to (image_tag("/images/home/2.jpg"), {:controller => "admin/users",:action => "send_emailnotification", :id => @photoset.user.id }, :style => "text-decoration:none;",:title => "Click here to send admin message",:popup => ['new_window','height=350,width=600']) %>) </span>
+
+
+</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div><br/>
+
+<div class="stories_rightbar_inner1"><img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+</div><br/>
+
+
+
+
+
+<% form_for :edit_photoset,:url =>{:controller => "admin/photosets",:action => "update",:id => @photoset.id } do %>
+
+<div class="edit_photoset_top">
+
+<div>
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1">
+<%= text_field 'photoset', 'title' ,:style => "width:180px; height:18px;",:id=>'title', :class => 'input',:onfocus => "photo_fileds_create();", :onblur => "photo_fileds_create();",:onkeyup => "photo_fileds_create();"  %></div>
+</div>
+<div>
+<div class="story_place_font story_place_flo">Description </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_area 'photoset','description',:class => 'input',:id => 'description',:style => "width:180px;height:62px;",:onfocus => "photo_fileds_create();", :onblur => "photo_fileds_create();",:onkeyup => "photo_fileds_create();"  %></div>
+</div>
+
+<div>
+<div class="story_place_font story_place_flo">Descriptive Tag </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_area 'photoset','tag',:class => 'input',:id => 'tag',:style => "width:180px;height:62px;",:onfocus => "photo_fileds_create();", :onblur => "photo_fileds_create();",:onkeyup => "photo_fileds_create();"  %></div>
+</div>
+
+<div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div style="padding-left:500px;">
+<input id="edit_save" name="edit_save" value="save" src="/images/home/save_g_b.jpg" type="image" >
+</div>
+</div>
+
+</div>
+<% end %>
+
+	</div>
+	<!--title end-->
+   <div class="edit_photoset">
+	<div  style="margin:20px 0px 10px 0px;"><img src="/images/admin/strip.gif" alt="" width="700px" /></div>
+	</div>
+	<!--map-->
+<% form_for :geo_location,:url =>{:controller => "admin/photosets",:action => "edit_geo_location",:id => @photoset.id } do %>
+	<div class="edit_photoset">
+	
+	<div class="edit_photoset_map">
+	
+	<div class="story_place_font story_place_flo">Add Geo-locations</div>
+	<br/>
+	
+	<div class="story_place_flo">
+        <% if @photoset.lat.blank? || @photoset.longt.blank? %>
+        <%= render :partial => "/admin/photosets/map" %>
+        <% else %>
+        <%= render :partial => "/admin/photosets/confirm_map"%>
+        <% end %>
+</div>
+	</div>
+		
+	
+	<div class="edit_photoset_map_right">
+	<div style="padding-top:20px;">&nbsp;</div>
+	
+	<div class="story_place_font1">
+<div class="mid_right1" style="padding-top:10px;">
+         		  
+          <div class="home">Geo-coord (Latitude, Longitude)</div>
+          <div class="share_column_padding">
+		   <%= text_field 'photoset', 'lat',:style => "width:82px; height:18px;", :class => 'input', :id=>'lat',:onfocus => "photo_fileds_create();", :onblur => "photo_fileds_create();",:onkeyup => "photo_fileds_create();"  %> &nbsp; 
+		   <%= text_field 'photoset', 'longt' ,:style => "width:82px; height:18px;", :class => 'input', :id=>'longt',:onfocus => "photo_fileds_create();",:onblur => "photo_fileds_create();", :onkeyup => "photo_fileds_create();"  %>
+		    </div>
+			 <div class="home" style="padding-top:10px; padding-left:60px;">(OR)</div>
+			
+          <div class="home">Address, State/Prov, Country </div>
+          <div class="share_column_padding">
+		   <%= text_area 'photoset', 'address' , :class => 'input',:id=>'location',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();",:onblur => "photo_fileds_create();",:style => "width:180px;height:62px;" %>
+		   </div>
+		   <div style="padding-top:10px;">&nbsp;</div>
+		 <div style="padding-left:90px;">
+            <input id="photo_tag" name="photo_tag" value="save" src="/images/home/save_g_b.jpg" type="image">
+			
+         </div>  
+		   
+     
+        </div>
+
+
+</div>
+
+	</div>
+	
+	
+	</div>
+<% end %>
+	<!--map end-->
+	<div class="edit_photoset">
+	<div  style="margin:20px 0px 10px 0px;"><img src="/images/admin/strip.gif" alt="" width="700px" /></div>
+	</div>
+	<!--photos-->
+	
+	
+	<div class="top_edit_photoset_1">
+	
+	<div class="story_place_font story_place_flo">Photos List</div>
+	<div class="clear">&nbsp;</div>
+
+<% form_for :geo_location,:url =>{:controller => "admin/photosets",:action => "edit_photos",:id => @photoset.id } do %>
+	
+	<div class="map_1">
+      <% if @photoset.photos.length > 5 %>
+      <div class="middle2">
+        <% else %>
+        <div class="middle2_noc">
+          <% end %>
+          <% count = 1 %>
+         
+		  <% for photo in @photoset.photos %>
+          <div  class= <% if count%2 == 0%>"middle31"<% else %>"middle3"<% end %> >
+            <div class="middle4"> <%= image_tag(url_for_file_column(photo, "image","submain"))%> </div>
+            <div class="middle5" > <%= hidden_field "photo[#{count}]", 'id', :value => photo.id %>
+              <div class="middle6">
+                <div class="home friends_flo"> Cover <%= radio_button "photoset", "coverimage_id", photo.id , {:onclick => "photo_fileds_create();"}%> </div>
+                <div class="home friends_flo1"> Delete&nbsp; <%= link_to image_tag("/images/home/delete.jpg"), { :controller => "/admin/photosets", :action => "delete_photo", :id => photo.id },:confirm => "Are you sure want to delete photo ?"  %>
+				 
+				  </div>
+              </div>
+          <div class="middle6">
+                <div class="home see_map_inner_flo">Title</div>
+                <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'title', :value => photo.title, :class => "share_column_inner" %>
+                  
+                </div>
+              </div>
+              <div class="middle6">
+                <div class="home see_map_inner_flo">Caption</div>
+                <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'caption', :value => photo.caption,  :class => "share_column_inner" %>
+                 
+                </div>
+              </div>    
+          
+		  <div class="middle7">
+                <div class="home see_map_inner_flo">Tags</div>
+                <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'tags', :id => "phototag_#{count}", :value => photo.tags, :class => "share_column_inner" %>
+                 
+                </div>
+              </div>
+		  
+		  
+		      
+              
+            </div>
+          </div>
+          <div class="clear"></div>
+          <% count = count+1 %>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+      </div>
+    
+	 <div style="padding-top:10px;">&nbsp;</div>
+		 <div style="padding-left:530px;">
+            <input value="save" src="/images/home/save_g_b.jpg" type="image">
+			
+         </div> 
+	<% end %>
+	</div>
+	
+	<!--photos end-->
+<span style="padding-left:150px;"><%= link_to (image_tag("/images/admin/back_list.gif"), {:controller => 'admin/photosets', :action => 'index'},{:title => "Click here to view photoset list"}) %> &nbsp;&nbsp;&nbsp;
+<%= link_to (image_tag("/images/admin/add_adv.gif"), {:controller => 'admin/photosets', :action => 'add_advertisement',:id => @photoset.id},{:title => "Click here to add advertisement photoset details"}) %>&nbsp;&nbsp;&nbsp;
+<%= link_to( image_tag("/images/admin/delete_new.gif"), {:controller => 'admin/photosets',:action => 'delete',:id => @photoset.permalink}, :confirm => 'Are you sure want to delete this photoset?', :method => :post,:title => "Click here to delete photoset( #{@photoset.title} ) details.",:class => 'story_place_font' )%>
+  	</span>
+</div>
+
+
+
+

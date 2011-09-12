@@ -1,0 +1,2 @@
+module Myworld::VideosHelper
+end

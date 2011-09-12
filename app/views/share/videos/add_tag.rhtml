@@ -1,0 +1,186 @@
+<%= javascript_include_tag 'defaults' %>
+<%= javascript_include_tag 'prototype' %>
+	 <div style="margin:12px; border:1px solid #E3DDC7">	 
+	
+	<div class="index_top_new" >	
+	<div class="top_1">&nbsp;</div>
+	<div class="top_middile_new">&nbsp;</div>
+	<div class="top_right">&nbsp;</div>
+	</div>
+	
+	<div style="clear:both;"></div>
+	
+<div class="middile_new" >
+	<% form_for :videos,:url => {:controller => "/share/videos", :action => "display_geo_location", :id => @videoset.permalink } do  %>
+
+<div class="left_bar_photos">
+		
+							
+		<div class="nav_box">
+	   <div style="height:250px; margin-left:12px; width:475px; float:left;">
+		<% if !@videoset.lat.blank? || !@videoset.longt.blank? %>	
+		<%= render :partial => "/share/videos/confirm_map"%>	
+		<% else %>				
+		<%= render :partial => "/share/videos/map" %>		
+		<% end %>							
+
+		</div>
+											
+							<div class="middle1">
+							
+							<div class="mid_right1">
+							
+							<div class="text_who">3.Tag, title and caption videos</div>
+							
+							<div class="home5"><b><%= @videoset.title%></b> contains <b><%= @videoset.blanktitle_videos.size %></b> <br />videos 
+that need tags, titles or<br />captions.</div>
+								
+							<div class="home">Descriptive tags for the whole Set</div>
+							<div style="padding-left:12px;">
+							<input type="hidden" value = '<%= @videoset.videos.length %>' id = 'total_videos' >
+							<%#= hidden_field :videoset, :value => @videos.size, :id => 'total_videos' %>
+		<%= text_area 'videoset', 'tag', :value => @videoset.tag, :class => 'default_style_textarea_new',:id => 'tag',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();"  %>
+							
+					
+							</div>
+							<div class="home">Geo-coord (Latitude, Longitude)</div>							
+							<div style="padding-left:12px;">
+							
+							<%= text_field 'videoset', 'lat' , :value => @videoset.lat,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'lat',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();"  %>	
+							&nbsp;
+							<%= text_field 'videoset', 'longt' , :value => @videoset.longt,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'longt',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();"  %>	
+													
+							</div>
+							<div class="home">Address, State/Prov, Country </div>
+							<div style="padding-left:12px;">
+							
+		<%= text_area 'videoset', 'address' , :value => @videoset.address, :class => 'default_style_textarea_h3_new', :id=>'location',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();"  %>		
+						
+							</div>
+							
+							
+							
+							<div style="padding-left:10px; margin-top:10px;">
+							<input name="video_tag" id="video_tag" value="save" src="/images/home/save_b.jpg" type="image" disabled = true >
+		<% if !@videoset.lat.blank? %>&nbsp; <%= link_to image_tag("/images/home/done.jpg"), :action => 'send_invitation', :id => @videoset.permalink %>
+			<% end %>
+							
+							</div>
+							
+							</div>
+			
+							</div>
+													
+											</div>
+											
+					           						
+										
+											
+											
+											<div style="clear:both;"></div>
+
+  <% if !@videoset.videos.blank? %>
+
+<div class="map_1">						
+     <% if @videoset.videos.length > 5 %>
+    <div class="middle2">
+	<% else %>
+	<div class="middle2_noc">
+	<% end %>
+	
+	
+	
+		        <% count = 1 %>
+				<% for video in  @videoset.videos %>
+			
+				<div  class= <% if count%2 == 0%>"middle31"<% else %>"middle3"<% end %> >
+			   
+					<div class="middle4">
+	   <% if !video.video_image.blank? %>
+	   <%= image_tag("/video/videofile/#{video.id}/main/#{video.video_image}",:style => "width:97px; height:97px;")%>
+	   <% end %>	  
+	   <%#= media_player( {:file =>  url_for_file_column(video,"videofile")},{:width =>100,:height => 100})%>
+      </div>
+		
+					
+		<div class="middle5" >
+		<%= hidden_field "video[#{count}]", 'id', :value => video.id %>
+									
+		<div class="middle6">
+	<div class="home" style="float:left;"> 
+		Cover	<%= radio_button "videoset", "covervideo_id", video.id %>							
+																																		 
+										</div>
+									
+										<div class="home" style="float:right;">
+
+										Delete&nbsp;
+										
+<%= link_to image_tag("/images/home/delete.jpg"),{ :controller => "/share/videos", :action => "delete_video", :id => video.id },:confirm => 'Are you sure want to delete this video?', :method => :post %>
+</div>
+								
+										</div>
+										
+										
+										<div class="middle6">
+										<div class="home" style="float:left; width:60px;">Title</div>
+										<div class="home" style="float:left; width:300px;">
+										<%= text_field "video[#{count}]", 'title', :value => video.title, :style => "width:300px; margin-left:12px; border:1px solid #c4bb9d;" %>
+										
+										</div>
+										</div>	
+										
+										<div class="middle6">
+										<div class="home" style="float:left; width:60px;">Caption</div>
+										<div class="home" style="float:left; width:300px;">
+										<%= text_field "video[#{count}]", 'caption', :value => video.caption,  :style => "width:300px; margin-left:12px; border:1px solid #c4bb9d;" %>
+										
+										</div>
+										</div>
+										
+										<div class="middle7">
+										<div class="home" style="float:left; width:60px;">Tags</div>
+										<div class="home" style="float:left; width:300px; ">
+										<%= text_field "video[#{count}]", 'tags', :id => "videotag_#{count}", :value => video.tags, :style => "width:300px;margin-left:12px; border:1px solid #c4bb9d;" %>
+										
+										</div>
+											
+										</div>
+							</div>
+					
+					</div>
+		
+				 				<div style="clear:both;"></div>
+										 <% count = count+1 %>
+			<% end %>
+							
+						
+							
+							<div style="clear:both;"></div>
+							
+	
+				
+				</div>
+								
+								
+		
+											
+											</div>
+									
+								<% end %>
+											
+											
+				
+											
+			
+			</div>
+			<% end %>
+</div>
+	<div style="clear:both;"></div>												
+	<div class="index_top_new">
+	<div class="bottom_left">&nbsp;</div>
+	<div class="bottom_middile_new">&nbsp;</div>
+	<div class="bottom_right">&nbsp;</div>
+	</div>
+						
+						</div>

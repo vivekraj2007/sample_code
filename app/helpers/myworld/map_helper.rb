@@ -1,0 +1,2 @@
+module Myworld::MapHelper
+end

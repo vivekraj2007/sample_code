@@ -1,0 +1,59 @@
+<div class="story_image" >
+<%= @photo_display.id%>
+			<% if !@photo_display.image.nil? %>					
+			<%= image_tag(url_for_file_column(@photo_display, 'image','main'))%>			
+			<% else %>
+			<%= image_tag ("/images/home/no-image_main.gif") %>
+			<% end %>
+			</div>
+			
+<div class="clear">&nbsp;</div>
+		  <div align="center"> 
+			<%= image_tag("/images/home/spinner.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "photo_spinner",
+              :style =>"display: none;" ) %> </div>
+
+<div class="story_image1">
+			
+			
+			
+			
+<!--script for image slide-->
+
+<%= javascript_include_tag 'njquery' %>
+<%= stylesheet_link_tag 'njquery' %>
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery('#mycarousel').jcarousel();
+});
+</script>
+
+<!--script for image slide-->
+
+<div id="wrap">
+          <div class="jcarousel-skin-tango">
+            <div style="display: block;" class="jcarousel-container jcarousel-container-horizontal">
+              <div style="display: block;" class="jcarousel-prev jcarousel-prev-horizontal jcarousel-prev-disabled jcarousel-prev-disabled-horizontal"> </div>
+              <div style="display: block;" class="jcarousel-next jcarousel-next-horizontal"></div>
+              <div class="jcarousel-clip jcarousel-clip-horizontal">
+                <ul style="width: 850px; left: 0pt;" id="mycarousel" class="jcarousel-list jcarousel-list-horizontal">
+                  <% @count = 1%>
+				  <% for cphoto in @index_photoset.photos %>
+                  <li jcarouselindex="<%= @count %>" class="jcarousel-item jcarousel-item-horizontal jcarousel-item-<%= @count %> jcarousel-item-<%= @count %>-horizontal">
+				   <% if @photo_display.id == cphoto.id %>
+				   <%= image_tag(url_for_file_column(cphoto, "image","thumbnail"),:style => "border:2px solid #EFD024;")%> 
+				   <% else %>
+<%= link_to_remote image_tag(url_for_file_column(cphoto, "image","thumbnail")),:update => 'photo_display',:before => "Element.show('photo_spinner')",:success => "Element.hide('photo_spinner')",:url=> {:action => 'photo',:id =>cphoto.id,:phst_id =>cphoto.photoset_id } %>				   
+ <% end %>
+				   </li>
+                  <% @count = @count+1%>
+
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+			</div>			

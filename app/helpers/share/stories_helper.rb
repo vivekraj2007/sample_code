@@ -1,0 +1,2 @@
+module Share::StoriesHelper
+end

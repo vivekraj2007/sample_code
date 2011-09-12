@@ -1,0 +1,117 @@
+<% form_for :user,  :url => { :action => "update_explorertype", :id => @user.id } , :html => {:multipart => true} do  %>
+
+<div class="edit_account_main">
+							
+							<div class="text_who">What type of Explorer are you?<span class="home_nb">check all that apply</span></div>
+							
+							<div class="edit_account">
+							
+							<div class="edit_account3">
+							<div><b>Transportation</b></div>
+							<% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",1]) %>
+							<% for transpo in transporation %>
+							<div class="home_edit">
+							<% if @profile.explorer_list.nil? %>							
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>">&nbsp;<%= transpo.title %>
+							 
+		 					<% elsif @profile.explorer_list.include?("#{transpo.id}")  %>
+							<input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" checked="checked">&nbsp;<%= transpo.title %>
+							
+							<% else %>
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" >&nbsp;<%= transpo.title %>
+							 
+       						 <% end %>
+							 </div>
+							 <% end %>
+				 
+							</div>
+							
+							
+							
+							
+							<div class="edit_account2">							
+							<div><b>Accomodations</b></div>
+							<% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",2]) %>
+							<% for transpo in transporation %>
+							<div class="home_edit">
+							<% if @profile.explorer_list.nil? %>							
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>">&nbsp;<%= transpo.title %>
+							 
+		 					<% elsif @profile.explorer_list.include?("#{transpo.id}")  %>
+							<input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" checked="checked">&nbsp;<%= transpo.title %>
+							
+							<% else %>
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" >&nbsp;<%= transpo.title %>
+							 
+       						 <% end %>
+							 </div>
+							 <% end %>
+				 
+							</div>
+							
+							
+							
+							
+							
+							<div class="edit_account1">
+							
+							<div><b>Sight-Seeing</b></div>
+							<% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",3]) %>
+							<% for transpo in transporation %>
+							<div class="home_edit">
+							<% if @profile.explorer_list.nil? %>							
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>">&nbsp;<%= transpo.title %>
+							 
+		 					<% elsif @profile.explorer_list.include?("#{transpo.id}")  %>
+							<input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" checked="checked">&nbsp;<%= transpo.title %>
+							
+							<% else %>
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" >&nbsp;<%= transpo.title %>
+							 
+       						 <% end %>
+							 </div>
+							 <% end %>
+				 
+							</div>
+							
+							
+							
+							
+							<div class="edit_account1">
+							
+							<div><b>Activity Level</b></div>
+							<% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",4]) %>
+							<% for transpo in transporation %>
+							<div class="home_edit">
+							<% if @profile.explorer_list.nil? %>							
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>">&nbsp;<%= transpo.title %>
+							 
+		 					<% elsif @profile.explorer_list.include?("#{transpo.id}")  %>
+							<input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" checked="checked">&nbsp;<%= transpo.title %>
+							
+							<% else %>
+							 <input type="checkbox"  name="explorer_list[]" value="<%= transpo.id %>" id="check_<%= transpo.id %>" >&nbsp;<%= transpo.title %>
+							 
+       						 <% end %>
+							 </div>
+							 <% end %>
+				 
+							</div>
+							
+									
+							</div>
+							
+							
+							<div style="float:right; padding-right:60px;">
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/save_g_n.jpg" type="image">	
+	
+	
+	</div>
+	
+	<div class="clear"></div>
+		
+							</div>
+							
+							
+							<% end %>
+							<div class="edit_story_middle_line">&nbsp;</div>

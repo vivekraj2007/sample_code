@@ -1,0 +1,11 @@
+<div align="center" class="my_stories_photo">
+
+	<%= image_tag(url_for_file_column(@photo, "image","main"), :onmouseover=>"show_title();", :onmouseout=>"hide_title();") %>
+</div>			
+   
+<div id="show_title" class="my_photos_inline" align="center">
+  <div class="my_photos_note">
+	<%= check_caption(@photo.caption) %>
+</div>
+
+</div>

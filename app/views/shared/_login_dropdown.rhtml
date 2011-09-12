@@ -1,0 +1,31 @@
+<div style="overflow: hidden; clear:both; text-align:left; top:50; width:200px; display:none; background-color:#000000;  position:absolute; z-index:5;" id="logindiv">
+      <% form_for :user, :url=> {:controller => "/account", :action => "login"}, :html => {:name => "myform", :onsubmit=>'return user_login();'} do %>
+      <% if flash[:login_falied] %>
+      <div align="center" class="login_flash"> <%= flash[:login_falied] %> </div>
+      <% end %>
+      <div style="float:left; padding-left:20px;">
+        <input name="email" id="login_email" value="<%= cookies[:email] ? cookies[:email] : 'Email' %>" class = 'default_style' style="height: 18px; width:160px; margin-top:10px;" type="text"  onfocus="checkinval(); if(this.value=='Email') this.value='';" onblur="checkinval(); if(this.value=='') this.value='Email';" onkeyup="checkinval();" onkeydown="checkinval();">
+      </div>
+      <div style="float:left; padding-left:20px;">
+        <div>
+          <input name="password" id="login_password" value="<%= cookies[:password] ? cookies[:password] : 'Password' %>" class = 'default_style' style="height: 18px; width:160px; margin-top:10px;" type="password" onfocus="javascript:checkinval(); if(this.value=='Password') this.value='';" onblur="checkinval(); if(this.value=='') this.value='Password';" onkeyup="checkinval();" onkeydown="checkinval();">
+        </div>
+      </div>
+      <div style="float:left; padding-right:5px; width: auto;">
+        <div style="padding-top:5px; margin-left:15px; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#585858;">
+          <input name="remember" type="checkbox" <% if !cookies[:email].blank? && !cookies[:password].blank? %> checked="checked" <% end %> >
+          Remember me &nbsp;&nbsp; <%= link_to "Forgot?", {:controller => "/account", :action => 'forgot_password'}, :class => "forgot" %> </div>
+		  
+        <div style="margin-top:10px;" align="center">
+          <% if !cookies[:email].blank? && !cookies[:password].blank? %>
+          <input type="image" src="/images/home/signin1.gif" alt="" border="0"  id="submitimage" />
+          <% else %>
+          <input type="image" src="/images/home/sigin.gif" alt="" border="0"  id="submitimage"  disabled = true  />
+          <% end %>
+        </div>
+		
+		
+      </div>
+      <div style="clear: both;"></div>
+      <% end %>
+    </div>

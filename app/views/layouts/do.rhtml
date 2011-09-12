@@ -1,0 +1,205 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<% if @page_title %>
+<title>UNCHARTED - <%= @page_title %></title>
+<% else %>
+<title>UNCHARTED - WORLD'S FIRST GEO-SOCIAL MEDIA AGENCY </title>
+<% end %>
+
+<%= stylesheet_link_tag 'style_menu','style11','menu' %>
+<% if session[:user_id].blank? %>
+<%= javascript_include_tag 'login_dropdown' %>
+<% end %>
+
+<%= javascript_include_tag :defaults %>
+<%= javascript_include_tag 'validations' %>
+<%= javascript_include_tag 'field_sets' %>
+
+
+<script>
+window.onload=function()
+{
+loadmap();
+<% if flash[:login_falied] %>
+logindiv(0);
+<% end %>
+
+}
+
+ </script>
+
+</head>
+
+
+<body >
+<!--main-->
+
+
+<center>
+<div style="width:95%; height:auto; margin:20px 0px 0px 20px;  padding:0px;" align="center" >
+		<div style="width:728px; height:90px; margin:20px 0px 0px 20px;" align="center">
+			<%#= render :partial => 'shared/adverticements', :locals => { :ad_id => 17} %>	
+			<% if !@header_adv.blank? %>
+			<%= @header_adv.script %>
+			<% end %>			
+		</div>
+</div>
+
+
+
+<div id="main">
+  <!--header-->
+  <div id="header">
+		
+		<div style="width:auto; float:left;"><img src="/images/home/top_left.jpg"  alt=""/></div>
+		
+		
+		<div class="top">
+		
+					<div class="top1">
+				
+						<div style="width:257px; margin-top:10px;"><a href="<%= home_url %>" title="uncharted">
+		<img src="/images/home/logo.jpg" alt="uncharted" /></a></div>
+						
+						<div class="toplink">
+						<div class="go"> <%= link_to(image_tag("/images/home/go.jpg"),go_url,{:title => "Click here to view GO module"})%></div>
+						<div class="see1">  <%= link_to(image_tag("/images/home/see1.jpg"),see_url,{:title => "Click here to view SEE module"})%></div>
+						<div  class="see1"> <%= link_to(image_tag("/images/home/do1.jpg"),do_url,{:title => "Click here to view DO module"})%></div>				
+						</div>
+					
+						
+				</div>
+		
+							<div class="search_box">
+							
+							<div style="width:85px; float:left; margin-top:64px;">	 <%= link_to(image_tag("/images/home/share.jpg"), sharephotos_url,{:title => "Click here to view SHARE module"})%></div>
+					
+					<div style="width:2px; float:left;"> <img src="/images/home/back_strip.jpg" alt="" /></div>
+					
+					
+								<div class="quick_box">
+				
+							<!--<div class="quick_box1">-->
+							
+								<!--<div class="quick">-->
+								
+								
+								<% form_for :search, :url=>{:controller=>'/see/map',:action=>'search'} do %>
+								
+								
+										<div style="float:left; width:auto;"> <input src="/images/home/search_left.jpg" id="search-button" type="image"></div>
+										
+										
+										<div class="top_search"><%= text_field_tag 'search_text', '', :value => "Search", :class => 'top_search', :id => 'search', :onfocus => " if(this.value=='Search') this.value='';", :onBlur =>  "if(this.value=='') this.value='Search';" %></div>
+										
+										<div style="float:left;"><a href="javascript:searchdiv('0')" title="Click here for Advanced Search"><img src="/images/home/search_right.jpg" alt="Advanced Search" /></a></div>
+								<% end %>
+								
+								<!--</div>-->
+								
+							 	<!--</div>-->
+								
+							
+					
+					</div>
+					
+							
+							
+							</div>
+		
+		
+		
+		
+		</div>
+		
+		
+		
+	<div style="width:auto; float:right;"><img src="/images/home/top_right.jpg" alt="" /></div>
+		
+		</div>
+  <!--header-div-end-->
+  <!--content-->
+
+    <!--menu-->
+	
+	
+	
+	
+       <div class="see_nav">
+     <%= render :partial => 'shared/do_menu'%>
+    </div>
+   <div  style="clear:both;"></div>
+    <!--menu-div-end-->
+    <div style="clear:both;"></div>
+	
+	<!--middle-->
+    <div class="content_new">
+<% if params[:controller] == "account" && params[:action] == 'index' %>
+<div style="width:845px;float:left; margin:0px; padding:0px;">
+<% else %>
+<div style="width:810px;float:left; margin:0px; padding:0px;">
+<% end %>
+
+ <div style="float:left; width:720px;">
+ <%= yield %>
+  </div>
+
+
+</div>
+
+
+
+
+
+<% if params[:controller] == "account" && params[:action]== 'index' %>
+<div style="width:203px; float:left;">
+<% else %>
+<div class="right_1">
+<div class="inner_div">
+<div class="cornerbg"></div>
+<% end %>
+
+	   <%= render :partial => "/shared/see_right_block"%>
+
+<% if params[:controller] == "account" && params[:action]== 'index' %>
+</div>
+<% else %>
+</div>
+</div>
+<% end %>
+
+
+
+
+	</div>
+	<!--middle end-->
+	
+	
+	<div style="clear:both;"></div>
+	<div style="width:100%; background-color:#E3DDC7; overflow:hidden;">
+	<div style="float:left; text-align:left; width:845px; height:56px;"> 
+	<img src="/images/home/register_new.jpg" border="0" alt="" width="845" height="56"/></div>
+	
+	</div>
+	
+  </div>
+  <!--content-div-end-->
+  <div style="clear:both;"></div>
+  <div style="background-color:#444444;">
+    <div class="main_foot">
+      <div id="footer">
+        <div style="width:720px;" class="footerlinks"> <a href="" class="footerlinks1">Home</a> | <a href="" class="footerlinks1">Blog</a> | <a href="" class="footerlinks1">Contact</a> | <a href="" class="footerlinks1">Legal</a> | <a href="" class="footerlinks1">Privacy Policy</a> | <a href="" class="footerlinks1">Tearms of Use</a> | <a href="" class="footerlinks1">Honor Code</a> | <br />
+          <div class="foot_link">Copyright &copy;  2008 Uncharted tm Greate Divide Media LLC All Rights Reserved </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--<div style="background-color:#FFCCCC;">gsrgd</div>-->
+
+<!--main-div-end-->
+<center>
+<%= render :partial => 'shared/google_analytics_code' %>
+</body>
+</html>

@@ -1,0 +1,258 @@
+	
+	<!--script to check the check boxes before and after div toogle -->
+		<script type="text/javascript">
+		function check_other(status,id)
+		{
+		<!--alert(status);-->
+		<!--alert(id);-->
+		if(status=='before')
+		{
+		 <!--alert('enter into before');-->
+		 <!--alert(document.getElementById('before_'+id).checked);-->
+		 if(document.getElementById('before_'+id).checked==true)
+		 {
+		  document.getElementById('after_'+id).checked=true		  
+		 }
+		 else
+		 {
+		 document.getElementById('after_'+id).checked=false
+		 
+		 }
+		 
+		}
+		
+		if(status=='after')
+		{
+		  <!--alert('enter into after');-->
+		 <!--alert(document.getElementById('after_'+id).checked);-->
+		 if(document.getElementById('after_'+id).checked==true)
+		 {
+		  document.getElementById('before_'+id).checked=true
+		 }
+		 else
+		 {
+		 document.getElementById('before_'+id).checked=false
+		 }
+		}
+		
+		
+		}
+		</script>
+		
+		
+		
+		
+		
+		
+
+<% form_for :user,  :url => { :action => "update_exploredplaces", :id => @user.id } , :html => {:multipart => true} do  %>
+
+<div class="edit_account_main">
+							
+							
+							
+					<div class="text_who">Where I've explored <span class="home_nb">check all that you've visited</span></div>
+							
+							<div class="edit_account">
+							
+							<div class="edit_account3">
+					
+					
+					        <!--main continent div-->
+							
+							<div class="home_edit" style=" color:#000000;">
+							
+							<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('1_div', 'blind', {duration:0.9}); Element.show('1_div');" value="1" id="check_1">&nbsp;<b>North America</b>							
+							</div>
+							 
+<!--northamerica_div continent div end --> 							
+<% @parient = 1 %>
+<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>	
+
+
+							
+<!--northamerica_div div end--> 
+<div class="clear"></div>
+							
+ 
+ 
+ 
+ 	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('13_div', 'blind', {duration:0.9}); Element.show('13_div');" value="13" id="check_13">&nbsp;<b>Central America</b>						
+	</div>		
+	
+	<!--Central America_div continent div start --> 	
+	<% @parient = 13 %>
+	<%= render :partial => 'new_specified_sub_locations', :locals => {:parient => @parient } %>			
+	<!--Central America_div div end--> 
+	<div class="clear"></div>	
+ 
+ 		 
+				 
+				 
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('2_div', 'blind', {duration:0.9}); Element.show('2_div');" value="2" id="check_2">&nbsp;<b>South America</b>						
+	</div>
+	
+	<!--southamerica_div continent div start --> 							
+<% @parient = 2 %>
+<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>	
+							
+	<!--southamerica_div div end--> 
+	<div class="clear"></div>			
+				
+				
+				
+				
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('3_div', 'blind', {duration:0.9}); Element.show('3_div');" value="3" id="check_3">&nbsp;<b>Caribbean</b>						
+	</div>			
+				
+<!--Caribbean_div continent div start --> 				
+<% @parient = 3 %>
+<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>					
+<!--Caribbean_div div end--> 
+	<div class="clear"></div>
+	
+	
+	
+	
+	
+	
+	
+	
+	</div>
+							
+<!--end of left part div 	-->						
+							
+							
+<div class="edit_account2" >
+
+
+<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('4_div', 'blind', {duration:0.9}); Element.show('4_div');" value="4" id="check_4">&nbsp;<b>Africa</b>						
+	</div>
+	
+<!--Africa_div continent div start --> 	
+<% @parient = 4 %>
+<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>			
+<!--Africa_div div end--> 
+<div class="clear"></div>
+
+
+							
+<div class="home_edit" style=" color:#000000;">
+<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>Antarctica</b>
+</div>
+							
+</div>
+					
+<!--middle div end 	-->						
+							
+<div class="edit_account1">
+
+
+
+ 
+ 
+ 	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('337_div', 'blind', {duration:0.9}); Element.show('337_div');" value="337" id="check_337">&nbsp;<b>United Kingdom (UK)</b>						
+	</div>		
+	
+	<!--United Kingdom_div continent div start --> 	
+	<% @parient = 337 %>
+	<%= render :partial => 'new_specified_sub_locations', :locals => {:parient => @parient } %>			
+	<!--United Kingdom_div div end--> 
+	<div class="clear"></div>	
+						
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('5_div', 'blind', {duration:0.9}); Element.show('5_div');" value="5" id="check_5">&nbsp;<b>Europe</b>						
+	</div>		
+	
+	<!--Europe_div continent div start --> 	
+	<div id="<%= @parient %>_div" style="display:none;">
+	<% @parient = 5 %>
+	<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>	
+			
+	<!--Europe_div div end--> 
+	<div class="clear"></div>	
+	
+	
+	
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('6_div', 'blind', {duration:0.9}); Element.show('6_div');" value="6" id="check_5">&nbsp;<b>Middle East</b>						
+	</div>		
+	
+	<!--Middle East_div continent div start --> 	
+	<% @parient = 6 %>
+	<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>			
+	<!--Middle East_div div end--> 
+	<div class="clear"></div>	
+	
+					
+							
+</div>
+
+							
+							
+							
+							
+<div class="edit_account1">
+
+
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('7_div', 'blind', {duration:0.9}); Element.show('7_div');" value="7" id="check_5">&nbsp;<b>Asia</b>						
+	</div>		
+	
+	<!--Asia_div continent div start --> 	
+	<% @parient = 7 %>
+	<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>			
+	<!--Asia_div div end--> 
+	<div class="clear"></div>	
+	
+	
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('8_div', 'blind', {duration:0.9}); Element.show('8_div');" value="8" id="check_8">&nbsp;<b>Australia</b>						
+	</div>		
+	
+	<!--Australia_div continent div start --> 	
+	<% @parient = 8 %>
+	<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>			
+	<!--Australia_div div end--> 
+	<div class="clear"></div>
+	
+	
+	<div class="home_edit" style=" color:#000000;">
+	<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('9_div', 'blind', {duration:0.9}); Element.show('9_div');" value="9" id="check_9">&nbsp;<b>Oceania</b>						
+	</div>		
+	
+	<!--Oceania_div continent div start --> 	
+	<% @parient = 9 %>
+	<%= render :partial => 'new_sub_locations', :locals => {:parient => @parient } %>			
+	<!--Oceania_div div end--> 
+	<div class="clear"></div>
+	
+	
+	
+	
+	
+</div>
+							
+									
+							</div>
+							
+							
+							<div style="float:right; padding-right:60px;">
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/save_g_n.jpg" type="image">	
+	
+	
+	</div>
+	<div class="clear"></div>
+		
+	
+							</div>
+							
+							
+							<% end %>
+							<div class="edit_story_middle_line">&nbsp;</div><br>
+						

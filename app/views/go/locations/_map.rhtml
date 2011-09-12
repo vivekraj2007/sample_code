@@ -1,0 +1,87 @@
+ 
+  <script src="http://maps.google.com/maps?file=api&v=2&markers=16.965127,82.216256,blues|16.93128,82.238277,tinygreen&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+    type="text/javascript"></script>
+  <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+    type="text/javascript"></script>
+ <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+        map.setCenter(new GLatLng(16.936063,82.232838), 1);
+ 			
+	 // Create our "tiny" marker icon
+        var blueIcon = new GIcon(G_DEFAULT_ICON);
+        blueIcon.image = "../images/home/map_pin_story1.png";
+		blueIcon.iconSize = new GSize(30, 40);
+		
+		
+	// Set up our GMarkerOptions object
+		markerOptions = { icon:blueIcon };
+			
+	// default icon
+          function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "click", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		
+		
+	    <% if @photosets %>
+		<% for photos in @photosets %>
+	
+		  var point = new GLatLng(<%= photos.lat %>,<%= photos.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !photos.title.blank? %>
+		   var marker = createMarker(point,"<%= photos.title %>");
+		  <% else %>
+		   var marker = createMarker(point,'<%= photos.id %>');
+		  <% end %>		 
+		  map.addOverlay(marker);			
+		<% end %>
+		<% end %>
+		
+		
+		
+		
+		<% if @stories %>
+		<% for story in @stories %>		 
+		  var point = new GLatLng(<%= story.lat %>,<%= story.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !story.title.blank? %>
+		   var marker = createMarker(point,"<%= story.title %>");
+		  <% else %>
+		   var marker = createMarker(point,'<%= story.id %>');
+		  <% end %>		
+		  map.addOverlay(marker);	
+		   <% end %>
+		<% end %>
+		
+		
+		<% if @videosets %>
+		<% for video in @videosets %>		
+		  var point = new GLatLng(<%= video.lat %>,<%= video.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !video.title.blank? %>
+		   var marker = createMarker(point,"<%= video.title %>");
+		  <% else %>
+		   var marker = createMarker(point,'<%= video.id %>');
+		  <% end %>		 
+		  map.addOverlay(marker);			
+		 <% end %>	
+		<% end %>
+	  }
+	}
+    </script>
+
+
+
+<div id="mapsearch" style="width: 518px; height: 392px;"></div>
+

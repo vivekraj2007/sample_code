@@ -1,0 +1,44 @@
+
+
+			<div style="width:748px;margin-left:7px;">
+				<div style="width:100%; color:#444e02; margin:0px; font-size:20px;" align="center" class="admin_font">List of Admins</div>
+				<div class="menu_heading">
+				<div style="width:30px; height:auto;" class="float_left heading">&nbsp;SNo</div>
+				<div style="width:140px;height:auto;" class="float_left heading" align="center">Name</div>
+				<div style="width:180px;height:auto;" class="float_left heading" align="center">Email ID</div>
+				<div style="width:150px;height:auto;" class="float_left heading" align="center">Last Login</div>
+				<div style="width:140px;height:auto;" class="float_left heading" align="center">Registered on</div>
+				<div style="width:105px;height:auto;" class="float_left heading" align="center">Action</div>
+				</div>
+				<div class="clearer"></div>
+				<% @admin.each_with_index do |admin,i|  %>
+				
+				<div style="height:auto; margin-top:4px;" onmouseover="javaScript:rowOverEffect(this)" onmouseout="javaScript:rowOutEffect(this,'')">
+				
+				<div style="width:30px; height:auto;" class="float_left heading sub_item" align="center">&nbsp;<%= i+1 %></div>
+				<div style="width:140px;height:auto;" class="float_left heading sub_item" align="center"><%= admin.name %></div>
+				<div style="width:180px;height:auto;" class="float_left heading sub_item" align="center"><%= admin.email %></div>
+				<div style="width:150px;height:auto;" class="float_left heading sub_item" align="center">
+				<%=  user_dateformate(admin.last_login) %>
+				</div>
+				<div style="width:140px;height:auto;" class="float_left heading sub_item" align="center">
+				<%=  user_dateformate(admin.created_at) %>
+				</div>
+				<div style="width:105px;height:auto;" class="float_left heading sub_item" align="center">
+				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+			  <tr >
+				<!--<td align="center"><a href="#"><img src="/images/admin/show.jpg" width="20" height="20" border="0" /></a></td>-->
+				<td align="center">
+				
+				<%= link_to image_tag("/images/admin/edit.jpg",:style => "border:0" ,:title => 'Edit Details'), :action=> "change_password"%> 
+				
+				
+				<!--<td align="center"><a href="#"><img src="/images/admin/delete.jpg" alt="delete" width="19" height="19" border="0" /></a></td>-->
+			  </tr>
+			</table>
+
+				</div>
+				<div class="clearer"></div>
+				</div><% end %>
+			</div>
+			

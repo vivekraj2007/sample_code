@@ -1,0 +1,67 @@
+
+<script type="text/javascript">
+function see_videos(id)
+{
+document.location.href = "/myworld/videos/search_map/"+id;
+}
+</script>
+  
+<script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+       <% if !@browser_ip.blank?%>
+		<% if !@browser_ip.browser_lat.blank? && !@browser_ip.browser_longt.blank? %>
+		map.setCenter(new GLatLng(<%= @browser_ip.browser_lat %>,<%= @browser_ip.browser_longt %>), 9,G_PHYSICAL_MAP);
+       	<% else %>
+		 map.setCenter(new GLatLng(16.936063,82.232838), 9,G_PHYSICAL_MAP);
+		<% end %>
+		<% else %>
+		map.setCenter(new GLatLng(16.936063,82.232838), 9,G_PHYSICAL_MAP);
+		<% end %>
+		map.addMapType(G_PHYSICAL_MAP);
+		// Create our "tiny" marker icon
+        var storyIcon = new GIcon(G_DEFAULT_ICON);
+        storyIcon.image = "/images/home/map/map_video.png";
+		//storyIcon.shadow = "/images/home/map/shadow-map_video.png";
+		storyIcon.shadow = "";
+		storyIcon.iconSize = new GSize(16, 15);
+		
+		// Set up our GMarkerOptions object
+		markerOptions = { icon:storyIcon };
+ 			
+		// default icon
+          function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		
+	<% if @videosets %>
+		<% for video in @videosets %>		
+		  var point = new GLatLng(<%= video.lat %>,<%= video.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !video.title.blank? %>
+		   var marker = createMarker(point,'<div class="map_main_map" onclick="see_videos(<%= video.id%>);"><div class="map_left"><div class="map_left1"><%=  "#{title(video.title.gsub(/'/,''),50)}" %></div><div class="map_title"><%= "#{title(video.description.gsub(/'/,''),20)}" %></div><div class="map_title"><%= map_date(video.created_on) %></div></div><div class="map_image"><div class="map_image1"><img src="/images/home/map/map_video.jpg"/></div><div class="map_date"><% if !video.covervideo.blank? %> <%= image_tag("/video/videofile/#{video.covervideo.id}/thumb/#{video.covervideo.video_image}",:class => "map_inner") %><% else %><%= image_tag "/images/home/no-image_tumb.gif",:class => "map_inner" %><% end %></div></div></div>');
+		  <% else %>
+		   var marker = createMarker(point,'<%= video.id %>');
+		  <% end %>		 
+		  map.addOverlay(marker);			
+		 <% end %>	
+		<% end %>
+		
+	
+         }
+	}
+    </script>
+ 
+
+
+<div id="mapsearch" class="see_map_map"></div>
+

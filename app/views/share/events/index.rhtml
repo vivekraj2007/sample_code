@@ -1,0 +1,63 @@
+<%#= javascript_include_tag "prototype.js" %>
+<%#= javascript_include_tag "eventvalidate.js" %>
+
+<% image_error_message = error_message_on :event, :begin_date %>
+<% if !image_error_message.blank? %>
+<div align="center" class="top_errormessage_border">
+  <div align="center" class="top_errormessage">Begin date <%= error_message_on :event, :begin_date %> </div>
+</div>
+<% end %>
+
+
+
+<div class="left_bar_1">
+<div class="nav_box">
+  <div class="left_bar_12">
+    <div class="left_bar_13">
+	
+      <div class="text_who"> 1. Create a new Event</div>
+	  
+	  
+	  
+		  <div style="margin-left:12px; margin-top:10px;">
+			<% form_for :event,  :url => {:controller => "share/events",:action => "edit_event"} do  %>
+			<select id="eventedit" name="eventedit" class="regtext1" onchange="this.form.submit();">
+			  <option value="new">Edit Existing Event</option>
+			  <%= options_from_collection_for_select @events, "id", 'title', 'params[:eventedit]' %>
+			</select>
+			<% end %>
+		  </div>
+		  
+		  
+		  
+		  
+      <% form_for "event",:url => {:action=>'create'},:html=>{:onSubmit=>'return eventvalid();'} do %>
+	  
+      <div class="home">Title</div>
+      <div style="margin-left:12px;">
+	   <%= text_field 'event', 'title' ,:style => "width:180px;", :class => 'default_style', :id=>'title',:onfocus => "event_fileds();", :onkeyup => "event_fileds();" %> </div>
+	   
+      <div class="home">Description</div>
+      <div style="margin-left:12px;">
+	   <%= text_area 'event', 'description',:class => 'default_style default_style_textarea', :cols=>20,:rows=>3, :id => 'description',:onfocus => "event_fileds();", :onkeyup => "event_fileds();" %> </div>
+	   
+      <div class="home">Begin Date</div>
+      <div style="margin-left:12px;"> 
+	  <%= date_select(:event, :begin_date, :order =>[:day,:month,:year], :start_year => 2008, :end_year => 3008) %> </div>
+	  
+      <div class="home">End Date</div>
+      <div style="margin-left:12px;">
+	   <%= date_select(:event,:end_date,:order =>[:day,:month,:year],:start_year => 2008,:end_year => 3008) %> </div>
+	   
+      <div style="padding-left:10px; margin-top:10px;">
+        <input name="eventsave" id="eventsave" value="save" src="/images/home/save_n.jpg" type="image" disabled = true>
+      </div>
+	  
+      <% end %>
+	  
+      <div style="clear:both;"></div>
+	  
+    </div>
+  </div>
+</div>
+</div>

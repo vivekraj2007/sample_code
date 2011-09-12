@@ -1,0 +1,133 @@
+
+<style>
+.webs {color:#000000;}
+.webs:hover{color:#FFFFFF;}
+</style>
+
+<script type="text/javascript">
+<!--this function is called when open new div-->
+function open_operation(tgn,shn)
+{
+tg=document.getElementById('div_toogle').value;
+sh=document.getElementById('div_show').value;
+if (tg != '' && sh !='')
+{
+Effect.toggle(tg, 'blind', {duration:0.6});
+Element.show(sh);
+}
+document.getElementById('div_toogle').value=tgn;
+document.getElementById('div_show').value=shn;
+}
+
+
+<!--this functions is called when div closed-->
+function close_operation()
+{
+Effect.toggle('rightdiv_features', 'blind', {duration:0.6});
+Element.hide('rightdiv_features_close');
+document.getElementById('div_toogle').value='rightdiv_features';
+document.getElementById('div_show').value='rightdiv_features_close';
+}
+
+<!--this functions is called for feature div is closed-->
+function feclose_operation()
+{
+document.getElementById('div_toogle').value = '';
+document.getElementById('div_show').value = '';
+}
+
+<!--this functions is to intialize values in page onload-->
+function first_div()
+{
+document.getElementById('div_toogle').value = 'rightdiv_features';
+document.getElementById('div_show').value = 'rightdiv_features_close';
+}
+
+</script>
+
+
+<!--hidden field valus used for div operation-->
+<%= hidden_field_tag 'div_toogle','', :value => 'rightdiv_features', :id => 'div_toogle' %>
+<%= hidden_field_tag 'div_show','', :value => 'rightdiv_features_close', :id => 'div_show' %>
+
+<div class="clear"></div>
+
+<div class="middle_right121">
+  <!--rightblock-->
+  
+  
+  
+
+    <div class="right_bg121">	 
+	
+	<!--  search drop down start here-->
+	<%= render :partial => '/shared/search' %>
+	<!--  search drop down end here-->   
+	
+
+	<!--login drop down code starts here-->
+    <%= render :partial => 'shared/login_dropdown' %>    
+    <!--login drop down code ends here-->
+	
+	
+
+	
+      <!--  <div>-->
+	  
+	  
+      <div id ="rightdiv_map_close" class="user_profile_map">
+	  
+      <div class="right_in">
+	  
+       <div class="profileright_in1">
+             <div class="profile_cal1_reg">
+			 <%= link_to "Map",see_map_url,:title => 'Click here to view the full map', :class=> 'profile_cal1_reg' %> 
+			</div>
+			
+       </div>
+	   
+      <div>
+			<a href="javascript://" onclick="Effect.toggle('rightdiv_map_close', 'blind', {duration:0.6}); Element.show('rightdiv_map');" class="profileright_in2"><img src="/images/home/up_arrow.jpg" alt="" /></a>
+	  </div>
+      </div>
+      <div style="clear:both;"></div>
+       
+		
+        <div style="width:200px; height:214px; float:left; clear:both; overflow:hidden;">
+		<%= render :partial => 'shared/layoutmap' %>
+		</div>     
+		   
+       </div>
+	  
+	<div class="clear"></div>
+	  
+      <div class="profile_bg1" style="display:none;" id="rightdiv_map">
+	  
+	  
+	    
+        <div class="right_in">
+          <div class="profileright_in1">
+            <div class="profile_cal1_reg">
+			 <%= link_to "Map",see_map_url,:title => 'Click here to view the full map', :class=> 'profile_cal1_reg' %> 
+			
+			</div>
+          </div>
+          <div class="profileright_in2">
+		   <a href="javascript://" onclick="Effect.toggle('rightdiv_map_close', 'blind', {duration:0.6}); Element.hide('rightdiv_map');"><img src="/images/home/down_arrow.jpg" alt="" /></a></div>
+        </div>
+      </div>
+      	  
+		  
+		  <div class="clear"></div>
+	 <!-- user messages-->
+	 
+      <%= render :partial => '/shared/home_calendar' %>
+	 <%= render :partial => '/shared/home_news' %>
+      <%= render :partial => '/shared/home_features' %>	  
+	  
+      
+      <!--</div>-->
+    </div>
+  </div>
+  <!--rightblock-div-end-->
+

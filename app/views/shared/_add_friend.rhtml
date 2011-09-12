@@ -1,0 +1,58 @@
+
+
+ 
+   <% if check_friend(@user_profile.id) %>	
+  <div class="shared_add_friend">
+		<div id="pwd_1" class="edit_newchange" onmouseover="pwd_change(1);">				
+		<div class="edit_newchange1">			
+	    <div class="edit_newchange2"><div class="edit_newimage"><img src="/images/home/add_1.gif"></div>
+		</div>
+		<div class="edit_newtext">
+		Add as a Friend
+		</div>
+		</div>			
+		</div>		
+		<a href="<%= add_friend_url(:id =>@user_profile.screen_name.gsub(' ', '_'))%>">	
+		<div id="pwd_2" class="edit_newchangered my_world_display" onmouseout="pwd_change(2);" style="cursor:pointer;">						
+		<div class="edit_newchangered1">		
+		<div class="edit_newchangered2">
+		<div class="edit_newimagered"><img src="/images/home/add_2.gif"></div>
+		</div>	 
+		<div class="edit_newtextred">Add as a Friend
+		</div>
+        </div>			
+		</div>
+		</a>
+	
+	<% else %>
+	
+	<div class="shared_add_inn">	
+	<% end %>
+		
+		
+		<div id="edit_1" class="edit_newchange" onmouseover="change_text(1); ">				
+		<div class="edit_newchange1">			
+		<div class="edit_newchange2">
+		<div class="edit_newimage"><img src="/images/home/edit_1.jpg"></div>
+		</div>
+		<div class="edit_newtext">
+		Message
+		</div>	
+		</div>			
+		</div>
+
+	
+		<div id="edit_2" class="edit_newchangered" style="display:none;" onmouseout="change_text(2);">						
+		<div class="edit_newchangered1">	
+		<div class="edit_newchangered2">
+		<div class="edit_newimagered"><img src="/images/home/edit_2.jpg"></div>
+		</div>	 
+		<div class="edit_newtextred">		 
+		<%= link_to "Message", write_messageto_url(:id => @user_profile.screen_name.gsub(' ', '_')),:class =>"edit_newchangered",:style => "text-decoration:none;" %>
+		</div>
+        </div>			
+		</div>
+
+		
+		</div>	
+	

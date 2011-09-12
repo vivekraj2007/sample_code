@@ -1,0 +1,156 @@
+<% form_for :user,  :url => { :action => "update_exploredplaces", :id => @user.id } , :html => {:multipart => true} do  %>
+
+<div class="edit_account_main">
+							
+							
+							
+					<div class="text_who">Where I've explored <span class="home_nb">check all that you've visited</span></div>
+							
+							<div class="edit_account">
+							
+							<div class="edit_account3">
+					
+					
+					        <!--main continent div-->
+							
+							<div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" onclick="Effect.toggle('nortamerica_div', 'blind', {duration:0.6}); Element.show('nortamerica_div');" value="1" id="check_1">&nbsp;<b>North America</b>							
+							</div>
+							 
+							 <!--main continent div end --> 
+							
+						   <div id="nortamerica_div" style="display:none;">	 
+							
+							
+							
+							
+							<!-- after div start-->
+								 
+						   <div style="width:180px; display:none;" id="us_div_after">								   					   						
+						   <div style="background-color:#ECE9DA; float:left; width:180px;">						   
+				          <div class="home_edit" style="float:left; width:130px;">
+						  <input type="checkbox"  name="exploredplaces_list[]"  value="2" id="check_<%#= transpo.id %>">&nbsp;United States
+						  </div>
+						  
+						   <div style="float:left; width:10px; padding-top:10px; padding-left:20px;">
+						   <img src="/images/home/up_arrow.jpg" onclick="Effect.toggle('us_div_after', 'blind', {duration:0.6}); Element.show('us_div_before');">
+						   </div>
+						   </div>					   
+						   <div class="clear"></div>
+						   
+						   <div class="home_edit" style="margin-left:10px;">
+				           <input type="checkbox"  name="exploredplaces_list[]" value="3" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %>Canada
+				            </div>
+						   
+				           	
+							
+							
+							</div>
+							
+							 <!-- after div end -->		
+							
+							
+							
+							
+							
+							
+							
+							
+							
+					<!--before div start-->
+							
+					<div  id="us_div_before"style="background-color:#ECE9DA; float:left; width:180px;">
+					  
+				    <div class="home_edit" style="float:left; width:130px;">	
+					<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">
+						  &nbsp;United States
+					</div>
+						  
+				<div style="float:left; width:10px; padding-top:10px; padding-left:20px;">
+				<img src="/images/home/down_arrow.jpg" onclick="Effect.toggle('us_div_after', 'blind', {duration:0.6}); Element.hide('us_div_before');">
+				 </div>
+						 
+					  </div>
+						  
+						  <div class="clear"></div>							
+							
+							<!--before div end -->
+							
+							
+							 
+							 
+							 
+							 
+
+							
+							
+							
+							
+							</div>
+							
+							<div class="clear"></div>
+							
+							 
+						    <div class="home_edit" style=" color:#000000;">
+				           <input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>Central America</b>
+				            </div>
+				 
+				             <div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>South America</b>		 					
+							 </div>
+							 
+							 <div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>Caribbean</b>		 					
+							 </div>
+							 
+							 
+							 
+							</div>
+							
+							
+							
+							
+							<div class="edit_account2" >	
+							<div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>Africa</b>
+							</div>
+							
+							<div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>Antarctica</b>
+							</div>
+							
+							</div>
+					
+							
+							
+							
+							
+							<div class="edit_account1">
+							<div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>United Kingdom (UK)</b>
+							</div>
+							</div>
+
+							
+							
+							
+							
+							<div class="edit_account1">
+							<div class="home_edit" style=" color:#000000;">
+							<input type="checkbox"  name="exploredplaces_list[]" value="<%#= transpo.id %>" id="check_<%#= transpo.id %>">&nbsp;<%#= transpo.title %><b>Asia</b>
+							</div>
+							</div>
+							
+									
+							</div>
+							
+							
+							<div style="float:right;">
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/save1.jpg" type="image">	
+	
+	
+	</div>
+							</div>
+							
+							
+							<% end %>

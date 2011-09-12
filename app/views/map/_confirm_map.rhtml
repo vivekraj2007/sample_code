@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <title>Google maps example</title>
+    <!-- This includes the google maps API code. 
+          You need to put your own key here -->
+    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+            type="text/javascript"></script>
+    
+    <script type="text/javascript">
+      // helper function to create markers
+      function createMarker(point,html) {
+        var marker = new GMarker(point);
+        GEvent.addListener(marker, "click", function() {
+          marker.openInfoWindowHtml(html);
+        });
+        return marker;
+      }
+      
+      // this is called when the page loads. 
+      // it initializes the map, and creates each marker
+      function initialize() {
+        var map = new GMap(document.getElementById("map_canvas"));
+        map.addControl(new GSmallMapControl());
+        map.centerAndZoom(new GPoint(<%= @loc.longitude %>,<%= @loc.latitude %>), 1);
+            
+        var point = new GPoint(<%= @loc.longitude %>,<%= @loc.latitude %>);
+        var marker = createMarker(point,'<div><%=h params[:address] %></div>')
+        map.addOverlay(marker);	  
+
+       <%#*if (GBrowserIsCompatible()) {%>
+          <%#*var map = new GMap2(document.getElementById("map_canvas"));%>
+          <%#*map.setCenter(new GLatLng(16.969621, 82.238138), 13);%>
+          <%#*GEvent.addListener(map, "click", function() {%>
+            <%#*var center = map.getCenter();%>
+            <%#*document.getElementById("message").innerHTML = center.toString();%>
+          <%#*});%>
+        <%#*}%>	
+        }    
+    </script>
+    
+  </head>
+  <body onLoad="initialize()">
+    <!-- This is the element in which the map will be displayed. -->
+    <div id="map_canvas" style="width: 475px; height: 250px"></div>
+   
+    
+  </body>
+</html>

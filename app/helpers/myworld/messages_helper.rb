@@ -1,0 +1,2 @@
+module Myworld::MessagesHelper
+end

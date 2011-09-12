@@ -1,0 +1,70 @@
+			<div style="width:750px;margin-left:7px;">
+			
+	<div style="width:100%; color:#444e02; margin:0px; font-size:20px;" align="center" class="admin_font">List of Flagged messages</div><br/>
+				<div class="menu_heading" >
+				<div style="width:30px; height:auto;" class="float_left heading">&nbsp;SNo</div>
+				<div style="width:200px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Flagged By", "name", params[:page] %>
+				</div>
+				<div style="width:230px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Email", "email", params[:page] %>
+				</div>
+				<div style="width:120px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Flagged on", "created_at", params[:page] %>
+				</div>
+				<div style="width:105px;height:auto;" class="float_left heading" align="center">Action</div>
+				</div>
+				<div class="clearer"></div>
+				
+				<% @flag.each_with_index do |flag,i|  %>
+			
+				<% if !params[:page].blank? %>
+				<% if params[:page].to_i >= 1 %>
+				<% i = (i + 1) + (params[:page].to_i-1) * 25 %>
+				
+				<% end %> 
+				<%else %>
+				<% i = i+1 %>
+				<% end %>
+				<div style="height:auto; margin-top:4px;" onmouseover="javaScript:rowOverEffect(this)" onmouseout="javaScript:rowOutEffect(this,'')">
+				<div style="width:30px; height:auto;" class="float_left heading sub_item" align="center"><%= i %></div>
+				
+				
+				<div style="width:200px;height:auto;" class="float_left heading sub_item" align="center">
+				<%= profile_name(flag.name) %>
+				</div>
+				
+				<div style="width:230px;height:auto;" class="float_left heading sub_item" align="center">
+				<%= flag.email %></div>
+				
+				
+				<div style="width:120px;height:auto;" class="float_left heading sub_item" align="center">
+				<%=  user_dateformate(flag.created_at) %></div>
+				<div style="width:105px;height:auto;" class="float_left heading sub_item" align="center">
+				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+				
+			  <tr>
+			  
+				<td align="center">
+				<%= link_to( image_tag("/images/admin/show.jpg", :style => "width:20;height:20;border:0;"), {:action => 'show_details', :id =>flag.id}, :title => "Click here to view details of flagged message posted by #{flag.name}" )%>
+				</td>
+				
+				<td align="center">
+				<%#= link_to( image_tag("/images/admin/edit.jpg", :style => "width:20;height:20;border:0;"), {:action => 'show_details', :id =>flag.id}, :title => "Click here to edit #{story.title} details." )%>
+				</td>
+				
+				<td align="left">
+				<%= link_to( image_tag("/images/admin/delete.jpg", :style => "width:20px;height:20px;border:0;"), {:action => 'forced_delete', :id =>flag.id}, :confirm => 'Are you sure want to delete this Flagged message?', :method => :post,:title => "Click here to delete this Flagged message details." )%>
+				</td>
+			  </tr>
+			</table>
+
+				</div>
+				<div class="clearer"></div>
+				</div>
+				
+				<% end %>
+				<div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; margin-top:10px;" align="center">
+				<%= will_paginate @flag %>
+				</div>
+			</div>

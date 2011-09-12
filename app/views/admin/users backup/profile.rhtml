@@ -1,0 +1,488 @@
+
+
+<style type="text/css">
+.profile_name
+{
+color:#444e02; padding:0px;width:450px; margin:0px; font-size:20px; float:left;
+}
+
+.profile_name_dis
+{
+margin-bottom:8px;
+}
+.profile_who
+{
+width:400px; font-size:13px; padding-left:20px; border-bottom:2px #d9e19f solid; padding-bottom:5px; padding-top:5px; margin-bottom:10px;
+}
+.profile_details_main
+{
+width:400px; padding-bottom:3px;
+}
+.profile_details_name
+{
+width:120px; font-size:12px; float:left; text-align:right;
+}
+.profile_details_middle
+{
+width:20px; font-size:12px; float:left; text-align:center
+}
+.profile_details_name2
+{
+float:left;padding-left:3px; font-size:12px;
+}
+.profile_photoset_details_name
+{
+width:300px; font-size:12px; float:left; text-align:left; padding-left:45px;
+}
+.profile_details_head_name
+{
+width:120px; font-size:12px; float:left; text-align:right;padding-left:20px;
+}
+.profile_middle_image_photos{
+width:51px; float:left; margin:2px 2px 2px 2px; margin-top:5px;
+}
+
+</style>
+
+
+
+<div class="admin_font profile_name" > 
+<div class="profile_name_dis" align="center"><%= @user.screen_name %> Profile</div> 
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_who', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+ 
+<b>Who I am</b></div>
+
+
+<div id="profile_who" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Name </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.first_name %>&nbsp;<%= @user.middle_name %>&nbsp;<%= @user.last_name %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Email </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.email %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Screen Name </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.screen_name %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Gendar</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.gender %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">m_status</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.m_status %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Languages I speak </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.language_1 %>,&nbsp;<%= @user.profile.language_2 %>,&nbsp;<%= @user.profile.language_3 %>,&nbsp;</div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Website</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.website %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Mailing Address </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.Address1 %>,&nbsp;<%= @user.Address2 %>,&nbsp;<%= @user.Address3 %>,&nbsp;</div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Country </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.country.name %></div>
+<div style="clear:both;"></div>
+</div>
+
+</div>
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_what', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>What I love to do</b></div>
+
+<div id="profile_what" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Passions, Hobbies, Interests </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.hobbies %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Favorite Sports,Activities</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.activities %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Favorite Foods</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.fav_foods %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Books I'm Reading,Books I Love</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.fav_books %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Occupation</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.accupation %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Affiliations,Clubs</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.affiliations %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">3 Things I Want To Do Before I Die</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.before_die_1 %>&nbsp;<%= @user.profile.before_die_2 %>&nbsp;<%= @user.profile.before_die_2 %>&nbsp;</div>
+<div style="clear:both;"></div>
+</div>
+
+</div>
+
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_where', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Where I've been</b></div>
+
+<div id="profile_where" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Places I've lived</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.places_lived %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Places I've Visited</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.places_visited %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Places I want to go</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.places_want_to_go %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">My favorite places in the whole world</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.favorite_place_1 %>&nbsp;<%= @user.profile.favorite_place_2 %>&nbsp;<%= @user.profile.favorite_place_3 %>&nbsp;</div>
+<div style="clear:both;"></div>
+</div>
+
+</div>
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_status', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Status</b></div>
+
+<div id="profile_status" style="display:none;">
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">User Level</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.level.humanize %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Registered on</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.created_at)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Activated on</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.activated_at)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Last login</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.last_login)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Profile Update</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.updated_at)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+</div>
+
+<!--photosets div start-->
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_photosets', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Photosets & Photos</b></div>
+
+<div id="profile_photosets" style="display:none;">
+
+
+<div class="profile_details_main">
+<div class="profile_details_head_name">
+<a href="#" onclick="Effect.toggle('photosets_list', 'blind', {duration:0.4}); return false;">
+<img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+Total Photosets
+</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.photosets.length %> Photosets.</div>
+<div style="clear:both;"></div>
+</div>
+
+<div id="photosets_list" style="display:none;">
+
+<% for photoset in @user.photosets %>
+<div class="profile_details_main">
+<div class="profile_photoset_details_name"> <a href="#" onclick="Effect.toggle('photosets_list_<%= photoset.id %>', 'blind', {duration:0.4}); return false;"> <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;<%= photoset.title %>&nbsp;(<%= photoset.photos.length  %>)&nbsp;</div>
+<div style="clear:both;"></div>
+<div id="photosets_list_<%= photoset.id %>" style="display:none;">
+<div class="profile_photoset_details_name" >
+<b>Description</b>: <%= photoset.description  %>
+</div>
+<div class="profile_photoset_details_name" >
+<% for photos in photoset.photos %>
+ <div class="profile_middle_image_photos margin_photo_img">
+
+ <a href="<%= ( url_for_file_column(photos, "image","main")) %>" rel="lightbox[example]" >
+<img src="<%= ( url_for_file_column(photos, "image","thumbnail")) %>" > </a>
+ 
+ <%#= image_tag(url_for_file_column(photos, "image","thumbnail"),:style => "border:1px solid #e1ae62;")%>
+ </div>
+<% end %>
+
+</div>
+</div>
+<!--<div class="profile_details_middle">:</div>-->
+<!--<div class="profile_details_name2"><%#= photoset.photos.length  %></div>-->
+<div style="clear:both;"></div>
+</div>
+<% end %>
+
+</div>
+
+</div>
+<div style="clear:both;"></div>
+
+<!--photosets div end-->
+
+<!--videoset div start-->
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_videosets', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Videosets & Videos</b></div>
+
+
+<div id="profile_videosets" style="display:none;">
+
+
+<div class="profile_details_main">
+<div class="profile_details_head_name">
+<a href="#" onclick="Effect.toggle('videosets_list', 'blind', {duration:0.4}); return false;">
+<img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+Total Videosets
+</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.videosets.length %> Videosets.</div>
+<div style="clear:both;"></div>
+</div>
+
+<div id="videosets_list" style="display:none;">
+
+<% for videoset in @user.videosets %>
+<div class="profile_details_main">
+<div class="profile_photoset_details_name"> <a href="#" onclick="Effect.toggle('videosets_list_<%= videoset.id %>', 'blind', {duration:0.4}); return false;"> <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;<%= videoset.title %>&nbsp;(<%= videoset.videos.length  %>)&nbsp;</div>
+<div style="clear:both;"></div>
+<div id="videosets_list_<%= videoset.id %>" style="display:none;">
+<div class="profile_photoset_details_name" >
+<b>Description</b>: <%= videoset.description  %>
+</div>
+<div class="profile_photoset_details_name" >
+<% for videos in videoset.videos %>
+ <div class="profile_middle_image_photos margin_photo_img">
+<% if !videos.video_image.blank? %>
+<%= image_tag("/#{videos.video_image}",:style => "width:51px; height:51px;")%>
+<% else %>
+<%= image_tag("/images/home/no-image_tumb.gif",:style => "width:51px; height:51px;")%>
+<% end %>
+<!-- <a href="<%#= ( url_for_file_column(videos, "image","main")) %>" rel="lightbox[example]" >
+<img src="<%#= ( url_for_file_column(videos, "image","thumbnail")) %>" > </a>--> 
+ <%#= image_tag(url_for_file_column(photos, "image","thumbnail"),:style => "border:1px solid #e1ae62;")%>
+ </div>
+<% end %>
+
+</div>
+</div>
+
+<div style="clear:both;"></div>
+</div>
+<% end %>
+
+</div>
+
+</div>
+
+<!--videoset div end-->
+
+<!--Reviews div start-->
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_reviews', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Reviews</b></div>
+<div id="profile_reviews" style="display:none;">
+
+<div class="profile_details_main">
+<div class="profile_details_head_name">
+<a href="#" onclick="Effect.toggle('reviews_list', 'blind', {duration:0.4}); return false;">
+<img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+Total Reviews
+</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.reviews.length %> Reviews.</div>
+<div style="clear:both;"></div>
+</div>
+
+<div id="reviews_list" style="display:none;">
+<% for review in @user.reviews %>
+<div class="profile_details_main">
+<div class="profile_photoset_details_name">
+ <a href="#" onclick="Effect.toggle('review_list_<%= review.id %>', 'blind', {duration:0.4}); return false;"> <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;<%= review.title %></div>
+<div style="clear:both;"></div>
+<div id="review_list_<%= review.id %>" style="display:none;">
+<div class="profile_photoset_details_name" >
+<b>Description</b>: <%= review.description  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>Location</b>: <%= review.location  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>How was it</b>: <%= review.how_was_it  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>When did you go ?</b>: <%= review.date_to_go  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>This place is</b>: <%= review.place_is  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>Rating</b>: <%= review.rating  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>The Best Part</b>: <%= review.best_part  %>
+</div>
+<div class="profile_photoset_details_name" >
+<b>The Worst Part</b>: <%= review.worst_part  %>
+</div>
+
+</div>
+
+<div style="clear:both;"></div>
+</div>
+<% end %>
+
+
+
+</div>
+
+
+
+
+</div>
+<div style="clear:both;"></div>
+
+
+
+
+
+
+
+
+<div align="center" style="padding-top:5px;">
+
+</div>
+
+
+</div>
+<div style="float:left; width:175px; height:175px;">
+<% if !@user.profile.profile_image.blank? %>
+ 
+ <!--light box effect for image-->
+<!-- <a href="<%#= ( url_for_file_column(@user.profile, "profile_image","main")) %>" rel="lightbox[example]" >
+<img src="<%#= ( url_for_file_column(@user.profile, "profile_image","submain")) %>" > </a>-->
+
+
+<%= image_tag( url_for_file_column(@user.profile, "profile_image","submain")) %>
+<% else %>
+<%= image_tag("/images/home/no-image_submain.gif") %>
+<% end %>
+</div>
+<div class="clear"></div>

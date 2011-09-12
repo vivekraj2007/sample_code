@@ -1,0 +1,39 @@
+<%= stylesheet_link_tag "stylerate" %>
+<%#= javascript_include_tag :defaults %> 
+<%#= javascript_include_tag "prototype" %>
+
+
+  
+ <ul class='star-rating'>
+        
+    <li>
+<%= link_to_remote( "1" , {:url => {:controller => "/myworld/stories", 
+            :action => "rate", :id => @story.id, :rating => 1}},
+            :class => 'one-star', :title => 'Poor') %>
+			
+			
+            </li>
+    <li>
+        <%= link_to_remote( "2", {:url => { :controller => "/myworld/stories", 
+            :action => "rate", :id => @story.id,:rating => 2}},
+            :class => 'two-stars', :title => 'Fair') %>    
+    </li>
+	
+    <li>
+        <%= link_to_remote( "3", {:url => { :controller => "/myworld/stories", 
+            :action => "rate", :id => @story.id, :rating => 3}},
+            :class => 'three-stars', :title => 'Average') %>
+    </li>
+    <li>
+        <%= link_to_remote( "4", {:url => { :controller => "/myworld/stories", 
+            :action => "rate",  :id => @story.id, :rating => 4}},
+            :class => 'four-stars', :title => 'Good') %>    
+    </li>
+    <li>
+        <%= link_to_remote( "5", {:url => { :controller => "/myworld/stories", 
+            :action => "rate", :id => @story.id, :rating => 5}},
+            :class => 'five-stars', :title => 'Excellent') %>
+    </li>
+</ul>
+
+

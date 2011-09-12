@@ -1,0 +1,121 @@
+			 <% form_for :user,  :url => { :action => "create" } do  %>	
+			<div style="width:290px;" class="text"><b>Name</b></div>
+							
+									<div class="top_mid_page7">
+							
+										<div class="top_input">
+										<%= text_field 'user', 'first_name', :style => "width:110px;",:id=>'firstname' %>
+										</div>
+										<div class="top_input1">
+										<%= text_field 'user', 'middle_name' ,:style => "width:20px;",:id=>'middlename' %>
+										</div>
+										<div class="top_input2">
+										<%= text_field 'user', 'last_name',:style => "width:100px;",:id=>'lastname' %>
+										</div>
+										<div style="float:right;"><img src="/images/home/star.jpg" alt=""/></div>						
+										
+										
+										<div style="float:left; width:180px; color:#FF0000">
+										<%= error_message_on :user, :first_name, 'First Name '%></div>
+										<div style="float:left; width:180px;color:#FF0000">
+										<%= error_message_on :user, :middle_name, 'Middle Name ' %></div>
+										<div style="float:left; width:180px;color:#FF0000">
+										<%= error_message_on :user, :last_name, 'Last Name ' %>	</div>
+						 <div style="clear:both;"></div>
+						  </div>
+									
+									
+						
+									
+									
+						<div class="top_middle">
+						<div style="width:290px;" class="text"><b>Email</b></div>						
+						<div><%= text_field 'user', 'email' ,:style => "width:250px;",:id=>'email' %></div>
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :email, 'Email '%></div>						
+						</div>
+						
+						
+										
+						<div class="top_middle">
+						<div style="width:290px;" class="text">Create Screen Name</div>						
+						<div><%= text_field 'user', 'screen_name',:style => "width:250px;",:id=>'screenname' %></div>
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :screen_name, 'Screen name '%></div>
+						</div>
+								
+						<div class="top_middle">
+						<div style="width:290px; " class="text">Create Password</div>						
+						<div><%= password_field 'user', 'password' ,:id=>'password',:style => "width:250px;" %></div>
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :password, 'Password '%></div>
+						<div style="width:290px; " class="text">Retype Password</div>
+						<div><%= password_field 'user', 'confirm_password' ,:id=>'passwordconfirm',:style => "width:250px;"%>		 						</div>
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :confirm_password, 'Retype password '%></div>
+						</div>
+								
+								
+						<div class="top_middle">
+						<div style="width:290px;" class="text">City</div>
+						<div><%= text_field 'user', 'city',:style => "width:250px;",:id=>'city' %></div>
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :city, 'City '%></div>
+						</div>
+						
+						<div class="top_middle">
+						<div style="width:290px;" class="text">Country</div>						
+						<div><%= country_select :user, :country, ["","United States", "Canada"] , :id=> 'Country', 
+						                               :prompt =>'Select a Country' %>
+						</div>
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :country, 'Country '%></div>
+						</div>
+						
+						<div class="top_middle">
+						<div style="width:290px;" class="text">Zip code</div>
+						<div><%= text_field 'user', 'zip',:style => "width:110px;",:id=>'zip' %></div>	
+						<div style="float:left; width:290px; color:#FF0000">
+						<%= error_message_on :user, :zip, 'Zip Code '%></div>
+											
+						</div>
+								
+								
+			<!--			<div class="top_middle">
+						<div class="top_middle1">						
+						<div class="middle_right2">
+						<%#= text_field 'user', 'Address1',:style => "width:140px;",:id=>'address1' %>
+						</div>
+						
+						
+						<div class="middle_right22">
+					   <%#= text_field 'user', 'Address2',:style => "width:95px;",:id=>'address2' %>	
+						</div>
+						</div>
+						</div>-->
+						
+						
+						<div style="clear:both;"></div>
+								
+						
+						<div class="top_middle">
+						<div class="top_middle1">
+						
+						
+						<div class="top_middle2">
+						<%= check_box_tag 'user1','ROR',checked=false, {:name => 'user1[term][]', :id => 'ror' } %>
+						</div>
+						
+						<div style="width:auto; float:left;" class="text">I have read, understand and agree <br />
+                                          to the Terms of Service agreement.</div>
+						</div>
+								</div>
+								<div style="clear:both;"></div>
+								<div style="height:30px;"></div>
+								
+								<div>
+								
+								 <input name="adminloginok" id="adminloginok" value="registration" src="/images/home/register.jpg" type="image">	
+								
+								</div>
+									<% end %>	

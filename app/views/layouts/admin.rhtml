@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Uncharted.net - Administration Section</title>
+
+
+<%= javascript_include_tag :defaults %>
+<%= stylesheet_link_tag "admin" %>
+ <%= stylesheet_link_tag "sexy_flash" %>
+<script type="text/javascript" src="/javascripts/boxover.js"></script>	
+
+<%# if params[:controller] == 'admin/users'%>
+<%#= stylesheet_link_tag 'lightbox' %>
+<%#= javascript_include_tag "prototype.lite.js" %>
+<%#= javascript_include_tag "moo.fx.js" %>
+<%#= javascript_include_tag "litebox-1.0.js" %>
+<%# end %>
+
+<!--google map API key-->
+<script src="http://maps.google.com/maps?file=api&v=2&markers=21.796875,31.952162,blues|21.796875,31.952162,tinygreen&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+	
+<script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+<!--google map API key-->
+
+
+
+
+
+<%= javascript_include_tag 'admin_script' %>
+<%= javascript_include_tag 'ufo' %>
+<%= javascript_include_tag 'admin_field_sets' %>
+
+
+
+<script>
+window.onload=function()
+{
+<%# if params[:controller] == 'admin/users' && params[:action] == 'profile' %>
+<!--initLightbox();-->
+<%# end %>
+<% if (params[:controller] == 'admin/photosets' || params[:controller] == 'admin/stories') && (params[:action] == 'edit' || params[:action] == 'edit_new') %>
+initialize();
+<% end %>
+
+<% if params[:controller] == 'admin/ads_management' || params[:controller] == 'admin/ads' %>
+
+	<% if params[:action] == 'edit_advertisement' %>
+		adv_field_set();
+	<% end %>
+
+<% end %>
+
+}
+ </script>
+
+
+</head>
+
+
+
+<body>
+
+
+
+<div id="content">
+	<!--header-->
+	<div id="header">
+		<div class="float_left" >
+		
+		<img src="/images/admin/logo.jpg" alt="logo" class="img"/>
+		</div>
+		<div style="float:right; height: auto; padding-right:92px; ">
+			<div style="border:0px solid #666666;">
+			<div class="float_left menu_links" >
+			<a href="#"><img src="/images/admin/administration.jpg" alt="admin" border="0" /></a>
+			</div>
+			
+			<div class="float_left menu_links">
+			<%= link_to image_tag("/images/admin/myaccount.jpg" , :alt => "myaccount"), :controller => "admin/login", :action => "myaccount" %>
+			<!--<a href="#"><img src="/images/admin/myaccount.jpg" alt="myaccount" border="0" /></a>-->
+			</div>
+			
+			<div class="float_left menu_links">
+		<%= link_to image_tag("/images/admin/logoff.jpg" , :alt => "logoff"), :controller => "admin/login", :action => "logout",:id => session[:user_id] %>
+			<!--<a href="#"><img src="/images/admin/logoff.jpg" alt="logoff" border="0" /></a>-->
+			</div>
+			
+			<div style="clear:both"></div>
+			</div>
+		</div>
+		<div style="clear:both"></div>
+	</div>
+	
+	<!--header-end-->
+	
+	
+	
+
+	<div style="width:100%; border-top:6px solid #c0db05; background:url(/images/admin/content_bg.jpg) repeat-x; background-color:#cfc6a5;">
+		<!--middletop-->
+		<div style="width:100%;">
+			<div class="float_left"><img src="/images/admin/admin_icon.jpg" alt="admin" class="img_1" /></div>
+			<div class="float_left admin_font">Administration</div>
+			<div class="clearer"></div>
+		</div>
+		<!--middletop-end-->
+		<div class="float_left" style="height:auto; width:200px;">
+		<!--left-links-->
+		  <div id="leftbar">
+<ul>
+	<li>
+ <%= link_to "Administrator", {:controller => "/admin/login", :action => "list"}, :title => "Click here to view admin account" %>
+	</li>
+	<li>
+<%= link_to "Users", {:controller => "/admin/users", :action => "index"}, :title => "Click here to view users list" %>	
+	</li>
+	<li>
+<%= link_to "Stories", {:controller => "/admin/stories", :action => "index"}, :title => "Click here to view stories list" %>	
+	</li>
+	<li>
+<%= link_to "Photosets", {:controller => "/admin/photosets", :action => "index"}, :title => "Click here to view photosets list" %>		
+	</li>
+	
+<li>
+<%= link_to "Ads", {:controller => "/admin/ads", :action => "index"}, :title => "Click here to Add/Edit/Delete Advertisements" %>		
+	</li>
+
+	<li>
+<%= link_to "Ads Management", {:controller => "/admin/ads_management", :action => "index"}, :title => "Click here to Manage Advertisements in website" %>		
+	</li>
+	
+	<li>
+<%= link_to "Flaged messages", {:controller => "/admin/flag_messages", :action => "index"}, :title => "Click here to view Flag messages" %>		
+	</li>
+	
+	
+	<li>
+<%= link_to "Logout", {:controller => "/admin/login", :action => "logout",:id => session[:user_id]}, :title => "Click here to logout" %>		
+	</li>
+
+</ul>
+			</div>
+			<div class="float_left" style="height:auto; width:auto; background-color:#e2dcc6; margin-left:5px;"><img src="/images/admin/serperator.jpg" /></div>
+			<div class="clearer"></div>
+			
+				 <!--left-links-->
+		</div>
+		<!--rightcontent-->
+		
+		
+		<div class="float_right" >
+		
+<div align="center" style="margin-top:10px; margin-bottom:20px; margin-left:20px; margin-right:20px;">
+<%#if flash[:notice] %>
+ <div align="center" style="font-family:Arial, Helvetica, sans-serif;font-size:15px;color:#AB0300;text-align:center;">
+ <%= sexy_flash :timeout =>2, :duration => 1, :show_effect => "BlindDown", :hide_effect => "BlindUp" %>
+ <%#= flash[:notice]  %>
+</div>
+<%# end %>	
+		</div >
+		
+		<%= yield %>
+		
+		
+
+			
+		</div>
+		<!--rightcontent-end-->
+	<div class="clearer">&nbsp;</div>
+	</div>
+	<div style="width:93%; color:#000000; font-size:12px; margin:10px auto 0 auto;" class="admin_font"> 	© 2007 Uncharted  All Rights Reserved</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,53 @@
+
+ <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+       <% if !@user.lat.blank? && !@user.longt.blank?  %>
+		map.setCenter(new GLatLng(<%= @user.lat.to_f %>,<%= @user.longt.to_f %>),2,G_PHYSICAL_MAP);
+		<% else %>
+        map.setCenter(new GLatLng(16.936063,82.232838),2,G_PHYSICAL_MAP);
+		<% end %>
+		map.addMapType(G_PHYSICAL_MAP);
+		map.addControl(new GLargeMapControl());
+		map.addControl(new GMapTypeControl());
+		// Create our "tiny" marker icon
+        var photoIcon = new GIcon(G_DEFAULT_ICON);
+        photoIcon.image = "/images/home/map/map_photos.png";
+		photoIcon.shadow = "";
+		photoIcon.iconSize = new GSize(16, 15);
+		photoIcon.iconAnchor = new GPoint(5, 13);
+		
+		// Set up our GMarkerOptions object
+		markerOptions = { icon:photoIcon };
+ 			
+		// default icon
+          function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+          marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		<% if !@myworld_friends.blank? %>
+		<% for friend in @myworld_friends %>
+		<%= friend.lat %>
+		    var point = new GLatLng(<%= friend.lat %>,<%= friend.longt %>);
+		    var marker = createMarker(point,'');
+		  	 
+		  map.addOverlay(marker);		  
+		
+		<% end %>
+		<% end %>
+	
+         }
+	}
+    </script>
+ 
+
+
+<div id="mapsearch"style="width:600px; height:450px;"></div>
+

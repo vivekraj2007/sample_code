@@ -1,0 +1,302 @@
+<script type="text/javascript">
+function place_value()
+{
+document.getElementById('googlelocation').value=0;
+}
+</script>
+  
+  
+  
+<!--SCRIPT FOR GOOGLE MAP LOCATIONS START -->
+  
+ <script type="text/javascript">
+function gmap()
+{
+title = document.getElementById('title').value
+sub_title = document.getElementById('description').value
+bpage = document.getElementById('page_action').value
+cat_id = document.getElementById('page_catid').value
+
+var url = "http://greatdividemedia.com/share/travelogs/map?title="+title+"&sub_title="+sub_title+"&bpage="+bpage+"&cat_id="+cat_id;
+
+
+if(document.getElementById('googlelocation').value==0)
+{
+document.getElementById('googlelocation').value=1;
+winRef2 = window.open(url,'googlemapwindow','height=480,width=500,left=280,top=200,status=1,toolbar=0,close=0');
+}
+else
+
+{
+		if(winRef2.closed)
+		{
+		winRef2 = window.open(url,'googlemapwindow','height=480,width=500,left=280,top=200,status=1,toolbar=0,close=0');
+	
+		}
+		else
+		{
+			winRef2.focus();
+		}
+}
+
+
+document.getElementById('title').focus;
+document.getElementById('where_loc').disabled=false;
+
+
+
+}
+
+
+
+
+
+function maplocation()
+{
+<% if !@cart.blank? %>
+var whereis = '<%= @cart.loct %>'; 
+var title = '<%= @cart.map_title %>'; 
+var sub_title = '<%= @cart.map_subt %>';
+var lat = '<%= @cart.lat %>'; 
+var longt = '<%= @cart.longt %>';  
+
+
+var country = '<%= @cart.country %>'; 
+var continent = '<%= @cart.continent %>'; 
+var state = '<%= @cart.state %>'; 
+var location = '<%= @cart.location %>'; 
+
+
+
+document.getElementById('where_loc').value=whereis;
+document.getElementById('title').value=title;
+document.getElementById('description').value=sub_title;
+document.getElementById('lat').value=lat;
+document.getElementById('longt').value=longt;
+
+document.getElementById('country').value=country;
+document.getElementById('continent').value=continent;
+document.getElementById('state').value=state;
+document.getElementById('location').value=location;
+<% end %>
+}
+</script>
+<!--SCRIPT FOR GOOGLE MAP LOCATIONS END -->
+
+
+<%#= javascript_include_tag 'imgslide/carousel' %>	
+<%#= stylesheet_link_tag "imgslide/prototype-ui.css" %>  
+ 
+  
+  <script language>
+  	function addcode(str)
+	{
+		document.travelog_tellus.value +=  str;
+		return false;		
+	}
+  </script>
+  
+  
+<!--script for text editor start-->  
+
+
+<script language="javascript" type="text/javascript" src="/tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+  mode : 'exact',
+  elements : "travelog_tellus",
+  theme : 'advanced',
+  theme_advanced_buttons1 : "bold,italic,underline",
+  theme_advanced_buttons2 : "",
+  theme_advanced_toolbar_location : "bottom",
+  theme_advanced_toolbar_align : "left",
+  theme_advanced_path_location : "none",
+  debug : false,
+  theme_advanced_path : false
+});
+</script>
+<!--script for text editor END -->
+
+<!--MAIN DIV START-->
+<div class="left_bar_1">
+<div class="nav_box">
+
+
+<!--LEFT DIV START-->
+ <div class="left_bar_12">
+ 
+<!-- STEP 1 START-->
+ <div class="left_bar_13" >
+   <!--  backgroun style for div-->
+        <div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+        <div style="clear:both;"></div>		
+        <div class="middile">
+          <!--  backgroun style for div end -->
+		  
+		  
+		  
+            <div class="text_who">1.Create a new Travelog entry</div>
+		  
+            <div class="story_select">
+            <% form_for :travelog,:url => {:controller => "/share/travelogs",:action => "edit_travelog"} do  %>
+           <select id="travelogedit" name="travelogedit" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Travelog</option>
+              <%= options_from_collection_for_select @user_travelogs, "permalink", 'sliced_title' %>
+            </select>
+            <% end %>
+          </div>
+		   <div style="clear:both;"></div>
+		  
+		   <%= hidden_field_tag 'page_action', '', :value => "#{params[:action]}", :id => 'page_action' %>
+		   <%= hidden_field_tag 'page_catid', '', :value => "#{@travelog.permalink}", :id => 'page_catid' %>
+		   
+		   
+          <% form_for :newtravelog, :url => {:action => "update_travelog", :id => @travelog.permalink} do %>
+		  
+          <div class="home">Title</div>
+		  
+          <div class="story_text">
+		   <%= text_field 'travelog', 'title', :class => 'default_style',:style => "width:180px; height:18px;", :id=>'title', :onblur => "travelog_fileds();",:onfocus => "travelog_fileds();", :onkeyup => "travelog_fileds();" %> 
+		   </div>
+		   
+           <div class="story_text">
+		    <%= error_message_on :travelog, :title, 'Title '%>
+			 </div>
+		  
+          <div class="home">Description</div>
+		  
+           <div class="story_text">
+		   <%= text_area 'travelog', 'description', :class => 'default_style_textarea_new',  :style=> "height:62px;",:id => 'description',:onfocus => "travelog_fileds();", :onkeyup => "travelog_fileds();" , :onblur => "travelog_fileds();" %> 
+		   </div>
+		   
+           <div class="story_text"> 
+		  	  <%= error_message_on :travelog, :description, 'Description '%> 
+		    </div>
+		  
+          <div class="home">Where? </div>
+		  
+            <div class="story_text">
+			
+	 <%= text_area 'travelog', 'where',:class => 'default_style_textarea_h3_new',:style => "height:50px;", :id => 'where_loc', :onclick => "gmap();"%>
+	 <%= hidden_field_tag 'googlelocation','', :value => 0, :id => 'googlelocation' %>  
+			  </div>
+		  
+         <div class="story_text"> 
+		  <%= error_message_on :travelog, :where, 'Location '%>
+		  </div>
+		  <div class="home">When did you go ?</div>
+		   
+          <div class="story_text">
+		   <%= date_select(:travelog,:when_did,:order =>[:day,:month,:year],:start_year =>2008,:end_year => 3008) %> </div>
+          <div style="margin-left:12px;"> <%= error_message_on :travelog, :when_did, 'Date went '%>
+		  </div>
+		  
+          <div class="home">&nbsp;</div> 
+		  
+		  
+		  
+	       <%= hidden_field 'travelog', 'lat',  :id => 'lat' %>
+		   <%= hidden_field 'travelog', 'longt',  :id => 'longt' %>
+		   
+		   <%= hidden_field 'travelog', 'country',  :id => 'country' %>
+		      <%= hidden_field 'travelog', 'continent',  :id => 'continent' %>
+		   <%= hidden_field 'travelog', 'state',  :id => 'state' %>
+		    <%= hidden_field 'travelog', 'location',  :id => 'location' %>
+		   
+           <div class="story_select">
+            <input name="travelogsave" id="travelogsave" value="save" src="/images/home/save_b.jpg" type="image" disabled = true>
+          </div>
+		  
+          
+          <div style="clear:both;"></div>
+		  
+        </div>
+		
+        <div style="clear:both;"></div>
+		
+        <div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+		
+		<% end %>
+		
+      </div>
+<!--STEP 1 END -->	
+
+ 	  
+<div style="clear:both;"></div>
+	  
+	  
+<!--STEP 2 START	  -->	  
+
+	  <div class="home">&nbsp;</div>
+	  <div class="left_bar_13">
+        <div class="text_who">2.Tag and Link your Travelog</div>      
+          <div class="home4"><%= @travelog.title.humanize  %></div>
+       <div style="margin-left:12px;">
+		 <%= text_area 'travelog', 'tag', :class => 'default_style_textarea_new',  :style=> "height:62px;",:id => 'tag'%> </div>
+         <div>
+		<%= render :partial => 'shared/link_sets'%> </div>
+     <div class="story_select"> 
+	 <%= image_tag ("/images/home/save_n.jpg") %>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+<!--STEP 2 END	-->	
+	
+<!--	LEFT DIV END-->
+
+	
+	
+<!--RIGHT DIV START-->
+    <!--step: 3 start-->
+    <div class="story_step3" >
+	
+      <div class="text_who style_write1" align="left">  3. Tell us all about your latest adventurer!.</div>
+        
+      	<div style="margin:5px auto 0 auto; margin-left:15px; ">
+<div style="top:306px; left:80px; position:relative;z-index:1">
+
+	  <table width="200px" border="0" cellspacing="0" cellpadding="0" style="margin-top:3px;">
+	  <tr><td colspan="4" height"4px"></td></tr>
+  <tr>
+    <td width="80px" height="20px">
+	<img src="/images/home/img_hover.gif" alt="photoset_image" style="padding-left:5px;"/> <img src="/images/home/video_hover.gif"  alt="videoset_image"  style="padding-left:5px;" /></td>
+	
+ </tr>
+</table>
+</div>
+     <textarea id="travelog_tellus" name="travelog[tellus]" style="width:434px; height:290px; border:1px solid #b7b28c;"></textarea>
+	 <div style="top:0; position:relative;"><%= image_tag ("/images/home/background_bottom.gif")%></div>
+    </div>
+	  
+      <div class="style_write" align="left">
+	  <div class="story_publish">
+	  <%= image_tag ("/images/home/publish_n.gif") %>
+	  </div>
+	  <div class="story_save_n">
+	  <%= image_tag ("/images/home/save_n.jpg") %>
+	  </div>
+	  </div>  
+      
+    </div>
+     <!--step: 3 end -->
+	 
+	 
+   <!--  RIGHT DIV END-->
+	
+	
+
+	<!--text area-->
+	
+
+  <div style="clear:both;"></div>
+</div>
+</div>

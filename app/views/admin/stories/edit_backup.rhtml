@@ -1,0 +1,50 @@
+<div class="story_title" > 
+<div class="story_font_left" align="center">Edit <%= @story.title.titlecase %> Details</div> 
+
+<div style="clear:both;"></div>
+
+</div>
+<% form_for :story_edit, :url => {:controller => 'admin/stories',:action => 'update',:id => @story.id} do %>
+<div class="story_title1">
+<div>
+
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_field 'story', 'title' ,:style => "width:250px;",:id=>'title', :class => 'default_style' %></div>
+</div>
+
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Sub Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_field 'story', 'sub_title' ,:style => "width:250px;",:id=>'sub_title', :class => 'default_style' %></div>
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Place </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_field 'story', 'where_is' ,:style => "width:250px;",:id=>'where_is', :class => 'default_style' %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Tags </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_area 'story','tag',:rows => 20,:cols => 40,:class =>'default_style_textarea',:id => 'tag'%></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Description </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_area 'story','write_it',:rows => 20,:cols => 40, :class =>'default_style_textarea',:id => 'write_it' %></div>
+</div>
+<div class="clearer"></div>
+<div style=" float:left; padding-left:170px;"><input value="save" src="/images/home/save_b.jpg" type="image" ></div>
+<% end %>
+<div class="clearer"></div>
+<div  style="float:right;">
+<div>
+<%= link_to "Back to List", {:controller => 'admin/stories', :action => 'index'},:class => 'story_place_font' %></div>
+</div>
+</div>

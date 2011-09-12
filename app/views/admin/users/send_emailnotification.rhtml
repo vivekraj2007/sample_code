@@ -1,0 +1,82 @@
+<html>
+<head>
+
+	<title>Email Notification</title>
+
+<script src="/javascripts/tellfriend.js"></script>
+<%= stylesheet_link_tag "style" %>
+<script type="text/javascript">
+function focus()
+{
+document.appl_form.yname.focus();
+}
+</script>
+
+
+
+</head>
+
+<body onLoad="javascript:return focus();" BGCOLOR=#565455 LEFTMARGIN=1px TOPMARGIN=1px MARGINWIDTH=1px MARGINHEIGHT=1px>
+
+<% if @message %>
+   <script type="text/javascript">window.close();</script>
+<% end %>
+
+<div align="center" style="padding:2px ">
+<% form_for :sendmail,  :url => {:controller => 'admin/users', :action => :send_emailnotification, :id => @user.id  }, 
+                              :html => {:name=> 'appl_form', :onSubmit=>'return valid();'} do  %>
+<table cellpadding="0" cellspacing="0" border="0" width="550" style="border-color:#4d4b4c;border-style:solid;border-width:1px" bgcolor="#FFFFFF">
+<tr><td rowspan="3"><img src="/images/spacer.gif" width="2" height="1"/></td><td><img src="/images/spacer.gif" width="1" height="2"/></td><td rowspan="3"><img src="/images/spacer.gif" width="2" height="1"/></td></tr>
+		<tr>
+			<td  bgcolor="#ff5d10"  class="toplinks">
+				<table cellpadding="0" cellspacing="0" border="0" width="550" height="34">
+					<tr>
+						<td width="550" height="34"  style="font-family:verdana; color:#ffffff;background-color:#565455; background-repeat:repate-x;" >&nbsp;&nbsp; <font color="#FFFFFF"><strong>SEND EMAIL NOTIFICATION	</strong></font></td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		<tr><td><img src="/images/spacer.gif" width="1" height="2"/>
+			<table cellpadding="0" cellspacing="0" border="0" width="550">
+							<tr valign="top">
+					<td>
+						<table cellpadding="0" cellspacing="0" border="0" width="100%">
+							<tr>
+							
+								<td width="80%" align="center">
+									<table width="440" cellpadding="0" cellspacing="5" border="0">
+										<tr>
+											<td colspan="2" height="20" style="vertical-align:middle"><strong class="tellfriend" style="color:#4d4b4c;">User details: <% if flash[:notice] %><%= flash[:notice] %><% end %></strong></td>
+										</tr>
+										<tr>
+											<td>
+												<img src="/images/home/dot_arrow.gif" align="absmiddle">&nbsp;&nbsp;<span class="tellfriend">Name:</span><br>
+<%= text_field_tag 'name','', :value => @user.screen_name,  :id =>'fname' ,:class => 'inputbox11',:disabled => true   %>											</td>
+											<td>
+												<img src="/images/home/dot_arrow.gif" align="absmiddle">&nbsp;&nbsp;<span class="tellfriend">Email:</span><br>
+<%= text_field_tag 'email','',  :value => @user.email, :id =>'femail' ,:class => 'inputbox11',:disabled => true  %>											</td>
+										</tr>
+										<tr>
+					<td colspan="2" height="20" style="vertical-align:middle"><strong class="lightblue"><span class="tellfriend">Your message <span style="font-weight:normal">(optional)</span>:</span></strong></td>
+										</tr>
+										<tr>
+											<td colspan="2">
+												<%= text_area_tag 'message','', :id =>'message', :value => "Please Leave your Message Here..", :class => 'inputbox2' , :rows => 10 ,:cols => 40 ,:style =>"width:400px;height:125px;", :onKeyUp =>"if(event.keyCode==13) showOptions();", :onfocus =>  "if(this.value=='Please Leave your Message Here..') this.value='';", :onblur => "if(this.value=='') this.value='Please Leave your Message Here..';"     %>
+												<div align="right" style="padding:8px;padding-right:38px">
+												
+												<center><input type="image" src="/images/home/send.jpg" border="0"/></center></div>											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</form>
+			</table>
+		</td></tr>
+	</table>
+</div>
+</body>
+</html>
+<% end %>	

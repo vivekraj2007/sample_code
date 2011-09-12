@@ -1,0 +1,269 @@
+
+<div class="left_bar1">
+
+  <!--left stories-->
+  <div class="left_bar_stories_new">
+  
+    <!--advertisement-div-start-->
+	
+    <!--<div class="stories_leftbar">
+      <div class="adver_stories">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+      <div class="adver_stories2">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+    </div>-->
+	
+	
+	<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement"><%= @top_adv.script %></div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement"><%= @bottom_adv.script %></div>
+      
+      </div>
+    </div>
+	
+	
+    <!--advertisement-div-end-->
+	
+	
+	
+    <!--world start-->
+    <div class="myworld_rightbar">
+	
+      <!--top select-->
+      <div class="myworld_rightbar_inner_story">
+        <div class="world_cal1_story">
+		
+		<div class="stories_map_3">
+		 <%= link_to "Inbox", messages_url(:id => @user_profile.screen_name.gsub(' ', '_')), {:class => "stories_map_3",:title => "Click here to view all messages"}%> 
+		 </div>
+          <div class="friends_flo">
+            <div class="myworld_images_sent"></div>
+          </div>
+         
+		 <% if check_login(@user_profile.id)  %>
+         <div class="stories_map_3">
+		 <%= link_to "Write", write_message_url(:id => @user_profile.screen_name.gsub(' ', '_')),{:class => "stories_map_3",:title => "Click here to write new message"}%>		
+		  </div>
+		   <% end %>
+        </div>
+        <div class="photoset_select_story1_new">
+		
+		
+		<% form_for :messagedfriends, :url =>{ :controller =>'/myworld/messages', :action => 'sent_messages'} do %>		
+		<select  id="message_users" name="messaged[user]" onchange="this.form.submit();" class="world_select_story">
+		<option>View Messages from..</option>
+		<% if !@messaged_users.blank? %>
+		<%= options_from_collection_for_select @messaged_users, "id", "screen_name" %>
+		<% end %>
+		</select>
+		<% end %>						 	
+        </div>
+      </div>
+      <!--top select end-->
+	  
+	<script type="text/javascript">
+function display_delete(position,pid)
+{
+if (position == 0)
+{
+
+document.getElementById('delete_message_before_'+pid).style.display = 'none';
+document.getElementById('delete_message_after_'+pid).style.display = 'block';
+}
+
+else if (position == 1)
+{
+
+document.getElementById('delete_message_after_'+pid).style.display = 'none';
+document.getElementById('delete_message_before_'+pid).style.display = 'block';
+}
+}
+</script>  
+	  
+      <!--line div start-->
+      <!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+      <!--line div end-->
+	  
+	  <% if !@total.blank? %>
+	  
+      <!--world content start-->	
+	    
+      <div class="myworld_rightbar_inner1">	  
+        <div class="world_message1">
+          <!--messages-->
+          <div class="world_message">
+            <div class="home_world">
+			<strong>Messages</strong>
+			 <% if @total.blank? %>
+           0 - 0 of 0
+          <% else %>
+          <% if @total.size > 19 %>
+          <% if params[:page] %>
+         <%= (params[:page].to_i * 20) - 19  %> -
+          <% if (params[:page].to_i * 20) > @total.size %>
+          <%= @total.size %>
+          <% else %>
+          <%= (params[:page].to_i * 20)  %>
+          <% end %>
+          <% else %>
+           1 - <%= @sent_messages.size %>
+          <% end %>
+          of <%= @total.size %>
+          <% else %>
+           1 - <%= @sent_messages.size %> of <%= @total.size %>
+          <% end %>
+          <% end %>
+          <!--&nbsp; &nbsp;1 2 3 4 5--></div>
+          </div>
+          <!--messages end-->
+        </div>
+		
+		<% count = 1 %>
+		<%# for messages in @sent_messages %>
+		<% @sent_messages.each_with_index do |messages,i|  %>
+						
+				<% if !params[:page].blank? %>
+				   <% if params[:page].to_i > 1 %>
+				   <% i = (i + 1) + (params[:page].to_i-1) * 20 %>				
+				   <% end %> 
+				<% else %>
+				<% i = i+1 %>
+				<% end %>
+		
+		
+		
+		 
+        <!--world lightcolor div-->	
+		<div  class= <% if count%2 == 0%>"world_light1"<% else %>"world_light"<% end %> >
+          <!--middle image-->
+          <div class="light_image">
+		  
+		  
+		  <div class="light_innerimage">
+			
+			<% if !messages.to_id.profile.profile_image.blank? %>
+		    <%= link_to(image_tag(url_for_file_column(messages.to_id.profile, "profile_image","thumbnail")), profile_url(:id => messages.to_id.screen_name.gsub(' ', '_')), {:title => "#{messages.to_id.screen_name}"}) %>
+			<% else %>
+			<%= link_to(image_tag("/images/home/no-image_tumb.gif"), profile_url(:id => messages.to_id.screen_name.gsub(' ', '_')), {:title => "#{messages.to_id.screen_name}"}) %>
+			<% end %>
+
+			</div>
+		  
+		  
+		  	<div class="world_middle1">
+			
+				 <div class="world_middle1_new">
+				 <div class="myworld_text">
+			  <img src="/images/messages/world_mail.jpg" alt="" class="my_world_mid"/>
+			  <%= link_to messages.subject, view_message_url(:id => @user_profile.screen_name.gsub(' ', '_'),:position => i,:message => messages.id),{:class => "myworld_text",:title => "Click here to view full message"} %>			  
+			   </div>
+			   
+			   <div class="myworld_text1"><%= profile_name(messages.to_id.screen_name) %></div>
+              <div class="myworld_text2"><%= myworld_dateformat(messages.date_sent)%></div>
+				 </div>
+			
+			
+			<div class="world_delete">
+			<% if check_login(@user_profile.id)  %>
+            <div id="delete_message_before_<%= messages.id %>"  onmouseover="display_delete(0,<%= messages.id %>);" >
+<%= link_to (image_tag("/images/messages/delete_c1.gif"),sentmsg_delete_url(:id => @user_profile.screen_name.gsub(' ', '_'),:message =>messages.id),{:title => "Click here to delete this message", :class=> "friends_flo1", :confirm => "Are you sure you want to remove this message?"}) %>
+</div>
+<div id="delete_message_after_<%= messages.id %>"  class="my_world_display" onmouseout="display_delete(1,<%= messages.id %>);">
+<span class="my_world_sent_text">Delete Message</span>
+<%= link_to (image_tag("/images/messages/delete_c2.gif"),sentmsg_delete_url(:id => @user_profile.screen_name.gsub(' ', '_'),:message =>messages.id),{:title => "Click here to delete this message", :classs=> "friends_flo1",:confirm => "Are you sure you want to remove this message?"}) %>
+</div>	
+			<% end %>
+			
+			
+			</div>
+			
+			</div>
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  
+		  </div>
+          <!--middle image end-->
+        </div>
+        <!--world lightcolor div end-->
+
+		  <% count = count+1 %>
+		<% end %>
+		
+		
+      </div>
+      <!--world content end-->
+	  <% else %>	  
+	    <div class="myworld_rightbar_inner1">	  
+        <div class="world_message1">       
+          <div class="world_message">
+		  <strong>No Messages</strong>	   
+	      </div>
+	   </div>
+	   </div>
+	  <% end %>
+	  
+	  
+	  
+      <!--world foot start-->
+      <div class="myworld_rightbar_inner2"></div>
+      <!--world foot end-->
+	  
+	  
+      <div class="clear"></div>
+	  
+	  <% if !@total.blank? %>
+      <div class="world_message2">
+        <div class="my_world_index">
+	    <%= will_paginate (@sent_messages,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" class=" my_world_ver" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" class=" my_world_ver" />'}) %>
+      </div>
+        <div class="home_world">
+		<strong>Messages</strong>
+		<% if @total.blank? %>
+           0 - 0 of 0
+          <% else %>
+          <% if @total.size > 19 %>
+          <% if params[:page] %>
+         <%= (params[:page].to_i * 20) - 19  %> -
+          <% if (params[:page].to_i * 20) > @total.size %>
+          <%= @total.size %>
+          <% else %>
+          <%= (params[:page].to_i * 20)  %>
+          <% end %>
+          <% else %>
+           1 - <%= @sent_messages.size %>
+          <% end %>
+          of <%= @total.size %>
+          <% else %>
+           1 - <%= @sent_messages.size %> of <%= @total.size %>
+          <% end %>
+          <% end %>
+		  </div>
+      </div>
+	  <% end %>
+	  
+	  
+    </div>
+    <!--world end-->
+  </div>
+  
+  
+  <!--left stories end-->
+</div>

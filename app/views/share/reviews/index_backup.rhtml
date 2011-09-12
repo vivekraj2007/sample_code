@@ -1,0 +1,160 @@
+  <script language>
+  	function addcode(str)
+	{
+		document.Message_Message.value +=  str;
+		return false;		
+			}
+  </script>
+  <script language="javascript" type="text/javascript" src="../../tiny_mce/tiny_mce.js"></script>
+<script language="javascript" type="text/javascript">
+tinyMCE.init({
+   mode : 'exact',
+   elements : "Message_Message",
+  theme : 'advanced',
+  theme_advanced_buttons1 : ""	
+});
+</script>
+
+
+
+<div class="left_bar_1">
+  <div class="nav_box">
+    <div class="left_bar_12">
+      <div class="left_bar_13" >
+        <!--  backgroun style for div-->
+        <div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="middile">
+          <!--  backgroun style for div end -->
+          <div class="text_who">1.Create a new Review</div>
+          <div style="margin-left:12px; margin-top:10px;">
+            <% form_for :reviews,:url => {:controller => "/share/reviews",:action => "edit_review"} do  %>
+            <select id="reviewedit" name="reviewedit" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Review</option>
+              <%= options_from_collection_for_select @reviews, "id", 'title', 'params[:reviewedit]' %>
+            </select>
+            <% end %>
+          </div>
+          <% form_for :newreview, :url => {:action => "new_review"} do %>
+          <div class="home">Title</div>
+          <div style="margin-left:12px;">
+		   <%= text_field 'review', 'title' ,:style => "width:180px;", :class => 'default_style', :id=>'title',:onfocus => "review_fileds();", :onkeyup => "review_fileds();" %> </div>
+		   
+          <div style="margin-left:12px;"> <%= error_message_on :review, :title, 'Title '%> </div>
+		  
+          <div class="home">Description</div>
+          <div style="margin-left:12px;">
+		   <%= text_area 'review', 'description',:class => 'default_style default_style_textarea', :cols=>20,:rows=>3, :id => 'description', :onfocus => "review_fileds();", :onkeyup => "review_fileds();" %> </div>
+		   
+          <div style="margin-left:12px;"> <%= error_message_on :review, :description, 'Title '%> </div>
+		  
+          <div class="home">Where?</div>
+          <div style="margin-left:12px;"> <%= text_field 'review', 'location',:class => 'default_style', :id => 'where_loc', :onfocus => "review_fileds();", :onkeyup => "review_fileds();" %> </div>
+		  
+          <div style="margin-left:12px;"> <%= error_message_on :review, :location, 'Location '%> </div>
+		  
+          <div class="home">When did you go ?</div>
+          <div style="margin-left:12px;">
+		   <%= date_select(:review,:date_to_go,:order =>[:day,:month,:year],:start_year =>2008,:end_year => 3008) %> </div>
+          <div style="margin-left:12px;"> <%= error_message_on :review, :date_to_go, 'Date went '%> </div>
+		  
+          <div class="home">&nbsp;</div>
+		  
+          <div style="margin-left:12px;">
+
+		 <%= select('review','place_is', Review::PLACES, {:prompt => "This place is a..."}, {:id => 'palce_is',:onChange => "review_fileds();"}) %> 
+			
+			
+			
+          </div>
+          <div class="home">&nbsp;</div>
+		  
+          <div style="margin-left:12px;">
+
+	 <%= select  ('review','rating', Review::RATING, {},{:id => "rating",:onchange => "review_fileds();"}) %> 	
+          </div>
+		  
+          <div class="home">The Best Part</div>
+          <div style="margin-left:12px;">
+		   <%= text_area 'review', 'best_part',:class => 'default_style default_style_textarea', :cols=>20,:rows=>3, :id => 'best_part', :onfocus => "review_fileds();", :onkeyup => "review_fileds();" %> </div>
+		   
+          <div style="margin-left:12px;"> <%= error_message_on :review, :best_part, 'Best part '%> </div>
+		  
+          <div class="home">The Worst Part</div>
+		  
+          <div style="margin-left:12px;"> 
+		  <%= text_area 'review', 'worst_part',:class => 'default_style default_style_textarea', :cols=>20,:rows=>3, :id => 'worst_part', :onfocus => "review_fileds();", :onkeyup => "review_fileds();"%> </div>
+		  
+          <div style="margin-left:12px;"> <%= error_message_on :review, :worst_part, 'Worst part '%> </div>
+		  
+          <div style="padding-left:10px; margin-top:10px;">
+            <input name="reviewsave" id="reviewsave" value="save" src="/images/home/save_b.jpg" type="image" disabled = true>
+          </div>
+          
+          <div style="clear:both;"></div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+      </div>
+	
+    </div>
+	<!--text area-->
+	<div style="width:450px; margin-left:20px; height:600px; float:left">
+
+
+<div class="text_who" style="width:95%;" align="left">Well?how was it?</div>
+<div style="width:95%;" align="left">&nbsp;</div>	
+<div style="width:95%; float:left; padding-left:12px;">
+		
+<textarea id="Message_Message" name="review[how_was_it]" cols="45" rows="15"></textarea></div>
+	<div style="width:95%; padding-left:12px;" align="left">&nbsp;</div>
+		<div style="width:95%; float:left; padding-left:12px;">
+		
+		<div style="float:left; width:150px;">
+		<%= select("photoset", "id", Photoset.find(:all,:conditions => ["user_id LIKE ?",session[:user_id]]).collect {|p| [ "#{p.title}", p.id] }, {:prompt => "choose photoset"}, "onchange" => remote_function(:update => "photos", :loading => "Toggle.display('spinner1')", :complete => "Toggle.display('spinner1')", :with => "'photoset='+value", :url => { :controller => '/account', :action => "choose_photoset" })) %>
+		
+	
+			</div>
+			 <div align="center"><%= image_tag("/images/home/spinner1.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner1",
+              :style =>"display: none;" ) %> </div>
+			  
+			  
+			  <div style="float:left; padding-left:15px;font-family: Arial,Helvetica,sans-serif;font-size:12px;color: #a48046;">Drag and drop photos into text</div>
+          
+		
+		</div>	
+		<div style="width:95%;" align="left">&nbsp;</div>
+		<div style="width:95%; float:left; padding-left:12px;" id="photos">
+		
+		<% if !@photos.blank? %>
+		<% for photo in @photos %>
+		 <div style="width:60px; float:left;" > <%= image_tag(url_for_file_column(photo, "image","thumbnail"),:style => "border:1px solid #e1ae62;")%></div>
+		<% end %>
+		<% else %>
+	    <div>		
+		
+		No Images</div>
+		
+		<% end %>	</div>	
+	   </div>
+	<!--howwasitend-->
+	<% end %>
+	
+
+	<!--text area-->
+	
+
+  <div style="clear:both;"></div>
+</div>
+</div>

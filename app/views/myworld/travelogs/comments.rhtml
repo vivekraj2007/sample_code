@@ -1,0 +1,167 @@
+
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+						<div class="left_bar_stories">
+						
+						
+						<!--advertisement-div-start-->
+						<div class="stories_leftbar">
+						
+						<div class="adver_stories">
+								<div class="adver_stories1"><div class="friend_left_inner Advertisement">Advertisement</div></div>
+						</div>
+						
+						<div class="adver_stories2">
+								<div class="adver_stories1"><div class="friend_left_inner Advertisement">Advertisement</div></div>
+						</div>
+						
+						
+						</div>	
+						<!--advertisement-div-end-->
+						
+						<!--stories start-->
+						<div class="stories_rightbar">
+								<!--top select-->
+								<div class="stories_rightbar_inner_story">
+								
+								<div class="story_cal1_story121">
+								
+								
+						<div class="top_images123">
+							<%= link_to (image_tag("/images/home/stories/story_black.gif")), travelogpermalink_url(:continent =>check_continent(@travelog.continent),:country => check_country(@travelog.country), :state => check_state(@travelog.state), :location => check_location(@travelog.location),:id => @travelog.permalink), {:class=> "stories_map_1", :title => "Click here to view travelog details" } %></div>
+							
+							<div class="friends_flo">
+							<div class="stories_comment_images"></div>
+							</div>
+							
+							<div class="top_images121">
+							<%= link_to (image_tag("/images/home/stories/map_black.gif")),travelogpermalink_url(:continent =>check_continent(@travelog.continent),:country => check_country(@travelog.country), :state => check_state(@travelog.state), :location => check_location(@travelog.location),:id => @travelog.permalink,:value => 'map'), {:class=> "stories_map_1",:title => "Click here to view location of travelog in Map" } %></div>
+						
+							
+								</div>
+								
+								
+								<div class="story_select_story">
+	                           <% form_for :myworld, :url =>{ :controller =>'/myworld/travelogs', :action => 'comments'} do %>		
+								<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+								<option>Choose a travelog...</option>
+								<%= options_from_collection_for_select @user_travelogs_published, "permalink", 'title' %>
+						      </select>
+						         <% end %>				
+								</div>
+								
+								
+						<div class="stories_right">
+				
+				<img src="/images/home/stories/stories_box.gif" alt="stories_box" />&nbsp;
+				<img src="/images/home/stories/stories_mail.gif" alt="stories_mail" />&nbsp;
+				<img src="/images/home/stories/stories_print.gif" alt="stories_print" />&nbsp;
+				<% if session[:user_id] == @travelog.user.id %>
+				<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/travelogs", :action => "edit_travelog",:id => @travelog.permalink},{ :title => "Click here to edit this travelog"} %> 
+				<% end %>	
+				
+				
+				</div>
+								</div>
+									<!--top select end-->
+									<!--line div start-->
+			<!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+									<!--line div end-->
+				
+			<!--stories content start-->	
+				<div class="stories_rightbar_inner1">
+				
+				
+				<div class="stories_paintball"><%= title_slice(@travelog.title,15) %></div>
+				<div class="clear"></div>
+				<div class="stories_shooting"><%= title_slice(@travelog.tag,15) %></div>
+				<div class="clear"></div>
+				<div class="stories_date"><%= myworld_dateformat(@travelog.created_at) %><span class="home"><%= @comments.size %> Comments</span></div>
+				
+	             <% if !@comments.blank? %>	
+				 
+				 <% if @comments.size > 5 %>				 
+				<div class="stories_rightbar_innercomment1">
+				 <% else %>
+				 <div class="stories_rightbar_innercomment_nooverflow">
+				 <% end %>
+				 <% for commentdetails in @comments %>					
+		
+	        		
+				
+		
+			<% if session[:user_id] != commentdetails.user_id %>				
+			<div class="stories_comment_inner">
+			<% else %>
+			<div class="stories_comment_inner11">
+		    <% end %>
+			 
+			 
+				<div>
+				<span class="story_cal1">
+				<%= commentdetails.user.first_name %> </span>
+				
+				<span class="home_comment">
+				<%= myworld_dateformat(commentdetails.created_at) %> <%= commentdetails.created_at.strftime(" %I:%M %p") %> </span>
+				</div>
+				
+				
+				 <div class="stories_comment_text">
+				<%= commentdetails.comment %>		
+				 </div>				
+				</div>
+				
+				<!--<div class="stories_rightbar_inner_story">&nbsp;</div>-->
+						        			
+				<% end %>
+				</div>
+				
+	<% else %>
+	<div class="stories_comment_inner">
+	<div></div>
+	<div class="stories_comment_text">There are no comments posted for this travelog.</div>
+	<div class="stories_rightbar_inner_story">&nbsp;</div>
+	</div>
+	<% end %>		
+	
+	
+		
+			<!--text area-->
+			<% form_for :travelog_comments, :url => {:controller =>'/myworld/travelogs',:action => 'save_comment',:id => @travelog.permalink},:html => { :onsubmit =>"return valid();" } do %>
+			<div>
+			<div class="story_cal1">Post a Comment</div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12"  style="float:left;">Name or Uncharted Username :&nbsp;&nbsp;</div>
+			<div class="home_comment12" style="float:left; line-height:25px; color:#000000;">
+			<%= @user.first_name %></div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12" style="float:left;">Email :&nbsp;&nbsp;</div>
+			<div class="home_comment12" style="float:left; line-height:25px; color:#000000;">
+			<%= @user.email %></div>
+			<div class="clear" style="height:1px;"></div>
+			
+			
+			<div class="home_comment12">Comment :</div>
+			<div>
+			<textarea cols="30" rows="5" name=comment[comment] id="comment" onblur="story_comment_fields();" onkeydown="story_comment_fields();" onfocus="story_comment_fields();" onkeyup="story_comment_fields();"></textarea>
+			</div>
+			
+			<div>
+			<input name="story_commnetsave" id="story_commnetsave" value="save" src="/images/home/post.jpg" type="image" style="margin-top:10px;" disabled = true>
+			</div>
+			
+			</div>
+			<!--text area-end-->
+			<% end %>	
+				</div>
+			<!--stories content end-->	
+									
+			
+						</div>
+						<!--stories end-->
+						
+						</div>
+						<!--left stories end-->
+						</div>

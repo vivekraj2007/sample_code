@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<% if @page_title %>
+<title>Uncharted - <%= @page_title %></title>
+<% else %>
+<title>Uncharted - Explore. Live. Feel. </title>
+<% end %>
+
+<%= stylesheet_link_tag 'style_menu','style11','menu' %>
+
+<%= javascript_include_tag :defaults %>
+<%= javascript_include_tag 'login_dropdown' %>  <!--login drop down and search div-->
+<%= javascript_include_tag 'home' %>
+
+<!--google map API key-->
+<script src="http://maps.google.com/maps?file=api&v=2&markers=21.796875,31.952162,blues|21.796875,31.952162,tinygreen&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+	
+<script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+<!--google map API key-->
+
+<script>
+window.onload=function()
+{
+<% if !@location %>
+loadmap();
+first_div();
+<% end %>
+
+tab_image(document.getElementById('image_tab').value);
+
+<% if flash[:login_falied] %>
+logindiv(0);
+<% end %>
+
+}
+</script>
+
+
+</head>
+
+<body >
+<!--main-->
+
+
+<center>
+<%= hidden_field_tag 'image_tab', 'account', :id => 'image_tab' %>
+
+
+
+<div style="width:95%; height:auto; margin:20px 0px 0px 20px;  padding:0px;" align="center" >
+		<div style="width:728px; height:90px; margin:20px 0px 0px 20px;" align="center">
+			<%#= render :partial => 'shared/adverticements', :locals => { :ad_id => 17} %>	
+			<% if !@header_adv.blank? %>
+			<%= @header_adv %>
+			<% end %>
+		</div>
+</div>
+
+<div id="main">
+
+
+   <!--header-->
+  <%= render :partial => 'shared/header' %>
+  <!--header-div-end-->
+  
+  
+  
+  
+  <!--content-->
+
+    <!--menu-->
+		<div id="default">
+    <%= render :partial => '/shared/default_menu'%>
+	</div>
+	
+	<div id="go" style="display:none;">
+    <%= render :partial => 'shared/go_menu'%>
+	</div>
+	
+	<div id="see" style="display:none;">
+	<%= render :partial => 'shared/see_menu'%>
+   </div>
+   
+   	<div id="do" style="display:none;">
+	<%= render :partial => 'shared/do_menu'%>
+   </div>
+	
+	 <div id="share" style="display:none;">
+	 <%= render :partial => 'shared/share_menu'%>
+	 </div>
+	
+<div  style="clear:both;"></div>
+
+<!--menu-div-end-->
+
+	<div class="content_new">
+   	<div style="width:810px;float:left; margin:0px; padding:0px; ">
+	  
+	  
+    <div style="float:left; width:820px;">
+	 <%= yield %>
+    </div>
+	 
+</div>
+
+
+
+
+	 
+	  <% if @location %>
+	           	 <div class="right_1">
+   		    <div class="inner_div">
+            <div class="cornerbg"></div>
+	    <%= render :partial => "/shared/location_profile"%>		
+	  <% else %>	  
+        <div class="right_1">
+		 <div class="inner_div">
+            <div class="cornerbg"></div>
+		 <%= render :partial => "/shared/see_right_block"%>
+		 </div>
+		  </div>	  
+	  <% end %> 
+	   
+	   </div>
+       </div> 
+	   </div>
+	  <!--middle end-->
+  
+  <div style="clear:both;"></div>
+
+   </div>
+	
+	
+	
+<div style="clear:both;"></div>
+
+<div style="background-color:#444444;">
+  <%= render :partial => 'layouts/footer'%>
+</div>
+
+
+
+<!--main-div-end-->
+</div>
+</center>
+<%= render :partial => 'shared/google_analytics_code' %>
+</body>
+</html>

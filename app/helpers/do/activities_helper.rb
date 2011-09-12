@@ -1,0 +1,2 @@
+module Do::ActivitiesHelper
+end

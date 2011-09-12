@@ -1,0 +1,122 @@
+
+
+<script type="text/javascript">
+check_photoset()
+popup_div();
+</script>
+
+
+
+  <div class="photoset_rightbar_inner1">
+
+<div class="photosat_rightbar_inner_story my_world_block" id="story">
+  
+  
+  
+  <!--  navigation divs-->
+    <div class="my_world_nav">
+	
+	 
+     <div class="photosat_friend">
+								
+						
+							<div class="top_images12">
+							<%= link_to (image_tag("/images/home/photos/black_image.gif")),photopermalink_url(:continent =>check_continent(@photo.photoset.continent),:country => check_country(@photo.photoset.country), :state => check_state(@photo.photoset.state), :location => check_location(@photo.photoset.location),:id => @photo.photoset.permalink), {:class=> "stories_map_1", :title => "Click here to view photoset details" } %></div>
+							
+						<div class="friends_flo">
+							<div class="photoset_comments"></div>
+							</div>
+							
+					<div class="top_images12">
+					<!--<img src="/images/home/photos/black_map.gif"/>-->
+							<%#= link_to (image_tag("/images/home/photos/black_map.gif")), photopermalink_url(:continent =>check_continent(@photoset.continent),:country => check_country(@photoset.country_id), :state => check_state(@photoset.state), :location => check_location(@photoset.location),:id => @photoset.permalink, :value => 'map'), {:class=> "stories_map_1",:title => "Click here to view location of photoset in Map" } %></div>				
+							
+							</div>
+    </div>
+	  <!--  navigation divs end -->
+	
+
+    <div class="photos_right">
+	
+ <div style="float:left;">
+  <% if !session[:user_id].blank? %>
+ <a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'block';document.getElementById('flag_content').style.display = 'none';" title="Click here to email this Photoset">
+ <img src="/images/home/photos/email.gif"></a>
+ <% else %>
+  <a href="javascript://" onclick="logindiv(0);" title="Click here to email this Photoset to friend">
+<img src="/images/home/photos/email.gif"></a> 
+ <% end %>
+ </div>
+
+      <% if session[:user_id] == @photo.photoset.user_id %>
+      <%= link_to image_tag ("/images/home/photos/edit.gif"), {:controller => "/share/photos", :action => "add_photo_to_set",:id => @photo.photoset.permalink},{ :title => "Click here to edit this photoset" ,:class=>"my_world_nav_text2"} %>
+      <% end %>
+	  
+	   <div style="color:#FF0000; float:left;">
+	   <a href="javascript://" onclick="document.getElementById('flag_content').style.display = 'block';document.getElementById('share_the_love').style.display = 'none';" class="my_world_nav_text2" title="Click here to Flag this content">Flag</a>
+	   </div>
+	  
+    </div>
+	
+ </div></div>
+<div class="clear"></div>
+
+
+ <!-- share the love start-->
+ 
+<%= render :partial => "share_the_love", :locals => { :permalink => @permalink = @photo.photoset.permalink} %>
+ 
+  
+ <!-- share the love end-->
+  
+  <!--flag content start-->
+   
+<%= render :partial => "flag_content" %>
+<!--   flag content end-->
+
+
+
+
+
+
+<div class="photoset_rightbar_inner1">
+  
+    <div class="story_cal1 friends_flo">
+	 <%= @photo.title if !@photo.blank?  %>
+	 </div>
+	 
+    <div class="friends_flo1">
+      <div  class="my_world_nav_text"><%= @photo.photoset.title if !@photo.photoset.blank? %></div>
+      <div  class="my_world_nav_text1"><span id="coverimage_place"></span>&nbsp;of&nbsp;<%= @photo.photoset.photos.size %></div>
+    </div>
+	
+
+			  
+    <div class="clear"></div>
+	
+	
+    <%# if params[:value] != 'map' %>
+    <div  id="photoset_image" class="my_world_block">
+	<%# else %>
+    <!--<div id="photoset_image" style="display:none;">-->
+    <%# end %>
+	
+	
+    <div align="center" class="my_photos_main" >
+        <div align="center" class="my_world_photos_inner">
+          <% if !@photo.image.nil? %>
+          <%= image_tag(url_for_file_column(@photo,"image","main"),:name => 'ChangingPix',:id => 'ChangingPix',:onmouseover=>"show_title();", :onmouseout=>"hide_title();") %>
+          <% end %>
+        </div>
+		<div id="show_title" class="my_photos_inline" align="center">
+          <div class="my_photos_note"> <%= @photo.caption %> </div>
+        </div>
+		
+        
+      </div>
+	  
+	  
+	  
+    </div>
+	
+	</div>

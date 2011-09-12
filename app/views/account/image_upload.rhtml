@@ -1,0 +1,17 @@
+
+<% form_for :user,  :url => { :controller => '/account', :action => 'edit_profile_image', :id => @profile.user_id } , :html => {:onsubmit=>'return profileimage();',:multipart => true} do  %>
+<div style=" padding-top:105px;" align="center">
+	<%= file_column_field 'profile', 'profile_image', :size => '8%', :class => 'default_style', :id => 'profile_image' %>										
+					</div>
+					
+					<div align="center" style="padding-top:5px;">
+					
+	<% if @profile.profile_image.blank? %>				
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/upload.jpg" type="image">	
+	<input name="cancel" id="cancel" value="cancel" src="/images/home/cancel.jpg" type="image">
+	<% else %>
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/upload_g_n.gif" type="image">
+	<%= link_to image_tag("/images/home/cancel_g_n.gif"),:controller => '/account',:action => 'edit' %>
+	<% end %>
+	</div>
+<% end %>

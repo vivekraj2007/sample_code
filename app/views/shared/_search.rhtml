@@ -1,0 +1,65 @@
+
+<!-- <script type="text/javascript">
+          
+           showstates = function()
+            {
+                new Ajax.Updater('select_state', '/go/location/states?country=' + document.getElementById('select_country').value, {asynchronous:false, evalScripts:false});
+                                
+                return false;
+            }
+	</script>-->
+
+
+
+
+
+<div style="overflow: hidden; clear:both; text-align:left; top:50; width:200px; display:none; float:left; background-color:#202020;  position:absolute; z-index:5;" id="searchdiv"> 
+  
+      <% form_for :search, :url=> {:controller => "/account", :action => "search"}, :html => {:name => "myform"} do %>
+      <% if flash[:search_falied] %>
+      <div align="center" class="login_flash">
+	   <%= flash[:search_falied] %>
+	    </div>
+      <% end %>	  
+	  
+	
+      <div style="float:left; padding-left:25px; padding-bottom:10px;">
+	   <%= select("location", "id", [["Continent",""]]+Location.find(:all,:conditions=>["parent_id LIKE ? ",0]).collect {|p| [ "#{p.name}", p.id ] }, { :include_blank => false }, "onchange" => remote_function(:update => "select_country", :loading => "Toggle.display('spinner_ten')", :complete => "Toggle.display('spinner_ten')", :with => "'continent='+value", :url => {:controller => '/go/locations',  :action => "country"}),:html =>{:class => 'story_select_story'}) %>    <%= image_tag "/images/home/spinner.gif", :id => 'spinner_ten', :style => 'display:none;' %>
+      </div>
+	  
+	  
+	  <div id="select_country" style="float:left; padding-left:20px; padding-bottom:10px;">
+	        <select  id="country" name="country" class="story_select_story">
+            <option>Country</option>
+           </select>
+      </div>
+	  
+      <div id="select_state" style="float:left; padding-left:20px; padding-bottom:10px;">
+	        <select  id="state" name="state" class="story_select_story">
+            <option>State/Province</option>
+           </select>
+      </div>
+	  
+	  <!--<div id="select_event" style="float:left; padding-left:20px; padding-bottom:10px;">
+           <select  id="id" name="id" onchange="" class="story_select_story">
+            <option>Activity or Event</option>
+           </select>
+      </div>-->
+	  
+	  
+	 <div id="select_content" style="float:left; padding-left:20px; padding-bottom:10px;">
+           <select  id="content" name="content" onchange="" class="story_select_story">
+            <option value="">Type of Content</option>
+			<option value="story">Story</option>
+           </select>
+      </div>
+	  
+	  <div style="margin-top:10px;" align="center">
+		    <input type="image" src="/images/home/advanced_search.gif" alt="" border="0"  id="searchimage" />
+		
+      </div>
+	  
+      
+      <div style="clear: both;"></div>
+      <% end %>
+    </div>

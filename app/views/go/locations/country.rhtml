@@ -1,0 +1,11 @@
+<div style="overflow: hidden; text-align:left; width:150px; float:left; background-color:#202020;"  id="searchdiv"> 
+
+
+   <div class="story_select_story" style="float:left;">
+ <%= select("location", "id", [["Country",""]]+Location.find(:all,:conditions=>["parent_id LIKE ? ",params[:continent]]).collect {|p| [ "#{p.name}", p.id ] }, { :include_blank => false }, "onchange" => remote_function(:update => "select_state", :loading => "Toggle.display('spinner')", :complete => "Toggle.display('spinner')", :with => "'country='+value", :url => {:controller => '/go/locations', :action => "states"})) %> 
+ 
+    <%#= image_tag "/images/home/spinner.gif", :id => 'spinner', :style => 'display:none;' %>
+ </div>
+                                                                                                    
+
+</div>

@@ -1,0 +1,2 @@
+module See::TravelogsHelper
+end

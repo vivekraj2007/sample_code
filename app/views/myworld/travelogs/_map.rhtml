@@ -1,0 +1,58 @@
+
+ 
+  <script src="http://maps.google.com/maps?file=api&v=2&markers=16.965127,82.216256,blues|16.93128,82.238277,tinygreen&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+    type="text/javascript"></script>
+  <script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+    type="text/javascript"></script>
+	
+  <%#= javascript_include_tag "gsmapsearch.js" %>
+  <%= stylesheet_link_tag "gsmapsearch", "gsearch" %>
+ 
+
+  <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+        map.setCenter(new GLatLng(16.936063,82.232838), 1);
+ 			
+	 // Create our "tiny" marker icon
+        var storyIcon = new GIcon(G_DEFAULT_ICON);
+        storyIcon.image = "/images/home/map/story_map.png";
+		storyIcon.iconSize = new GSize(30, 40);
+		
+		// Set up our GMarkerOptions object
+		markerOptions = { icon:storyIcon };
+			
+		// default icon
+      function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+	
+		
+		  var point = new GLatLng(<%= @travelog.lat %>,<%= @travelog.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !@travelog.title.blank? %>
+		   var marker = createMarker(point,'<div style="width:100%; overflow:hidden;"><div style="width:180px; float:left; overflow:hidden;"><div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#7f000a; font-weight:bold; float:left; clear:both;"><%= title_slice(@travelog.title,50) %></div><div style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#000000; float:left; clear:both;">text text text text text</div><div style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#000000; float:left; clear:both;">text1 text1 text1 tex1t text1</div></div><div style="float:left; width:60px;"><div style="float:left; width:60px; clear:both;"><img src="/images/home/edit_map.jpg"/></div><div style="float:left; width:60px; padding-top:10px; height:60px;"><img src="/images/home/main_image_map.jpg"/></div></div></div>');
+		  <% else %>
+		   var marker = createMarker(point,'<%= @travelog.id %>');
+		  <% end %>
+		 
+		  map.addOverlay(marker);		  
+		 }
+	}
+
+	
+  </script>
+
+<body onLoad="initialize()" >
+<div id="mapsearch" style="width: 518px; height: 392px;"></div>
+
+</body>

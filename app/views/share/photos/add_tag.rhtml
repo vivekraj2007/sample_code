@@ -1,0 +1,119 @@
+<div class="share_add_tag">
+
+<div class="index_top_new">
+  <div class="top_1">&nbsp;</div>
+  <div class="top_middile_new">&nbsp;</div>
+  <div class="top_right">&nbsp;</div>
+</div>
+
+<div class="clear"></div>
+<div class="middile_new">
+<% form_for :photos,:url => {:controller => "/share/photos", :action => "display_geo_location", :id => @photoset.permalink } do  %>
+
+  <div class="left_bar_photos">
+    <div class="nav_box">
+      <div class="share_leftbar_photos">
+        <% if @photoset.lat.blank? || @photoset.longt.blank? || params[:option] == 'edit' %>
+        <%= render :partial => "/share/photos/map" %>
+        <% else %>
+        <%= render :partial => "/share/photos/confirm_map"%>
+        <% end %>
+      </div>
+      <div class="middle1">
+        <div class="mid_right1">
+          <div class="text_who">3.Tag, title and caption Photos</div>
+          <div class="home5"><b><%= @photoset.title%></b> contains <b><%= @photoset.blanktitle_photos.size %></b> <br />
+            photos 
+            that need tags, titles or<br />
+            captions.</div>
+          <div class="home">Descriptive tags for the whole Set</div>
+          <div class="share_column_padding">
+            <input type="hidden" value = '<%= @photoset.photos.length %>' id = 'total_photos'>
+           
+		    <%= text_area 'photoset', 'tag', :class => 'default_style_textarea_new',:id => 'tag',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();"  %>
+           
+          </div>
+		  
+		  
+          <div class="home">Geo-coord (Latitude, Longitude)</div>
+          <div class="share_column_padding">
+		   <%= text_field 'photoset', 'lat',:style => "width:82px; height:18px;", :class => 'default_style', :id=>'lat',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();"  %> &nbsp; <%= text_field 'photoset', 'longt' ,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'longt',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();"  %>
+		    </div>
+			
+          <div class="home">Address, State/Prov, Country </div>
+          <div class="share_column_padding">
+		   <%= text_area 'photoset', 'address' , :class => 'default_style_textarea_h3_new',:id=>'location',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();"  %>
+		   </div>
+		   
+          <div class="my_world_preview">
+            <input name="photo_tag" id="photo_tag" value="save" src="/images/home/save_b.jpg" type="image" disabled = true >
+			<%# if !@photoset.lat.blank? %>
+			<% if flash[:notice] == "Photoset details successfully modified" %>
+			&nbsp; <%= link_to image_tag("/images/home/done.jpg"), :action => 'send_invitation', :id => @photoset.permalink %>
+			<% else %>
+			&nbsp; <input  value="done" src="/images/home/done_grey1.gif" type="image" disabled = true>
+			<% end %>
+         </div>
+		 
+        </div>
+      </div>
+    </div>
+    <div class="clear"></div>
+    <div class="map_1">
+      <% if @photoset.photos.length > 5 %>
+      <div class="middle2">
+        <% else %>
+        <div class="middle2_noc">
+          <% end %>
+          <% count = 1 %>
+          <% for photo in @photoset.photos %>
+          <div  class= <% if count%2 == 0%>"middle31"<% else %>"middle3"<% end %> >
+            <div class="middle4"> <%= image_tag(url_for_file_column(photo, "image","submain"))%> </div>
+            <div class="middle5" > <%= hidden_field "photo[#{count}]", 'id', :value => photo.id %>
+              <div class="middle6">
+                <div class="home friends_flo"> Cover <%= radio_button "photoset", "coverimage_id", photo.id , {:onclick => "photo_fileds_create();"}%> </div>
+                <div class="home friends_flo1"> Delete&nbsp; <%= link_to image_tag("/images/home/delete.jpg"), :controller => "/share/photos", :action => "delete_photo", :id => photo.id  %>
+				 
+				  </div>
+              </div>
+              <div class="middle6">
+                <div class="home see_map_inner_flo">Title</div>
+                <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'title', :value => photo.title, :class => "share_column_inner" %>
+                  
+                </div>
+              </div>
+              <div class="middle6">
+                <div class="home see_map_inner_flo">Caption</div>
+                <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'caption', :value => photo.caption,  :class => "share_column_inner" %>
+                 
+                </div>
+              </div>
+              <div class="middle7">
+                <div class="home see_map_inner_flo">Tags</div>
+                <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'tags', :id => "phototag_#{count}", :value => photo.tags, :class => "share_column_inner" %>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="clear"></div>
+          <% count = count+1 %>
+          <% end %>
+          <div class="clear"></div>
+        </div>
+      </div>
+    </div>
+    <% end %>
+  </div>
+  
+  
+  <div class="clear"></div>
+  
+  <div class="index_top_new">
+    <div class="bottom_left">&nbsp;</div>
+    <div class="bottom_middile_new">&nbsp;</div>
+    <div class="bottom_right">&nbsp;</div>
+  </div>
+  
+  
+</div>

@@ -1,0 +1,49 @@
+<div class="story_title" > 
+<div class="story_font" align="center"><%= @admin.name.titlecase %> Profile</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div>
+
+<!--photosets div end-->
+
+<!--videoset div start-->
+
+<!--videoset div end-->
+
+<!--Reviews div start-->
+
+
+
+
+
+
+
+</div>
+
+<div class="story_title1">
+<div>
+<div class="story_place_font story_place_flo">Name </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= @admin.name %></div>
+</div>
+
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">E-mail </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= @admin.email %></div>
+</div>
+
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Created On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= myworld_dateformat(@admin.created_at) %></div>
+</div>
+
+
+
+</div>

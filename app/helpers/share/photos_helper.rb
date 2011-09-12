@@ -1,0 +1,2 @@
+module Share::PhotosHelper
+end

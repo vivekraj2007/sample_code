@@ -1,0 +1,27 @@
+
+	 
+          <select name="link_set" id="link_set" style="margin-left:12px; margin-top:10px;"  >
+		   <option value="">Link this Set to....</option>
+		    <% if @user_photsets.size != 0 %>
+			<option value="" style="font-weight:bold; color:#AB0300;">Photo Sets</option>
+				 <% for set in @user_photsets %>
+			 <option value="p_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= set.title.to(20)%></option>
+			 <% end %>
+			<% end %>
+			
+			 <%# if @user_videosets.size != 0 %>
+			<!-- <option value="" style="font-weight:bold; color:#AB0300;">Video Sets</option>-->
+			 <%# for set in @user_videosets %>
+			 <!--<option value="v_<%#= set.id %>">&nbsp;&nbsp;&nbsp;<%#= title_slice(set.title,20) %></option>-->
+			 <%# end %>
+			<%# end %>
+
+			 <%# if @user_reviews .size != 0 %>
+			<!-- <option value="" style="font-weight:bold; color:#AB0300;">Reviews</option>-->
+			 <%# for set in @user_reviews  %>
+			 <!--<option value="r_<%#= set.id %>">&nbsp;&nbsp;&nbsp;<%#= title_slice(set.title,20) %></option>-->
+			 <%# end %>
+			<%# end %>			
+           
+          </select>
+		  

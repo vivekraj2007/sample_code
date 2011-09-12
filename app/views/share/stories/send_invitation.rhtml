@@ -1,0 +1,46 @@
+
+
+<div align="left" class="invitefriend_main">
+
+
+ <% if @message %>
+		
+<div class="invitefriend_submain">		
+<div class="invitefriend_submain_new">			
+	<% if @sucess_count == 0 %>
+<span class="invitefriend_maintext">There was a problem:</span><br/><br/>
+<span class="invitefriend_submaintext">Either there is a syntax error in one of your address fields, or you have used a screen name which is not a valid one.<br/>
+Please enter a valid e-mail address (e.g., in the format myself@uncharted.com) or use a screen name. <br/>
+<b>Your message has not been sent.</b></span><br/>
+	<% else %>
+
+		 <span class="invitefriend_maintext"><%= @message %></span><br/><br/>
+		 <span class="invitefriend_submaintext"><%= @sent_invitations.split(',').join(', ') %></span><br/>
+
+	<% end %>
+<div style="clear:both;"></div>	
+</div>			  
+</div>				  
+	  
+<% end %>
+
+	
+
+<div class="invitefriend_submain">
+<div class="invitefriend_submain_new">
+         <div class="text_who">Share the love</div>
+        <% form_for :stories, :url => {:action => "send_invitation", :id => @story.permalink} do %>
+        <div class="home textalignment">Invite my friends to view this Story! <br class="br12"/>
+		Enter emails or screen names  <br class="br12"/>separated by commas.</div><br/><br/>
+        
+        <div class="marign_textinput" align="left">
+		 <%= text_area_tag 'invitation', '',:class => 'default_style_textarea_new', :id => 'invitation_email', :onfocus => "photo_invitation();", :onkeyup => "photo_invitation();",:style => "width:200px;" %> </div>
+        
+        <div style="padding-left:10px; margin-top:10px;">
+          <input name="invitesave" id="invitesave" value="send invitation" src="/images/home/send.gif" type="image" disabled = true>
+        </div>
+        <% end %>
+   </div>
+</div>
+			
+		</div>

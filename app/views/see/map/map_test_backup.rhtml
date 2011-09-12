@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+      	<title>Uncharted Map Test </title>
+      <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ"
+      type="text/javascript"></script>
+    <script type="text/javascript">
+
+ function load() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+        map.addControl(new GSmallMapControl());
+        map.addControl(new GMapTypeControl());
+        var center = new GLatLng(48.89364,  	2.33739);
+        map.setCenter(center, 15);
+        geocoder = new GClientGeocoder();
+        var marker = new GMarker(center, {draggable: true});  
+        map.addOverlay(marker);
+        document.getElementById("lat").innerHTML = center.lat().toFixed(5);
+        document.getElementById("lng").innerHTML = center.lng().toFixed(5);
+
+	  GEvent.addListener(marker, "dragend", function() {
+       var point = marker.getPoint();
+	      map.panTo(point);
+       document.getElementById("lat").innerHTML = point.lat().toFixed(5);
+       document.getElementById("lng").innerHTML = point.lng().toFixed(5);
+
+        });
+
+
+	 GEvent.addListener(map, "moveend", function() {
+		  map.clearOverlays();
+    var center = map.getCenter();
+		  var marker = new GMarker(center, {draggable: true});
+		  map.addOverlay(marker);
+		  document.getElementById("lat").innerHTML = center.lat().toFixed(5);
+	   document.getElementById("lng").innerHTML = center.lng().toFixed(5);
+
+
+	 GEvent.addListener(marker, "dragend", function() {
+      var point =marker.getPoint();
+	     map.panTo(point);
+      document.getElementById("lat").innerHTML = point.lat().toFixed(5);
+	     document.getElementById("lng").innerHTML = point.lng().toFixed(5);
+
+        });
+ 
+        });
+
+      }
+    }
+
+	   function showAddress()
+	    {
+		alert('hai');
+		address = document.getElementById("address").value;
+		alert(address);
+	   var map = new GMap2(document.getElementById("map"));
+       map.addControl(new GSmallMapControl());
+       map.addControl(new GMapTypeControl());
+       if (geocoder) {
+        geocoder.getLatLng(
+          address,
+          function(point) {
+            if (!point) {
+              alert("Unknown location: "+address );
+            } else {
+		  document.getElementById("lat").innerHTML = point.lat().toFixed(5);
+	   document.getElementById("lng").innerHTML = point.lng().toFixed(5);
+		 map.clearOverlays()
+			map.setCenter(point, 14);
+   var marker = new GMarker(point, {draggable: true});  
+		 map.addOverlay(marker);
+
+		GEvent.addListener(marker, "dragend", function() {
+      var pt = marker.getPoint();
+	     map.panTo(pt);
+      document.getElementById("lat").innerHTML = pt.lat().toFixed(5);
+	     document.getElementById("lng").innerHTML = pt.lng().toFixed(5);
+        });
+
+
+	 GEvent.addListener(map, "moveend", function() {
+		  map.clearOverlays();
+    var center = map.getCenter();
+		  var marker = new GMarker(center, {draggable: true});
+		  map.addOverlay(marker);
+		  document.getElementById("lat").innerHTML = center.lat().toFixed(5);
+	   document.getElementById("lng").innerHTML = center.lng().toFixed(5);
+
+	 GEvent.addListener(marker, "dragend", function() {
+     var pt = marker.getPoint();
+	    map.panTo(pt);
+    document.getElementById("lat").innerHTML = pt.lat().toFixed(5);
+	   document.getElementById("lng").innerHTML = pt.lng().toFixed(5);
+        });
+ 
+        });
+
+            }
+          }
+        );
+      }
+    }
+    </script>
+  </head>
+
+  
+<body onload="load()" onunload="GUnload()" >
+
+  <!--<form action="#" onsubmit="showAddress(this.address.value); return false">-->
+     <p>        
+      <input type="text" size="60" id="address" value="3 cit&eacute; Nollez Paris France" onblur="showAddress();"/>
+      <input type="submit" value="Search!" />
+      </p>
+  <!--  </form>-->
+
+ <p align="left">
+
+ 
+ <table  bgcolor="#FFFFCC" width="300">
+  <tr>
+    <td width="100"><b>Latitude</b></td>
+    <td id="lat"></td>
+  </tr>
+  <tr>
+    <td width="100"><b>Longitude</b></td>
+    <td id="lng"></td>
+
+  </tr>
+</table>
+ </p>
+  <p>
+  <div align="center" id="map" style="width: 600px; height: 400px"><br/></div>
+   </p>
+  </div>
+  </body>
+
+</html>
+

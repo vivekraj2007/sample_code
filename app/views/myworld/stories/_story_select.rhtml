@@ -1,0 +1,13 @@
+								
+								
+								<% form_for :myworld, :url =>{ :controller =>'/myworld/stories', :action => 'preview'} do %>		
+								<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+								<option>Choose a Story...</option>
+								<%= options_from_collection_for_select @user_stories, "id", 'title' %>
+								
+								
+								<%# for story in @user_stories %>
+								<option value="<%#= story.id%>"><%#= story.title.humanize %></option>
+								<%# end %>								
+								</select>
+						         <% end %>	

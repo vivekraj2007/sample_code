@@ -1,0 +1,86 @@
+
+<% total = 0 %>
+<% if @user_friends.length != 0 %>
+<% total = @user_friends.length %>
+<% end  %>
+  
+<div id="totaluser_user_friends" style="display:none;" class="profile_inneruser">
+ <div class="user_cal184">
+		    <%= total %> Friends     
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_friends', 'blind', {duration:0.6}); Element.show('totaluser_friends'); " >
+		<img src="/images/home/up_arrow.jpg" alt="friends"  style="padding-left:88px;"/>
+		</a>   	  
+		</div>  
+
+      <div class="profile_right6 ">	 
+	 <div style="width:200px; height:auto; overflow:hidden; margin:0 0 0 7px; ">
+        <% @user_friends.each_with_index do |friend,i| %>
+		
+		<% if @user_profile.id.to_i != friend.friend_id.to_i %>			
+	
+		
+         <div  style=" padding:4px; float:left;">
+		<% if !friend.user_friend.profile.profile_image.blank? %>		
+        <%= link_to image_tag(url_for_file_column(friend.user_friend.profile,"profile_image","thumbnail"),:alt => "#{friend.user_friend.screen_name}",:style => "border:1px solid #e1ae62;float:left;"),profile_url(:id => friend.user_friend.screen_name.gsub(' ', '_')),:title => "Click here to view the '#{friend.user_friend.screen_name}' profile"%>
+		<% else %>		
+		<%= link_to image_tag("/images/home/no-image_tumb.gif",:alt => "#{friend.user_friend.screen_name}",:style => "border:1px solid #e1ae62;float:left;"),profile_url(:id => friend.user_friend.screen_name.gsub(' ', '_')),:title => "Click here to view the '#{friend.user_friend.screen_name}' profile" %>
+		<% end %>		
+		 </div>
+		 
+		 
+		 <% elsif  @user_profile.id.to_i != friend.user_id.to_i %>
+		 
+		 
+		 <div  style=" padding:4px; float:left;">		 
+		<% if !friend.user.profile.profile_image.blank? %>
+        <%= link_to image_tag(url_for_file_column(friend.user.profile,"profile_image","thumbnail"),:alt => "#{friend.user.screen_name}",:style => "border:1px solid #e1ae62;float:left;"), profile_url(:id => friend.user.screen_name.gsub(' ', '_')),:title => "Click here to view the '#{friend.user.screen_name}' profile"%>
+		<% else %>		
+		<%= link_to image_tag("/images/home/no-image_tumb.gif",:alt => "#{friend.user.screen_name}",:style => "border:1px solid #e1ae62;float:left;"),profile_url(:id => friend.user.screen_name.gsub(' ', '_')),:title => "Click here to view the '#{friend.user.screen_name}' profile" %>
+		<% end %>
+		 </div>
+		 
+		 
+		 
+		 <% end %>
+		 
+		 
+		 
+		<% if i == 8 %>
+		<% break %>
+		<% end %>	
+        <% end %>
+      </div>
+	  </div>
+	</div>  
+
+<div class="clear"></div>
+
+
+<div class="profile_bg1"  id="totaluser_friends" style="display:block;">	
+    <div class="right_in">
+      <div class="profileright_in1">
+        <div class="profile_cal1">
+ 
+
+<% if total != 0 %>
+ <%= link_to "#{total} Friends",friends_url(:id => @user_profile.screen_name.gsub(' ', '_')),:title => 'Click here to view the friends list', :class=> 'profile_cal1_new' %> 
+ <% else %>
+ <%= total %> Friends
+ <% end %>
+		  
+		  </div>
+
+      </div>
+	  
+      <div>
+        <% if total!=0 %>
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_friends', 'blind', {duration:0.6}); Element.hide('totaluser_friends'); " class="profileright_in2">
+		<img src="/images/home/down_arrow.jpg" alt="" /></a>
+        <% end %>
+      </div>
+	  
+    </div>
+	<div class="clear"></div>
+  </div>
+  
+ 

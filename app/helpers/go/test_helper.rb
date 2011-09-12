@@ -1,0 +1,2 @@
+module Go::TestHelper
+end

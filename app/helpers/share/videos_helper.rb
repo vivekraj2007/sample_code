@@ -1,0 +1,2 @@
+module Share::VideosHelper
+end

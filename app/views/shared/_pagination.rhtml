@@ -1,0 +1,19 @@
+          <% if @total.blank? || @total == 0 %>
+           0 - 0 of 0
+          <% else %>		  
+          <% if @total > (pgmax-1) %>
+				  <% if params[:page] %>
+				  <%= (params[:page].to_i * pgmax) - (pgmax-1)  %> -
+						  <% if (params[:page].to_i * pgmax) > @total %>
+						  <%= @total %>
+						  <% else %>
+						  <%= (params[:page].to_i * pgmax)  %>
+						  <% end %>
+				  <% else %>
+				   1 - <%= type.size %>
+				  <% end %>
+          of <%= @total %>
+          <% else %>
+           1 - <%= type.size %> of <%= @total %>
+          <% end %>
+          <% end %>

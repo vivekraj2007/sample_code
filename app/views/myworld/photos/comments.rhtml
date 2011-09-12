@@ -1,0 +1,320 @@
+ <script type="text/javascript">
+		function show_title()
+		{
+		document.getElementById('show_title').style.display = 'block';
+		}		
+		function hide_title()
+		{
+		document.getElementById('show_title').style.display = 'none';
+		}				
+</script>
+    <script type="text/javascript">
+		function show_photo()
+		{
+		document.getElementById('photo_title').style.display = 'block';
+		}		
+		function hide_photo()
+		{
+		document.getElementById('photo_title').style.display = 'none';
+		}				
+</script>
+<!--link to remote functions -->
+<script type="text/javascript">
+function image_border(x)
+{
+
+<% @count = 1 %>
+<% for photoimages in @photoset.photos %>	
+document.getElementById('thumb_image_'+<%= @count %>).style.border = '0px';
+<% @count = @count+1 %>
+<% end %>
+
+document.getElementById('thumb_image_'+x).style.border = '3px solid #FED403';
+document.getElementById('coverimage_div_id').value=x;
+check_photoset()
+}
+
+
+function coverimage_div()
+{
+document.getElementById('coverimage_place').innerHTML=document.getElementById('coverimage_div_id').value;
+<!--alert(document.getElementById('coverimage_div_id').value);-->
+}
+
+function check_photoset()
+{
+<!--alert(document.getElementById('coverimage_div_id').value);-->
+document.getElementById('coverimage_place').innerHTML=document.getElementById('coverimage_div_id').value;
+<!--alert(document.getElementById('nag').innerHTML);-->
+}
+</script>
+
+
+
+<!--link to remote functions end-->
+
+
+
+
+<div class="photosat_left_bar_new">
+
+
+<!--advertisement-div-start-->
+<div class="photosat_left">
+  <div class="friend_left_inner Advertisement"> 
+			      <% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %>
+	</div>
+  <div class="friend_left_inner_12 Advertisement"> 
+			        <% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %>
+	</div>
+</div>
+<!--advertisement-div-end-->
+
+
+
+<!--photos start-->
+<div class="photosat_right">
+
+<div id="photo_thumbnail_stage">
+ 
+ 
+  <div class="photoset_rightbar_inner1">
+  
+    <!--top navigation divs -->
+
+  <div class="photosat_rightbar_inner_story my_world_block" id="story">
+  
+  
+  
+  <!--  navigation divs-->
+    <div class="my_world_nav">
+	
+	
+     <div class="photosat_friend">
+								
+						
+							<div class="top_images12">
+							<%= link_to (image_tag("/images/home/photos/black_image.gif")),photopermalink_url(:continent =>check_continent(@photoset.continent),:country => check_country(@photoset.country), :state => check_state(@photoset.state), :location => check_location(@photoset.location),:id => @photoset.permalink), {:class=> "top_mainimage", :title => "Click here to view photoset details" } %></div>
+							
+						<div class="friends_flo">
+							<div class="photoset_comments"></div>
+							</div>
+							
+					<div class="top_images12">
+					<!--<img src="/images/home/photos/black_map.gif"/>-->
+							<%#= link_to (image_tag("/images/home/photos/black_map.gif")), photopermalink_url(:continent =>check_continent(@photoset.continent),:country => check_country(@photoset.country_id), :state => check_state(@photoset.state), :location => check_location(@photoset.location),:id => @photoset.permalink, :value => 'map'), {:class=> "stories_map_1",:title => "Click here to view location of photoset in Map" } %></div>				
+							
+							</div>
+    </div>
+	  <!--  navigation divs end -->
+	
+
+ <div class="photos_right">
+	
+<div style="float:left;">
+ <% if !session[:user_id].blank? %>
+<a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'block';document.getElementById('flag_content').style.display = 'none';" title="Click here to email this Photoset to friend">
+<img src="/images/home/photos/email.gif"></a>
+<% else %>
+ <a href="javascript://" onclick="logindiv(0);" title="Click here to email this Photoset to friend">
+<img src="/images/home/photos/email.gif"></a> 
+<% end %>
+</div>
+	
+
+      <% if session[:user_id] == @photoset.user.id %>
+      <%= link_to image_tag ("/images/home/photos/edit.gif"), {:controller => "/share/photos", :action => "add_photo_to_set",:id => @photoset.permalink},{ :title => "Click here to edit this photoset",:class=>"my_world_nav_text2"} %>
+      <% end %>
+	  
+	   <div style="color:#FF0000; float:left;">
+	   <a href="javascript://" onclick="document.getElementById('flag_content').style.display = 'block';document.getElementById('share_the_love').style.display = 'none';" class="my_world_nav_text2" title="Click here to Flag this content">Flag</a>
+	   </div>
+	  
+    </div>
+	
+ </div>
+  <!--top navigation divs end-->
+  
+  <div class="clear"></div>
+  
+   <!-- share the love start-->
+ 
+  
+<%= render :partial => "share_the_love", :locals => { :permalink => @permalink = @photoset.permalink} %>
+  
+ <!-- share the love end-->
+  
+  <!--flag content start-->
+  
+   
+<%= render :partial => "flag_content" %>
+<!--   flag content end-->
+
+  
+  
+  
+    <div class="story_cal1 friends_flo">
+	 <%= @photoset.coverimage.title if !@photoset.coverimage.blank?  %>
+	 </div>
+	 
+    <div class="friends_flo1">
+      <div class="my_world_nav_text"><%= @photoset.title %></div>
+      <div class="my_world_nav_text1"><span id="coverimage_place"></span>&nbsp;of&nbsp;<%= @photoset.photos.size %></div>
+    </div>
+	
+
+			  
+    <div class="clear"></div>
+	
+    <%# if params[:value] != 'map' %>
+    <div  id="photoset_image" class="my_world_block">
+	<%# else %>
+    <!--<div id="photoset_image" style="display:none;">-->
+    <%# end %>
+	
+	
+    <div align="center" class="my_photos_main" ><!--my_world_photos_latest-->
+        <div align="center" class="my_world_photos_inner">
+          <% if !@photoset.coverimage.nil? %>
+          <%= image_tag(url_for_file_column(@photoset.coverimage,"image","main"),:name => 'ChangingPix',:id => 'ChangingPix',:onmouseover=>"show_title();", :onmouseout=>"hide_title();") %>
+          <% end %>
+        </div>
+        <div id="show_title" class="my_photos_inline" align="center">
+          <div class="my_photos_note"> <%= @photoset.coverimage.caption %> </div>
+        </div>
+      </div>
+	  
+	  
+	  
+    </div>
+	
+	</div>
+	
+	</div>
+	
+	
+
+    <!--photoset map start-->
+    <%# if params[:value] == 'map' %>
+    <!--<div id="photoset_map" style="display:block;">
+	<%# else %>
+	<div id="photoset_map" style="display:none;">
+	<%# end %>
+
+	<%#= render :partial => '/myworld/photos/map' %> 
+	</div></div>-->
+    <!--photoset map end-->
+	
+  <div class="photoset_rightbar_inner1">
+	
+	<!--thumbnail images start-->
+	<div align="center">
+	 <%= image_tag("/images/home/spinner.gif",
+             :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+	</div>
+	
+	
+    <div class="photoset_rightbar_inner2">
+	
+      <% if @photoset.photos.size > 9 %>
+   <div class="my_photos_rightbar">
+    <% else %>
+   <div class="my_photos_rightbar1">
+    <% end %>
+	
+   <div style="padding-left:5px; float:left; height:10px; width:<%= ((@photoset.photos.size) * 4.88)%>em;">
+   <% @count = 1 %>
+   <% for photoimages in @photoset.photos %>
+ <div id="thumb_image_<%= @count %>"   style="float:left; margin:5px 5px 5px 5px; padding:0px; <% if photoimages.id == @photoset.coverimage_id %> border:3px solid #FED403; <% end %>">
+   <% if photoimages.id == @photoset.coverimage_id %>
+  <%= hidden_field_tag 'coverimage_div_id', '', :value => @count, :id => "coverimage_div_id" %>
+  <% end %>
+  <%= link_to_remote image_tag(url_for_file_column(photoimages, "image","thumbnail"),:onclick => "image_border(#{@count});"),
+								:update => 'photo_thumbnail_stage',
+			 					:before => "Element.show('spinner')",
+                  				:success => "Element.hide('spinner')",
+                  				:url => {:action=>'photo_commnets',:id => photoimages.id} %>
+
+ </div>  
+  <% @count = @count +1 %>
+  <% end %>
+          </div>
+        </div>
+     
+      <!--thumbnail images end -->
+	  
+	  <div class="my_photos_mar">
+	  
+      <div class="story_cal1">
+		<%= @comments.size %> Comments on this Set
+	  </div>
+		
+		
+		<div class="clear"></div>
+		  <% if !@comments.blank? %>	
+		<% if @comments.size > 6 %>				
+			<div class="photoset_rightbar_inner3">
+		<% else %>
+			<div class="photoset_rightbar_inner3_none">
+		<% end %>
+		
+		 <% for commentdetails in @comments %>
+		<% if session[:user_id] != commentdetails.user_id %>
+		<div class="stories_comment_inner">
+		<% else %>
+		<div class="photoset_comment_inner11">
+		<% end %>
+		
+				<div style="float:left;"><span class="story_cal1"><%= commentdetails.user.screen_name %></span><span class="photoset_home_comment"><%= myworld_dateformat(commentdetails.created_at) %> <%= commentdetails.created_at.strftime(" %I:%M %p") %></span>
+				</div>
+				
+				<div class="my_photos_user">
+				<% if session[:user_id] == @photoset.user.id %>
+				<%= link_to image_tag("/images/home/red_delete.gif"), photodelete_url(:id => commentdetails.id),{:confirm => "Are you sure you want to delete this comment?"} %>
+				<% end %>
+				</div>
+				
+				<div class="clear"></div>
+				<div class="photoset_comment_text"><%= commentdetails.comment %></div>
+				
+				</div>
+		<% end %>
+		<% end %>
+		
+				
+					<div class="clear"></div>
+					
+<% form_for :photoset_comments,:url=> {:controller =>'/myworld/photos',:action => 'save_comment',:id => @photoset.permalink} do %>
+			<div class="my_photos_mar_top" style="padding-left:11px;">
+			<div class="story_cal1">Post a comment about this Set</div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12"  style="float:left;">Screen Name:&nbsp;&nbsp;<span class="my_photos_color"><%= @user.screen_name if !@user.blank? %></span></div>
+			<div class="clear"></div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12 friends_flo">Email :&nbsp;&nbsp;<span class="my_photos_color"><%= @user.email if !@user.blank? %></span></div><div class="clear"></div>
+			<div class="clear" style="height:1px;"></div>
+			
+			
+			<div class="home_comment12">Comment :</div>
+			<div>
+			<textarea name="comment[comment]" id="comment" onblur="photoset_comment_fields();" onkeydown="photoset_comment_fields();" onfocus="photoset_comment_fields();" onkeyup="photoset_comment_fields();" class = "default_style_textarea_new" class="my_photos_comment"></textarea>
+			</div>
+			
+			<div>
+			<input name="photoset_commnetsave" id="photoset_commnetsave" value="save" src="/images/home/photos/black_post.gif" type="image" class="my_margin" disabled = true >
+			</div>
+			
+			</div>
+			<!--text area-end-->
+			<% end %>				
+				
+		</div>	
+		</div>
+    </div>
+  </div>
+  <!--photos end-->
+</div>
+</div>

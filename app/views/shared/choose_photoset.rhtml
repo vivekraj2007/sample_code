@@ -1,0 +1,38 @@
+	<%#= javascript_include_tag 'prototype' %>
+	<%#= javascript_include_tag 'effects' %>
+	<%#= javascript_include_tag 'imgslide/carousel' %>
+	
+   <%#= stylesheet_link_tag "imgslide/prototype-ui.css" %>
+
+<div class="scroll_main_container"> 
+   
+    <div id="horizontal_carousel" >
+	<div class="rouneded_corner"><%= image_tag("/images/imgslide/left_b.gif")%></div>
+	
+	  <% if @photos.size > 7 %>
+      <div class="previous_button">	  
+	  </div>  	  
+	  <% end %>
+      <div class="container">
+       <ul>
+	    <% for photo in @photos %>		
+          <li>
+		  <%= image_tag(url_for_file_column(photo, "image","thumbnail") )%> <br />		  
+          <%= photo.title %><br />
+          </li>		  
+		  <% end %>        
+        </ul>
+      </div>
+      <div class="next_button"></div>
+	   <div class="rouneded_corner"><%= image_tag("/images/imgslide/right_b.gif")%></div>
+      </div>    
+     <script type="text/javascript">
+    // <![CDATA[
+      function runTest() {
+        hCarousel = new UI.Carousel("horizontal_carousel");
+           }
+      Event.observe(window, "load", runTest);
+    // ]]>
+    </script>
+	
+	</div>

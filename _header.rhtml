@@ -1,0 +1,217 @@
+<div id="main">
+<!--top bg-->
+<div class="top_new"><span></span></div>
+<!--top bg end-->
+
+	<!--top middle-->
+		<div class="middle_bg_new">		
+				<!--tabs-->
+				<div class="new_spoorty_center">	
+		           <div class="new_spoorty_tabs">					
+						<div class="newmiddle_logo">
+						<div class="logo">
+						 <%= link_to image_tag("/images/logo.png"), root_url %>
+						 </div>
+		
+						<div style="width:650px; float:right;  height:160px;">			
+						
+<div style="width:650px; float:right;  height:115px;">	
+
+ <%- if facebook_user  -%>
+ <div class="profile_new"  style="float:right; margin-right:15px;">
+	<div class="left_profile_new"></div>
+	<div class="center_profile_new">
+		<div class="top_profile_new">	
+			<div class="playername"><b>Welcome, <%= facebook_user.name %></b></div>
+			<div><%= link_to("", profile_url(:id => facebook_user.name), {:class => "img_myprofile"}) %></div>
+		</div>
+		<div class="bottom_profile_new">
+			<div class="img_main_profile">
+<div class="img_profile">
+ <%if !facebook_user.pic_square_with_logo.blank? %>
+<%= link_to image_tag(facebook_user.pic_square_with_logo), profile_url(:id => facebook_user.name), {:title => session[:first_name]} %>
+<%else%>
+
+ 
+
+  <facebook-logo="true" size="square"><img src="http://static.ak.connect.facebook.com/pics/q_silhouette_logo.gif" alt="" title="" style="" > 
+
+
+ <%end%>
+ 
+</div>
+			</div>
+			<div class="links_profile">
+				<div class="links_profile_sub">
+<div ><%= link_to("Edit Account", profile_edit_url(:id => session[:user_user_id]),{:style=>'text-decoration:none;',:class=>'edit',:title => "Click here to edit your acount information"}) %></div>
+<div ><%= link_to_function 'Logout', 'FB.Connect.logout(function() {logout()})' %></div>
+		</div>
+			</div>
+		</div>
+	</div>
+	<div class="right_profile_new"></div>
+</div>
+
+			 
+<% elsif session[:user_user_id].blank? %>						 
+	
+	
+<div class="email_error" style="margin-right:15px;">						 
+<% form_for :login, :url => login_url, :html => {:onSubmit=>'return login();'} do  %>					 
+
+		<% if flash[:notice] %>
+		<div><%= flash[:notice] %></div>
+		<% end %>
+		
+		<div class="main_email">
+<div>
+<input  name="login_email" tabindex="1"  id="login_email" type="text" class="email_input" value="Email" 
+onkeyup="if(event.keyCode==13);" onfocus="if(this.value=='Email') this.value='';" onblur="if(this.value=='') this.value='Email';" />
+</div>
+<div class="normail_text">
+<div style="float:left; margin-top:4px;"><input name="rememberme" id="checkbox" type="checkbox"/></div>
+<div class="normail_text_1">&nbsp;&nbsp;Keep me logged in on this computer</div>
+</div>
+</div>
+
+<div class="main_password">
+<div>
+<div class="flo_left">
+<input name="login_password" tabindex="2"  id="login_password" type="password" class="email_input" value="password" onkeyup="if(event.keyCode==13)" onfocus=  "if(this.value=='password') this.value='';" onblur="if(this.value=='') this.value='password';" />
+
+</div>
+<div class="flo_right">
+<input type="image" src="/images/n_login.png"></div>
+<div class="flo_right">
+or register with Facebook connect
+  
+<fb:login-button onclick='facebook_button_onclick()'></fb:login-button>
+
+</div>
+</div>
+<div class="normail_text_1">
+
+
+</div>
+
+</div>
+
+<% end %>
+
+</div>
+
+<% else %>	
+
+	<div class="profile_new"  style="float:right; margin-right:15px;">
+	<div class="left_profile_new"></div>
+	<div class="center_profile_new">
+		<div class="top_profile_new">	
+			<div class="playername"><%= link_to(session[:user_full_name], profile_url(:id => session[:user_username]), :style=>'text-decoration:none;color:#000;') %></div>
+			<div><%= link_to("", profile_url(:id => session[:user_username]), {:class => "img_myprofile"}) %></div>
+		</div>
+		<div class="bottom_profile_new">
+			<div class="img_main_profile">
+<div class="img_profile">
+<% if !session[:user_image].blank? %>
+<%= link_to image_tag("/user/image/#{session[:user_user_id]}/thumbnail/#{session[:user_image]}", :style =>'width:48px;height:48px;',:alt => session[:user_full_name]), profile_url(:id => session[:user_username]), {:title => session[:user_full_name]} %>
+<% else %>
+<%= link_to image_tag("/images/profile/sample_profileimg.jpg",:alt => session[:user_full_name]), profile_url(:id => session[:user_username]), {:title => session[:user_full_name]} %>
+<% end %>
+</div>
+			</div>
+			<div class="links_profile">
+				<div class="links_profile_sub">
+<div><%= link_to("Edit Account", profile_edit_url(:id => session[:user_user_id]),{:style=>'text-decoration:none;',:class=>'edit',:title => "Click here to edit your acount information"}) %></div>
+<div ><%= link_to("Logout", logout_url,{:style=>'text-decoration:none;',:class=>'logout', :title => "click here to logout"}) %></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="right_profile_new"></div>
+</div>
+	
+	
+<% end %>
+
+	
+	</div>
+	
+	
+	
+	
+	<div class="top_menu">
+
+<div class="newtab">
+<ul>
+<% if params[:controller] == "home"  %>
+<li class="current">
+<% else %>
+<li>
+<% end %>
+<%= link_to "Home", root_url %>
+</li>
+
+<% if params[:controller] == "leagues"  %>
+<li class="current">
+<% else %>
+<li>
+<% end %>
+
+<%= link_to "Leagues", home_league_url %>
+</li>
+
+<% if params[:controller] == "teams"  %>
+<li class="current">
+<% else %>
+<li>
+<% end %>
+<%= link_to "Teams", teams_list_url %>
+</li>
+
+<% if params[:controller] == "sports/account"  %>
+<li class="current">
+<% else %>
+<li>
+<% end %>
+<%= link_to "Sports", sports_list_url %>
+</li>
+
+<% if params[:controller] == "player"  %>
+<li class="current">
+<% else %>
+<li>
+<% end %>
+<%= link_to "Find Players", find_players_url  %>
+</li>
+
+
+<% if params[:controller] == "news"  %>
+<li class="current">
+<% else %>
+<li>
+<% end %>
+<%= link_to "News", news_list_url  %>
+</li>
+
+<li><%#= link_to "Forum"  %></li>
+</ul>
+
+</div>
+
+
+</div>
+	
+</div>
+			
+</div>
+</div>
+				<!--tabs end-->
+				
+		</div>
+		<div class="clear"></div>
+	<!--top middle end-->
+
+
+</div>
+
+

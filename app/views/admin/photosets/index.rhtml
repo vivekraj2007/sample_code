@@ -1,0 +1,96 @@
+			<div style="width:750px;margin-left:7px;">
+			
+<div style="width:100%; color:#444e02; margin:0px; font-size:20px; padding-bottom:5px; padding-left:5px;" align="left" class="admin_font">List of Photosets</div><br/>
+<div style="width:100%; color:#444e02; margin:0px; font-size:20px;padding-bottom:5px; padding-right:10px;" align="right" class="admin_font">
+<% form_for :stories, :url => {:action => 'index'} do %>
+<%= text_field_tag 'search',params[:search], :class => 'input' %>&nbsp;&nbsp;<%= submit_tag 'Search' %>
+<% end %>
+</div>
+
+
+				<div class="menu_heading">
+				<div style="width:20px; height:auto;" class="float_left heading">&nbsp;SNo</div>
+				<div style="width:240px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Title ", "title", params[:page] %><span class="heading">(Total photos)</span>
+				</div>
+				<div style="width:140px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Created By", "screen_name", params[:page] %>
+				</div>
+				<div style="width:150px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Status", "status", params[:page] %>
+				</div>
+				<div style="width:100px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Created on", "created_on",params[:page] %>
+				</div>
+				<div style="width:90px;height:auto;" class="float_left heading" align="center">Action</div>
+				</div>
+				<div class="clearer"></div>
+				
+				<% @photoset.each_with_index do |photoset,i|  %>
+				<%# @photos = Photo.find(:all,:conditions => ["photoset_id LIKE ?",photo.id]) %>
+				<% if !params[:page].blank? %>
+				<% if params[:page].to_i >= 1 %>
+				<% i = (i + 1) + (params[:page].to_i-1) * 25 %>
+				
+				<% end %> 
+				<%else %>
+				<% i = i+1 %>
+				<% end %>
+				<div style="height:auto; margin-top:4px;" onmouseover="javaScript:rowOverEffect(this)" onmouseout="javaScript:rowOutEffect(this,'')">
+				<div style="width:20px; height:auto;" class="float_left heading sub_item" align="center"><%= i %></div>
+				
+				
+				<div style="width:250px;height:auto;" class="float_left heading sub_item" align="center">
+				<%= photoset.title.titlecase %> (<%= photoset.photos.length %>)
+				</div>
+				
+				<div style="width:140px;height:auto;" class="float_left headding_title_new sub_item" align="center">
+				<%= link_to profile_name(photoset.user.screen_name), :controller => 'users', :action => 'profile', :id => photoset.user.id %>
+				<%#= profile_name(photoset.user.screen_name) %>
+				</div>
+				
+				<div style="width:150px;height:auto;" class="float_left heading sub_item" align="center">
+				<% if photoset.lat.blank? || photoset.longt.blank? %>
+				UnPublished
+				<% else %>
+				Published
+				<% end %>
+			
+				</div>
+				
+				
+				<div style="width:100px;height:auto;" class="float_left heading sub_item" align="center">
+				<%=  user_dateformate(photoset.created_on) %></div>
+				<div style="width:90px;height:auto;" class="float_left heading sub_item" align="center">
+				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+				
+			  <tr>
+			  
+				<td align="center">
+				<%= link_to( image_tag("/images/admin/show.jpg", :style => "width:20px;height:20px;border:0;"), {:action => 'details', :id =>photoset.permalink}, :title => "Click here to view photoset( #{photoset.title} ) details." )%>
+				</td>
+				
+				<td align="center">
+				<%= link_to( image_tag("/images/admin/edit_admin.gif", :style => "width:20;height:20;border:0;"), {:action => 'edit', :id =>photoset.permalink}, :title => "Click here to edit #{photoset.title} details." )%>
+				</td>
+				
+				<td align="center">
+				<%= link_to( image_tag("/images/admin/adv_blue.gif", :style => "width:20;height:20;border:0;"), {:controller => 'admin/photosets',:action => 'add_advertisement', :id =>photoset.id}, :title => "Click here to add Advertisement to this photoset." )%>
+				</td>
+				
+				<td align="left">
+				<%= link_to( image_tag("/images/admin/delete.jpg", :style => "width:20px;height:20px;border:0;"), {:action => 'forced_delete', :id =>photoset.permalink}, :confirm => 'Are you sure want to delete this photoset ?', :method => :post,:title => "Click here to delete photoset( #{photoset.title} ) details." )%>
+			
+				</td>
+			  </tr>
+			</table>
+
+				</div>
+				<div class="clearer"></div>
+				</div>
+				
+				<% end %>
+				<div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; margin-top:10px;" align="center">
+				<%= will_paginate (@photoset,:params => {:search => params[:search]}) %>
+				</div>
+			</div>

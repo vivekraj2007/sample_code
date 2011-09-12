@@ -1,0 +1,65 @@
+<div class="nav_green" onmouseover="show_this('share');" onmouseout="hide_this('share');">
+													
+													<div class="nav_green22">
+													
+													<div style="float:left;">
+			 <% def class_on(c)
+            params[:controller].to_s == c ? "current" : ""
+            end %>	
+			 <%# def class_on_ul(c)
+            #params[:controller].to_s == c ? "current" : ""
+            #end %>	
+													
+				<div  style="width:580px; float:left; position:absolute; left:265px;">
+							<ul class="menu">
+							
+							<li class=<%= class_on('share/stories') %>>
+<!--							<span><b><%#= link_to "Stories",{:controller => 'share/stories'}, { :class => class_on('share/stories'),:title => "Stories"} %></b></span><em></em> -->
+
+							<a href="/share/stories" title="Stories"><b>Stories</b><em></em> </a>
+							</li>
+							
+							<!--<li class=<%#= class_on('share/travelogs') %>>-->
+<!--						<span><b><%#= link_to "Travelogs",{:controller => 'share/travelogs'}, { :class => class_on('share/travelogs'),:title => "Travelogs"} %></b></span><em></em> -->
+					<!--<a href="/share/travelogs" title="Travelogs" >  Travelogs<em></em></a>
+							</li>-->
+							
+							<!--<li class=<%#= class_on('share/reviews') %>>-->
+<!--							<span><b><%#= link_to "Reviews",{:controller => 'share/reviews'}, { :class => class_on('share/reviews'),:title => "Reviews"} %></b></span><em></em> -->
+						<!--<a href="/share/reviews" title="Reviews">Reviews<em></em></a>
+							</li>-->
+							<li class=<%= class_on('share/photos') %>>
+<!--						<span><b>	<%#= link_to "Photos",{:controller => 'share/photos'}, { :class => class_on('share/photos'),:title => "Photos"} %></b></span><em></em> -->
+							<a href="/share/photos" title="Photos"><b>Photos</b><em></em></a>
+							</li>
+						<!--	<li class=<%#= class_on('share/videos') %>>-->
+						<!--<span><b>	<%#= link_to "Videos",{:controller => 'share/videos'}, { :class => class_on('share/videos'),:title => "Videos"} %></b></span><em></em> -->
+							<!--<a href="/share/videos" title="Video"><b>Videos</b><em></em></a>
+							</li>-->
+							<!--<li class="suckertreemenu">-->
+						<!--	<li class=<%#= class_on('share/events') %>>-->
+			             <!-- <span><b><%#= link_to "Events",{:controller => 'share/events'}, { :class => class_on('share/events'),:title => "Events"} %></b></span><em></em> -->
+							<!--<a href="/share/events" title="Events" class="selected">Events Calendar<em></em></a>
+							
+							
+							  </li>-->
+							
+					
+							</ul>
+							<br style="clear: left;" />
+					</div>
+								<div class="bg_strip"></div>					
+													
+									
+													
+													
+													</div>
+													
+														<%= render :partial => "shared/login"%>
+													
+													
+													</div>
+													
+													
+													
+											</div>

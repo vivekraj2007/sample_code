@@ -1,0 +1,39 @@
+<div class="nav_right">
+													
+													<div style="float:left;"><img src="/images/home/nav_2.jpg" alt=""/></div>
+													<div style="width:200px; float:left;">
+													
+												    <% if session[:user_id].blank? %>																									
+													<%= render :partial => '/layouts/login' %>													
+													<% else %>													
+											      <!--  <div class="nav_right_img">
+										<img src="/images/home/signout_button.jpg" alt="" align="right" style="margin-top:5px;"/>
+										</div>-->
+										
+										
+										
+										
+										<div class="signin_main" align="center" >
+	<!--								
+      <div style="float:left; width:auto; padding-top:3px; border:1px solid #000000;"> <%#= link_to "My World", profile_url(:id => @user_profile.screen_name.gsub(' ', '_')), {:class => "logout", :style => 'color:#ff8400; text-decoration:none; padding-left:4px;' ,:title => "Click here to view the profile"}%> </div>-->
+   
+     <div class="logout" style="float:left; width:70px; padding-top:3px; padding-right:5px;"> <%= link_to "My&nbsp;World",profile_url(:id => session[:user_screenname]), {:class => "logout", :style => 'color:#ff8400; text-decoration:none; padding-left:4px;' ,:title => "Click here to view the profile"}%> </div>
+   
+      <div style="float:left; padding-top:4px; width:auto;" align="center">  <%= link_to image_tag("/images/home/signout_button.jpg"), profile_url(:id => session[:user_screenname]),  {:style => "padding-bottom:1px;",:title => "Click here to view the profile"} %> </div>
+     
+	  <div class="logout" style="float:left; width:auto; padding-top:3px;"> <%= link_to "Sign&nbsp;Out", {:controller => "/account", :action => "signout"}, {:style => 'color:#ff8400; text-decoration:none; padding-left:4px;',:class=>"logout",:title => "Click here to Logout"} %></div>
+    </div>
+ 
+										
+										
+										
+										
+										
+												<!--	<div class="logout">	
+													<%#= link_to "Sign Out", {:controller => "/account", :action => "signout", :id => session[:user]}, :style => 'color:#ff8400; text-decoration:none; padding-left:4px;' %>
+													
+													</div>-->
+													<% end %>
+													</div>
+													
+													</div>

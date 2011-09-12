@@ -1,0 +1,208 @@
+
+<script type="text/javascript">	  
+ function view_details(url)
+{
+//alert(url);
+document.location.href = url;
+}
+</script>
+<%= stylesheet_link_tag 'myworld_style'%>
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories">
+    <!--advertisement-div-start-->
+    <!--<div class="stories_leftbar">
+      <div class="adver_stories">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+      <div class="adver_stories2">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+    </div>-->
+	
+	<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement"> <% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %> </div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement"><% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %></div>
+      
+      </div>
+    </div>
+    <!--advertisement-div-end-->
+	
+	
+	
+    <!--Adventures start-->
+    <div class="stories_rightbar">
+	
+	
+	
+      <!--top navigation start-->
+      <div class="stories_rightbar_inner_story">
+        <div class="friends_flo"><img src="/images/home/gloab_1.jpg" alt="" /></div>
+        <div class="worldmap_paintball">
+		<% if check_login(@user.id)  %>My<% else %><%= profile_name(@user.screen_name) %>'s<% end %>&nbsp;Latest Adventures
+		</div>
+        <div class="worldmap_cal1_story">
+          <div class="friends_flo">
+            <div class="profile_images"></div>
+          </div>
+          <div class="top_images">		  
+		  <%= link_to (image_tag("/images/home/profile2.gif"), profilemap_url(:id => @user.screen_name.gsub(' ', '_') ),{:title => "Click here to View profile details"})%>
+		   </div>
+		  <% if check_login(@user.id) %> 
+          <div class="top_images">
+		   <%= link_to (image_tag("/images/home/edit_1.gif"), {:controller => "/account", :action => "edit"} ,{:title => "Click here to edit profile"})%>
+		    </div>
+			<% end %>
+        </div>
+      </div>
+	   <!--top navigation end-->
+	   
+<% for latestpost in @latest %>
+    
+	   <!--latest storiey content start-->
+<% if latestpost.source == 'story' %>
+<% @latest_story = latestpost.story %>	  
+	  
+	  <% if !@latest_story.blank? %>
+	  
+      
+	  <div class="stories_rightbar_inner111 my_cursor" onclick="view_details('<%=  storypermalink_url(:continent =>!@latest_story.continent.blank? ? @latest_story.continent.gsub(/ /,'-') : 'continent',:country => !@latest_story.country.blank? ? @latest_story.country.gsub(/ /,'-') : 'country', :state => !@latest_story.state.blank? ? @latest_story.state.gsub(/ /,'-') : 'state', :location => !@latest_story.location.blank? ? @latest_story.location.gsub(/ /,'-') : 'location',:id => @latest_story.permalink) %>');">
+	  
+        <div class="stories_home">
+		<img src="/images/home/stories/story_myworld.gif" class="my_world_right"/>
+		 <%= title_slice_withoutcap(@latest_story.title,50) %>
+	
+		  </div>
+		  
+        <div>
+		<span class="stories_tag"><%= title_slice_withoutcap(@latest_story.sub_title,75) %></span>
+		 </div>
+		 
+        <div class="stories_date">
+          <div class="friends_flo">
+		   <%= myworld_dateformat(@latest_story.created_at) %> 	 <%#= Time.zone.now.strftime("%d %H:%M %P") %> <%#= Time.now.strftime("%d %H:%M %P")%><span class="home"> <%= @latest_story.story_comments.length %> Comments </span>
+		    </div>
+			
+          <div class="stories_rating" id ="star-ratings-block">
+		   <%= render :partial => 'myworld/stories/ratee', :locals => {:story => @story = @latest_story }%> </div>
+        </div>
+		
+		<div class="clear"></div>
+				
+        <div class="stories_tag_text">
+		<% data = sanitize @latest_story.write_it, :tags => %w(table tr td), :attributes => %w(id class style) %> 
+		 <%= title_slice_withoutcap(data,460) %>
+       <span class="story_view friends_flo1">
+	   
+	  
+	   
+          <%= link_to "View this Story",  storypermalink_url(:continent =>!@latest_story.continent.blank? ? @latest_story.continent.gsub(/ /,'-') : 'continent',:country => !@latest_story.country.blank? ? @latest_story.country.gsub(/ /,'-') : 'country', :state => !@latest_story.state.blank? ? @latest_story.state.gsub(/ /,'-') : 'state', :location => !@latest_story.location.blank? ? @latest_story.location.gsub(/ /,'-') : 'location',:id => @latest_story.permalink), {:class => 'story_view',:title =>"Click here to view the story details" } %>
+      </span> 
+        </div>
+		
+        <!--slide images start here-->
+      <% if !@latest_story.dragged_images.blank? %>
+        <div class="stories_rightbar_inner2">
+          <%# for photoadded in @latest_story.dragged_images %>
+		  <% @latest_story.dragged_images.each_with_index do |photoadded,i| %>
+          <div class="my_world_photos_latest">
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %>
+		  </div>
+		  <% if i == 8 %> <% break %> <% end %>
+         <% end %>
+        </div>
+   <% end %>
+        <!--  slide show end-->
+		
+      </div>
+	  <!--latest storiey content end-->	  
+	  
+      <!--line div start-->
+      <div class="stories_topimg"> <img src="/images/home/stories_line.jpg" alt="" width="518px" /> </div>
+      <!--line div end-->
+	  
+	  <% end %>
+     
+ <% end %>
+	   <!--latest Photoset content start-->
+	  
+	  
+<% if latestpost.source == 'photoset' %>  
+<% @latest_photoset = latestpost.photoset %>
+	  
+	  <% if !@latest_photoset.blank? %>
+		 	  
+      <div class="stories_rightbar_inner111 my_cursor" onclick="view_details('<%= photopermalink_url(:continent => !@latest_photoset.continent.blank? ? @latest_photoset.continent.gsub(/ /,'-') : 'continent',:country => !@latest_photoset.country.blank? ? @latest_photoset.country.gsub(/ /,'-') : 'country', :state => !@latest_photoset.state.blank? ? @latest_photoset.state.gsub(/ /,'-') : 'state', :location => !@latest_photoset.location.blank? ? @latest_photoset.location.gsub(/ /,'-') : 'location', :id => @latest_photoset.permalink) %>');">
+        <div class="stories_home"><img src="/images/home/stories/photoset_myworld.gif" class="my_world_right"/>
+		 <%= title_slice(@latest_photoset.title,50) %> </div>
+        <div> <span class="stories_tag"><%= @latest_photoset.description.to(75) %></span> </div>
+		
+			
+        <div class="stories_date">
+          <div class="friends_flo"> <%= myworld_dateformat(@latest_photoset.created_on) %> 
+		  <span class="home my_world_color"><%= @latest_photoset.photos.length %>&nbsp;Photos</span>
+		  </div>
+</div>
+		  
+		  <div class="clear"></div>
+		  
+		  <div class="stories_tag_text">
+		  <%# data = sanitize @latest_story.write_it, :tags => %w(table tr td), :attributes => %w(id class style) %> 
+		   <%= title_slice_withoutcap(@latest_photoset.description,460) %>
+          <% if !@latest_photoset.description.blank? %>
+            <span class="story_view friends_flo1">
+          <%= link_to "View this Photoset", photopermalink_url(:continent => !@latest_photoset.continent.blank? ? @latest_photoset.continent.gsub(/ /,'-') : 'continent',:country => !@latest_photoset.country.blank? ? @latest_photoset.country.gsub(/ /,'-') : 'country', :state => !@latest_photoset.state.blank? ? @latest_photoset.state.gsub(/ /,'-') : 'state', :location => !@latest_photoset.location.blank? ? @latest_photoset.location.gsub(/ /,'-') : 'location', :id => @latest_photoset.permalink) , {:class => 'story_view',:title =>"Click here to view the photoset details" } %>
+      </span>
+          <% end %>
+        </div>
+		  
+        		
+        <!--slide images start here-->
+        <% if @latest_photoset.photos.length != 0 %>
+        <div class="stories_rightbar_inner2">
+          
+		  <% @latest_photoset.limited_photos.each_with_index do |photoimages,i| %>
+		  <% if !photoimages.image.blank? %>
+          <div class="my_world_photos_latest">
+		   <%= image_tag(url_for_file_column(photoimages, "image","thumbnail"))%> 
+		   </div>
+		   <% end %>
+		  
+          <% end %>
+        </div>
+		
+       <% end %>
+        <!--  slide show end-->
+      </div>
+	  
+	  <!--latest photoset content end-->	  
+	  
+      <!--line div start-->
+      <div class="stories_topimg"> <img src="/images/home/stories_line.jpg" alt="" width="518px" /> </div>
+      <!--line div end-->
+	  
+	  <% end %>
+	  
+<% end %>	  
+	  
+ <% end %>
+ <br/>
+
+<div align="center"> <strong>	
+	   <%= will_paginate (@latest,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" class="my_world_ver"/>',:next_label =>'<img src="/images/home/next.jpg" alt="next" class="my_world_ver"/>'}) %> </strong></div>
+	  
+    </div>
+   
+  </div>
+  
+</div>

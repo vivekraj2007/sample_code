@@ -1,0 +1,99 @@
+			<div style="width:750px;margin-left:7px;">
+			
+<div style="width:100%; color:#444e02; margin:0px; font-size:16px; padding-bottom:5px; padding-left:5px;" align="left" class="admin_font">
+Adding Advertisements to Story > <b><%= @story.title %></b>
+</div>
+
+<div style="width:100%; color:#444e02; margin:0px; font-size:20px;padding-bottom:5px; padding-right:10px;" align="right" class="admin_font">
+<% form_for :advertisement, :url => {:action => 'add_adv_to_story', :id => @story.id,:position => params[:position]} do %>
+<%= text_field_tag 'search',params[:search], :class => 'input' %>&nbsp;&nbsp;<%= submit_tag 'Search' %>
+<% end %>
+</div>			
+			
+<br/>
+				<div class="menu_heading">
+				<div style="width:30px; height:auto;" class="float_left heading">&nbsp;SNo</div>
+				
+				<div style="width:180px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Title", "title",params[:page] %>
+				</div>				
+				<div style="width:160px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Company Name", "company_name",params[:page] %>
+				</div>
+				<div style="width:150px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Location", "position",params[:page] %>
+				</div>
+				<div style="width:120px;height:auto;" class="float_left headding_title" align="center">
+				<%= sort_link_helper "Created on", "created_at",params[:page] %>
+				</div>
+				<div style="width:105px;height:auto;" class="float_left heading" align="center">Action</div>
+				</div>
+				<div class="clearer"></div>
+				
+				<% @adv.each_with_index do |adv,i|  %>
+				<% if !params[:page].blank? %>
+				<% if params[:page].to_i >= 1 %>
+				<% i = (i + 1) + (params[:page].to_i-1) * 5 %>				
+				<% end %> 
+				<% else %>
+				<% i = i+1 %>
+				<% end %>
+				<div style="height:auto; margin-top:4px;" onmouseover="javaScript:rowOverEffect(this)" onmouseout="javaScript:rowOutEffect(this,'')">
+				<div style="width:30px; height:auto;" class="float_left heading sub_item" align="center"><%= i %></div>
+				
+				
+				<div style="width:180px;height:auto;" class="float_left heading sub_item" align="center">
+				<% if adv.title.blank? %><!-- Not Applicable-->&nbsp; <% else %><%= adv.title.titlecase %><% end %>
+				</div>
+				
+				<div style="width:160px;height:auto;" class="float_left heading sub_item" align="center">
+				<% if adv.company_name.blank? %>  &nbsp; <% else %><%= adv.company_name.titlecase %><% end %>
+				</div>
+				
+				<div style="width:150px;height:auto;" class="float_left heading sub_item" align="center">
+				
+					<% if adv.position.blank? %>&nbsp; <% else %> <%= adv.position %><% end %>
+				</div>
+				
+				<div style="width:120px;height:auto;" class="float_left heading sub_item" align="center">
+				<%=  user_dateformate(adv.created_at) %></div>
+				<div style="width:105px;height:auto;" class="float_left heading sub_item" align="center">
+				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+				
+			  <tr>
+			  
+				<td align="center">
+				<% if @story.story_adv.headeradv_id == adv.id || (@story.story_adv.topadv_id == adv.id && params[:position] == 'left_top') || (@story.story_adv.bottomadv_id == adv.id && params[:position] == 'left_bottom')  || (@story.story_adv.rightadv_id == adv.id && params[:position] == 'right') %>
+				<%= link_to( image_tag("/images/admin/delete.jpg", :style => "width:20;height:20;border:0;"),{:controller => 'stories',:action => 'delete_adv',:id => @story.id, :position => params[:position]})%>
+				<% else %>
+				<%= link_to( image_tag("/images/admin/add.gif", :style => "width:20;height:20;border:0;"),{:controller => 'stories',:action => 'save_adv',:id => @story.id , :adv_id => adv.id, :position => params[:position]},{:title => "Click here to add Ad to #{@story.title} "} )%>
+				<% end %>
+				</td>
+				
+			   <td align="center">
+				<%#= link_to( image_tag("/images/admin/edit_admin.gif", :style => "width:20;height:20;border:0;"))%>
+				</td>	
+				
+				
+				<td align="center">
+				<%#= link_to( image_tag("/images/admin/edit.jpg", :style => "width:20;height:20;border:0;") )%>
+				</td>
+				
+				<td align="left">
+				<%#= link_to( image_tag("/images/admin/delete.jpg", :style => "width:20px;height:20px;border:0;") )%>
+				</td>
+			  </tr>
+
+			</table>
+
+				</div>
+				<div class="clearer"></div>
+				</div>
+				
+				<% end %>
+				
+		<div class="headding_title" style="padding-top:50px;float:right;"><%= link_to (image_tag("/images/admin/back.gif"), {:controller => "stories",:action => 'add_advertisement', :id => params[:id]}) %></div>		
+				<div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; margin-top:10px;" align="center">
+				<%= will_paginate (@adv,:params => {:search => params[:search]}) %>
+				</div>
+			</div>

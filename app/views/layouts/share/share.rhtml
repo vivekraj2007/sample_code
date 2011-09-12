@@ -1,0 +1,1009 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>UNCHARTED - SHARE - MODULE</title>
+
+<%= stylesheet_link_tag 'style_menu','style11' %>
+<%= javascript_include_tag 'menu', 'hmenuscript', 'jquery-1.2.3.min' %>
+<%= javascript_include_tag :defaults %>
+
+<script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAALHXVqR3ivZP4lPuASHGUbRRxI6gS_yiE9yY2PwSnUHXXLgJkihRW61pIbuWHVb-9kU-NwqDke2W2iw" 
+    type="text/javascript">
+</script>
+<script type="text/javascript">
+//SuckerTree Horizontal Menu (Sept 14th, 06)
+//By Dynamic Drive: http://www.dynamicdrive.com/style/
+var menuids=["treemenu1"] //Enter id(s) of SuckerTree UL menus, separated by commas
+function buildsubmenus_horizontal(){
+for (var i=0; i<menuids.length; i++){
+  var ultags=document.getElementById(menuids[i]).getElementsByTagName("ul")
+    for (var t=0; t<ultags.length; t++){
+		if (ultags[t].parentNode.parentNode.id==menuids[i]){ //if this is a first level submenu
+			ultags[t].style.top=ultags[t].parentNode.offsetHeight+"px" //dynamically position first level submenus to be height of main menu item
+			ultags[t].parentNode.getElementsByTagName("a")[0].className="mainfoldericon"
+		}
+		else{ //else if this is a sub level menu (ul)
+		  ultags[t].style.left=ultags[t-1].getElementsByTagName("a")[0].offsetWidth+"px" //position menu to the right of menu item that activated it
+    	ultags[t].parentNode.getElementsByTagName("a")[0].className="subfoldericon"
+		}
+    ultags[t].parentNode.onmouseover=function(){
+    this.getElementsByTagName("ul")[0].style.visibility="visible"
+    }
+    ultags[t].parentNode.onmouseout=function(){
+    this.getElementsByTagName("ul")[0].style.visibility="hidden"
+    }
+    }
+  }
+}
+
+if (window.addEventListener)
+window.addEventListener("load", buildsubmenus_horizontal, false)
+else if (window.attachEvent)
+window.attachEvent("onload", buildsubmenus_horizontal)
+
+</script>
+</head>
+
+<body>
+
+<!--main-->
+		<div id="main">
+		
+		<!--header-->
+		<div id="header">
+		
+		<div style="width:auto; float:left;">
+		<%= image_tag '/images/home/top_left.jpg', :alt => 'top_left' %></div>
+		
+		
+		<div style="float:left; width:97%;">
+		
+					<div style="float:left; width:257px;">
+				
+						<div style="width:257px; margin-top:10px;"><a href="#" title="uncharted"><img src="/images/home/logo1.jpg" alt="uncharted" /></a></div>
+						
+						<div style="width:257px;  margin-top:19px;">
+						<div style="width:58px; float:left;"><a href="#" title="go"><img src="/images/home/go.jpg" alt="go"/></a></div>
+						<div style="width:58px; float:left; margin-left:20px;"><a href="#" title="see"><img src="/images/home/see.jpg" alt="see" /></a></div>
+						<div style="width:58px; float:left; margin-left:20px;"><a href="#" title="do"><img src="/images/home/do.jpg" alt="do" /></a></div>				
+						</div>
+					
+						
+				</div>
+		
+							<div style="float:right; width:275px; margin-top:9px; ">
+							
+							<div style="width:85px; float:left; padding-top:64px; z-index:300;"><a href="#" title="share"><img src="/images/home/share.jpg" alt="share" /></a></div>
+					
+					<div style="width:2px; float:left;"><img src="/images/home/back_strip.jpg" alt="" /></div>
+					
+					
+								<div style="width:183px; float:left;">
+				
+							<div style="width:183px; height:77px; margin-top:14px; float:left;">
+							
+								<div class="quick">Quick Tour</div>
+								<div class="quick">Register</div>
+								
+								<div class="quick">
+								
+										<div style="float:left; width:auto;"><img src="/images/home/search_left.jpg" alt="" /></div>
+										
+										
+										<div><input name="" type="text" class="input"/></div>
+										
+										<div style="float:left;"><img src="/images/home/corner.jpg" alt="" /></div>
+								
+								
+								</div>
+								
+							 	</div>
+								
+							
+					
+					</div>
+					
+							
+							
+							</div>
+		
+		
+		
+		
+		</div>
+		
+		
+		
+		<div style="width:auto; float:right;"><img src="/images/home/top_right.jpg" alt="" /></div>
+		
+		</div>
+		<!--header-div-end-->
+		
+		
+							<!--content-->
+										<div style="background-image:url(/images/home/h_bg.jpg); background-repeat:repeat-x; background-color:#e3ddc7;">
+										
+										<!--menu-->
+											<div class="nav_green">
+													
+													<div style="width:914px;  float:right;">
+													
+													<div style="float:left;">
+													
+													
+													<div class="suckertreemenu" style="padding-left:45px; width:580px; float:left;">
+							<ul id="treemenu1">
+							<li><a href="index.html" title="Stories">Stories</a></li>
+							<li><a href="index.html" title="Travelogs" >Travelogs</a></li>
+							<li><a href="index.html" title="Reviews">Reviews</a></li>
+							<li><a href="index.html" title="Photos">Photos</a></li>
+							<li><a href="index.html" title="Video">Video</a></li>
+							<li class="suckertreemenu"><a href="index.html" title="Events" class="selected">Events </a></li>
+							<li><a href="index.html" title="Mark the Calendar">Mark&nbsp;the&nbsp;Calendar	</a></li>
+							
+							  
+							
+					
+							</ul>
+							<br style="clear: left;" />
+					</div>
+								<div class="bg_strip"></div>					
+													
+									
+													
+													
+													</div>
+													
+													<div style="width:206px; background-image:url(/images/home/navbar.jpg); background-repeat:repeat-x; height:27px; float:right;">
+													
+													<div style="float:left;"><img src="/images/home/nav_2.jpg" alt=""/></div>
+													
+													<div class="login"><a href="#" class="login" title="Sign In">Sign In</a></div>
+													
+													
+													</div>
+													
+													
+													</div>
+													
+													
+													
+											</div>	
+										
+										<!--menu-div-end-->
+										
+				<div style="clear:both;"></div>
+										<div style="background-image:url(/images/home/h_bg.jpg); background-repeat:repeat-x; background-color:#e3ddc7; overflow:hidden;">
+										
+										
+											<div style=" float:left; width:78%;">
+											 
+								
+		<div style="width:100%; margin-top:50px; overflow:hidden;">
+		
+							
+											<div style="width:750px; margin:auto;">
+											<div style="width:257px; float:left; margin-left:10px" >
+											
+													
+													<div style="width:257px; float:left;">
+													<div><img src="/images/home/top1.jpg" alt="" /></div>
+													
+										<div style="background-image:url(/images/home/top_bg1.jpg); background-repeat:repeat-y;">
+													
+													
+								<div style="width:225px; margin-left:15px;">
+								
+					<div class="text_who">1.Create a new photo set</div>
+																
+					<div><select style="margin-left:12px; margin-top:10px;"><option>Edit existing Set</option></select></div>
+																
+							
+					<div class="home">Title</div>
+							
+					<div><input name="" type="text"  style="width:180px; margin-left:12px;"/></div>	
+					
+					
+					<div class="home">Description</div>
+							
+					<div><textarea cols="20" rows="3" style="margin-left:12px;"></textarea></div>
+					
+					<div><a href="#" title="save"><img src="/images/home/save.jpg" alt=""  style="padding-left:10px; margin-top:10px;"/></a></div>									
+																
+								</div>
+													
+													
+													</div>
+													
+													<div><img src="/images/home/top2.jpg" alt="" /></div>
+													
+													
+													
+													</div>
+											
+											
+											
+											</div>
+											
+		<div style="width:220px;  float:left; margin-left:5px;">
+		
+		<div style="width:210px; float:left; margin-top:5px;">
+											
+		<div class="text_who">2. Add photos to this Set</div>
+		<div class="home">Select entire folders or individually.
+Sets may contain up to 100 photos.</div>
+		
+		<div class="home4">Yellowstone 07</div>
+		
+		<div class="home5">Favorite shots from our family trip 
+through beautiful Yellowstone National 
+Park</div>
+
+<div><a href="#" title="add"><img src="/images/home/add_button.jpg" alt="" style="margin-left:10px; margin-top:10px;" /></a>	</div>
+
+<div><select style="margin-left:12px; margin-top:10px;"><option>Link this Set to....</option></select></div>
+
+<div><a href="#" title="link"><img src="/images/home/link.jpg" alt=""  style="margin-left:12px; margin-top:10px;"/></a></div>
+		
+		
+		</div>
+							
+		</div>
+		
+											
+							<div style="width:220px; float:left; ">
+							
+							<div style="width:210px; float:left;">
+							
+							<div class="text_who">3.Tag,&nbsp;title&nbsp;and&nbsp;caption&nbsp;Photos</div>
+							
+							<div class="home5"><b>‘Yellowstone 07’</b> contains <b>23</b> <br />photos 
+that need tags, titles or<br />captions.</div>
+								
+							<div style="height:20px;"></div>
+							<div class="home">Descriptive tags for the whole Set</div>
+							<div><textarea cols="20" rows="3" style="margin-left:12px;"></textarea></div>
+							<div class="home">Enter a location here</div>
+							<div><input name="" type="text"  style="width:180px; margin-left:12px;"/></div>
+							<div><a href="#" title="save"><img src="/images/home/save1.jpg" alt=""  style="padding-left:10px; margin-top:10px;"/></a></div>
+							
+							</div>
+							
+							</div>
+													
+											</div>
+											
+											
+										
+											
+											
+											<div style="clear:both;"></div>
+											
+											
+											
+											
+											
+											<div style=" width:100%; margin-top:10px;">
+											
+				<div style="width:700px; overflow-y:scroll; overflow-x:hidden; margin:auto; border:1px solid #baad85;">
+				
+					<div style=" width:700px; height:113px; background-color:#f5f3e3;">
+					
+					<div style="width:97px; float:left; margin:10px 10px 10px 10px;">
+									
+										<img src="/images/home/mid_image.jpg" alt="" />
+					</div>
+					
+					
+						<div style="width:550px; height:113px; float:left; ">
+									
+									
+									<div style="width:550px; float:left;">
+										<div class="home" style="float:left;">Cover <input name="" type="radio" /></div>
+										<div class="home" style="float:right;">Delete <input name="" type="radio" /></div>
+										</div>
+										
+										
+										<div style="width:550px; float:left;">
+										<div class="home" style="float:left; width:60px;">Title</div>
+										<div class="home" style="float:left; width:300px;"><input name="" type="text"  style="width:300px; margin-left:12px; border:1px solid #c4bb9d;"/></div>
+										</div>	
+										
+										<div style="width:550px; float:left;">
+										<div class="home" style="float:left; width:60px;">Caption</div>
+										<div class="home" style="float:left; width:300px;"><input name="" type="text"  style="width:300px; margin-left:12px; border:1px solid #c4bb9d;"/></div>
+										</div>
+										
+										<div style="width:550px; float:left; padding-bottom:5px;">
+										<div class="home" style="float:left; width:60px;">Tags</div>
+										<div class="home" style="float:left; width:300px;"><input name="" type="text"  style="width:300px; margin-left:12px; border:1px solid #c4bb9d;"/></div>
+											
+										</div>
+							</div>
+					
+					</div>
+					
+			
+							
+							<div style=" width:700px; height:113px; background-color:#ffffff; padding-top:10px;">
+					
+					<div style="width:97px; float:left; margin:10px 10px 10px 10px;">
+									
+										<img src="/images/home/mid_image2.jpg" alt="" />
+					</div>
+					
+					
+						<div style="width:550px; height:113px; float:left;">
+									
+									
+									<div style="width:550px; float:left;">
+										<div class="home" style="float:left;">Cover <input name="" type="radio" /></div>
+										<div class="home" style="float:right;">Delete <input name="" type="radio" /></div>
+										</div>
+										
+										
+										<div style="width:550px; float:left;">
+										<div class="home" style="float:left; width:60px;">Title</div>
+										<div class="home" style="float:left; width:300px;"><input name="" type="text"  style="width:300px; margin-left:12px; border:1px solid #c4bb9d;"/></div>
+										</div>	
+										
+										<div style="width:550px; float:left;">
+										<div class="home" style="float:left; width:60px;">Caption</div>
+										<div class="home" style="float:left; width:300px;"><input name="" type="text"  style="width:300px; margin-left:12px; border:1px solid #c4bb9d;"/></div>
+										</div>
+										
+										<div style="width:550px; float:left;">
+										<div class="home" style="float:left; width:60px;">Tags</div>
+										<div class="home" style="float:left; width:300px;"><input name="" type="text"  style="width:300px; margin-left:12px; border:1px solid #c4bb9d;"/></div>
+										</div>
+							</div>
+					
+					</div>
+					
+					
+					
+					<div style=" width:700px; height:113px; background-color:#f5f3e3; padding-top:10px;">
+					
+					<div style="width:97px; float:left; margin:10px 10px 10px 10px;">
+									
+										<img src="/images/home/mid_image3.jpg" alt="" />
+					</div>
+					
+					
+					  <div style="width:550px; height:113px; float:left;"></div>
+					
+					</div>
+							
+							
+							<div style=" width:700px; height:113px; background-color:#ffffff; padding-top:10px;">
+					
+					<div style="width:97px; float:left; margin:10px 10px 10px 10px;">
+									
+										<img src="/images/home/mid_image4.jpg" alt="" />
+					</div>
+					
+					
+						<div style="width:550px; height:113px; float:left;"></div>
+							</div>
+							
+							
+							<div style=" width:700px; height:113px; background-color:#f5f3e3; padding-top:10px;">
+
+					
+					<div style="width:97px; float:left; margin:10px 10px 10px 10px;">
+									
+										<img src="/images/home/mid_image5.jpg" alt="" />
+					</div>
+					
+					
+					  <div style="width:550px; height:113px; float:left;"></div>
+					
+					</div>
+					
+					
+					
+					<div style=" width:700px; height:113px; background-color:#ffffff; padding-top:10px;">
+					
+					<div style="width:97px; float:left; margin:10px 10px 10px 10px;">
+									
+										<img src="/images/home/mid_image6.jpg" alt="" />
+					</div>
+					
+					
+						<div style="width:550px; height:113px; float:left;"></div>
+							</div>
+							
+							<div style=" width:700px; height:113px; background-color:#f5f3e3;">
+					
+					</div>
+							
+							<div style=" width:700px; height:113px; background-color:#ffffff;">
+					
+					</div>
+							
+							
+							<div style=" width:700px; height:113px; background-color:#f5f3e3;">
+					
+					</div>
+					
+					
+					<div style=" width:700px; height:113px; background-color:#ffffff;">
+					
+					</div>
+							
+							<div style="clear:both;"></div>
+							
+	
+				
+				</div>
+								
+								
+		
+											
+											</div>
+				
+											
+			
+			</div>
+			
+											</div>	
+											
+											
+											<!--right-->
+											<div style="width:202px; float:right;">
+							
+											
+							<!--rightblock-->		
+								<div style="width:202px; background-color:#33FFCC; float:right;">
+								
+								
+								
+								
+								
+								
+								
+								
+								<div style="background:url(/images/home/left_strip_3.jpg) repeat-x; background-color:#f4e0aa; float:left; padding:0px; margin:0px;">
+											
+											<div>
+											<div style="width:190px;">
+							<div style="width:100px; float:left"><div class="cal1">Billy Gote</div></div>
+							<div style="float:left; width:10px; margin-top:6px; margin-right:20px;"><img src="/images/home/plus.jpg" alt="" /></div>				
+							<div style="float:left; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/email.jpg" alt="" /></a></div>
+							<div  style="float:left; width:10px; margin-top:5px; padding-left:20px;"><a href="#"><img src="/images/home/plus11.jpg" alt="" /></a></div>				
+											
+											</div>
+											<div style="clear:both;"></div>
+											
+											</div>
+											<div><img src="/images/home/boy.jpg" alt=""  style="margin-left:15px;"/></div>
+									
+									
+									<div>
+											<div style="width:190px;">
+							<div style="width:130px; float:left"><div class="cal1">Uncharted Guide</div></div>				
+							
+							<div  style="float:right; width:60px; margin-top:5px;"><a href="#"><img src="/images/home/flag.jpg" alt="" /></a></div>				
+											
+											</div>
+											<div style="clear:both;"></div>
+											
+					  </div>
+									
+									<div>
+											<div style="width:190px;">
+							<div style="width:70px; float:left;"><div class="home">Home:</div></div>				
+							
+							<div style="width:110px; float:left; margin-top:5px;"><div class="home1">Utah,USA</div>	</div>			
+											
+											</div>
+											<div style="clear:both;"></div>
+											
+											<div style="width:190px;">
+							<div style="width:70px; float:left;"><div class="home">Expert:</div></div>				
+							
+							<div style="width:110px; float:left; margin-top:5px;"><div class="home1">Brezil,Utah,Eating,</div>	</div>			
+											
+											</div>
+											<div style="clear:both;"></div>
+											
+											<div style="width:190px;">
+							<div style="width:160px; padding-left:10px; float:left;"><div class="home1">Intermountain West</div></div>
+											
+											</div>
+											
+											<div style="width:190px;">
+							<div style="width:70px; float:left;"><div class="home">Other:</div></div>				
+							
+							<div style="width:110px; float:left; margin-top:5px;"><div class="home1">Eagle Scout:)</div>	</div>			
+											
+											</div>
+											<div style="clear:both;"></div>
+											<div style="width:190px;">
+							<div style="width:70px; float:left;"><div class="home">Hobbies:</div></div>				
+							
+							<div style="width:110px; float:left; margin-top:5px;"><div class="home1">Photography,Food</div>	</div>			
+											
+											</div>
+											
+											<div style="clear:both;"></div>
+											
+													<div style="width:190px;">
+							<div style="width:60px; float:left;"><div class="home">Site:</div></div>				
+							
+							<div style="width:120px; float:left; margin-top:5px;"><div class="home1">www.Explourist.com</div></div>			
+											
+											</div>
+											<div style="clear:both;"></div>
+					<div style="background-image:url(/images/home/bg_strip_right.jpg); background-repeat:repeat-x; height:28px;">
+					
+						<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1"><img src="/images/home/email.jpg" alt="" />&nbsp;3New Messages</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/plus.jpg" alt="" /></a></div>	</div>
+						
+					<div style="clear:both;"></div>
+					</div>	
+					
+					
+					
+					<div style="background-image:url(/images/home/bg_12.jpg); background-repeat:repeat-x; overflow:hidden;">
+					
+					<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">17 Friends</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/minus.jpg" alt="" /></a></div>	</div>
+							<div style="clear:both;"></div>
+							<div>
+								<div style="width:180px; margin-left:10px;">
+								
+						             <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image1.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>
+									 
+									 <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image2.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>
+									 
+									<div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image3.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>	
+										
+								
+								</div>
+								
+								<div style="width:180px; margin-left:10px;">
+								
+						             <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image4.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>
+									 
+									 <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image5.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>
+									 
+									<div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image6.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>	
+										
+								
+								</div>
+								
+								<div style="width:180px; margin-left:10px;">
+								
+						             <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image7.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>
+									 
+									 <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image8.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>
+									 
+									<div style="width:51px; float:left; margin:3px 3px 6px 3px;"><img src="/images/home/image9.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>	
+										
+								
+								</div>
+							
+							</div>
+							
+					
+					</div>
+					
+							<div style="background-image:url(/images/home/bg_12.jpg); background-repeat:repeat-x; overflow:hidden;">
+					
+					<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">9,286 Photos,999 Sets</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/plus11.jpg" alt="" /></a></div>	</div>
+							<div style="clear:both;"></div>
+							<div>
+								<div style="width:180px; margin-left:10px;">
+								
+						             <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image1.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>
+									 
+									 <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image2.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>
+									 
+									<div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image3.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>	
+										
+								
+								</div>
+								
+								<div style="width:180px; margin-left:10px;">
+								
+						             <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image4.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>
+									 
+									 <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image5.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>
+									 
+									<div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image6.jpg" alt="" style="border:1px solid #e1ae62;" /> </div>	
+										
+								
+								</div>
+								
+								<div style="width:180px; margin-left:10px;">
+								
+						             <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image7.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>
+									 
+									 <div style="width:51px; float:left; margin:3px 3px 3px 3px;"><img src="/images/home/image8.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>
+									 
+									<div style="width:51px; float:left; margin:3px 3px 6px 3px;"><img src="/images/home/image9.jpg" alt="" style="border:1px solid #e1ae62;"/> </div>	
+										
+								
+								</div>
+							
+							</div>
+							
+							
+							
+					
+					</div>
+							
+							<div style="background-image:url(/images/home/bg_strip_right.jpg); background-repeat:repeat-x; height:28px;">
+					
+						<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">17 Videos</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/plus.jpg" alt="" /></a></div>	</div>
+						
+					<div style="clear:both;"></div>
+					</div>	
+					
+					<div style="background-image:url(/images/home/bg_strip_right.jpg); background-repeat:repeat-x; height:28px;">
+					
+						<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">6 Stories</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/plus.jpg" alt="" /></a></div>	</div>
+						
+					<div style="clear:both;"></div>
+					</div>
+					
+											<div style="background-image:url(/images/home/bg_12.jpg); background-repeat:repeat-x; overflow:hidden;">
+					
+					<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">37 Reviews</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/minus.jpg" alt="" /></a></div>	</div>
+							<div style="clear:both;"></div>
+							<div>
+								
+								<div style="margin-left:12px;">
+								<div class="home1">Hotel Porto Verde</div>
+								
+								<div class="home2">Porto Seguro, Brazil</div>
+								
+								<div class="home1">Hotel Mont Blanc</div>
+								
+								<div class="home2">Latin Quarter, Paris, France</div>
+								
+								<div class="home1">Roosevelt Hotel</div>
+								
+								<div class="home2">Manhattan, NYC, New York</div>
+								
+								<div class="home1">Arches Inn Campground</div>
+								
+								<div class="home2">Moab, Utah</div>
+								
+								<div class="home1">Angie’s Restaurant</div>
+								
+								<div class="home2">Logan, Utah</div>
+								
+								</div>
+							</div>
+							
+							
+							
+					
+					</div>
+										<div style="background-image:url(/images/home/bg_strip_right.jpg); background-repeat:repeat-x; height:28px;">
+					
+						<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">7 Travelogs</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/plus.jpg" alt="" /></a></div>	</div>
+						
+					<div style="clear:both;"></div>
+					</div>
+								
+								
+								<div style="background-image:url(/images/home/bg_12.jpg); background-repeat:repeat-x; overflow:hidden;">
+					
+					<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">8 Plans</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/minus.jpg" alt="" /></a></div>	</div>
+							<div style="clear:both;"></div>
+							<div>
+								
+								<div style="margin-left:12px;">
+								<div class="home1">Cuzco, Peru - Open Invita...</div>
+								
+								<div class="home2">January 20-29, 2008</div>
+								
+								<div class="home1">Speed Week, Bonneville...</div>
+								
+								<div class="home2">August 19-21, 2008</div>
+								
+								<div class="home1">Cruise to Alaska</div>
+								
+								<div class="home2">May 1-10, 2008</div>
+								
+								<div class="home1">Havasupai</div>
+								
+								<div class="home2">August 12-15, 2008</div>
+								
+								<div class="home1">Lincoln Highway Road Trip</div>
+								
+								<div class="home2">April 8, 2008</div>
+								
+								</div>
+							</div>
+						
+					
+					</div>	
+					
+					
+								<div style="background-image:url(/images/home/bg_12.jpg); background-repeat:repeat-x; overflow:hidden;">
+					
+					<div style="width:190px;">
+							<div style="width:150px; float:left"><div class="cal1">231 Tags</div></div>				
+							
+				<div  style="float:right; width:10px; margin-top:5px;"><a href="#"><img src="/images/home/minus.jpg" alt="" /></a></div>	</div>
+							<div style="clear:both;"></div>
+							<div style="background-image:url(/images/home/bg_12.jpg); background-repeat:repeat-x; height:215px;">
+								
+								<div style="margin-left:12px;">
+								<div class="home8">burrito, joint, food, mexican, restaurant, huge, eat, furry, aliens, greasy, huge, ginormous, art, church, Paris, France, museum, Europe, sculpture, Andrew, metro, paintings, modern, Porto Seguro, Brazil, beach, Verde, Porto, carnival, pool, Park, restaurant, huge, eat, furry, France, museum, Europe, </div>					
+								
+								
+								</div>
+							</div>
+							
+							
+							
+					
+					</div>
+						
+					
+					  </div>
+									
+									
+									
+						</div>
+								
+								
+								
+								
+								
+								
+								<div style="clear:both;"></div>
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								
+								<!--<div class="/images/home">
+				<div class="/images/homet1">
+					<div class="/images/homet1a">
+						<div class="billy" align="left">Billy Gote</div>
+						<div class="letter" align="left"><img src="/images/home/lletter.jpg" /></div>
+						<div class="plus"><img src="/images/home/plusmark.jpg" /></div>
+						<div class="/images/homet1aimage"><img src="/images/home/manimage.jpg"></div>
+						<div class="/images/homet1aimagetext">
+							<div class="UnchartedGuide1">
+								<div class="UnchartedGuide" align="left">Uncharted Guide</div>
+								<div class="flag1" align="left"><img src="/images/home/flag1.jpg" /></div>
+								<div class="flag2" align="left"><img src="/images/home/flag2.jpg" /></div>
+							</div>
+							<div style="width:180px; float:left;  padding-left:11px; ">
+								<div class="Home">Home: <font style="color:#000000; ">Utah, USA</font></div>
+								<div style="width:173px; float:left;  ">	
+						<div class="Home">Expert:<font style="color:#000000; "> Brazil, Utah, Eating,</font></div>
+						<div style="width:173px; float:left;   ">
+								<div class="Home"><font style="color:#000000; ">Intermountain West</font></div>
+						</div>	
+						<div style="width:173px; float:left; ">
+							<div class="Home">Other:<font style="color:#000000;"> Eagle Scout :)</font></div>
+						</div>	
+						<div style="width:173px; float:left;   ">
+							<div class="Home">Hobbies:<font style="color:#000000; "> Photography, Food</font></div>
+						</div>
+						<div style="width:173px; float:left;">
+							<div class="Home">Site: <font style="color:#000000;">www.Explourist.com</font></div>
+						</div>
+						
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="image2">
+				  <div class="image2a">
+						<div class="letter1" align="left"><img src="/images/home/lletter.jpg" /></div>
+						<div class="billy1" align="left">3 New Messages</div>
+						<div class="plus1"><img src="/images/home/plusmark1.jpg" /></div>
+					<div style="width:190px; float:left;">
+						<div class="billy2">17 Friends</div>
+						<div class="minus"><img src="/images/home/minus.jpg" /></div>
+					</div>
+					<div class="main/images/home">
+						<div class="mainimage1">
+							<div class="mainimage1a"><img src="/images/home/mainimage1.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage2.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage3.jpg" /></div>
+						<div class="mainimage1" style="padding-top:3px;">
+							<div class="mainimage1a"><img src="/images/home/mainimage4.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage5.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage6.jpg" /></div>
+						<div class="mainimage1" style="padding-top:3px;">
+						 	<div class="mainimage1a"><img src="/images/home/mainimage7.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage8.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage9.jpg" /></div>
+						 </div>
+						 </div>
+						 
+					   </div>
+					</div>
+				 </div>
+				 <div class="/images/homet2">
+				 		<div style="width:200px; float:left;">
+							<div class="billy2"><font style="font-size:14px;">9,286 Photos, 999 Sets</font></div>
+							<div style="padding-top:16px; float:left; padding-left:5px;"><img src="/images/home/minus.jpg" /></div>
+						</div>
+						<div class="main/images/home">
+						<div class="mainimage1">
+							<div class="mainimage1a"><img src="/images/home/mainimage10.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage11.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage12.jpg" /></div>
+						<div class="mainimage1" style="padding-top:3px;">
+							<div class="mainimage1a"><img src="/images/home/mainimage13.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage14.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage15.jpg" /></div>
+						<div class="mainimage1" style="padding-top:3px;">
+						 	<div class="mainimage1a"><img src="/images/home/mainimage16.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage18.jpg" /></div>
+							<div class="mainimage1a"><img src="/images/home/mainimage19.jpg" /></div>
+						 </div>
+						 </div>
+						 
+					   </div>
+					</div>
+					
+					
+					
+				</div>
+				<div class="/images/homet3">
+				 	<div class="17studios">
+						<div class="billy2">17 Videos</div>
+						<div class="plus1" style="padding-left:90px;float:left;"><img src="/images/home/plusmark2.jpg"/></div>
+					</div>
+				 </div>
+				 <div class="/images/homet3">
+				 	<div class="17studios">
+						<div class="billy2">6 Stories</div>
+						<div class="plus1" style="padding-left:95px;float:left;"><img src="/images/home/plusmark2.jpg"/></div>
+					</div>
+				 </div>
+				 <div class="/images/homet4">
+				 	<div class="17studios">
+						<div class="billy2">37 Reviews</div>
+						<div style="padding-top:15px; float:left; padding-left:75px;"><img src="/images/home/minus.jpg" /></div>
+				 </div>
+				
+				<div class="blacktext" align="left">Hotel Porto Verde </div>
+				<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">Porto Seguro, Brazil</div>
+				<div class="blacktext" align="left">Hotel Mont Blanc</div>
+				<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">Latin Quarter, Paris, France</div>
+				<div class="blacktext" align="left">Roosevelt Hotel</div>
+				<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">Manhattan, NYC, New York
+</div>
+				<div class="blacktext" align="left">Arches Inn Campground</div>
+			<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">Moab, Utah</div>
+			<div class="blacktext" align="left">Angie’s Restaurant</div>
+			<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">Logan, Utah</div>
+				 </div>
+				 <div class="/images/homet3">
+				 	<div class="17studios">
+						<div class="billy2">7 Travelogs</div>
+						<div class="plus1" style="padding-left:75px; padding-top:12px;float:left;"><img src="/images/home/plusmark2.jpg"/></div>
+					</div>
+				 </div>
+				 <div class="/images/homet4">
+				 	<div class="17studios">
+						<div class="billy2">8 Plans</div>
+						<div style="padding-top:15px; float:left; padding-left:105px;"><img src="/images/home/minus.jpg" /></div>
+				 </div>
+				
+				<div class="blacktext" align="left">Cuzco, Peru - Open Invita... </div>
+				<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">January 20-29, 2008</div>
+				<div class="blacktext" align="left">Speed Week, Bonneville...</div>
+				<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">August 19-21, 2008</div>
+				<div class="blacktext" align="left">Cruise to Alaska</div>
+				<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">May 1-10, 2008
+</div>
+				<div class="blacktext" align="left">Havasupai<strong></strong></div>
+			<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">August 12-15, 2008</div>
+			<div class="blacktext" align="left">Lincoln Highway Road Trip</div>
+			<div class="Home" style="width:187px; padding-left:11px; font-size:12px;" align="left">April 8, 2008</div>
+				 </div>
+				 <div class="/images/homet4" style=" height:203px;">
+				 	<div class="17studios">
+						<div class="billy2">231 Tags</div>
+						<div style="padding-top:15px; float:left; padding-left:85px;"><img src="/images/home/minus.jpg" /></div>
+				 </div>
+				 <div class="blacktext1" align="left">burrito, joint, food, mexican, </div>
+				 <div class="blacktext1" align="left">restaurant, huge, eat, furry,  </div>
+				 <div class="blacktext1" align="left">aliens, greasy, huge, </div>
+				 <div class="blacktext1" align="left">ginormous, art, church, Paris, </div>
+				 <div class="blacktext1" align="left">France, museum, Europe,  </div>
+				 <div class="blacktext1" align="left">sculpture, Andrew, metro,  </div>
+				 <div class="blacktext1" align="left">paintings, modern, Porto  </div>
+				 <div class="blacktext1" align="left">Seguro, Brazil, beach, Verde, </div>
+				 <div class="blacktext1" align="left">Porto, carnival, pool, Park,  </div>
+				 <div class="blacktext1" align="left">restaurant, huge, eat, furry,  </div>
+				 <div class="blacktext1" align="left">France, museum, Europe,  </div>
+				 </div>
+				</div>
+			</div>-->
+								
+								
+								
+								
+		
+								
+								
+								
+								
+								</div>
+						<!--rightblock-div-end-->		
+									</div>	
+										<!--right-div-end-->
+										
+										
+										</div>
+										
+										
+										<div style="clear:both;"></div>
+										
+										<div style="background-color:#444444;">
+										
+										<div style="width:720px; margin:auto;">
+										
+										
+												<div id="footer">
+					  <div style="width:720px;" class="footerlinks"> <a href="" class="footerlinks1">Home</a> | <a href="" class="footerlinks1">Blog</a> | <a href="" class="footerlinks1">Contact</a> | <a href="" class="footerlinks1">Legal</a> | <a href="" class="footerlinks1">Privacy Policy</a> | <a href="" class="footerlinks1">Tearms of Use</a> | <a href="" class="footerlinks1">Honor Code</a> | <br /><div class="foot_link">Copyright &copy;  2008 Uncharted tm Greate Divide Media LLC All Rights Reserved </div></div>
+					</div>
+										
+										</div>
+															
+										
+										</div>
+										
+										
+										
+										</div>
+										<!--content-div-end-->
+										
+									
+		
+		
+		</div>
+		<!--main-div-end-->
+
+</body>
+</html>

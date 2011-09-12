@@ -1,0 +1,163 @@
+
+<div style="color:#444e02; padding:0px;width:600px; margin:0px; font-size:16px;"  class="admin_font"> 
+<div style="margin-bottom:8px;" align="right">Add Advertisements to this Photoset > <b><%= @photoset.title %></b></div> 
+
+<% form_for :adv_form,:url => {:action => 'adv_save',:id => @photoset.id},:html => {:name=> 'adv_form', :onsubmit=>'return add_adv();'}do %>
+
+
+<div style="width:700px; padding-left:20px;" align="center">
+<div style="margin-left:50px;">
+<table width="500" border="1" cellspacing="0" cellpadding="0" class="inerfontkicolor" align="center">
+  <tr>
+    <td colspan="3" height="35" align="center">
+	<div style="padding-left:15px;">
+	<font style="size:2px; color:#F03432;">Top Header Advertisements </font><br/><br/>
+<% if @adv.headeradv_id == @default_ad_top.advertisement_id %>
+		<input type="radio" id="headeradv_id" name="adv[headeradv_id]" checked="checked" value="<%= @default_ad_top.advertisement_id %>" />
+ Default Adv ( <%= @default_ad_top.adv_list.title %> )&nbsp;&nbsp;
+<% else %>
+		<input type="radio" id="headeradv_id" name="adv[headeradv_id]" value="<%= @default_ad_top.advertisement_id %>" />
+ Default Adv ( <%= @default_ad_top.adv_list.title %> )&nbsp;&nbsp;
+<% end %>
+
+<% if @adv.headeradv_id.blank? || @adv.headeradv_id == @default_ad_top.advertisement_id %>
+
+<% header = '<input type="radio" id="headeradv_id" name="adv[headeradv_id]"/>' %>
+    
+ <%= link_to "#{content_tag :span, header}", {:controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'header'} %> 
+<%= link_to " Place new Adv" , :controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'header'%>
+	
+ <% else %>
+ 
+<input type="radio" id="headeradv_id" name="adv[headeradv_id]" checked="checked" value="<% if !@adv.photoset_top_adv.blank? %><%= @adv.photoset_top_adv.id %><% end %>" />
+<%= link_to "Edit Ad" , :controller => 'ads_management', :action => "add_adv_to_photo", :id => @photoset.id,:position => 'header' %> ( <% if !@adv.photoset_top_adv.blank? %><%= @adv.photoset_top_adv.title %><% end %> )
+
+<% end %>
+<br/><br/>						  
+<br/><br/>
+</td>
+  </tr>
+</table>
+</div>
+<br/><br/>
+
+
+
+<table width="700px" border="1" cellspacing="2" cellpadding="2" class="inerfontkicolor" align="center">
+  <tr>
+    <td colspan="3" height="35" align="center">Header</td>
+  </tr>
+  <tr>
+    <td width="200" height="40" align="left"><br/>
+	<font style="size:2px; color:#F03432;">Default Left top adv </font><br/>
+	
+	<% if @adv.topadv_id == @default_ad_left_top.advertisement_id %>
+
+<input type="radio" id="topadv_id" name="adv[topadv_id]" checked="checked" value="<%= @default_ad_left_top.advertisement_id %>" />
+ Default Adv (<%= @default_ad_left_top.adv_list.title %>)
+<% else %>
+<input type="radio" id="topadv_id" name="adv[topadv_id]" value="<%= @default_ad_left_top.advertisement_id %>" />
+ Default Adv (<%= @default_ad_left_top.adv_list.title %>)
+<% end %>
+<br/>
+<% if @adv.topadv_id.blank? || @adv.topadv_id == @default_ad_left_top.advertisement_id %>
+
+<% left_top = '<input type="radio" id="topadv_id" name="adv[topadv_id]"/>' %>
+    
+ <%= link_to "#{content_tag :span, left_top}", {:controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'left_top'} %> 
+
+<%= link_to " Place new Adv" , :controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'left_top'%>
+	
+ <% else %>
+
+<input type="radio" id="topadv_id" name="adv[topadv_id]" checked="checked" value="<% if !@adv.photoset_left_top_adv.blank? %><%= @adv.photoset_left_top_adv.id %><% end %>" />
+<%= link_to "Edit Ad" , :controller => 'ads_management', :action => "add_adv_to_photo", :id => @photoset.id,:position => 'left_top' %> (<% if !@adv.photoset_left_top_adv.blank? %> <%= @adv.photoset_left_top_adv.title %><% end %> )
+<% end %>
+
+<br/><br/>						  
+<br/><br/>
+	</td>
+	
+    <td width="350" rowspan="2">Content</td>
+	
+    <td width="200" height="20" align="center"> User Profile	</td>
+  </tr>
+  <tr>
+    <td height="40" align="left">
+	<font style="size:2px; color:#F03432;">Default Left bottom adv </font><br/><br/>
+
+<% if @adv.bottomadv_id == @default_ad_left_bottom.advertisement_id %>
+
+<input type="radio" id="bottomadv_id" name="adv[bottomadv_id]" checked="checked" value="<%= @default_ad_left_bottom.advertisement_id %>" />
+ Default Adv (<%= @default_ad_left_bottom.adv_list.title %>)
+<% else %>
+<input type="radio" id="bottomadv_id" name="adv[bottomadv_id]" value="<%= @default_ad_left_bottom.advertisement_id %>" />
+ Default Adv (<%= @default_ad_left_bottom.adv_list.title %>)
+<% end %>
+<br/>
+<% if @adv.bottomadv_id.blank? || @adv.bottomadv_id == @default_ad_left_bottom.advertisement_id %>
+
+<% left_bottom = '<input type="radio" id="bottomadv_id" name="adv[bottomadv_id]"/>' %>
+    
+ <%= link_to "#{content_tag :span, left_bottom}", {:controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'left_bottom'} %> 
+
+<%= link_to " Place new Adv" , :controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'left_bottom'%>
+	
+ <% else %>
+
+<input type="radio" id="bottomadv_id" name="adv[bottomadv_id]" checked="checked" value="<% if !@adv.photoset_left_bottom_adv.blank? %><%= @adv.photoset_left_bottom_adv.id %><% end %>" />
+<%= link_to "Edit Ad" , :controller => 'ads_management', :action => "add_adv_to_photo", :id => @photoset.id,:position => 'left_bottom' %> (<% if !@adv.photoset_left_bottom_adv.blank? %> <%= @adv.photoset_left_bottom_adv.title %> <% end %>)
+<% end %>
+
+
+	</td>
+	<td height="60" align="left">
+	<font style="size:2px; color:#F03432;">Default right adv </font><br/><br/>
+
+<% if @adv.rightadv_id == @default_ad_right.advertisement_id %>
+
+<input type="radio" id="rightadv_id" name="adv[rightadv_id]" checked="checked" value="<%= @default_ad_right.advertisement_id %>" />
+ Default Adv (<%= @default_ad_right.adv_list.title %>)
+<% else %>
+<input type="radio" id="rightadv_id" name="adv[rightadv_id]" value="<%= @default_ad_right.advertisement_id %>" />
+ Default Adv (<%= @default_ad_right.adv_list.title %>)
+<% end %>
+<br/>
+<% if @adv.rightadv_id.blank? || @adv.rightadv_id == @default_ad_right.advertisement_id %>
+
+<% right = '<input type="radio" id="rightadv_id" name="adv[rightadv_id]"/>' %>
+    
+ <%= link_to "#{content_tag :span, right}", {:controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'right'} %> 
+
+<%= link_to " Place new Adv" , :controller => 'ads_management', :action => "add_adv_to_photo",:id => @photoset.id, :position => 'right'%>
+	
+ <% else %>
+
+<input type="radio" id="rightadv_id" name="adv[rightadv_id]" checked="checked" value="<% if !@adv.photoset_right_adv.blank? %><%= @adv.photoset_right_adv.id %><% end %>" />
+<%= link_to "Edit Ad" , :controller => 'ads_management', :action => "add_adv_to_photo", :id => @photoset.id,:position => 'right' %> ( <% if !@adv.photoset_right_adv.blank? %><%= @adv.photoset_right_adv.title %><% end %> )
+<% end %>
+
+
+	</td>
+	
+	
+  </tr>
+  <tr>
+    <td colspan="3" height="35" align="center">Footer</td>
+  </tr>
+</table>
+
+
+</div>
+<div style="clear:both;"></div>
+<div > &nbsp;</div>
+<div align="left" style="padding-top:5px; padding-left:200px;">
+
+<input type="image" src="/images/admin/save_adv.gif" value="submit"/>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to (image_tag("/images/admin/back_list.gif"), {:controller => 'admin/photosets', :action => 'index'},{:title => "Click here to view photoset list"}) %>&nbsp;&nbsp;&nbsp;
+<%= link_to( image_tag("/images/admin/delete_new.gif"), {:controller => 'admin/photosets',:action => 'delete',:id => @photoset.permalink}, :confirm => 'Are you sure want to delete this photoset?', :method => :post,:title => "Click here to delete photoset( #{@photoset.title} ) details.",:class => 'story_place_font' )%>
+
+</div>
+<% end %>
+
+</div>

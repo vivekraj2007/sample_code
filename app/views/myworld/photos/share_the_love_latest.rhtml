@@ -1,0 +1,113 @@
+<%= javascript_include_tag 'rounded_corners_lite' %>
+<style>
+
+ .myBox
+{
+    margin: 0 auto;
+    border: 0px solid green;
+    color: #ffffff;
+    width:304px;
+	height:auto;
+    padding: 20px;
+    text-align: left;
+    background-color: #e2ddc7;
+    /*
+    background-image: url(back_test2.jpg);
+    background-repeat: no-repeat;
+    */
+}
+
+/*html,body{
+	height:100%;
+    text-align: center;
+  	 font-family: Verdana, Geneva, Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    margin: 0px;
+    background-image: url(grass.jpg);
+}*/
+</style>
+
+
+<script type="text/JavaScript">
+
+  window.onload = function()
+  {
+      /*
+      The new 'validTags' setting is optional and allows
+      you to specify other HTML elements that curvyCorners
+      can attempt to round.
+
+      The value is comma separated list of html elements
+      in lowercase.
+
+      validTags: ["div", "form"]
+
+      The above example would enable curvyCorners on FORM elements.
+      */
+      settings = {
+          tl: { radius: 10 },
+          tr: { radius: 10 },
+          bl: { radius: 10 },
+          br: { radius: 10 },
+          antiAlias: true,
+          autoPad: true,
+          validTags: ["div"]
+      }
+
+      /*
+      Usage:
+
+      newCornersObj = new curvyCorners(settingsObj, classNameStr);
+      newCornersObj = new curvyCorners(settingsObj, divObj1[, divObj2[, divObj3[, . . . [, divObjN]]]]);
+      */
+      var myBoxObject = new curvyCorners(settings, "myBox");
+      myBoxObject.applyCornersToAll();
+  }
+  
+</script>
+
+
+<a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'block';"><img src="/images/home/photos/email.gif"></a>
+
+
+
+<div style="padding: 0px; background-position: 0px -17px; display:none; position: absolute; left: 380px; top:450px;" class="myBox" id="share_the_love">
+ 
+  <div style="width:290px; height:auto; float:left;  padding:0px auto 0px 60px;" align="right"><a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'none';"><img src="/images/home/red_delete.gif"/></a></div>
+ <div class="clear"></div>
+  <div class="flaged_top" align="left">
+ 
+<% if @message %>
+<div class="text_who">Invitations have been sent</div>		
+		
+ <% else %>
+		
+	
+
+        <div class="text_who"><img src="/images/home/mail.gif">&nbsp;Email this Photo to friends&nbsp;</div>
+        <%# form_for :photoset, :url => {:action => "share_the_love", :id => @photoset.permalink} do %>
+         <div class="home">Emails separated by commas:</div>
+		  <div style="margin-left:12px;">
+		<%= text_field_tag 'invitation','',  :id =>'invitation_email' ,:class => 'default_style',:style => "width:220px; height:18px;"   %>	
+		  </div>
+		 
+		   <div class="home">Your name:</div>
+		  <div style="margin-left:12px;">
+		 <%= text_field_tag 'your',session[:user_screenname], :id =>'email' ,:class => 'default_style',:style => "width:220px; height:18px;"  %>
+		  </div>
+		 
+		 	<div class="home">Message (optional)</div>
+		  <div style="margin-left:12px;">
+			 <%= text_area_tag'your', 'Check out this photo from Uncharted!',:class => 'default_style_textarea_new', :id => 'invitation_email', :style => "width:220px;" %>
+												
+
+		  </div>
+        
+		  <div style="padding-left:10px; padding-top:10px;">
+         <input type="image" src="/images/home/send.gif" border="0"/>
+        </div>
+        <% end %>
+			<%# end %>
+</div>
+ 
+  </div>

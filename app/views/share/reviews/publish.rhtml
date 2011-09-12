@@ -1,0 +1,396 @@
+<style>
+ .middile_write{
+ width:468px;
+ float:left;
+ background-color:#cfcaa2;
+ }
+  .top_middile_write{
+ width:452px;
+ height:8px;
+ float:left;
+ background-color:#d1caa4;
+ }
+ .bottom_middile_write{
+ width:452px;
+ height:8px;
+ float:left;
+ background-color:#d1caa4;}
+ .write_middle
+ {
+ width:468px;
+ margin-left:8px;
+  height:800px;
+   float:left;
+   
+ }
+
+</style>
+<!--script for image slide-->
+<%= javascript_include_tag 'imgslide/carousel' %>	
+<%= stylesheet_link_tag "imgslide/prototype-ui.css" %>
+<!--script for image slide-->
+<!--  <script language>
+  	function addcode(str)
+	{
+	document.story_write.value +=  str;
+	return false;		
+   }
+  </script>-->
+  
+  
+  <!--script for text editor start-->
+  
+<script language="javascript" type="text/javascript" src="/tiny_mce/tiny_mce.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+tinyMCE.init({
+  mode : 'exact',
+  elements : "review_how_was_it",
+  theme : 'advanced',
+  theme_advanced_buttons1 : "bold,italic,bold",
+  theme_advanced_buttons2 : "",
+  theme_advanced_toolbar_location : "bottom",
+  theme_advanced_toolbar_align : "left",
+  theme_advanced_path_location : "none",
+  debug : false,
+  theme_advanced_path : false
+});
+
+</script>
+
+
+<!--script for text editor end-->
+
+<!--MAIN DIV START-->
+<div class="left_bar_1">
+<div class="nav_box">
+
+
+<!--LEFT DIV START-->
+ <div class="left_bar_12">
+	
+<!-- STEP 1 START-->
+ <div class="left_bar_13" >
+ 
+          <div class="text_who">1.Create a new Review</div>
+          <div class="story_select">
+            <% form_for :reviews,:url => {:controller => "/share/reviews",:action => "edit_review"} do  %>
+            <select id="reviewedit" name="reviewedit" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Review</option>
+              <%= options_from_collection_for_select @user_reviews, "permalink", 'sliced_title' %>
+            </select>
+            <% end %>
+          </div>
+		  
+         
+	   <div style="clear:both;"></div>
+          <div class="home" >Title</div>
+		  
+          <div style="margin-left:12px;">
+		   <%= text_field 'review', 'title', :style => "width:180px;", :class => 'default_style', :id=>'title', :disabled => 'disabled' %>
+		    </div>
+			
+          <div style="margin-left:12px;">
+		   <%= error_message_on :review, :title, 'Title '%>
+		   </div>
+		   
+                  <div class="home">Description of place of the event</div>
+          <div class="story_text"> 		
+		  <%= text_area 'review', 'description', :class => 'default_style_textarea', :id => 'description',:onfocus => "review_fileds();", :onkeyup => "review_fileds();" , :onblur => "review_fileds();", :disabled => 'disabled' %> 
+		  </div>
+		  
+          <div class="story_text">
+		  <%= error_message_on :review, :description, 'Description '%> 
+		   </div>
+		   
+          <div class="home">Where?</div>
+		  
+          <div class="story_text">
+		 <%= text_area 'review', 'where',:class => 'default_style_textarea_h3', :id => 'where_loc', :onclick => "gmap();", :onfocus => "gmap();" , :disabled => 'disabled' %> 
+		  
+  </div>
+  
+          <div class="story_text"> 
+		  <%= error_message_on :review, :where, 'Location '%>
+		  </div>
+		  
+		   <div class="home">When did you go ?</div>
+		   
+          <div class="story_text">
+		   <%= date_select(:review,:date_to_go,:order =>[:day,:month,:year], :start_year =>2008, :end_year => 3008, :disabled => 'disabled') %> </div>
+          <div style="margin-left:12px;"> <%= error_message_on :review, :date_to_go, 'Date went '%>
+		  </div>
+		  
+          <div class="home">&nbsp;</div>
+		  
+		  
+		  <div class="story_text">
+		 <%= select('review','place_is', Review::PLACES, {:prompt => "This place is a..."}, {:id => 'palce_is',:onChange => "review_fileds();" , :disabled => 'disabled'}) %> 			
+          </div>
+		  
+          <div class="home">&nbsp;</div>
+		  	
+		 <div class="story_text">
+	      <%= select  ('review','rating', Review::RATING, {},{:id => "rating",:onchange => "review_fileds();", :disabled => 'disabled'}) %> 	
+          </div>	
+			
+		<div class="home">The Best Part</div>
+		
+        <div style="margin-left:12px;">
+		<%= text_area 'review', 'best_part',:class => 'default_style_textarea', :id => 'best_part', :onfocus => "review_fileds();", :onkeyup => "review_fileds();", :disabled => 'disabled' %>
+	   </div>
+		   
+      <div style="margin-left:12px;">
+	  <%= error_message_on :review, :best_part, 'Best part '%>
+	  </div>
+		  
+      <div class="home">The Worst Part</div>
+		  
+      <div style="margin-left:12px;"> 
+	  <%= text_area 'review', 'worst_part',:class => 'default_style_textarea', :id => 'worst_part', :onfocus => "review_fileds();", :onkeyup => "review_fileds();" , :disabled => 'disabled' %>
+	  </div>
+		  
+      <div style="margin-left:12px;">
+	  <%= error_message_on :review, :worst_part, 'Worst part '%>
+	  </div>
+	
+		   
+          <div style="padding-left:10px; margin-top:10px;">
+		  <%= image_tag ("/images/home/save_n.jpg") %>
+           </div>
+          <div style="clear:both;"></div>
+       
+		
+		
+		
+       
+      </div>
+<!--STEP 1 END -->	  
+
+
+<div style="clear:both;"></div>
+	  
+	  
+<!--STEP 2 START	  -->
+
+<div class="home">&nbsp;</div>
+
+
+      <div class="left_bar_13">
+      
+        <div class="text_who">2.Tag and Link your story</div>
+        <div class="home4"><%= title_slice(@review.title,15)%></div>
+        <div style="margin-left:12px;"> 
+		<%= text_area 'review', 'tag',:class => 'default_style_textarea', :id => 'tag', :disabled => 'disabled'%> </div>
+        <div> <%= render :partial => 'shared/link_sets'%> </div>
+        <div style="padding-left:10px; margin-top:10px;"> 
+		<%= image_tag("/images/home/save_n.jpg")%>
+		 </div>
+        <div style="clear:both;"></div>
+        </div>
+  </div>
+  
+
+
+<!--STEP 2 END	-->
+
+
+<!--	LEFT DIV END-->
+
+
+
+
+<!--RIGHT DIV START-->
+
+  
+	
+    <!--text area-->
+	<script type="text/javascript">
+	function photoset()
+	{
+	document.getElementById('phtimage').src='/images/home/image_display.gif';
+	document.getElementById('photoset').style.display='block';
+	document.getElementById('photocheck').style.display='block';		
+	document.getElementById('videoset').style.display='none';
+	document.getElementById('vidimage').src='/images/home/video_hover.gif';
+	}
+	function videoset()
+	{
+	document.getElementById('phtimage').src='/images/home/img_hover.gif';
+	document.getElementById('videoset').style.display='block';
+	document.getElementById('vidimage').src='/images/home/video_display.gif';	
+	document.getElementById('photoset').style.display='none';	
+	document.getElementById('photocheck').style.display='none';	
+	
+	}
+	function photosetslide()
+	{	
+
+	if(document.getElementById('slideshow').checked)	
+	{
+	photoselect = document.getElementById('photoset_id').value
+	document.getElementById('photoslideshow').value = photoselect;	
+	
+	}
+	else
+	{
+	document.getElementById('photoslideshow').value="";
+	
+	}
+    }
+
+	</script>
+	
+<% form_for :review_publish, :url => {:action => "publish", :id => @review.permalink } do %>
+
+
+    <div class="write_middle">
+	
+	
+	 <!--  backgroun style for div-->
+        <div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile_write">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+		
+        <div style="clear:both;"></div>
+		
+        <div class="middile_write">
+       <!--  backgroun style for div end -->
+      <div class="text_who style_write1" align="left"> 3. Write</div>
+	  <div class="text_write_itb style_write1" align="left"><%= @review.title.humanize %> </div>
+	 <!-- <div class="text_write_it style_write1" align="left"> <%#= @review.sub_title %></div>-->
+	  
+      <div style="margin:5px auto 0 auto; margin-left:15px; ">
+	  <div style="top:302px; left:80px; position:relative;z-index:1">
+	  <table width="350px" border="0" cellspacing="0" cellpadding="0" style="margin-top:3px;">
+	  <tr><td colspan="4" height"4px"></td></tr>
+  <tr>
+    <td width="20px" height="20px">	
+	<img src="/images/home/img_hover.gif" onclick="photoset();" id="phtimage" alt="photoset_image" style="float:left; padding-left:5px;"/>
+	</td>
+	
+    <td width="20px" height="20px">
+	 <img src="/images/home/video_hover.gif" onclick="videoset();" id="vidimage" alt="videoset_image"  style="float:left; padding-left:5px;" />
+	 </td>
+	
+     <td width="160px">
+	  
+	  <div style="display:none; float:left;" id = "photoset">
+	  <%= select("photoset", "id", @user_photsets.collect {|p| [ "#{p.title}", p.id] }, {:prompt => "choose photoset"}, "onchange" => remote_function(:update => "photos", :loading => "Toggle.display('spinner1')", :complete => "Toggle.display('spinner1')", :with => "'photoset='+value", :url => { :controller => '/account', :action => "choose_photoset" })) %></div>
+	  
+
+	  
+	
+	  <div style="display:none; float:left;" id = "videoset">
+	 <%= select("videoset", "id", @user_videosets.collect {|p| [ "#{p.title}", p.id] }, {:prompt => "choose videoset"}, "onchange" => remote_function(:update => "photos", :loading => "Toggle.display('spinner1')", :complete => "Toggle.display('spinner1')", :with => "'videoset='+value", :url => { :controller => '/account', :action => "choose_videoset" })) %>
+	  </div>
+	  <div class="clear"></div>
+	  </td>
+	  <td width="25px" style=" padding-left:5px;">
+	  <%= image_tag("/images/home/spinner1.gif",
+              :align => "absmiddle",
+              :border => 0,
+			  :id => "spinner1",
+              :style =>"display: none;" ) %> </td>
+			  
+			  
+	 <td align="right" width="150px">	 	  
+	  <div style="float:right; display:none;" id = "photocheck"> 
+	  <input type="checkbox" name="slideshow" id="slideshow" onclick="photosetslide();">
+	  <%= hidden_field_tag 'photoslideshow','',:value => @review.slideshow_id, :id => 'photoslideshow' %>
+	  <font style="font-family:Arial, Helvetica, sans-serif; font-size: 12px; color:#9b854f;">Slideshow </font> </div>	  
+	 </td>
+	 
+  </tr>
+</table>
+</div>
+     <textarea id="review_how_was_it" name="review[how_was_it]" style="width:434px; height:290px; border:1px solid #b7b28c;">
+	 <%= @review.how_was_it %>
+	 </textarea>
+	 <div style="top:0; position:relative;"><%= image_tag ("/images/home/background_bottom_b.gif")%></div>
+
+    </div>
+	
+   
+      
+    
+	 
+    <div style="width:95%; float:left;" id="photos">
+  	 <div class="clear" style="font-family:Arial, Helvetica, sans-serif; font-size: 12px; color:#9b854f; margin-left:18px; margin-top:7px;">Drag and Drop individual photos into Story or check 'Slideshow' to display entire Set</div> 
+    <div class="scroll_main_container"> 
+   
+    <div id="horizontal_carousel" >
+	<div class="rouneded_corner"><%= image_tag("/images/imgslide/left_b.gif")%></div>
+      <div class="previous_button">	  
+	  </div>  	  
+      <div class="container">
+       <ul>
+	    <% for photoset in @user_photsets %>
+		<% if photoset.photos.length != 0 %>
+		<% photoset = Photo.find(:all,:conditions => ["photoset_id like ?",photoset])%>		
+		<% for photo in photoset %>
+		<% if !photo.image.blank? %>
+          <li>
+		  <%= image_tag(url_for_file_column(photo, "image","thumbnail") )%> <br />		  
+          <%= photo.title %><br />
+          </li>	
+		  <% end %>
+		  <% end %>	
+		  <% end %>  
+		  <% end %>        
+        </ul>
+      </div>
+      <div class="next_button"></div>
+	   <div class="rouneded_corner"><%= image_tag("/images/imgslide/right_b.gif")%></div>
+      </div>    
+	  
+     <script type="text/javascript">
+    // <![CDATA[
+      function runTest() {
+        hCarousel = new UI.Carousel("horizontal_carousel");
+           }
+      Event.observe(window, "load", runTest);
+    // ]]>
+    </script>
+	
+	
+	</div>
+      </div>
+	  	 <div style="clear:both;"></div>
+		 
+		 
+		 
+		 
+		 
+		 
+	  <div class="style_write" align="left">
+	  <div class="story_publish">
+      <input type="submit" name="story_submit" value="Publish" class="publish">
+	  </div>
+	  <div class="story_save_n">
+	  <input type="submit" name="story_submit" value="Save" class="publish">
+	  </div>
+	  </div>	 
+	
+    </div>
+    <!--howwasitend-->
+
+    <!--text area-->
+    <div style="clear:both;"></div>
+		<!--background bottom-->
+        <div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile_write">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+	  <!--background bottom-->
+  </div>
+  
+  
+  <% end %>
+   
+</div>
+</div>

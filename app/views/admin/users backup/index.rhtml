@@ -1,0 +1,65 @@
+			<div style="width:750px;margin-left:7px;">
+				<div style="width:100%; color:#444e02; margin:0px; font-size:20px;" align="center" class="admin_font">List of Users</div>
+				<div class="menu_heading">
+				<div style="width:30px; height:auto;" class="float_left heading">&nbsp;SNo</div>
+				<div style="width:140px;height:auto;" class="float_left heading" align="center">Screen Name</div>
+				<div style="width:200px;height:auto;" class="float_left heading" align="center">Email ID</div>
+				<div style="width:150px;height:auto;" class="float_left heading" align="center">Status</div>
+				<div style="width:120px;height:auto;" class="float_left heading" align="center">Registered on</div>
+				<div style="width:105px;height:auto;" class="float_left heading" align="center">Action</div>
+				</div>
+				<div class="clearer"></div>
+				
+				<% @users.each_with_index do |user,i|  %>
+				<% if !params[:page].blank? %>
+				<% if params[:page].to_i > 1 %>
+				<% i = (i + 1) + (params[:page].to_i-1) * 5 %>
+				
+				<% end %> 
+				<%else %>
+				<% i = i+1 %>
+				<% end %>
+				<div style="height:auto; margin-top:4px;" onmouseover="javaScript:rowOverEffect(this)" onmouseout="javaScript:rowOutEffect(this,'')">
+				<div style="width:30px; height:auto;" class="float_left heading sub_item" align="center"><%= i %></div>
+				
+				
+				<div style="width:140px;height:auto;" class="float_left heading sub_item" align="center">
+				<%= profile_name(user.screen_name) %>
+				</div>
+				
+				<div style="width:200px;height:auto;" class="float_left heading sub_item" align="center"><%= user.email %></div>
+				
+				<div style="width:150px;height:auto;" class="float_left heading sub_item" align="center">
+				<%= user_status(user.activated_at) %>
+				</div>
+				<div style="width:120px;height:auto;" class="float_left heading sub_item" align="center">
+				<%=  user_dateformate(user.created_at) %></div>
+				<div style="width:105px;height:auto;" class="float_left heading sub_item" align="center">
+				<table width="80%" border="0" cellspacing="0" cellpadding="0">
+				
+			  <tr >
+			  
+				<td align="center">
+				<%= link_to( image_tag("/images/admin/show.jpg", :style => "width:20;height:20;border:0;"), {:action => 'profile', :id =>user.id}, :title => "Click here to view #{profile_name(user.screen_name)} Profile." )%>
+				<!--<a href="#"><img src="/images/admin/show.jpg" width="20" height="20" border="0" /></a>-->
+				</td>
+				
+				<td align="center">
+				<a href="#"><img src="/images/admin/edit.jpg" alt="edit" width="20" height="20" border="0" /></a>
+				</td>
+				
+				<td align="center">
+				<a href="#"><img src="/images/admin/delete.jpg" alt="delete" width="19" height="19" border="0" /></a>
+				</td>
+			  </tr>
+			</table>
+
+				</div>
+				<div class="clearer"></div>
+				</div>
+				
+				<% end %>
+				<div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; margin-top:10px;" align="center">
+				<%= will_paginate  @users %>
+				</div>
+			</div>

@@ -1,0 +1,2 @@
+module Myworld::TravelogsHelper
+end

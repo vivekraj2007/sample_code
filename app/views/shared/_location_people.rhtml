@@ -1,0 +1,63 @@
+<% @user_friends = @poeple %>  
+<% total = 0 %>
+
+<% if @user_friends.length != 0 %>
+  <% total = @user_friends.length %>
+ <% end  %>
+ 
+<div id="totaluser_user_friends" style="display:none;" class="profile_inneruser">
+ <div class="user_cal184">
+		    <%= total %> People     
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_friends', 'blind', {duration:0.6}); Element.show('totaluser_friends'); " ><img src="/images/home/up_arrow.jpg" alt=""  style="padding-left:88px;"/></a>
+           
+   	  
+		</div>  
+
+      <div class="profile_right6 ">
+	 
+	 <div style="width:200px; height:auto; overflow:hidden; margin:0 0 0 7px; ">
+        <% @user_friends.each_with_index do |people,i| %>
+		
+			
+		
+         <div  style=" padding:4px; float:left;">
+		<% if !people.profile.profile_image.blank? %>
+		
+        <%= link_to image_tag(url_for_file_column(people.profile,"profile_image","thumbnail"),:alt => "#{people.screen_name}",:style => "border:1px solid #e1ae62;float:left;"),profile_url(:id => people.screen_name.gsub(' ', '_')),:title => "Click here to view the #{people.screen_name} profile"%>
+		<% else %>		
+		<%= link_to image_tag("/images/home/no-image_tumb.gif",:alt => "#{people.screen_name}",:style => "border:1px solid #e1ae62;float:left;"), profile_url(:id => people.screen_name.gsub(' ', '_')),:title => "Click here to view the #{people.screen_name} profile" %>
+		<% end %>
+		<% if i == 8 %>
+		<% break %>
+		<% end %>	
+		 </div>
+		 
+         <% end %>
+      </div>
+	  </div>
+	</div>  
+
+<div class="clear"></div>
+
+
+<div class="profile_bg1"  id="totaluser_friends" style="display:block;">	
+    <div class="right_in">
+      <div class="profileright_in1">
+		<div class="profile_cal1">
+		 <%= total %> People
+		</div>
+
+      </div>
+	  
+      <div>
+        <% if total!=0 %>
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_friends', 'blind', {duration:0.6}); Element.hide('totaluser_friends'); " class="profileright_in2">
+		<img src="/images/home/down_arrow.jpg" alt="" /></a>
+        <% end %>
+      </div>
+	  
+    </div>
+	<div class="clear"></div>
+  </div>
+  
+ 

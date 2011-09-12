@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Untitled Document</title>
+<%#= stylesheet_link_tag 'style11' %>
+<style>
+.flaged_top{width:210px; margin:10px auto 0 auto;}	
+.text_who{font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	color:#ab0300;
+	text-align:left;
+	padding-left:12px;
+	}
+.text_who_message{font-family:Arial, Helvetica, sans-serif;
+	font-size:16px;
+	font-weight:bold;
+	color:#ab0300;
+	text-align:left;
+	padding-left:12px;
+	padding-top:30px;
+	}	
+	
+.home{
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#a48046;
+	height:18px;
+	padding-left:12px;
+	padding-top:5px;
+	padding-bottom:5px;
+	text-align:left;
+	}	
+.default_style{	
+    background:url(/images/home/text_bg.gif) #ffffff repeat-x;
+	border:0px;
+	width:180px;
+	height:20px;
+	border-left:1px solid #b1a989;
+	border-right:1px solid #b1a989;
+	border-bottom:1px solid #c0b99d;
+	}	
+.default_style_textarea_new{
+    background:url(/images/home/text_bg.gif)  #ffffff repeat-x;
+	border:0px;
+    width:180px;
+    overflow:auto;
+    height:68px;
+	border-left:1px solid #b1a989;
+	border-right:1px solid #b1a989;
+	border-bottom:1px solid #c0b99d;
+  }	
+</style>
+</head>
+
+<body bgcolor="#E2DDC7">
+<center>
+
+<div class="flaged_top" align="left">
+<% if @message %>
+<div class="text_who">Invitations have been sent</div>		
+		
+ <% else %>
+		
+	
+
+
+        <div class="text_who">Email this Photo to friends</div>
+        <% form_for :photoset, :url => {:action => "share_the_love", :id => @photoset.permalink} do %>
+         <div class="home">Emails separated by commas:</div>
+		  <div style="margin-left:12px;">
+		<%= text_field_tag 'invitation','',  :id =>'invitation_email' ,:class => 'default_style',:style => "width:220px; height:18px;"   %>	
+		  </div>
+		 
+		   <div class="home">Your name:</div>
+		  <div style="margin-left:12px;">
+		 <%= text_field_tag 'your',session[:user_screenname], :id =>'email' ,:class => 'default_style',:style => "width:220px; height:18px;"  %>
+		  </div>
+		 
+		 	<div class="home">Message (optional)</div>
+		  <div style="margin-left:12px;">
+			 <%= text_area_tag'your', 'Check out this photo from Uncharted!',:class => 'default_style_textarea_new', :id => 'invitation_email', :style => "width:220px;" %>
+												
+
+		  </div>
+        
+		  <div style="padding-left:10px; margin-top:10px;">
+         <input type="image" src="/images/home/send.gif" border="0"/>
+        </div>
+        <% end %>
+        <div style="clear:both;"></div>
+			<% end %>
+</div>
+
+</center>
+</body>
+</html>

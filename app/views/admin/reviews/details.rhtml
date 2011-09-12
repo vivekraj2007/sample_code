@@ -1,0 +1,80 @@
+<div class="story_title" > 
+<div class="story_font"><%= link_to 'Reviews' ,{:controller => '/admin/reviews',:action => 'index' }, :style => 'text-decoration:none'%>  > <%= @review.title.titlecase %> Details</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div><br/>
+
+<div class="stories_rightbar_inner1"><img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+
+<!--photosets div end-->
+
+<!--videoset div start-->
+
+<!--videoset div end-->
+
+<!--Reviews div start-->
+
+
+</div><br/>
+
+<div class="story_title1">
+<div>
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= check_blank_condition(@review.title) %></div>
+</div>
+
+
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Place </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= check_blank_condition(@review.location) %></div>
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Status </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%# if @story.status == 0 %>
+<%= link_to  'Unpublished', {},:style=>'text-decoration:none'   %>
+  <%# else %>
+  <%#= link_to 'Approve', {:action => 'status', :controller => 'admin/stories', :id => @story.id, :status => '0',:url => request.request_uri},:style=>'text-decoration:none'   %> <%# end %></div>
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Created On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= myworld_dateformat(@review.created_on) %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Updated On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= myworld_dateformat(@review.updated_on) %></div>
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Description </div>
+<div class="story_place_flo">:</div>
+<% if @review.description.length > 200 %>
+<div class="story_place_flo story_place_font1" style="width:500px;height:100px; overflow-y:scroll; overflow-x:hidden;">
+<% else %>
+<div class="story_place_flo story_place_font1">
+<% end %>
+<%= check_blank_condition(@review.description) %></div>
+</div>
+<div class="clearer"></div><br/>
+<div>
+<div class="story_place_font story_place_flo">&nbsp; </div>
+<div class="story_place_flo">&nbsp;</div>
+<div  class="story_place_flo story_place_font1">
+<div><%#= link_to "Edit", {:controller => 'admin/stories', :action => 'edit',:id => @story.id},:class => 'story_place_font' %>
+<%= link_to "Back to List", {:controller => 'admin/reviews', :action => 'index'},:class => 'story_place_font' %></div>
+</div>
+</div>
+</div>

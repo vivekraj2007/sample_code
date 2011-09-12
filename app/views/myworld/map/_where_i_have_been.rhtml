@@ -1,0 +1,52 @@
+
+ 
+ <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+	   geocoder = new GClientGeocoder();
+	   var map = new GMap2(document.getElementById("mapsearch"));
+       map.addControl(new GLargeMapControl());
+       map.addControl(new GMapTypeControl());
+	   map.addMapType(G_PHYSICAL_MAP);
+	    var blueIcon = new GIcon(G_DEFAULT_ICON);
+	   blueIcon.image = "/images/home/map/default_point.png";
+	   blueIcon.shadow = "";
+	   blueIcon.iconSize = new GSize(16, 15);
+	   blueIcon.iconAnchor = new GPoint(5, 13);
+	   var add = new Array('<%= @user.profile.places_lived_1 %>','<%= @user.profile.places_lived_2 %>','<%= @user.profile.places_lived_3 %>');
+	   
+	   for(i=0; i< add.length;i++)
+	   {
+       address = add[i];
+      if(address != "")
+	  {
+       if (geocoder) {
+        geocoder.getLatLng(
+          address,
+       function(point) {
+          if (!point) {
+            alert("Unknown location: "+address );
+            }
+		else {
+
+		//map.clearOverlays()
+		map.setCenter(point, 1,G_PHYSICAL_MAP);
+			
+   		 var marker = new GMarker(point,blueIcon);  
+		 map.addOverlay(marker);
+	
+		 
+        }})}
+		}
+	
+	}
+	
+         }
+	}
+    </script>
+ 
+
+
+<div id="mapsearch" style="width:600px; height:450px;"></div>
+

@@ -1,0 +1,31 @@
+   	<script type="text/javascript">
+	runTest();
+	</script>
+   <div class="clear" style="font-family:Arial, Helvetica, sans-serif; font-size: 12px; color:#9b854f; margin-left:18px; margin-top:7px;">Drag and Drop individual photos into Story <!--or check 'Slideshow' to display entire Set--></div> 
+<div class="scroll_main_container"> 
+
+    <div id="horizontal_carousel" >
+	<div class="rouneded_corner"><%= image_tag("/images/imgslide/left_b.gif")%></div>
+      <div class="previous_button">
+	  
+	  </div>  	  
+      <div class="container">
+       <ul>
+	    <% for photo in @photos %>		
+          <li>
+		  <%= image_tag(url_for_file_column(photo, "image","thumbnail") )%> <br />		  
+          <%= photo.title %><br />
+          </li>		  
+		  <% end %>        
+        </ul>
+      </div>
+      <div class="next_button"></div>
+	   <div class="rouneded_corner"><%= image_tag("/images/imgslide/right_b.gif")%></div>
+      </div>    
+     <script type="text/javascript">
+      function runTest() {
+        hCarousel = new UI.Carousel("horizontal_carousel");
+		        }
+     </script>
+	
+	</div>

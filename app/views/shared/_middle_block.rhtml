@@ -1,0 +1,279 @@
+
+<% form_for :user,  :url => { :action => "update", :id => @user.id } do  %>
+<div class="left_bar_1" >
+		
+			
+											<div class="left_bar_11">
+											<div class="left_bar_12">
+											
+													
+													<div class="left_bar_13">
+													<div><img src="/images/home/top1.jpg" alt="" /></div>
+													
+										<div class="left_bg11">
+													
+													
+								<div class="left_v1">
+								
+					<div class="text_who">1.Who I am</div>
+				
+					
+
+<div class="home">Name*</div>
+					
+	<div style="overflow:hidden;">		
+		
+		<div style="width:80px; float:left; margin-right:10px; margin-left:12px;">
+		<%= text_field 'user', 'first_name' ,:style => "width:80px;", :id=>'first_name' %>
+		</div>
+		
+		
+		
+		<div style="width:20px; float:left; margin-right:10px;">
+		<%= text_field 'user', 'middle_name' ,:style => "width:20px;", :id=>'middle_name' %>
+		</div>
+		
+		
+		<div  style="width:80px; float:left;">
+		<%= text_field 'user', 'last_name' ,:style => "width:80px;", :id=>'last_name' %>
+		</div>
+				
+	</div>	
+
+
+	
+<div class="home">Email*</div>
+
+
+<div style="width:180px; margin-left:12px;">
+<%= text_field 'user', 'email' ,:style => "width:180px;", :id=>'email' %>
+</div>
+					
+					
+<div class="home">Screen Name</div>
+<div style="width:180px; margin-left:12px;">
+<%= text_field 'user', 'screen_name' ,:style => "width:180px;", :id=>'screen_name' %>
+</div>
+
+					
+
+<div class="home">Password, Verify Password*</div>
+
+<div>
+<input name="" type="text" value="Billy Goat"  style="width:180px; margin-left:12px;"/>
+</div>
+					
+
+<div><input name="" type="text" value="Billy Goat"  style="width:180px; margin-left:12px; margin-top:5px;"/></div>
+				
+
+<div class="top_feelds">
+
+<div class="top_feelds1 home">
+<input name="" type="radio" />Male
+<input name="" type="radio" />Female						
+						<select><option>Select</option>
+						<option>Available</option>
+						<option>Single</option>
+						<option>Taken</option>						
+						</select>
+						</div>
+			
+				
+</div>
+				
+<div style="clear:both;"></div>
+					
+<div class="home">Languages I speak</div>
+							
+<div style="margin:0px 0px 0px 12px;">
+<%= select  ('profile','languages', Profile::LANGUAGES,:name=>'languages', :prompt => "Select Primary Language") %>
+</div>
+					
+<div style="margin:4px 0px 0px 12px;" >
+<%= select  ('profile','languages', Profile::LANGUAGES,:name=>'languages', :prompt => "Select Second Language") %>
+</div>
+					
+<div style="margin:4px 0px 0px 12px;">
+<%= select  ('profile','languages', Profile::LANGUAGES,:name=>'languages', :prompt => "Select Third Language   ") %>
+</div>
+					
+			
+					
+					<div class="home">My Website or blog</div>
+							
+					<div style="margin-left:12px;">
+					<%= text_field 'profile', 'website' ,:style => "width:180px;", :id=>'website' %>
+					
+					</div>
+					
+					<div class="home">Mailing Address*(To receive free stuff)</div>
+							
+					<div><input name="" type="text" value="Street" style="width:180px; margin-left:12px;"/></div>
+					
+					<div><input name="" type="text" value="Apt" style="width:180px; margin:10px 0px 0px 12px;"/></div>
+					
+					<div><input name="" type="text" value="Farmington" style="width:180px; margin:10px 0px 0px 12px;"/></div>
+					
+					<div style="overflow:hidden;">			
+<div><input name="Input" type="text" value="State,Province" style="width:90px; float:left;  margin:10px 10px 0px 12px;" /></div>
+			<div><input name="Input" type="text" value="84025" style="width:80px; float:left; margin:10px 10px 0px 12px;" /></div></div>
+			
+			<div><select style="margin:10px 0px 10px 12px;"><option>United States of America</option></select></div>
+					
+					
+					
+					
+					<!--<div><a href="#" title="save"><img src="/images/home/save.jpg" alt="save"  style="padding-left:10px; margin-top:10px;"/></a></div>			-->						
+																
+								</div>
+												
+													
+													</div>
+													
+													
+													<div><img src="/images/home/top2.jpg" alt="" /></div>
+													
+													
+														<div class="home">*These items will NOT be posted</div>	
+													</div>
+											
+										
+											
+											</div>
+											
+		
+		
+											<div class="mid">
+		
+		<div class="mid1">
+											
+		<div class="text_who">2. What I love to do</div>
+		<div class="home">Passions, Hobbies, Interests</div>
+		
+		<div><textarea cols="20" rows="2" style="margin-left:12px;"></textarea></div>
+		
+		
+		<div class="home">Favorite Sports,Activities</div>
+		
+		<div><textarea cols="20" rows="2" style="margin-left:12px;"></textarea></div>
+
+		<div class="home">Favorite Foods</div>
+		
+		<div><input name="" type="text"  style="width:180px; margin-left:12px;"/></div>
+
+		
+		<div class="home">Books I'm Reading,Books I Love</div>
+		
+		<div><input name="" type="text"  style="width:180px; margin-left:12px;"/></div>
+		
+		<div class="home">Occupation</div>
+		
+		<div><input name="" type="text" style="width:180px; margin-left:12px;"/></div>
+		
+		<div class="home">Affiliations,Clubs</div>
+		
+		<div><input name="" type="text" style="width:180px; margin-left:12px;"/></div>
+		
+		<div class="home">3 Things I Want To Do Before I Die</div>
+		
+		<div><input name="" type="text" style="width:180px; margin-left:12px;"/></div>
+		<div><input name="" type="text" style="width:180px; margin:10px 0px 0px 12px;"/></div>
+		<div><input name="" type="text" style="width:180px; margin:10px 0px 0px 12px;"/></div>
+
+
+		
+		</div>
+											
+		</div>
+		
+		
+		<div class="mid_right">
+							
+							<div class="mid_right1">
+							
+							<div class="text_who">3. Where I’ve been</div>
+							
+						<div class="text_wid">
+						
+						
+						<div class="home">Places I’ve lived</div>
+							
+					<div><textarea cols="20" rows="2" style="margin-left:12px;"></textarea></div>
+					
+					<div class="home">Places I’ve Visited</div>
+							
+					<div><textarea cols="20" rows="2" style="margin-left:12px;"></textarea></div>
+					
+					<div class="home">Places I want to go</div>
+							
+					<div><textarea cols="20" rows="2" style="margin-left:12px;"></textarea></div>
+						
+	<div class="home">My favorite places in the whole world</div>
+		
+		<div><input name="" type="text" style="width:180px; margin-left:12px;"/></div>
+		<div><input name="" type="text" style="width:180px; margin:10px 0px 0px 12px;"/></div>
+		<div><input name="" type="text" style="width:180px; margin:10px 0px 0px 12px;"/></div>
+
+	<div class="home">My preferred travel style:</div>
+	
+	<div><select style="margin:0px 0px 10px 12px; width:180px;"><option>Select</option></select></div>
+	
+	<div style="float:right;">
+	<input name="profileedit" id="profileedit" value="save" src="/images/home/save1.jpg" type="image">	
+	
+	
+	</div>
+							
+						</div>
+						
+						<div style="clear:both;"></div>
+						
+						
+							</div>
+		
+							</div>
+
+											</div>
+												<div style="clear:both;"></div>
+			
+										
+										
+										<div class="map_1">
+											
+				<div class="map_2">
+				
+					
+				<div class="text_who">4.What Kind of traveler are you?</div>
+				
+				
+					
+							
+							<div style="clear:both;"></div>
+		
+				</div>
+											
+											</div>
+										
+
+										
+	
+											<div class="map_1">
+											
+				<div class="map_2">
+				
+					
+				<div class="home3" style="padding-right:80px;">All information will be displayed in your My World profile</div>
+				
+				<div style="float:right; margin-right:30px;"><img src="/images/home/map11.jpg" alt="" /></div>
+					
+							
+							<div style="clear:both;"></div>
+		
+				</div>
+											
+											</div>
+		
+			</div>
+			
+			<% end %>

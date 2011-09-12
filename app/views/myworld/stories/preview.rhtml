@@ -1,0 +1,345 @@
+<style>
+		.thumb_story_more
+		{
+		width:600px; overflow-x:scroll; overflow-y:hidden; height:80px; float:left; clear:both;
+		}
+		.thumb_story_less
+		{
+		width:600px; overflow-y:hidden; height:80px; float:left; clear:both;
+		}	
+</style>
+
+<% if !@story.dragged_images.blank?  %>		
+<script type="text/javascript">
+function image_border(x)
+{
+<% @count = 1 %>
+<% for photoimages in @story.dragged_images %>	
+document.getElementById('thumb_image_'+<%= @count %>).style.border = '0px';
+<% @count = @count+1 %>
+<% end %>
+document.getElementById('thumb_image_'+x).style.border = '3px solid #FED403';
+<!--document.getElementById('coverimage_div_id').value=x;-->
+<!--check_photoset()-->
+}
+</script>
+<% end %>
+
+<!--script for print option-->
+
+
+<script type="text/javascript">
+		function show_title()
+		{
+		document.getElementById('show_title').style.display = 'block';
+		}		
+		function hide_title()
+		{
+		document.getElementById('show_title').style.display = 'none';
+		}				
+</script>
+
+
+
+
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+							<div class="left_bar_stories_new1">
+				
+				
+				<!--advertisement-div-start-->
+						
+						
+	<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">
+		  <!--Left Top-->
+		  	<% if @story.story_adv.topadv_id != 0 &&  !@story.story_adv.topadv_id.blank? %>								
+			<%= @story.story_adv.story_left_top_adv.script %>								
+			<% else %>
+			
+		      <% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %>
+			<% end %>	  
+		  </div>    
+      </div>
+    
+	
+	
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement">
+				  
+		      <% if @story.story_adv.bottomadv_id != 0 &&  !@story.story_adv.bottomadv_id.blank? %>								
+				<%= @story.story_adv.story_left_bottom_adv.script %>								
+				<% else %>
+			
+				  <% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %>
+				<% end %>		  
+		  </div>      
+      </div>
+	  
+	  
+    </div>
+							
+						<!--advertisement-div-end-->
+		<div class="stories_rightbar_new">
+		
+		<% if params[:value] != 'map' %>
+		<div class="stories_rightbar_inner_photo" id="story" style="display:block;">
+		<% else %>
+		<div class="stories_rightbar_inner_photo" id="story" style="display:none;">
+		<% end %><!-- story tab -->
+			
+											
+						<div class="story_cal1_story121_new">
+							<div class="friends_flo"><div class="stories_images_new"></div></div>
+							
+							<div class="top_images11_new">
+						
+							<%= link_to image_tag("/images/home/stories/comment_black.gif"), {:controller => 'myworld/stories', :action => 'comments', :id => @story.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this Story" }%>
+							</div>
+						<div class="top_images11_new">		
+	<a href="javascript://" onclick="Element.show('display_map'); Element.show('story_map');Element.hide('image'); Element.hide('story');"><div><img src="/images/home/stories/map_black.gif" /></div></a>				
+							
+							</div>
+						
+						
+						</div>
+						
+						
+								
+		<div class="photoset_select_story">
+		<% form_for :myworld, :url =>{ :controller =>'/myworld/stories', :action => 'search'} do %>		
+		<select  id="id" name="search" onchange="this.form.submit();" class="story_select_story">
+		<option value="">Choose a Story...</option>
+		<%= options_from_collection_for_select @user_stories_published, "permalink", 'sliced_title' %>
+		</select>
+		<% end %>						 	
+		</div>
+		
+							
+			<div class="stories_right">
+			
+			<div class="friends_flo">
+			<% if !session[:user_id].blank? %>
+			<a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'block';document.getElementById('flag_content').style.display = 'none';">
+			<img src="/images/home/stories/stories_mail.gif" alt="share the love" title="Click here to email this Story to friend"/></a>
+			<% else %>
+	<a href="javascript://" onclick="logindiv(0);"><img src="/images/home/stories/stories_mail.gif" alt="share the love" title="Click here to email this Story to friend" /></a>
+			<% end %>
+			</div>
+			
+			
+			
+			<div class="friends_flo">
+			<% if session[:user_id] == @story.user.id %>
+			&nbsp;
+			<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/stories", :action => "edit_story",:id => @story.permalink},{ :title => "Click here to edit this story"} %> 
+			<% end %>
+			</div>
+				
+				
+			<div class="friends_flo">
+			<a href="javascript://" onclick="document.getElementById('flag_content').style.display = 'block';document.getElementById('share_the_love').style.display = 'none';" class="dec_text" title="Click here to Flag this content">Flag</a>
+			</div>
+		
+			
+		    </div>					
+								
+				
+				
+				</div>
+		
+		<% if params[:value] != 'map' %>
+		<div class="stories_rightbar_inner_photo" id="story_map" style="display:none;">
+		<% else %>
+		<div class="stories_rightbar_inner_photo" id="story_map" style="display:block;">
+		<% end %>
+		 <!--map div-->
+						
+								<div class="story_cal1_story121_new">
+								
+								<div class="top_images10_new2"><a href="javascript://" onclick="Element.hide('display_map'); Element.hide('story_map');Element.show('image'); Element.show('story');"><div class="stories_map_2" title="Click here view the story"><img src="/images/home/stories/story_black.gif"/></div></a></div>
+								
+								<div class="top_images10_new1"><%= link_to image_tag("/images/home/stories/comment_black.gif"), {:controller => 'myworld/stories', :action => 'comments', :id => @story.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this Story" }%></div>
+								
+								<div class="friends_flo"><a href="javascript://" onclick="Element.show('display_map'); Element.show('story_map');Element.hide('image'); Element.hide('story');"><div class="stories_map_images121_new"></div></a></div>
+					
+						
+								</div>
+	
+	
+	
+								<div class="story_select_story">
+								<% form_for :myworld, :url =>{ :controller =>'/myworld/stories', :action => 'search'} do %>		
+								<select  id="id" name="search" onchange="this.form.submit();" class="story_select_story">
+								<option value="">Choose a Story...</option>
+								<%= options_from_collection_for_select @user_stories_published, "permalink", 'sliced_title' %>
+								</select>
+						        <% end %>						 	
+								</div>
+								
+		
+								
+<div class="stories_right">
+			<div class="friends_flo"><a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'block';document.getElementById('flag_content').style.display = 'none';"><img src="/images/home/stories/stories_mail.gif" alt="stories_mail" /></a></div>
+			
+			<div class="friends_flo">
+			<% if session[:user_id] == @story.user.id %>
+				<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/stories", :action => "edit_story",:id => @story.permalink},{ :title => "Click here to edit this story"} %> 
+				<% end %></div>
+				
+				
+				<div class="friends_flo"><a href="javascript://" onclick="document.getElementById('flag_content').style.display = 'block';document.getElementById('share_the_love').style.display = 'none';" class="dec_text">Flag</a></div>
+			
+			
+					</div>
+				</div>
+		<div class="clear"></div>
+		
+	  
+ <!-- share the love start-->  
+ <%= render :partial => "share_the_love", :locals => { :permalink => @permalink = @story.permalink} %>  
+ <!-- share the love end-->
+  
+  <!--flag content start-->  
+  <%= render :partial => "flag_content" %>	
+  <!--   flag content end-->	
+		
+		
+		
+		
+		
+		
+		
+		
+		<div class="stories_photo_new">
+				
+				
+				<div class="stories_paintball">
+				<%= title_slice_withoutcap(@story.title,500) %>
+				</div>
+				<div class="clear"></div>
+				<div class="stories_shooting"><%= title_slice_withoutcap(@story.sub_title,10000) %></div>
+				<div class="clear"></div>
+				
+				<div class="stories_date">
+				<div class="friends_flo">
+				<%= myworld_dateformat(@story.created_at) %>
+				<span class="home">
+				<%= @story.story_comments.length %> Comments
+
+				</span>
+				</div>
+				
+				<div class="stories_rating" id ="star-ratings-block">
+				<% if session[:user_id].blank? %>
+				        <%= render :partial => 'myworld/stories/ratee'%>				
+				<% else %>
+						<% if @story.rated_by_user?(session[:user_id]) %>
+						 <%= render :partial => 'myworld/stories/ratee'%>						
+						<% else %>
+						<%= render :partial => 'myworld/stories/rating'%>						
+						<% end %>
+				<% end %>		
+				</div>
+				
+				</div>
+				</div>
+		
+		
+		<div class="clear"></div>
+		
+		
+		<% if !@story.dragged_images.blank? %>
+		
+		<% if params[:value] != 'map' %>
+	<div align="center" id="image" style="width:600px; height:530px; padding-bottom:20px; display:block;" >
+	<% else %>
+	<div align="center" id="image" style="width:600px; height:530px; padding-bottom:20px; display:none;" >
+	<% end %>
+		
+	
+				<div align="center" class="my_stories_photo">
+				<%= image_tag(url_for_file_column(@story.dragged_images[0], "image","main"),:onmouseover=>"show_title();", :onmouseout=>"hide_title();") %>
+	            </div>		
+				<div id="show_title" class="my_photos_inline" align="center">
+  <div class="my_photos_note">
+  <%= check_caption(@story.dragged_images[0].caption) %>
+</div>
+</div>		
+</div>	
+<% else %>
+<div id="image">&nbsp;</div>
+	<% end %>
+		
+		<% if params[:value] != 'map' %>
+		<div align="center" id="display_map" style="display:none; width:600px; height:450px;  padding:20px 0px 20px 0px;" >
+		<% else %>
+		<div align="center" id="display_map" style="display:block; width:600px; height:450px;  padding:20px 0px 20px 0px;" >
+		<% end %>
+		
+		<%= render :partial => '/myworld/stories/map' %>
+		</div>
+		
+	<div align="center" class="my_story_height">
+	 <%= image_tag("/images/home/spinner.gif",
+             :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+	</div>	
+		
+			<% if !@story.dragged_images.blank? %>
+		
+		<% if @story.dragged_images.size > 9 %>	
+		<div class="thumb_story_more">
+			<% else %>
+		<div class="thumb_story_less">
+			<% end %>	
+			
+			<div style="padding-left:5px; float:left; height:10px; width:<%= ((@story.dragged_images.size) * 5.00)%>em;">
+			 <% @count = 1 %>
+			<% for photoimages in @story.dragged_images %>
+			 <div id="thumb_image_<%= @count %>"  style="float:left; margin:5px 5px 5px 5px; padding:0px; <% if photoimages.id == @story.dragged_images[0].id %> border:3px solid #FED403; <% end %>">
+			<%#= image_tag(url_for_file_column(photoimages, "image","thumbnail")) %>
+			<%= link_to_remote image_tag(url_for_file_column(photoimages, "image","thumbnail"),:onclick => "image_border(#{@count});"),
+								:update => 'image',
+								:before => "Element.show('spinner')",
+                  				:success => "Element.hide('spinner')",
+								:url => {:action=>'photo',:id => photoimages.id} %>
+			
+			
+			</div>
+			 <% @count = @count +1 %>
+			<% end %>	
+		   </div>
+		   
+		  
+		   </div>
+		   <% end %>  
+	
+		
+		<div class="stories_photo_new friends_flo1">
+				<div class="stories_tag_text">
+				<%= @story.write_it %>
+				</div>
+				</div>
+		
+		
+		
+		</div>
+		
+		
+		
+		
+		
+		
+		
+				
+						</div>
+						<!--left stories end-->
+</div>
+				

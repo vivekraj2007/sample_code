@@ -1,0 +1,62 @@
+<script type="text/javascript">
+ function see_videos(id)
+ {
+//document.location.href = "/myworld/videos/search_map/"+id;
+ }
+</script> 
+   
+ <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+       <% if !@user.lat.blank? && !@user.longt.blank?  %>
+		map.setCenter(new GLatLng(<%= @user.lat.to_f %>,<%= @user.longt.to_f %>),4,G_PHYSICAL_MAP);
+		<% else %>
+        map.setCenter(new GLatLng(16.936063,82.232838), 4,G_PHYSICAL_MAP);
+		<% end %>
+		map.addMapType(G_PHYSICAL_MAP);
+		// Create our "tiny" marker icon
+        var photoIcon = new GIcon(G_DEFAULT_ICON);
+        photoIcon.image = "/images/home/map/map_video.png";
+		photoIcon.shadow = "";
+		photoIcon.iconSize = new GSize(16, 15);
+		
+		// Set up our GMarkerOptions object
+		markerOptions = { icon:photoIcon };
+ 			
+		// default icon
+          function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		
+		<% for videos in @videosets %>
+		<% video = Video.find_by_id(videos.covervideo_id) %>
+		  <% if !videos.lat.blank? && !videos.longt.blank? %>
+		  var point = new GLatLng(<%= videos.lat %>,<%= videos.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !videos.title.blank? %>
+		   var marker = createMarker(point,'<!--<div style="width:auto; overflow:hidden; cursor:pointer;" onclick="see_videos(<%= videos.id%>);"><div style="width:180px; float:left; overflow:hidden;"><div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#7f000a; font-weight:bold; float:left; clear:both;"><%#=  "#{title(videos.title.gsub(/'/,''),50)}" %></div><div style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#000000; float:left; clear:both;"><%#="#{title(videos.description.gsub(/'/,''),20}" %></div><div style="font-family:Arial, Helvetica, sans-serif; font-size:11px; color:#000000; float:left; clear:both;"><%#= map_date(videos.created_on) %></div></div><div style="float:left; width:60px;"><div style="float:left; width:60px; clear:both;"><img src="/images/home/map/map_video.jpg"/></div><div style="float:left; width:60px; padding-top:10px; height:60px;"><%# if !videos.covervideo.blank? %> <%#= image_tag("/video/videofile/#{videos.covervideo.id}/thumb/#{videos.covervideo.video_image}",:style => "border:1px solid #e1ae62;float:left;") %><%# else %><%#= image_tag "/images/home/no-image_tumb.gif",:style => "border:1px solid #e1ae62;float:left;" %><%# end %></div></div></div>-->');
+		  <% else %>
+		   var marker = createMarker(point,'<%= videos.id %>');
+		  <% end %>		 
+		  map.addOverlay(marker);		  
+		  <% end %>
+		<% end %>
+		
+	
+         }
+	}
+    </script>
+ 
+
+
+<div id="mapsearch" style="width: 518px; height: 392px;"></div>
+

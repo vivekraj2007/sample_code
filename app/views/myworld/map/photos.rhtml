@@ -1,0 +1,92 @@
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+						<div class="left_bar_stories">
+						
+						
+						<!--advertisement-div-start-->
+						<div class="stories_leftbar">
+						
+						<div class="adver_stories">
+								<div class="adver_stories1"><div class="friend_left_inner Advertisement">Advertisement</div></div>
+						</div>
+						
+						<div class="adver_stories2">
+								<div class="adver_stories1"><div class="friend_left_inner Advertisement">Advertisement</div></div>
+						</div>
+						
+						
+						</div>	
+						<!--advertisement-div-end-->
+						
+						<!--stories start-->
+						<div class="stories_rightbar">
+								<!--top select-->
+								<div class="stories_rightbar_inner_story">
+								
+								<div class="worldmap_paintball"><%= @user_photsets.size %> Photo Sets</div>
+								
+								<div>
+								 <% form_for :myworld, :url =>{ :controller =>'/myworld/map', :action => 'index' } do %>
+								<select class="worldmap_select_story" id="types" name="types" onchange="this.form.submit();">
+								<option value="">Show me...</option>
+								<option value="">Where I've Been</option>
+								<option value="">Where I'm Going</option>
+								<option value="">Favorite Places</option>
+								<option value="">Friends</option>
+								<option value="photosets">Photo Sets</option>
+								<option value="videosets">Video Sets</option>
+								<option value="">Reviews</option>
+								<option value="stories">Stories</option>
+								<option value="">Travelogs</option>
+								<option value="">Plans</option>
+								<option value="">Tags</option>
+								</select>
+								<% end %>
+								</div>      
+								
+								<div class="worldmap_cal1_story">
+								
+							<div class="top_images"><%= link_to image_tag("/images/home/map_img6.jpg"), {:controller=>'/myworld/latest',:action=>'posts'},:title => "Click here to view latest data" %>	</div>
+							<div class="friends_flo"><div class="myworldmap_red"></div></div>
+							<div class="top_images"><%= link_to image_tag(("/images/home/map_img3.jpg"),:style => "padding-left:10px;"), {:controller=>'/account',:action=>'edit'},:title => "Click here to edit user profile" %></div>
+						
+								</div>
+								
+						
+								</div>
+									<!--top select end-->
+									<!--line div start-->
+			<!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+									<!--line div end-->
+				
+			<!--stories content start-->	
+				<div class="stories_rightbar_inner1">
+
+				<div class="stories_rightbar_inner1"><%= render :partial => 'photosmap' %></div>
+				
+				</div>
+			<!--stories content end-->	
+						</div>
+						<!--stories end-->
+					
+						<div class="world_mainmap">
+						
+		  <% for photos in @photosets %>
+		 
+		  Title : <font style="font-family:Verdana, Arial, Helvetica, sans-serif; font-weight:bold; padding-left:40px;"><%= title_slice(photos.title,50) %></font><br/><br/>
+		  <font style="color:#990033; font-weight:bold; font-size:12px;"><%= myworld_dateformat(photos.created_on)%> at <%= photos.created_on.strftime("%I:%M %p")%></font><br/>
+		  <strong>Tag :</strong><%= photos.tag %><br/><br/>
+		  <div>
+		   <%= photos.description.to(500) %>...</div><br/><img src="/images/home/story_line.jpg"><br/><br/>
+		 
+		  <% end %>
+		 
+		  
+		   </div>
+				<% if !@photosets.blank? %><div align="center"><b><%= will_paginate (@photosets,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" style="vertical-align:bottom;" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" style=" vertical-align:bottom;" />'}) %></b></div><% end %>		
+						
+						</div>
+						<!--left stories end-->
+						</div>

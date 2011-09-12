@@ -1,0 +1,202 @@
+<script type="text/javascript">	  
+ function view_review(review)
+{
+document.location.href = review;
+}
+</script>
+
+<%= stylesheet_link_tag 'myworld_style' %>
+
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories">
+    <!--advertisement-div-start-->
+    <div class="stories_leftbar">
+      <div class="adver_stories2"> <%#= @top_adv.script %> </div>
+      <div class="adver_stories2"> <%#= @bottom_adv.script %> </div>
+    </div>
+    <!--advertisement-div-end-->
+    <!--stories start-->
+    <div class="stories_rightbar">
+      <div class="stories_rightbar_inner">
+        <div class="story_cal1">
+		<img src="/images/home/review_image.jpg" class="my_world_right"/>Reviews
+		 
+		<font style="color:#736F66;">
+          <% if @total.blank? %>
+           0 - 0 of 0
+          <% else %>		  
+          <% if @total.size > 5 %>
+          <% if params[:page] %>
+         <%= (params[:page].to_i * 6) - 5  %> -
+          <% if (params[:page].to_i * 6) > @total.size %>
+          <%= @total.size %>
+          <% else %>
+          <%= (params[:page].to_i * 6)  %>
+          <% end %>
+          <% else %>
+           1 - <%= @reviews.size %>
+          <% end %>
+          of <%= @total.size %>
+          <% else %>
+           1 - <%= @reviews.size %> of <%= @total.size %>
+          <% end %>
+          <% end %>
+		 </font>
+        </div>
+		
+		<div class="see_reviews_world">
+		<div class="see_control">
+		   <% form_for :myworld, :url =>{ :controller =>'/see/reviews', :action => 'index'} do %>
+          <select  id="user_country" name="user[country]" onchange="this.form.submit();" class="story_sort_story">
+            <option>Sort By...</option>
+			<option value="Date">Date</option>
+			<option value="Best">Best</option>
+			<option value="Worst">Worst</option>
+            <option value="Places to stay">Places to stay</option>
+			<option value="Places to eat">Places to eat</option>
+			<option value="Entertainment">Entertainment</option>
+			<option value="Attractions">Attractions</option>
+			<option value="Activities">Activities</option>
+          </select>
+          <% end %>
+		</div>
+		
+		
+		
+		
+		
+		        <!--SELECT BOX DIV START HERE	-->
+		
+	 <div class="see_select_box">
+		<% form_for :seephotosets, :url =>{ :controller =>'/see/reviews', :action => 'index'} do %>		
+		<select  id="user_country" name="user[country]" onchange="this.form.submit();" class="story_select_story">
+		<option value="">Choose a Review...</option>
+		<%= options_from_collection_for_select @countries, "id", "name" %>
+		</select>
+		<% end %>						 	
+		</div>
+        
+        <!--SELECT BOX DIV END HERE	-->
+
+		</div>
+      </div>
+	  
+	  
+      <% if !@total.blank? %>
+	  
+	  
+      <% for review in @reviews %>
+	  
+	  
+      <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+	  
+      <!--stories content start-->
+      <div class="stories_rightbar_inner111 my_cursor" onclick ="view_review('<%= reviewpermalink_url(:continent =>check_continent(review.continent),:country => check_country(review.country), :state => check_state(review.state), :location => check_location(review.location),:id => review.permalink) %>');">
+	  
+        <div class="stories_home"> <%= title_tcase(review.title) %> </div>
+		
+        <div class="stories_tag"> <%= title_tcase(review.tag) %> </div>
+		
+        <div class="stories_date">
+        <div class="friends_flo">
+		 <%= myworld_dateformat(review.created_on) %>
+		  <span class="home"> <%= review.review_comments.length %> Comments </span>
+		 </div>
+		 
+          <div class="stories_rating" id ="star-ratings-block"> 
+		  <%= render :partial => 'myworld/reviews/ratee', :locals => {:review => @review = review }%>
+		  </div>
+		   
+          </div><br/>
+		
+		
+        <div class="stories_tag_text">
+		  <%= title_slice_withoutcap(review.how_was_it,460) %>
+
+		 <span class="story_view" style="float:right;">
+		  <%= link_to "Read this Review", reviewpermalink_url(:continent =>check_continent(review.continent),:country => check_country(review.country), :state => check_state(review.state), :location => check_location(review.location),:id => review.permalink), {:class => 'story_view',:title =>"Click here to read the review details" } %>
+		 </span>
+	
+		  </div>
+		  
+		  
+		  
+		  
+        <!--slide images start here-->
+		
+  <% if !review.slideshow_id.blank? && review.slideshow_id != 0 %>		
+  <div class="stories_rightbar_inner2" >		
+  <% totalphotos = Photo.find(:all, :conditions =>["photoset_id like ?",review.slideshow_id], :select => "image, id", :limit => 9) %>		 
+          <% for photoimages in totalphotos %>
+		  <% if !photoimages.image.blank? %>
+          <div class="my_world_photos">
+		  <%= image_tag(url_for_file_column(photoimages, "image","thumbnail"))%> 
+		  </div>
+		  <% end %>
+          <% end %>
+	  
+   </div>
+		
+		
+  <% elsif !review.added_images.blank? %>
+   <div class="stories_rightbar_inner2">
+		
+          <% for reviewid in review.added_images.split(',') %>		  
+           <% photoadded = Photo.find_by_id(reviewid) %>
+		   <% if !photoadded.image.blank? %>
+           <div class="my_world_photos"> 
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %> 
+		   </div>
+		   <% end %>
+		   <% end %>	
+		   	   
+  </div>	
+		   	   
+  <% end %>
+		  
+   <!--  slide show end-->
+  </div>
+	  
+	  
+	  
+      <!--stories content end-->
+  <% end %>
+	  
+  <div class="stories_rightbar_inner111"> <img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+	  
+      <div align="center"> <strong>	  
+	   <%= will_paginate (@reviews,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" class=" my_world_ver" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" class=" my_world_ver" />'}) %> </strong></div>
+	   
+      <% else %>
+	  
+	  
+         <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+      <div class="stories_rightbar_inner1"><br/>
+        <div class="stories_home">
+          <center>
+            No Reviews
+            <% if @message %>
+            found for your search keyword.
+            <% end %>
+          </center>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <!--stories end-->
+  </div>
+  <!--left stories end-->
+</div>

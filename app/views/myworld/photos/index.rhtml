@@ -1,0 +1,120 @@
+
+<div class="photosat_left_bar_new">
+				
+			<!--advertisement-div-start-->
+						<div class="photosat_left">
+						
+						<div class="friend_left_inner Advertisement"><% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %></div>
+						
+						<div class="friend_left_inner_12 Advertisement"><% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %></div>
+						
+						</div>	
+				<!--advertisement-div-end-->
+
+				<!--center photos-->
+			
+					<div class="photosat_right">
+					
+					<div class="photoset_rightbar_inner1">
+  
+  <!--top navigation divs -->
+  
+  <div class="photosat_rightbar_inner_story">
+  
+  
+  
+  <!--  navigation divs-->
+
+	
+	
+    
+		
+
+       <div class="story_cal1">
+		<img src="/images/home/photos_picture.jpg" class="my_world_right"/>
+		 <% if check_login(@user_profile.id)  %>My<% else %><%= profile_name(@user_profile.screen_name) %><% end %> PhotoSets 
+		 <font style="color:#736F66;">
+		 <%= render :partial => '/shared/pagination', :locals => {:total => @total, :type => @photosets, :pgmax => 45 } %>	
+		 </font> 
+		 
+        </div>
+		
+	
+	 
+
+	  <!--  navigation divs end -->
+	
+	  <div class="select_photoset">
+		<% form_for :myworld, :url =>{ :controller =>'/myworld/photos', :action => 'search_map'} do %>		
+		<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+		<option value="">Choose a Photoset...</option>
+		<%= options_from_collection_for_select @user_photsets, "id", 'sliced_title' %>
+		</select>
+		<% end %>						 	
+		</div>
+	
+	
+ </div>
+  
+  
+  <!--top navigation divs end-->
+  
+    	
+	</div>
+	
+	
+		
+					<div class="photosat_right_inner">
+			
+					<% @photosets.each_with_index do |photoset,i| %>					
+						
+			<div class="photosat_image" class="my_world_bottom">			
+							
+			 <div class="my_world_image">
+			 			
+            <div>			 
+		   	<% if !photoset.coverimage.nil? %>
+			
+			<%= link_to(image_tag(url_for_file_column(photoset.coverimage,"image","submain"), :class => "my_world_image"),  photopermalink_url(:continent => !photoset.continent.blank? ? photoset.continent.gsub(/ /,'-') : 'continent',:country => !photoset.country.blank? ? photoset.country.gsub(/ /,'-') : 'country', :state => !photoset.state.blank? ? photoset.state.gsub(/ /,'-') : 'state', :location => !photoset.location.blank? ? photoset.location.gsub(/ /,'-') : 'location', :id => photoset.permalink),{:title => "Click here to view all photos in this photoset"} )%>
+			<% else %>
+			<%= link_to(image_tag(("/images/home/black_blankimage.jpg"),:class => "my_world_image"),  photopermalink_url(:continent => !photoset.continent.blank? ? photoset.continent.gsub(/ /,'-') : 'continent',:country => !photoset.country.blank? ? photoset.country.gsub(/ /,'-') : 'country', :state => !photoset.state.blank? ? photoset.state.gsub(/ /,'-') : 'state', :location => !photoset.location.blank? ? photoset.location.gsub(/ /,'-') : 'location', :id => photoset.permalink),{:title => "Click here to view all photos in this photoset"} )%>
+			<% end %>
+			
+		     </div>
+		   
+		   
+		<!--   popupdiv start here-->
+		   
+           
+		  
+		  
+		  <!--   popupdiv end here-->
+			
+		  </div>
+
+								<div>
+								<div class="Hiker friends_flo" align="center"><%= photoset.title %></div>
+								<div class="friends_flo1 friends_mar"><!--<img src="/images/friends/map_1.jpg"/>-->
+								
+								</div>
+								
+								</div>
+								</div>
+					
+			<% end %>
+					
+					
+					</div>	
+					
+					<div class="clear"></div>
+					
+	<div>
+			 <% if !@photosets.blank? %><div align="center"><b><%= will_paginate (@photosets,{:prev_label =>'<img src="/images/home/photos/black_prev.gif" alt="previous" class="my_world_ver" />',:next_label =>'<img src="/images/home/photos/black_next.gif" alt="next" class="my_world_ver" />',:class => 'pagination_photos' }) %></b></div><% end %>	</div>				
+					
+					
+					</div>
+						<!--center photos end-->
+			
+															
+															
+					</div>

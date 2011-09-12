@@ -1,0 +1,154 @@
+<script type="text/javascript">
+function mahesh()
+{
+
+}
+</script>
+<div style="color:#444e02; padding:0px;width:600px; margin:0px; font-size:20px;"  class="admin_font" > 
+<div style="margin-bottom:8px;" align="center">Add Advertisement to this photoset > <%= @photoset.title %></div> 
+
+<% form_for :adv do %>
+
+
+<div style="width:550px;">
+<table width="500px" border="1" cellspacing="2" cellpadding="2" class="inerfontkicolor" align="center">
+  <tr>
+    <td colspan="3" height="35" align="center">
+	<div style="padding-left:15px;">
+	<font style="size:2px; color:#F03432;">Top Header Advertisements </font><br/><br/>
+<% if @adv.headeradv_id != 0  %>
+<%= link_to "Edit Ad" , :controller => 'ads_management', :action => "photoset_header", :id => 17 ,:photoset_id => @photoset.id %>
+<% else %>
+<%= link_to "Add new Ad" , :controller => 'ads_management', :action => "photoset_header", :id => 17 ,:photoset_id => @photoset.id %>
+<% end %>
+     <%#= link_to_remote("Default Ad", 
+                          #:update => "details",
+						  #:frequency => 2,
+						  #:before => "Element.show('spinner')",
+                          #:success => "Element.hide('spinner')",
+                          #:url =>{:action => 'edit_advertisement', :id => 17 , :page => 'index'}, :title => "Click Here to Edit Home page Top Advertisement")  %>						  
+<br/><br/>
+</td>
+  </tr>
+</table>
+<br/><br/>
+
+
+
+<table width="700px" border="1" cellspacing="2" cellpadding="2" class="inerfontkicolor" align="center">
+  <tr>
+    <td colspan="3" height="35" align="center">Header</td>
+  </tr>
+  <tr>
+    <td width="200" height="40" align="left">
+	<div style="padding-left:15px;">
+	<% left_top = Advertisement.find(:all, :conditions => ["parient_id LIKE ?",1]) %>
+	<font style="size:2px; color:#F03432;"> Left Top Advertisements </font><br/><br/>
+	Total Ads Available = <%= left_top.size %><br/><br/>
+	Default Ad
+	<%#= link_to_remote("Default Ad", 
+                          #:update => "details",
+						  #:frequency => 2,
+						  #:before => "Element.show('spinner')",
+                          #:success => "Element.hide('spinner')",
+                         # :url =>{:action => 'edit_advertisement', :id => 1 , :page => 'index'}, :title => "Click Here to Edit default Advertisement in this section")  %>
+						   <br/><br/>
+						   	New Ad
+	<%#= link_to_remote("New Ad", 
+                          #:update => "details",
+						  #:frequency => 2,
+						  #:before => "Element.show('spinner')",
+                          #:success => "Element.hide('spinner')",
+                          #:url =>{:action => 'new_advertisement', :id => 1 , :page => 'index'}, :title => "Click Here to Add new Advertisement in this section")  %>
+						   <br/><br/>
+	</div>
+	</td>
+	
+    <td width="350" rowspan="2">Content</td>
+	
+    <td width="200" height="20" align="center"> User Profile	</td>
+  </tr>
+  <tr>
+    <td height="40" align="left">
+	<div style="padding-left:15px;">
+	<% left_bottom = Advertisement.find(:all, :conditions => ["parient_id LIKE ? ",6]) %>
+	<font style="size:2px; color:#F03432;">Left Bottom Advertisements </font>  <br/><br/>
+	Total Ads Available = <%= left_bottom.size %>   <br/><br/>
+	<%= radio_button 'adv', 'headeradv_id', '6'  %>
+	Default Ad
+	
+	<%#= link_to_remote("Default Ad", 
+                         # :update => "details",
+						 # :frequency => 2,
+						  #:before => "Element.show('spinner')",
+                         # :success => "Element.hide('spinner')",
+                         # :url =>{:action => 'edit_advertisement', :id => 6 , :page => 'index'}, :title => "Click Here to Edit default Advertisement in this section")  %>
+						   <br/><br/>
+	<%= radio_button 'adv', 'headeradv_id', '6' , :onclick => "mahesh();"%>					   
+						   New Ad
+	<%#= link_to_remote("New Ad", 
+                         # :update => "details",
+						  #:frequency => 2,
+						  #:before => "Element.show('spinner')",
+                         # :success => "Element.hide('spinner')",
+                         # :url =>{:action => 'new_advertisement', :id => 6, :page => 'index'}, :title => "Click Here to Add new Advertisement in this section") %>    <br/><br/>
+						   
+	
+	</div>
+	</td>
+	<td height="60" align="left">
+	<div style="padding-left:15px;">
+	<% right_bottom = Advertisement.find(:all, :conditions => ["parient_id LIKE ?",29]) %>
+	<font style="size:2px; color:#F03432;"> Right Bottom Advertisements </font><br/><br/>
+	Total Ads Available = <%= right_bottom.size %><br/><br/>Default Ad
+	
+	<%#= link_to_remote("Default Ad", 
+                         # :update => "details",
+						 # :frequency => 2,
+						 # :before => "Element.show('spinner')",
+                          #:success => "Element.hide('spinner')",
+                          #:url =>{:action => 'edit_advertisement', :id => 29 , :page => 'index'}, :title => "Click Here to Edit default Advertisement in this section")  %>
+						   <br/><br/>New Ad
+						   	
+	<%#= link_to_remote("New Ad", 
+                          #:update => "details",
+						  #:frequency => 2,
+						  #:before => "Element.show('spinner')",
+                         # :success => "Element.hide('spinner')",
+                         # :url =>{:action => 'new_advertisement', :id => 29 , :page => 'index'}, :title => "Click Here to Add new Advertisement in this section")  %>
+						   <br/><br/>
+	 
+	</div>
+	</td>
+	
+	
+  </tr>
+  <tr>
+    <td colspan="3" height="35" align="center">Footer</td>
+  </tr>
+</table>
+
+<br/>
+ <div align="center">
+ <%= image_tag("/images/admin/spiner_admin.gif",
+              :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+ </div>
+<br/><br/>
+
+<div id = "details">
+
+</div>
+
+
+</div>
+<div style="clear:both;"></div>
+<div > &nbsp;</div>
+<div align="left" style="padding-top:5px; padding-left:120px;">
+<%= submit_tag 'Add Advertisement' %>
+</div>
+<% end %>
+
+</div>

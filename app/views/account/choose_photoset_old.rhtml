@@ -1,0 +1,10 @@
+	<% if !@photos.blank? %>
+		<% for photo in @photos %>
+		 <div style="width:60px; float:left;" > <%= image_tag(url_for_file_column(photo, "image","thumbnail"),:style => "border:1px solid #e1ae62;")%></div>
+		<% end %>
+		<% else %>
+	    <div>		
+		
+		No Images</div>
+		
+		<% end %>

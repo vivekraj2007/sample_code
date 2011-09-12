@@ -1,0 +1,140 @@
+<div class="story_title" > 
+<div class="story_font"><%= link_to 'Stories' ,{:controller => '/admin/stories',:action => 'index' }, :style => 'text-decoration:none'%>  > <%= @story.title.titlecase %> Details</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div><br/>
+
+<div class="stories_rightbar_inner1"><img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+
+<!--photosets div end-->
+
+<!--videoset div start-->
+
+<!--videoset div end-->
+
+<!--Reviews div start-->
+
+
+</div><br/>
+
+<div class="story_title1">
+
+
+<div>
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= check_blank_condition(@story.title) %>
+<% if @story.status == 1%>
+( <%= link_to 'permalink',storypermalink_url(:continent =>check_continent(@story.continent),:country => check_country(@story.country), :state => check_state(@story.state), :location => check_location(@story.location),:id => @story.permalink) %> )<% end %></div>
+</div>
+
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Sub Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= check_blank_condition(@story.sub_title) %></div>
+</div>
+
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Uploaded By </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1">
+<%= link_to @story.user.screen_name, :controller => 'users', :action => 'profile', :id => @story.user.id %>
+
+	<span>	(<%= link_to (image_tag("/images/home/2.jpg"), {:controller => "admin/users",:action => "send_emailnotification", :id => @story.user.id }, :style => "text-decoration:none;",:title => "Click here to send admin message",:popup => ['new_window','height=350,width=600']) %>) </span>
+
+</div>
+</div>
+
+<div class="clearer"></div>
+
+
+
+<div>
+<div class="story_place_font story_place_flo">Place </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= check_blank_condition(@story.where_is) %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Tags </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= check_blank_condition(@story.tag) %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Status </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><% if @story.status == 0 %> Unpublished
+  <% else %>
+  Published <% end %></div>
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Created On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= myworld_dateformat(@story.created_at) %></div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Updated On </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= myworld_dateformat(@story.updated_at) %></div>
+</div>
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Description </div>
+<div class="story_place_flo">:</div>
+<% if !@story.write_it.blank? %>
+<div class="story_place_flo story_place_font1" style="width:500px;height:250px; overflow-y:scroll; overflow-x:hidden;">
+<%= @story.write_it %></div><% else %><div class="story_place_flo story_place_font1">N/A</div><% end %>
+</div>
+<div class="clearer"></div><br/>
+
+<% if !@story_comments.blank? %>
+<div>
+<div class="story_place_font story_place_flo">Comments (<%= @story_comments.size %>)</div>
+<div class="story_place_flo">:</div>
+
+<div class="story_place_flo story_place_font1" style="width:500px;height:150px; overflow-y:scroll; overflow-x:hidden;">
+<% for story_comment in @story_comments %>
+
+
+<div class="stories_comment_inner11">
+<div>
+<span class="story_cal1">
+<%= story_comment.user.first_name %> </span>
+<span class="home_comment">
+<%= myworld_dateformat(story_comment.created_at) %> <%= story_comment.created_at.strftime(" %I:%M %p") %> </span>
+</div>
+<div class="stories_comment_text">
+<%= story_comment.comment %>		
+</div>				
+</div>
+
+
+<% end %>
+
+
+</div>
+</div>
+
+<% end %>
+<div class="clearer"></div><br/>
+<div>
+<div class="story_place_font story_place_flo">&nbsp; </div>
+<div class="story_place_flo">&nbsp;</div>
+<div  class="story_place_flo story_place_font1">
+<div><%= link_to(image_tag("/images/admin/back_list.gif"), {:controller => 'admin/stories', :action => 'index'})%>
+&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to (image_tag("/images/admin/edit.gif"), {:controller => 'admin/stories', :action => 'edit',:id => @story.permalink}) %>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to( image_tag("/images/admin/delete_new.gif"), {:controller => 'admin/stories',:action => 'delete',:id => @story.permalink}, :confirm => 'Are you sure want to delete this story?', :method => :post,:title => "Click here to delete story( #{@story.title} ) details.",:class => 'story_place_font' )%>
+</div>
+</div>
+</div>
+</div>

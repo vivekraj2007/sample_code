@@ -1,0 +1,312 @@
+<%= javascript_include_tag 'imgslide/carousel','admin_field_sets' %>	
+<%= stylesheet_link_tag "imgslide/prototype-ui.css" %>
+<script type="text/javascript">
+function photoset()
+	{
+	
+	document.getElementById('phtimage').src='/images/home/image_display.gif';
+	document.getElementById('photoset').style.display='block';
+}
+</script>
+
+<style>
+ .middile_write{
+ width:468px;
+ float:left;
+ background-color:#cfcaa2;
+ }
+  .top_middile_write{
+ width:452px;
+ height:8px;
+ float:left;
+ background-color:#d1caa4;
+ }
+ .bottom_middile_write{
+ width:452px;
+ height:8px;
+ float:left;
+ background-color:#d1caa4;}
+ .write_middle
+ {
+ width:468px;
+ margin-left:8px;
+ height:800px;
+   float:left;
+   
+ }
+
+</style>
+<script language="javascript" type="text/javascript" src="/tiny_mce/tiny_mce.js"></script>
+
+<script language="javascript" type="text/javascript">
+
+tinyMCE.init({
+  mode : 'exact',
+  elements : "story_write",
+  theme : 'advanced',
+  theme_advanced_buttons1 : "bold,italic,underline",
+  theme_advanced_buttons2 : "",
+  theme_advanced_toolbar_location : "bottom",
+  theme_advanced_toolbar_align : "left",
+  theme_advanced_path_location : "none",
+  debug : false,
+  theme_advanced_path : false
+});
+
+</script>
+
+
+
+
+
+<div class="edit_photoset">
+
+	<!--title-->
+	<div class="edit_photoset_top">
+	
+	
+<div class="story_title" > 
+<div class="story_font"> Edit stories > 
+<%= link_to @story.title.titlecase ,{:controller => '/admin/stories',:action => 'details', :id => @story.permalink }, :style => 'text-decoration:none'%>  > uploaded by <%= link_to @story.user.screen_name , :controller => 'users', :action => 'profile', :id => @story.user.id %>
+
+	<span>	(<%= link_to (image_tag("/images/home/2.jpg"), {:controller => "admin/users",:action => "send_emailnotification", :id => @story.user.id }, :style => "text-decoration:none;",:title => "Click here to send admin message",:popup => ['new_window','height=350,width=600']) %>) </span>
+
+</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div><br/>
+
+<div class="stories_rightbar_inner1"><img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+</div><br/>
+
+
+
+
+
+<% form_for :edit_photoset,:url =>{:controller => "admin/stories",:action => "update",:id => @story.id } do %>
+
+<div class="edit_photoset_top">
+
+<div>
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1">
+<%= text_field 'story', 'title' ,:style => "width:180px; height:18px;",:id=>'title', :class => 'input',:onfocus => "story_fileds_create();", :onblur => "story_fileds_create();",:onkeyup => "story_fileds_create();"  %></div>
+</div>
+
+<div>
+<div class="story_place_font story_place_flo">Sub Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1">
+<%= text_field 'story', 'sub_title' ,:style => "width:180px; height:18px;",:id=>'sub_title', :class => 'input',:onfocus => "story_fileds_create();", :onblur => "story_fileds_create();",:onkeyup => "story_fileds_create();"  %></div>
+</div>
+
+
+<div>
+<div class="story_place_font story_place_flo">Descriptive Tag </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1"><%= text_area 'story','tag',:class => 'input',:id => 'tag',:style => "width:180px;height:62px;",:onfocus => "story_fileds_create();", :onblur => "story_fileds_create();",:onkeyup => "story_fileds_create();"  %></div>
+</div>
+
+<div>
+<div>&nbsp;</div>
+<div>&nbsp;</div>
+<div style="padding-left:500px;">
+<input id="story_edit_save" name="story_edit_save" value="save" src="/images/home/save_g_b.jpg" type="image" >
+</div>
+</div>
+
+</div>
+<% end %>
+
+	</div>
+	<!--title end-->
+   <div class="edit_photoset">
+	<div  style="margin:20px 0px 10px 0px;"><img src="/images/admin/strip.gif" alt="" width="700px" /></div>
+	</div>
+	<!--map-->
+<% form_for :geo_location,:url =>{:controller => "admin/stories",:action => "edit_geo_location",:id => @story.id } do %>
+	<div class="edit_photoset">
+	
+	<div class="edit_photoset_map">
+	
+	<div class="story_place_font story_place_flo">Add Geo-locations</div>
+	<br/>
+	
+	<div class="story_place_flo">
+        <% if @story.lat.blank? || @story.longt.blank? %>
+        <%= render :partial => "/admin/stories/map" %>
+        <% else %>
+        <%= render :partial => "/admin/stories/confirm_map"%>
+        <% end %>
+</div>
+	</div>
+		
+	
+	<div class="edit_photoset_map_right">
+	<div style="padding-top:20px;">&nbsp;</div>
+	
+	<div class="story_place_font1">
+<div class="mid_right1" style="padding-top:10px;">
+         		  
+          <div class="home">Geo-coord (Latitude, Longitude)</div>
+          <div class="share_column_padding">
+		   <%= text_field 'story', 'lat',:style => "width:82px; height:18px;", :class => 'input', :id=>'lat',:onfocus => "story_fileds_create();", :onblur => "story_fileds_create();",:onkeyup => "story_fileds_create();"  %> &nbsp; 
+		   <%= text_field 'story', 'longt' ,:style => "width:82px; height:18px;", :class => 'input', :id=>'longt',:onfocus => "story_fileds_create();",:onblur => "story_fileds_create();", :onkeyup => "story_fileds_create();"  %>
+		    </div>
+			 <div class="home" style="padding-top:10px; padding-left:60px;">(OR)</div>
+			
+          <div class="home">Address, State/Prov, Country </div>
+          <div class="share_column_padding">
+		   <%= text_area 'story', 'where_is' , :class => 'input',:id=>'where_is',:onfocus => "story_fileds_create();", :onkeyup => "story_fileds_create();",:onblur => "story_fileds_create();",:style => "width:180px;height:62px;" %>
+		   </div>
+		   <div style="padding-top:10px;">&nbsp;</div>
+		 <div style="padding-left:90px;">
+            <input id="story_tag" name="story_tag" value="save" src="/images/home/save_g_b.jpg" type="image">
+			
+         </div>  
+		   
+     
+        </div>
+
+
+</div>
+
+	</div>
+	
+	
+	</div>
+<% end %>
+	<!--map end-->
+	<div class="edit_photoset">
+	<div  style="margin:20px 0px 10px 0px;"><img src="/images/admin/strip.gif" alt="" width="700px" /></div>
+	</div>
+	<!--photos-->
+	
+	
+	<div class="top_edit_photoset_1">
+	
+	<div class="story_place_font story_place_flo">Write It</div>
+	
+<% form_for :description,:url =>{:controller => "admin/stories",:action => "publish",:id => @story.id } do %>
+	
+	<div class="map_1">
+               
+		<div class="share_tag_mar ">
+	  <div class="share_publish_share">
+	  <table width="350px" border="0" cellspacing="0" cellpadding="0" class="share_tag_table">
+	  <tr><td colspan="4" height"4px"></td></tr>
+  <tr>
+    <td width="20px" height="20px">
+	
+	
+	<img src="/images/home/img_hover.gif" onclick="photoset();" id="phtimage" alt="photoset_image" class="my_world_photos_latest"/>
+	</td>
+	
+    <td width="20px" height="20px">
+	</td>
+	
+     <td width="160px">
+	  
+	  <div style="display:none; float:left;" id = "photoset">
+	  <%= select("@story.user.photoset", "id", @story.user.photosets.collect {|p| [ "#{p.sliced_title}", p.id] }, {:prompt => "choose photoset"}, "onchange" => remote_function(:update => "photos", :loading => "Toggle.display('spinner1')", :complete => "Toggle.display('spinner1')",  :with => "'photoset='+value",:url => { :controller => '/account', :action => "choose_photoset" })) %></div>
+	  
+
+	  <div style="display:none; float:left;" id = "videoset">
+	 	  </div>
+	  <div class="clear"></div>
+	  </td>
+	  <td width="25px" class="share_tag_img">
+	  <%= image_tag("/images/home/spinner1.gif",
+              :align => "absmiddle",
+              :border => 0,
+			  :id => "spinner1",
+              :style =>"display: none;" ) %> </td>
+			  
+			  
+	
+  </tr>
+</table>
+</div>
+     <textarea id="story_write" name="story[write_it_with_images]" class="share_tag_border" >
+	 <%= @story.write_it_with_images %>
+	 </textarea>
+	 <div class="share_position"><%= image_tag ("/images/home/background_bottom_b.gif")%></div>
+
+    </div>
+	
+	<div class="share_publish_width" id="photos">
+  	<div class="clear share_publish_text">Drag and Drop individual photos into Story</div> 
+    <div class="scroll_main_container"> 
+   
+    <div id="horizontal_carousel" >
+	<div class="rouneded_corner"><%= image_tag("/images/imgslide/left_b.gif")%></div>
+      <div class="previous_button">	  
+	  </div>  	  
+      <div class="container">
+       <ul>
+	    <% for photoset in @story.user.photosets %>
+		<% if photoset.photos.length != 0 %>
+		<% photoset = Photo.find(:all,:conditions => ["photoset_id like ?",photoset])%>		
+		<% for photo in photoset %>
+		<% if !photo.image.blank? %>
+          <li>
+		  <%= image_tag(url_for_file_column(photo, "image","thumbnail") )%> <br />		  
+          <%= photo.title %><br />
+          </li>	
+		  <% end %>
+		  <% end %>	
+		  <% end %>  
+		  <% end %>        
+        </ul>
+      </div>
+      <div class="next_button"></div>
+	   <div class="rouneded_corner"><%= image_tag("/images/imgslide/right_b.gif")%></div>
+      </div>    
+	  
+     <script type="text/javascript">
+    // <![CDATA[
+      function runTest() {
+        hCarousel = new UI.Carousel("horizontal_carousel");
+           }
+      Event.observe(window, "load", runTest);
+    // ]]>
+    </script>
+	
+	
+	</div><br/>
+	
+      </div>
+	  	 <div class="clear"></div>
+	
+	
+	
+	          
+            </div>
+          </div>
+		  <div style="padding-top:10px;">
+ <div style="padding-left:18px; float:left;"><input type="submit" name="story_submit" value="Publish" class="publish" id="publish"></div>
+<div style="float:right; padding-right:160px;"><input type="submit" value="Save" name="story_submit" class="publish"></div></div>
+          <div class="clear"></div>
+        </div>
+      </div>
+    
+	 <div style="padding-top:10px;">&nbsp;</div>
+
+		 <div style="padding-left:400px;">
+		<%= link_to(image_tag("/images/admin/back_list.gif"), {:controller => 'admin/stories', :action => 'index'})%>
+&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to (image_tag("/images/admin/add_adv.gif"), {:controller => 'admin/stories', :action => 'add_advertisement',:id => @story.id}) %>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to( image_tag("/images/admin/delete_new.gif"), {:controller => 'admin/stories',:action => 'delete',:id => @story.permalink}, :confirm => 'Are you sure want to delete this story?', :method => :post,:title => "Click here to delete story( #{@story.title} ) details.",:class => 'story_place_font' )%>    
+		
+		  </div> 
+	<% end %>
+	</div>
+	
+	<!--photos end-->
+      <div class="clear"></div>
+</div>
+
+
+
+

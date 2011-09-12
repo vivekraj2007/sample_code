@@ -1,0 +1,52 @@
+
+    <script src="http://maps.google.com/maps?file=api&v=2&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+            type="text/javascript"></script>
+    
+    <script type="text/javascript">
+	
+	
+      // helper function to create markers
+
+	  
+      function createMarker(point,html)
+	   {
+	   
+        var marker = new GMarker(point, {draggable: true});  
+		GEvent.addListener(marker, "click", function(){marker.openInfoWindowHtml(html);});
+		GEvent.addListener(marker, "dragend", function(){
+       var ctr = marker.getPoint();
+		var lt =ctr.lat();
+		var lng=ctr.lng();
+	    document.getElementById('longt').value = lng;
+	    document.getElementById('lat').value = lt;
+   
+       }
+	   );
+        return marker;
+        }
+      
+      // this is called when the page loads. 
+      // it initializes the map, and creates each marker
+	  
+      function initialize()
+	   {
+     
+     var map = new GMap(document.getElementById("map_canvas"));
+     map.addControl(new GSmallMapControl());
+     map.centerAndZoom(new GPoint(<%= @videoset.longt%>,<%= @videoset.lat %>), 4);           
+        
+		var point = new GPoint(<%= @videoset.longt%>,<%= @videoset.lat %>);
+		
+      <!--  var marker = createMarker(point,'<div><%#=h  @videoset.title %></div>')-->
+		var marker = createMarker(point,'<div style="width:100%;"><div style="width:25%; float:left"> <% if !@videoset.covervideo.nil? %><%= image_tag("/#{@videoset.covervideo.video_image}",:style => "width:51px; height:51px;")%><% end %></div><divstyle="width:70%; float:left"><b><%= @videoset.title.humanize %></div></div>')
+        map.addOverlay(marker);	       
+        }    
+    </script>
+    
+
+
+
+    <div id="map_canvas" style="width: 475px; height: 250px"></div>
+    
+    
+

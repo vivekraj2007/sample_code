@@ -1,0 +1,42 @@
+
+    <script type="text/javascript">
+function createMarker(point,html)
+	   {	   
+      var marker = new GMarker(point, {draggable: true}); 
+
+		GEvent.addListener(marker, "click", function(){});
+				GEvent.addListener(marker, "dragend", function(){
+       var ctr = marker.getPoint();
+		var lt =ctr.lat();
+		var lng=ctr.lng();
+	    document.getElementById('longt').value = lng;
+	    document.getElementById('lat').value = lt;
+		return story_fields();
+   
+       }
+	   );
+		
+        return marker;
+        }	
+	
+	function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("stories_map"));
+        map.setCenter(new GLatLng(21.796875, 31.952162),1,G_PHYSICAL_MAP);
+		map.addMapType(G_PHYSICAL_MAP);
+       var point = new GLatLng(21.796875, 31.952162);
+	    
+		
+		var marker = createMarker(point,'')		
+
+map.addControl(new GSmallMapControl());
+map.addControl(new GMapTypeControl());
+map.addOverlay(marker);
+      }
+    }  
+    </script>
+    
+<%= stylesheet_link_tag 'myworld_style' %>
+
+    <div id="stories_map" class="share_confirm"></div>
+    <div id="message"></div>

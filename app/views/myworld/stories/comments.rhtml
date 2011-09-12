@@ -1,0 +1,222 @@
+
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+						<div class="left_bar_stories">
+						
+						
+						<!--advertisement-div-start-->
+						<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">
+		  	
+		  	<% if @story.story_adv.topadv_id != 0 &&  !@story.story_adv.topadv_id.blank? %>								
+			<%= @story.story_adv.story_left_top_adv.script %>								
+			<% else %>
+		      <% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %>
+			<% end %>	
+		  </div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement">
+		  
+		      <% if @story.story_adv.bottomadv_id != 0 &&  !@story.story_adv.bottomadv_id.blank? %>								
+				<%= @story.story_adv.story_left_bottom_adv.script %>								
+				<% else %>
+				  <% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %>
+				<% end %>
+		  
+		  </div>
+      
+      </div>
+    </div>	
+						<!--advertisement-div-end-->
+						
+						<!--stories start-->
+						<div class="stories_rightbar">
+								<!--top select-->
+								<div class="stories_rightbar_inner_story">
+								
+								<div class="story_cal1_story121_new">
+								
+								
+						<div class="top_images10_new">
+							<%= link_to (image_tag("/images/home/stories/story_black.gif")), storypermalink_url(:continent =>check_continent(@story.continent),:country => check_country(@story.country), :state => check_state(@story.state), :location => check_location(@story.location),:id => @story.permalink), {:class=> "stories_map_1", :title => "Click here to view story details" } %></div>
+							
+							<div class="friends_flo">
+							<div class="stories_comment_images_new"></div>
+							</div>
+							
+							<div class="top_images11_new">
+							<%= link_to (image_tag("/images/home/stories/map_black.gif")),storypermalink_url(:continent =>check_continent(@story.continent),:country => check_country(@story.country), :state => check_state(@story.state), :location => check_location(@story.location),:id => @story.permalink,:value => 'map'), {:class=> "stories_map_1",:title => "Click here to view location of story in Map" } %></div>
+						
+							
+								</div>
+								
+								
+								<div class="story_select_story">
+	                           <% form_for :myworld, :url =>{ :controller =>'/myworld/stories', :action => 'comments_search'} do %>		
+								<select  id="id" name="search" onchange="this.form.submit();" class="story_select_story">
+								<option>Choose a Story...</option>
+								<%= options_from_collection_for_select @user_stories_published, "permalink", 'sliced_title' %>
+						      </select>
+						         <% end %>				
+								</div>
+								
+								
+			<div class="stories_right">
+			
+			<div class="friends_flo">
+			<% if !session[:user_id].blank? %>
+			<a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'block';document.getElementById('flag_content').style.display = 'none';">
+			<img src="/images/home/stories/stories_mail.gif" alt="share the love" title="Click here to email this Story to friend"/></a>
+			<% else %>
+	<a href="javascript://" onclick="logindiv(0);"><img src="/images/home/stories/stories_mail.gif" alt="share the love" title="Click here to email this Story to friend" /></a>
+			<% end %>
+			</div>
+			
+			
+			
+			<div class="friends_flo">
+			<% if session[:user_id] == @story.user.id %>
+			&nbsp;
+			<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/stories", :action => "edit_story",:id => @story.permalink},{ :title => "Click here to edit this story"} %> 
+			<% end %>
+			</div>
+				
+				
+			<div class="friends_flo">
+			<a href="javascript://" onclick="document.getElementById('flag_content').style.display = 'block';document.getElementById('share_the_love').style.display = 'none';" class="dec_text" title="Click here to Flag this content">Flag</a>
+			</div>
+		
+			
+		    </div>
+	</div>
+									<!--top select end-->
+									
+									
+			<div class="clear"></div>
+			
+ <!-- share the love start-->
+ <%= render :partial => "share_the_love", :locals => { :permalink => @permalink = @story.permalink} %>  
+ <!-- share the love end-->
+  
+  <!--flag content start-->  
+     <%= render :partial => "flag_content" %>	
+  	<!--   flag content end-->	
+		
+			
+			
+			
+			
+			
+									
+									<!--line div start-->
+			<!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+									<!--line div end-->
+				
+			<!--stories content start-->	
+				<div class="stories_rightbar_inner1">
+				
+				
+				<div class="stories_paintball"><%= title_slice_withoutcap(@story.title,500) %></div>
+				<div class="clear"></div>
+				<div class="stories_shooting"><%= title_slice_withoutcap(@story.sub_title,10000) %></div>
+				<div class="clear"></div>
+				<div class="stories_date"><%= myworld_dateformat(@story.created_at) %><span class="home"><%= @comments.size %> Comments</span></div>
+				
+	             <% if !@comments.blank? %>	
+				 
+				 <% if @comments.size > 5 %>				 
+				<div class="stories_rightbar_innercomment1">
+				 <% else %>
+				 <div class="stories_rightbar_innercomment_nooverflow">
+				 <% end %>
+				 <% for commentdetails in @comments %>					
+		
+	        		
+				
+		
+			<% if session[:user_id] != commentdetails.user_id %>				
+			<div class="stories_comment_inner">
+			<% else %>
+			<div class="stories_comment_inner11">
+		    <% end %>
+			 
+			 
+				<div class="friends_flo">
+				<span class="story_cal1">
+				<%= commentdetails.user.screen_name %> </span>
+				
+				<span class="home_comment">
+				<%= myworld_dateformat(commentdetails.created_at) %> <%= commentdetails.created_at.strftime(" %I:%M %p") %> </span>
+				</div>
+				
+				<div class="my_world_comment">
+				<% if session[:user_id] == @story.user.id %>
+				<%= link_to image_tag("/images/home/red_delete.gif"), storydelete_url(:id => commentdetails.id) %>
+				<% end %>
+				</div>
+				
+					<div class="clear"></div>
+				 <div class="stories_comment_text">
+				<%= commentdetails.comment %>		
+				 </div>				
+				</div>
+				
+				<!--<div class="stories_rightbar_inner_story">&nbsp;</div>-->
+						        			
+				<% end %>
+				</div>
+				
+	<% else %>
+	<div class="stories_comment_inner">
+	<div></div>
+	<div class="stories_comment_text">There are no comments posted for this story.</div>
+	<div class="stories_rightbar_inner_story">&nbsp;</div>
+	</div>
+	<% end %>		
+	
+	
+		
+			<!--text area-->
+	<% form_for :storycomments, :url => {:controller =>'/myworld/stories',:action => 'save_comment',:id => @story.permalink} do %>
+			<div>
+			<div class="story_cal1">Post a Comment</div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12"  class="friends_flo">Screen Name :&nbsp;&nbsp;</div>
+			<div class="home_comment12" class="my_world_comment_color">
+			<%= @user.screen_name %></div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12" class="friends_flo">Email :&nbsp;&nbsp;</div>
+			<div class="home_comment12" class="my_world_comment_color">
+			<%= @user.email %></div>
+			<div class="clear" style="height:1px;"></div>
+			
+			
+			<div class="home_comment12">Comment :</div>
+			<div>
+			<textarea name=comment[comment] id="comment" onblur="story_comment_fields();" onkeydown="story_comment_fields();" onfocus="story_comment_fields();" onkeyup="story_comment_fields();" class = "default_style_textarea_new" style="height:80px; width:215px;"></textarea>
+			</div>
+			
+			<div>
+			<input name="story_commnetsave" id="story_commnetsave" value="save" src="/images/home/post.jpg" type="image" class="my_margin" disabled = true>
+			</div>
+			
+			</div>
+			<!--text area-end-->
+			<% end %>	
+				</div>
+			<!--stories content end-->	
+									
+			
+						</div>
+						<!--stories end-->
+						
+						</div>
+						<!--left stories end-->
+						</div>

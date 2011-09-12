@@ -1,0 +1,493 @@
+
+
+<style type="text/css">
+.profile_name
+{
+color:#444e02; padding:0px;width:450px; margin:0px; font-size:20px; float:left;
+}
+
+.profile_name_dis
+{
+margin-bottom:8px;
+}
+.profile_who
+{
+width:400px; font-size:13px; padding-left:20px; border-bottom:2px #d9e19f solid; padding-bottom:5px; padding-top:5px; margin-bottom:10px;
+}
+.profile_details_main
+{
+width:400px; padding-bottom:3px;
+}
+.profile_details_name
+{
+width:120px; font-size:12px; float:left; text-align:right;
+}
+.profile_details_middle
+{
+width:20px; font-size:12px; float:left; text-align:center
+}
+.profile_details_name2
+{
+float:left;padding-left:3px; font-size:12px; height:auto; width:250px; 
+}
+.profile_photoset_details_name
+{
+width:300px; font-size:12px; float:left; text-align:left; padding-left:45px;
+}
+.profile_details_head_name
+{
+width:120px; font-size:12px; float:left; text-align:right;padding-left:20px;
+}
+.profile_middle_image_photos{
+width:51px; float:left; margin:2px 2px 2px 2px; margin-top:5px;
+}
+
+</style>
+
+
+
+<div class="admin_font profile_name" > 
+<div class="profile_name_dis" align="center"><%= @user.screen_name %> profile</div> 
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_who', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+ 
+<b>Who I am</b></div>
+
+
+<div id="profile_who" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Name </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.first_name %>&nbsp;<%= @user.middle_name %>&nbsp;<%= @user.last_name %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Email </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.email %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Screen Name </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.screen_name %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Gendar</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.gender %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Status</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.m_status %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Languages I speak </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2">
+<%= user_langauages(@user.profile.language_1,@user.profile.language_2,@user.profile.language_3)%>
+</div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Website</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.website %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Mailing Address </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2">
+<%= user_langauages(@user.Address1,@user.Address2,@user.Address2)%>
+</div>
+<div style="clear:both;"></div>
+</div>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Country </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.country.name %></div>
+<div style="clear:both;"></div>
+</div>
+
+</div>
+
+
+<!--status div start-->
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_status', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Status (<%= user_status(@user.activated_at)%>)</b></div>
+
+<div id="profile_status" style="display:none;">
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">User Level</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.level.humanize %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Registered on</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.created_at)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+<% if !@user.activated_at.blank? %>
+<div class="profile_details_main">
+<div class="profile_details_name">Activated on</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.activated_at)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Last login</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.last_login)  %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Profile Update</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= user_dateformate(@user.updated_at)  %></div>
+<div style="clear:both;"></div>
+</div>
+<% end %>
+
+</div>
+
+
+<!--status div end-->
+
+<% if @user.activated_at.blank? %>
+<div class="profile_who" align="left">
+<img src="/images/admin/admin_brown_plus.jpg" alt="" />&nbsp;
+ <b><%= link_to "Click here to activate user account", {:controller =>'admin/users', :action => "account_activation", :id => @user.id }, :style => "text-decoration:none;",:title => "Click here to activate user account" %>
+</b></div>
+<div class="profile_who" align="left">
+ <img src="/images/home/2.jpg" style="border:none;"/>&nbsp;
+ <b><%= link_to "Email Notification",{:controller => 'admin/users',:action => "send_account_notification", :id => @user.id },:style => "text-decoration:none;",:title => "Click here to send an email to user to activate his account" %>
+</b></div>
+
+<% end %>
+
+
+
+<% if !@user.activated_at.blank? %>
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_what', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>What I love</b></div>
+
+
+
+<div id="profile_what" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Passions, Hobbies, Sports, Activities </div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.hobbies %></div>
+<div style="clear:both;"></div>
+</div><br/>
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">Favorite Foods</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.fav_foods %></div>
+<div style="clear:both;"></div>
+</div><br/>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Books I'm Reading,Books I Love</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.fav_books %></div>
+<div style="clear:both;"></div>
+</div><br/>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Favorite Music</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.fav_music %></div>
+<div style="clear:both;"></div>
+</div><br/>
+
+<div class="profile_details_main">
+<div class="profile_details_name">Affiliations,Clubs</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2"><%= @user.profile.affiliations %></div>
+<div style="clear:both;"></div>
+</div><br/>
+
+<div class="profile_details_main">
+<div class="profile_details_name">My favorite places in the whole world</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2">
+<%= user_places(@user.profile.favorite_place_1,@user.profile.favorite_place_2,@user.profile.favorite_place_3)%>
+</div>
+<div style="clear:both;"></div>
+</div><br/>
+
+
+
+<div class="profile_details_main">
+<div class="profile_details_name">3 Things I Want To Do Before I Die</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2">
+<%= user_places(@user.profile.before_die_1,@user.profile.before_die_2,@user.profile.before_die_3)%>
+</div>
+<div style="clear:both;"></div>
+</div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_going', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Where I'm going</b></div>
+
+<div id="profile_going" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Places I want to explore next</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2">
+<%= user_places(@user.profile.places_want_to_explore_1,@user.profile.places_want_to_explore_2,@user.profile.places_want_to_explore_3)%>
+</div>
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+
+
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_where', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Where I've been</b></div>
+
+<div id="profile_where" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_name">Places I've lived</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2">
+<%= user_places(@user.profile.places_lived_1,@user.profile.places_lived_2,@user.profile.places_lived_3)%>
+</div>
+<div style="clear:both;"></div>
+</div>
+</div>
+
+
+
+
+
+<!--photosets div start-->
+
+
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_photosets', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Photosets & Photos</b></div>
+
+
+
+<div id="profile_photosets" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_head_name">
+<a href="#" onclick="Effect.toggle('photosets_list', 'blind', {duration:0.4}); return false;">
+<img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+Total Photosets
+</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2" style="width:200px;"><%= @user.photosets.length %> Photosets.</div>
+<div style="clear:both;"></div>
+</div>
+
+<div id="photosets_list" style="display:none;">
+
+<% for photoset in @user.photosets %>
+<div class="profile_details_main">
+<div class="profile_photoset_details_name"><!-- <a href="#" onclick="Effect.toggle('photosets_list_<%#= photoset.id %>', 'blind', {duration:0.4}); return false;">--> <img src="/images/admin/admin_brown_arrow.jpg" alt="" />&nbsp;<%= link_to "#{photoset.title.capitalize}",{:controller => '/admin/photosets',:action => 'details',:id => photoset.permalink},:style => 'text-decoration:none;' %>&nbsp;(<%= photoset.photos.length  %>)&nbsp;</div>
+<div style="clear:both;"></div>
+<!--This is for display the photoset details in user profile page-->
+<!--<div id="photosets_list_<%#= photoset.id %>" style="display:none;">
+<div class="profile_photoset_details_name" >
+<b>Description</b>: <%#= photoset.description  %>
+</div>
+<div class="profile_photoset_details_name" >
+<%# for photos in photoset.photos %>
+ <div class="profile_middle_image_photos margin_photo_img">
+
+ <a href="<%#= ( url_for_file_column(photos, "image","main")) %>" rel="lightbox[example]" >
+<img src="<%#= ( url_for_file_column(photos, "image","thumbnail")) %>" > </a>
+ 
+ <%#= image_tag(url_for_file_column(photos, "image","thumbnail"),:style => "border:1px solid #e1ae62;")%>
+ </div>
+<%# end %>
+
+</div>
+</div>-->
+
+<!--End of display the photoset details in user profile page-->
+
+
+<!--<div class="profile_details_middle">:</div>-->
+<!--<div class="profile_details_name2"><%#= photoset.photos.length  %></div>-->
+<div style="clear:both;"></div>
+</div>
+<% end %>
+
+</div>
+
+</div>
+<div style="clear:both;"></div>
+
+<!--photosets div end-->
+
+
+
+<!--Stories div start-->
+
+<div class="profile_who" align="left">
+ <a href="#" onclick="Effect.toggle('profile_stories', 'blind', {duration:0.4}); return false;"> 
+ <img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+<b>Stories</b></div>
+
+
+<div id="profile_stories" style="display:none;">
+<div class="profile_details_main">
+<div class="profile_details_head_name">
+<a href="#" onclick="Effect.toggle('stories_list', 'blind', {duration:0.4}); return false;">
+<img src="/images/admin/admin_brown_plus.jpg" alt="" /></a>&nbsp;
+Total Stories
+</div>
+<div class="profile_details_middle">:</div>
+<div class="profile_details_name2" style="width:200px;"><%= @user.stories.length %> Stories.</div>
+<div style="clear:both;"></div>
+</div>
+
+<div id="stories_list" style="display:none;">
+
+<% for story in @user.stories %>
+<div class="profile_details_main">
+<div class="profile_photoset_details_name"> <img src="/images/admin/admin_brown_arrow.jpg" alt="" />&nbsp;<%= link_to "#{story.title.capitalize}",{:controller => '/admin/stories',:action => 'details',:id => story.permalink},:style => 'text-decoration:none;'%></div>
+<div style="clear:both;"></div>
+
+<!--This is for the display the story details-->
+
+
+
+<!--End of story details-->
+<div style="clear:both;"></div>
+</div>
+<% end %>
+</div>
+</div>
+
+<!--End of Stories div-->
+
+<% end %>
+
+
+
+
+
+
+
+
+
+
+<div align="center" style="padding-top:5px;">
+
+</div>
+
+
+</div>
+<div style="float:left; width:175px; height:175px;">
+<div>
+<% if !@user.profile.profile_image.blank? %>
+<%= image_tag( url_for_file_column(@user.profile, "profile_image","submain")) %>
+<% else %>
+<%= image_tag(("/images/home/no-image_submain.gif"),:style => "width:173px;height:174px;") %>
+<% end %>
+</div>
+
+<div style="margin-top:5px;  font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; height:20px;" align="left">
+&nbsp;&nbsp;
+</div>
+
+<div style="margin-top:5px;  font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px; height:20px;" align="left">
+
+<div style="float:left;">
+<%= image_tag("/images/home/2.jpg", :style => "border:0;") %>
+&nbsp;&nbsp;</div>
+
+<div style="float:left;">
+<%= link_to "Send an email", {:action => "send_emailnotification", :id => @user.id }, {:style => "text-decoration:none;",:title => "Click here to send admin message",:popup => ['new_window','height=350,width=600'] } %>
+</div>
+
+</div>
+
+
+
+
+<div style="margin-top:5px; font-family:Verdana, Arial, Helvetica, sans-serif; font-size:12px;" align="left">
+<div style="float:left;"><%= image_tag("/images/admin/edit_admin.gif", :style => "width:19;height:19;border:0;") %>&nbsp;&nbsp;</div>
+<div style="float:left;"><%= link_to "Edit profile", { :action => "edit_profile", :id => @user.id }, :style => "text-decoration:none;",:title => "Click here to edit profile" %></div>
+</div>
+
+</div>
+<div class="clear"></div>
+
+<div>
+<div class="story_place_font story_place_flo">&nbsp; </div>
+<div class="story_place_flo">&nbsp;</div>
+<div  class="story_place_flo story_place_font1">
+<div><%= link_to (image_tag("/images/admin/back_list.gif"), {:action => 'index'}) %>
+&nbsp;&nbsp;&nbsp;&nbsp;<%= link_to (image_tag("/images/admin/edit.gif"), {:action => 'edit_profile',:id => @user.id}) %>&nbsp;&nbsp;&nbsp;&nbsp;
+<%= link_to(image_tag("/images/admin/delete_new.gif") , {:action => 'delete_profile',:id => @user.id},{ :title => "Click here to Delete #{profile_name(@user.screen_name)} Profile.", :confirm => "Are you sure you want to remove this user from uncharted?"} )%>
+</div>
+</div>
+</div>

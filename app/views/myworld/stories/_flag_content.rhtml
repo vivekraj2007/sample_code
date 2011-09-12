@@ -1,0 +1,74 @@
+<script type="text/javascript">
+function check_validation()
+{
+
+flg_name = document.getElementById('flg_name').value;
+email = document.getElementById('email').value;
+message = document.getElementById('message').value;
+if (flg_name=="" || email=="" || message == "Please Leave your Message Here.." || message == "")
+{
+	document.getElementById('send').src='/images/home/send.gif';
+	document.getElementById('send').disabled=true;
+}
+else
+{
+	document.getElementById('send').src='/images/home/send_g.gif';
+	document.getElementById('send').disabled=false;	
+}
+}
+</script>
+<div style="padding: 0px; background-position: 0px -17px; display:none; position: absolute; left: 380px; top:450px;" class="myBox" id="flag_content">
+ 
+  <div style="width:290px; height:auto; float:left;  padding:0px auto 0px 60px;" align="right">
+  <a href="javascript://" onclick="document.getElementById('flag_content').style.display = 'none';" title="Close">
+  <img src="/images/home/red_delete.gif"/></a>
+  </div>
+  
+ <div class="clear"></div>
+  
+  
+ <div class="flaged_top" align="left">
+
+		
+<div class="text_who">Report this content</div>
+
+<% form_remote_tag(:url => {:controller => "/account",:action => "flagged_content"}, 
+									 :update => 'flag_content',
+									 :before => "Element.show('search_spinner');",
+									 :complete => "Element.hide('search_spinner');") do %>
+
+<div class="home">Your Name:</div>
+ 
+<div class="my_mar_leftphotos">
+<%= text_field 'flaged','name',  :id =>'flg_name',:class => 'default_style', :style => "width:210px; height:18px;" , :onkeyup => "check_validation(); ", :onblur => "check_validation();", :onfocus => "check_validation();",:onkeydown => "check_validation();" %>	
+</div>
+		 
+ <div class="home">Your Email:</div>
+ 
+<div class="my_mar_leftphotos">
+<%= text_field 'flaged','email', :id =>'email' ,:class => 'default_style',:style => "width:210px; height:18px;" , :onkeyup => "check_validation(); ", :onblur => "check_validation();", :onfocus => "check_validation();",:onkeydown => "check_validation();" %>
+</div>
+		 
+<div class="home">Your comment:</div>
+
+<div class="my_mar_leftphotos">
+<%= text_area 'flaged','message', :id =>'message', :value => "Please Leave your Message Here..", :class => 'default_style_textarea_new' , :style => ' width:210px; height:75px;', :onkeyup =>"if(event.keyCode==13) check_validation();",  :onfocus =>  "if(this.value=='Please Leave your Message Here..') this.value=''; check_validation();", :onblur => "if(this.value=='') this.value='Please Leave your Message Here..'; check_validation();",:onkeydown =>  "check_validation();"  %>
+</div>
+												
+<%= hidden_field 'flaged', 'url_path', :value => request.env['HTTP_REFERER'] %>	
+
+
+        
+<div class="my_world_preview">
+<input type="image" id ="send" value = "send" src="/images/home/send.gif" border="0" disabled = true />
+<span id="search_spinner" style="display:none;">&nbsp;&nbsp;<img src="/images/home/spinner.gif"/></span>
+</div>
+
+
+<% end %>
+
+<div class="clear"></div>
+
+</div> 
+  
+  </div>

@@ -1,0 +1,2 @@
+class TravelogsController < ApplicationController
+end

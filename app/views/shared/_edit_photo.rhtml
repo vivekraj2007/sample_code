@@ -1,0 +1,31 @@
+
+<%= stylesheet_link_tag 'myworld_style' %>
+
+<div id="edit_1" class="edit_newchange" onmouseover="change_text(1);" >
+              <div class="edit_newchange1">
+                <% if params[:controller] == 'account' && (params[:action] == 'edit' || params[:action] == 'edit_profile_image' || params[:action] == 'update') %>
+                <div class="edit_newchange2">&nbsp; </div>
+                <div class="edit_newtext"> Change My Photo </div>
+                <% else %>
+                <div class="edit_newchange2">
+                  <div class="edit_newimage"><img src="/images/home/edit_1.jpg"></div>
+                </div>
+                <div class="edit_newtext"> Edit My Profile </div>
+                <% end %>
+              </div>
+            </div>				
+
+			<div id="edit_2" class="edit_newchangered" style="display:none;" onmouseout="change_text(2);">
+              <div class="edit_newchangered1">
+                <% if params[:controller] == 'account' && (params[:action] == 'edit' || params[:action] == 'edit_profile_image' || params[:action] == 'update') %>
+                <div class="edit_newchangered2">&nbsp; </div>
+                <div class="edit_newtextred"> <%= link_to "Change My Photo", {:controller => "/account",:action => "change_photo"},:class =>"edit_newchangered shared_edit_decoration" %> </div>
+                <% else %>
+                <div class="edit_newchangered2">
+                  <div class="edit_newimagered"> <img src="/images/home/edit_2.jpg"> </div>
+                </div>
+                <div class="edit_newtextred"> <%= link_to "Edit My Profile", {:controller => "/account",:action => "edit"},:class =>"edit_newchangered shared_edit_decoration" %> </div>
+                <% end %>
+              </div>
+            </div>
+	

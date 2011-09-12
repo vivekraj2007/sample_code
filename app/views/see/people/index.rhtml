@@ -1,0 +1,153 @@
+
+<div class="photosat_left_bar">
+															
+				
+				<!--advertisement-div-start-->
+						<div class="photosat_left">
+						
+						<div class="friend_left_inner Advertisement"><% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %></div>
+						
+						<div class="friend_left_inner_12 Advertisement"><% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %></div>
+						
+						</div>
+						<!--advertisement-div-end-->
+
+					
+						
+				<!--center photos-->
+			
+					<div class="photosat_right">
+					
+					<div class="photoset_rightbar_inner1">
+  
+  <!--top navigation divs -->
+  
+  <div class="photosat_rightbar_inner_story">
+  
+  
+  
+  <!--  navigation divs-->
+
+	
+	
+    <div class="photosat_friend">
+					  
+					  <div class="story_cal1">
+		<img src="/images/home/profile_friends.gif" class="my_world_right"/> People
+			 <font style="color:#736F66;">
+		<%= render :partial => '/shared/pagination', :locals => {:total => @total, :type => @user, :pgmax => 45 } %>	 
+			 </font> 
+        </div>
+
+		<div class="select_photoset">
+		<% form_for :seepeople, :url =>{ :controller =>'/see/people', :action => 'index'} do %>		
+		<select  id="search_by" name="search_by" onchange="this.form.submit();" class="story_select_story">
+		<% if params[:search_by].blank? %>
+		<option value="">Pick a Friend...</option>
+		<% else %>
+		<option value="<%= params[:search_by] %>"><%= @country_name.name %></option>
+		<% end %>
+		<%= options_from_collection_for_select @countries, "id", "name" %>
+		</select>
+		<% end %>						 	
+		</div>
+		
+		
+		
+		</div>
+		
+
+       
+		
+		
+
+	  <!--  navigation divs end -->
+	
+	
+ </div>
+  <!--top navigation divs end-->
+  
+	</div>
+		
+		
+					<div class="photosat_right_inner">
+					
+	
+			<% @user.each_with_index do |user,i| %>					
+			<div class="photosat_image" class="my_world_bottom">			
+							
+			 <div class="my_world_image" onmouseover="test('image_<%= user.id%>','fimage_<%= user.id %>','limage_<%= user.id %>');" onmouseout="divout('fimage_<%= user.id %>','limage_<%= user.id %>');">
+			 			
+            <div id="fimage_<%= user.id %>">			 
+		   	<% if !user.profile.profile_image.blank? %>
+			<%= image_tag(url_for_file_column(user.profile,"profile_image","main"), :id => "image_#{user.id}",:alt => "#{user.screen_name.titlecase}") %>
+	   		<% else %>
+			<%= image_tag(("/images/home/black_blankimage.jpg"), :id => "image_#{user.id}", :class => "my_world_image",:alt => "#{user.screen_name.titlecase}")%>
+			<% end %>
+		     </div>
+		   
+		   
+		<!--   popupdiv start here-->
+		
+		   <div class="my_world_main_image" id='limage_<%= user.id %>' onclick="people_profile('<%= profile_url(:id => user.screen_name.gsub(' ', '_'))%>');" title="Click here to view '<%= user.screen_name.titlecase %>' profile">
+		   
+		   
+           <div class="my_world_friend">
+		   &nbsp;
+		   
+		   <% if check_friend(user.id) %>		   
+           <div class="menu_nyros" class="my_world_menu" onmouseover="this.style.backgroundColor='#FF0000'" onmouseout="this.style.background=''" id="friend">
+		  &nbsp;<a href="<%= add_friend_url(:id => user.screen_name.gsub(' ', '_'))%>" class="menu_nyros" title="Add '<%= user.screen_name.titlecase %>' as a friend">
+		  <img src="/images/home/friend.jpg" alt = "Add '<%= user.screen_name.titlecase %>' as a friend"/>&nbsp;
+		  Friend</a>
+		   </div>
+		  <% else %>
+		   <div class="menu_nyros my_world_menu">
+		   </div>
+		  <% end %>
+		  			 
+           <div class="menu_nyros my_world_menu" id="message" onmouseover="this.style.backgroundColor='#FF0000'" onmouseout="this.style.background=''">
+		  &nbsp; <a href="<%= write_messageto_url(:id => user.screen_name.gsub(' ', '_'))%>" class="menu_nyros" title="Send message to '<%= user.screen_name.titlecase %>'">
+		  <img src="/images/home/message.jpg" alt = "Send message to '<%= user.screen_name.titlecase %>'" />&nbsp;Message</a>
+		   </div>
+		   
+            </div>
+			
+			
+          </div>
+        
+		  
+		  
+		  <!--   popupdiv end here-->
+			
+		  </div>
+
+								<div>
+								<div class="Hiker friends_flo" align="center">
+								<%= profile_name(user.screen_name) %></div>
+								<div class="friends_flo1 friends_mar">
+								<%= image_tag(url_for_file_column(user.country,"image","main")) %>
+								</div>								
+								</div>
+								
+								
+								
+								</div>
+							
+			<% end %>
+					
+					</div>
+					
+					<div class="clear"></div>
+					
+					
+					<div>
+			 <% if !@user.blank? %><div align="center"><b><%= will_paginate (@user,{:prev_label =>'<img src="/images/home/photos/black_prev.gif" alt="previous" style=" vertical-align:bottom;" />',:next_label =>'<img src="/images/home/photos/black_next.gif" alt="next" style=" vertical-align:bottom;" />',:class => 'pagination_photos',:params => {:search_by => params[:search_by]} }) %></b></div><% end %>	</div>
+					
+					</div>
+						<!--center photos end-->			
+
+				
+				
+														
+					</div>

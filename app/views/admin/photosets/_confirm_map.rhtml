@@ -1,0 +1,40 @@
+
+  <script type="text/javascript">	
+      // helper function to create markers	  
+      function createMarker(point,html)
+	   {
+	   
+       var marker = new GMarker(point, {draggable: true});  
+     GEvent.addListener(marker, "click", function(){marker.openInfoWindowHtml(html);});
+	  GEvent.addListener(marker, "dragend", function(){
+       var ctr = marker.getPoint();
+		var lt =ctr.lat();
+		var lng=ctr.lng();
+	    document.getElementById('longt').value = lng;
+	    document.getElementById('lat').value = lt;
+   		return photo_fileds_create();
+       }
+	   );
+	   
+        return marker;
+        }
+      
+      // this is called when the page loads. 
+      // it initializes the map, and creates each marker
+	  
+      function initialize()
+	   {
+     
+     var map = new GMap(document.getElementById("map_canvas"));
+     map.addControl(new GSmallMapControl());
+	 map.addControl(new GMapTypeControl());
+     map.centerAndZoom(new GPoint(<%= @photoset.longt%>,<%= @photoset.lat %>), 4);           
+        
+		var point = new GPoint(<%= @photoset.longt%>,<%= @photoset.lat %>);
+		
+      <!--  var marker = createMarker(point,'<div><%#=h  @photoset.title %></div>')-->
+		var marker = createMarker(point,'<div style="width:100%;"><div style="width:25%; float:left"> <% if !@photoset.coverimage.nil? %><%= image_tag(url_for_file_column(@photoset.coverimage, 'image','thumbnail'))%><% end %></div><div style="width:70%; float:left"><b><%= @photoset.title.humanize %></div></div>')
+        map.addOverlay(marker);	       
+        }    
+    </script>
+    <div id="map_canvas" style="width:400px; height:280px;"></div>

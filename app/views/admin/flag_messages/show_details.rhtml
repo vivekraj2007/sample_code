@@ -1,0 +1,54 @@
+
+<div style="color:#444e02; padding:0px;width:600px; margin:0px; font-size:20px;"  class="admin_font" > 
+<div style="margin-bottom:8px;" align="center">Flagged Message details</div> 
+
+<%# form_for :flad_message do %>
+
+<div style="width:550px; font-size:12px;">
+<div style="width:120px; font-size:12px; float:left; text-align:right"><b>Falgged by </b>&nbsp;:&nbsp;</div>
+<div style="float:left;padding-left:3px;  text-align:left; width:300px"><%= @flag.name %></div>
+<div style="clear:both; "></div>
+</div>
+
+<div style="width:550px; font-size:12px;">
+<div  style="width:120px; margin-top:5px; font-size:12px; float:left; text-align:right"><b>Email Id</b> &nbsp; :&nbsp;</div> 
+<div style="float:left;padding-left:3px;margin-top:5px;  text-align:left; width:300px"><%= @flag.email %></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div style="width:550px; font-size:12px;">
+<div style="width:120px;margin-top:5px; font-size:12px; float:left; text-align:right"><b>Message</b> &nbsp;:&nbsp;</div>
+<div style="float:left; padding-left:3px;margin-top:5px; text-align:left; width:300px"><%= @flag.message %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div style="width:550px; font-size:12px;">
+<div style="width:120px;margin-top:5px; font-size:12px; float:left; text-align:right"><b>URL of the flagged message </b>&nbsp;:&nbsp;</div>
+<div style="float:left; padding-left:3px;margin-top:5px;  text-align:left; width:300px"><%= @flag.url_path %></div>
+<div style="clear:both;"></div>
+</div>
+
+<div style="width:550px; font-size:12px;">
+<div style="width:120px;margin-top:5px; font-size:12px; float:left; text-align:right"><b>Flagged on </b>&nbsp;:&nbsp;</div>
+<div style="float:left; padding-left:3px;margin-top:5px;  text-align:left; width:300px"><%=  user_dateformate(@flag.created_at)%></div>
+<div style="clear:both;"></div>
+</div>
+
+
+<div style="width:550px; font-size:12px;">
+<div style="width:120px;margin-top:5px; font-size:12px; float:left; text-align:right">
+&nbsp;</div>
+<div style="float:left; padding-left:3px;margin-top:10px;  text-align:left; width:300px">
+<%= link_to (image_tag("/images/admin/back.gif"), {:action => 'index'})%> &nbsp;&nbsp;
+<%= link_to (image_tag("/images/admin/delete_new.gif"),{:action => 'forced_delete', :id => @flag.id},{ :confirm => 'Are you sure want to delete this flagged message ?', :method => :post, :title => "click here to delete this flagged message"}) %>
+</div>
+<div style="clear:both;"></div>
+</div>
+
+<!--<div align="center" style="padding-top:5px;">
+<%#= submit_tag 'Change password' %>
+</div>-->
+<%# end %>
+
+</div>

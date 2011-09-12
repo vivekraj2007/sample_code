@@ -1,0 +1,96 @@
+<% total = 0 %>
+<% total_photos_in_set = 0 %>
+
+
+	<%	if @user_photsets.length != 0 %>
+	
+		   <% for photoset in @user_photsets %>
+			 <% total_photos_in_set = photoset.photos.length %>
+			 <% total = total + total_photos_in_set  %>
+		   <% end %>
+	
+	<% end %>
+		
+	
+<div id="totaluser_user_photos" style="display:none;" class="profile_inneruser">
+ <div class="right_in">
+   <div class="profileright_in1">
+        <div class="newphoto_call" style="width:150px;"> 
+        <%= total %> Photos,
+        <% if !@user_photsets.blank? %>
+           <%= @user_photsets.length %>
+        <% else %>
+          0
+        <% end %> Sets
+		  </div>
+		  </div>
+     <div>
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_photos', 'blind', {duration:0.6}); Element.show('totaluser_photos'); " class="newphoto_call2"><img src="/images/home/up_arrow.jpg" alt="" /></a>
+           
+   	  </div>
+		</div>  
+<div class="clear"></div>
+
+<div class="profile_right6">
+	 
+	 <div style="width:200px; height:auto; overflow:hidden; margin:0 0 0 7px; ">
+        <% @user_photsets.each_with_index do |photosett,i| %>
+		<% if i == 9 %>
+		 <% break %>  
+		 <% else %>
+         <div  style=" padding:4px; float:left;">			 	 
+		<% if !photosett.coverimage.blank? %>
+		<%= link_to image_tag(url_for_file_column(photosett.coverimage, "image","thumbnail"),:alt => "#{photosett.title}",:style => "border:1px solid #e1ae62;float:left;"), photopermalink_url(:continent => !photosett.continent.blank? ? photosett.continent.gsub(/ /,'-') : 'continent',:country => !photosett.country.blank? ? photosett.country.gsub(/ /,'-') : 'country', :state => !photosett.state.blank? ? photosett.state.gsub(/ /,'-') : 'state', :location => !photosett.location.blank? ? photosett.location.gsub(/ /,'-') : 'location', :id => photosett.permalink),{:title => "#{photosett.title}"} %>
+		<% else %>		
+		<%= link_to image_tag("/images/home/no-image_tumb.gif",:alt => "#{photosett.title}", :style => "border:1px solid #e1ae62;float:left;"), photopermalink_url(:continent => !photosett.continent.blank? ? photosett.continent.gsub(/ /,'-') : 'continent',:country => !photosett.country.blank? ? photosett.country.gsub(/ /,'-') : 'country', :state => !photosett.state.blank? ? photosett.state.gsub(/ /,'-') : 'state', :location => !photosett.location.blank? ? photosett.location.gsub(/ /,'-') : 'location', :id => photosett.permalink),{:title => "#{photosett.title}"} %>
+		<% end %>	
+		 </div>
+		 <% end %>	
+		 
+        <% end %>
+      </div>
+	  </div>
+   	  
+</div>	
+	
+	
+	
+		  
+  
+
+<div class="clear"></div>
+
+
+
+<div class="profile_bg1" style="display:block;" id="totaluser_photos">	
+    <div class="right_in">
+      <div class="profileright_in1">
+        <div class="profile_cal1" style="width:150px;">
+		
+ <% if total != 0 %>
+  <%= link_to "#{total} Photos,",photos_url(:id => @user_profile.screen_name.gsub(' ', '_')),:title => 'Click here to view the photoset list', :class=> 'profile_cal1_new' %> 
+ <% else %>
+ <%= total %> Photos,
+ <% end %>
+ 
+<% if !@user_photsets.blank? %>
+      <%= link_to "#{@user_photsets.length} Sets",photos_url(:id => @user_profile.screen_name.gsub(' ', '_')),:title => 'Click here to view the photoset list', :class=> 'profile_cal1_new' %> 
+<% else %>
+          0 Sets
+<% end %>
+         
+		  
+		  </div>
+
+      </div>
+	  
+      <div >
+        <% if total!=0 %>
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_photos', 'blind', {duration:0.6}); Element.hide('totaluser_photos');" class="profileright_in2"><img src="/images/home/down_arrow.jpg" alt="" /></a>
+        <% end %>
+      </div>
+	  
+    </div>
+	
+  </div>
+

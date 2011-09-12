@@ -1,0 +1,29 @@
+<% for location in main_loc %>
+	<% location_1 = Location.find(:all, :conditions => ["parent_id like ?",location.id]) %>
+		<% if !location_1.blank? %>
+			<li><a class="drop" href="<%= location_mostpopular_url(:id => location.name)%>"><%= location.name %>
+			<!--[if IE 7]><!-->
+			</a>
+				 <!--<![endif]-->
+				 <!--[if lte IE 6]><table><tr><td><![endif]-->		 
+				<ul>
+	           <%= render :partial => "/shared/sub_locations" , :locals => {:main_loc => location_1 } %>
+			    </ul> 	  
+			  <!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+		<% else %>	
+			<li><a class="drop" href="<%= location_mostpopular_url(:id => location.name)%>"><%= location.name %>
+			<!--[if IE 7]><!-->
+			</a>
+				 <!--<![endif]-->
+				 <!--[if lte IE 6]><table><tr><td><![endif]-->	
+			<ul>
+			<li><a href="<%= location_peoples_url(:id => location.name)%>">Peoples</a></li>
+			<li><a href="<%= location_photosets_url(:id => location.name)%>">Photosets</a></li>
+			<li><a href="<%= location_stories_url(:id => location.name)%>">Stories</a></li>
+			</ul>	 
+			<!--[if lte IE 6]></td></tr></table></a><![endif]-->
+			</li>
+		<% end %>
+		
+<% end %>

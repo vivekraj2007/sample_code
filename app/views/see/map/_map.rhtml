@@ -1,0 +1,88 @@
+<script type="text/javascript">
+ function see_photos(id)
+{
+document.location.href = "/myworld/photos/search_map/"+id;
+ }
+
+function see_stories(id)
+{
+document.location.href = "/myworld/stories/search_map/"+id;
+}
+</script>
+
+ <script type="text/javascript">
+ 
+   
+    function see_map() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+		<%# if !@browser_ip.blank?%>
+		<%# if !@browser_ip.browser_lat.blank? && !@browser_ip.browser_longt.blank? %>
+		 //map.setCenter(new GLatLng(21.796875, 31.952162),1,G_PHYSICAL_MAP);
+		//map.setCenter(new GLatLng(<%#= @browser_ip.browser_lat %>,<%#= @browser_ip.browser_longt %>), 9,G_PHYSICAL_MAP);
+       	<%# else %>
+		//map.setCenter(new GLatLng(21.796875, 31.952162),1,G_PHYSICAL_MAP);
+		<%# end %>
+		<%# else %>
+		map.setCenter(new GLatLng(21.796875, 31.952162),1,G_PHYSICAL_MAP);
+		<%# end %>
+		map.addMapType(G_PHYSICAL_MAP);
+		map.addControl(new GLargeMapControl());
+		map.addControl(new GMapTypeControl());
+ 			
+	 // Create our "tiny" marker icon
+        var blueIcon = new GIcon(G_DEFAULT_ICON);
+      // blueIcon.image = "/images/home/map/default_point.png";
+	   blueIcon.shadow=""
+	   blueIcon.iconSize = new GSize(16, 15);
+	blueIcon.iconAnchor = new GPoint(5, 13);
+		
+	var photos = new GIcon(blueIcon, "/images/home/map/map_photos.png"); 	
+	var story = new GIcon(blueIcon, "/images/home/map/map_story.png"); 	
+	//var video = new GIcon(blueIcon, "/images/home/map/map_video.png"); 
+	
+		
+	// Set up our GMarkerOptions object
+		//markerOptions = { icon:storyIcon };
+			
+	// default icon
+          function createMarker(point, html, icon) {
+          var marker =
+          new GMarker(point,icon);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		
+	<% if @see_map_stories %>
+		<% for story in @see_map_stories %>		 
+		  var point = new GLatLng(<%= story.lat %>,<%= story.longt %>);
+	      var marker = createMarker(point,'<div class="map_main_map" onClick="see_stories(<%= story.id%>);"><div class="map_left"><div class="map_left1"><%=  "#{story.title.gsub(/'/,'').to(50)}" %></div><div class="map_title"><%= "#{story.sub_title.gsub(/'/,'').to(20)}" %></div><div class="map_title"><%= map_date(story.created_at) %></div></div><div class="map_image"><div  class="map_image1"><img src="/images/home/map/map_story.jpg"/></div><div class="map_date"><%= image_tag("/photo/image/#{story.image_id}/thumbnail/#{story.image}",:class => "map_inner") %></div></div></div>',story);
+		  map.addOverlay(marker);	
+		
+		<% end %>	
+		
+		<% end %>
+
+	 <% if @see_map_photosets %>
+		<% for photos in @see_map_photosets %>	
+		  var point = new GLatLng(<%= photos.lat %>,<%= photos.longt %>);
+	
+		   var marker = createMarker(point,'<div class="map_main_map" onClick="see_photos(<%= photos.id %>);"><div class="map_left"><div class="map_left1"><%=  "#{title(photos.title.gsub(/'/,''),50)}" %></div><div class="map_title"><%= "#{title(photos.description.gsub(/'/,''),20)}" %></div><div class="map_title"><%= map_date(photos.created_on) %></div></div><div class="map_image"><div class="map_image1"><img src="/images/home/map/map_photo.jpg"/></div><div class="map_date"><%= image_tag(url_for_file_column(photos.coverimage, "image","thumbnail"),:class => "map_inner") %></div></div></div>',photos);
+		 map.addOverlay(marker);			
+	
+		<% end %>
+	
+	<% end %>
+		
+		
+	 }
+	}
+    </script>
+
+
+
+<div id="mapsearch" class="see_map_map"></div>
+

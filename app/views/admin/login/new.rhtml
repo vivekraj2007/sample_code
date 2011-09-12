@@ -1,0 +1,18 @@
+<% form_for :admin,   :url => { :action => "create" ,:controller=>"admin/login"} do  %>	
+							  
+							  
+							  
+	<div><div align="left"><b>Email :</b><%= text_field 'admin', 'email' ,:style => "width:250px;",:id=>'email', :class => 'default_style' %></div></div>
+			
+	<div><div align="left"><%= error_message_on :admin, :email, 'Email '%></div></div>
+	<div><div align="left"><b>Name :</b><%= text_field 'admin', 'name',:style => "width:250px;",:id=>'name', :class => 'default_style' %></div></div>
+	<div><div align="left"><%= error_message_on :admin, :name, 'name '%></div></div>
+	
+	<div><div align="left"><b>Password :</b><%= password_field 'admin', 'password' ,:id=>'password',:style => "width:250px;" , :class => 'default_style'%></div></div>
+	<div><div align="left"><%= error_message_on :admin, :password, 'Password '%></div></div>
+	<div><div align="left"><b>Confirmation Password :</b><%= password_field 'admin', 'confirmation_password' ,:id=>'passwordconfirm',:style => "width:250px;", :class => 'default_style'%>	</div></div>
+	<div><div align="left"><%= error_message_on :admin, :confirmation_password, 'confirmation password '%></div></div>
+	<div><%= submit_tag "create" %></div>				
+						
+<% end %>		
+			

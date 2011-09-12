@@ -1,0 +1,102 @@
+<div id="<%= @parient %>_div" style="display:none;">		
+			
+
+<% location_1 = Location.find(:all, :conditions => ["parent_id LIKE ?",@parient],:group =>'name') %>
+	
+<% for place in location_1 %>		
+
+					
+		<!-- places after div start-->		
+		
+		<% sub_places = Location.find(:all,:conditions => ["parent_id LIKE ?",place.id],:group =>'name') %>
+		<% if place.status != 1 %> 
+		<%# if sub_places.length == 0 %>   
+		<div class="home_edit">
+			<% if @profile.exploredplaces_list.nil? %>			
+			<input type="checkbox"  name="exploredplaces_list[]" value="<%= place.id %>" id="check_<%= place.id %>">&nbsp;<%= place.name %>
+			<% elsif @profile.exploredplaces_list.include?("#{place.id}")  %>	
+			<input type="checkbox"  name="exploredplaces_list[]" value="<%= place.id %>" id="check_<%= place.id %>" checked="checked" >&nbsp;<%= place.name %>
+			<% else %>
+			<input type="checkbox"  name="exploredplaces_list[]" value="<%= place.id %>" id="check_<%= place.id %>">&nbsp;<%= place.name %>
+			<% end %>
+			
+			</div>
+		
+		
+		<% else %>
+								 
+			<div style="width:180px; display:none;" id="div_<%= place.id %>_after">		
+																				
+			<div style="background-color:#ECE9DA; float:left; width:180px;">						   
+			<div class="home_edit" style="float:left; width:130px;">
+			
+			
+			<% if @profile.exploredplaces_list.nil? %>
+			<input type="checkbox"  name="exploredplaces_list[]"  value='<%= place.id %>' id="after_<%= place.id %>" onclick="check_other('after',<%= place.id %>)">&nbsp;<%= place.name %>			
+			<% elsif @profile.exploredplaces_list.include?("#{place.id}")  %>			
+			<input type="checkbox"  name="exploredplaces_list[]"  value='<%= place.id %>' id="after_<%= place.id %>" onclick="check_other('after',<%= place.id %>)" checked="checked" >&nbsp;<%= place.name %>
+			<% else %>
+			<input type="checkbox"  name="exploredplaces_list[]"  value='<%= place.id %>' id="after_<%= place.id %>" onclick="check_other('after',<%= place.id %>)">&nbsp;<%= place.name %>
+			<% end %>
+			
+			
+			
+			</div>
+							  
+			<div style="float:left; width:10px; padding-top:10px; padding-left:20px;">
+			<img src="/images/home/explored_up_arrow.jpg" onclick="Effect.toggle('div_<%= place.id %>_after', 'blind', {duration:0.9}); Element.show('div_<%= place.id %>_before');">
+			</div>
+			</div>					   
+			<div class="clear"></div>
+							 
+			<!--places in selected place	-->		
+				
+			<% if !sub_places.blank? %>   
+			<% for subplace in sub_places %>
+			<% sub_depth = Location.find(:all, :conditions => ["parent_id like ?",subplace.id],:group =>'name',:order => "name ASC") %>
+			<% for subplace in sub_depth %>			
+			<div class="home_edit" style="margin-left:10px;">
+			<% if @profile.exploredplaces_list.nil? %>			
+			<input type="checkbox"  name="exploredplaces_list[]" value="<%= subplace.id %>" id="check_<%= subplace.id %>">&nbsp;<%= subplace.name %>
+			<% elsif @profile.exploredplaces_list.include?("#{subplace.id}")  %>	
+			<input type="checkbox"  name="exploredplaces_list[]" value="<%= subplace.id %>" id="check_<%= subplace.id %>" checked="checked" >&nbsp;<%= subplace.name %>
+			<% else %>
+			<input type="checkbox"  name="exploredplaces_list[]" value="<%= subplace.id %>" id="check_<%= subplace.id %>">&nbsp;<%= subplace.name %>
+			<% end %>
+			
+			</div>
+			<% end %>
+			<% end %>			   
+			<% end %>
+		  <!-- places in place end	-->			
+							
+	   </div>
+							
+	   <!-- places after div end -->		
+		
+
+							
+	   <!-- places before div start-->
+							
+		<div  id="div_<%= place.id %>_before"style="background-color:#ECE9DA; float:left; width:180px; border-bottom: 1px solid #E3DDC7;">
+					  
+		<div class="home_edit" style="float:left; width:130px;">	
+		<input type="checkbox"  name="exploredplaces_list[]" value="<%= place.id %>" id="before_<%= place.id %>" onclick="check_other('before',<%= place.id %>)">&nbsp;<%= place.name %>
+		</div>
+						  
+		<div style="float:left; width:10px; padding-top:10px; padding-left:20px;">
+		<img src="/images/home/explored_down_arrow.jpg" onclick="Effect.toggle('div_<%= place.id %>_after', 'blind', {duration:0.9}); Element.hide('div_<%= place.id %>_before');">
+		 </div>
+						 
+		</div>
+						  
+		<div class="clear"></div>							
+		<% end %>					
+	<!-- places before div end -->
+							
+
+		
+	<% end %>						
+	</div>
+							
+	<!--Caribbean_div div end--> 

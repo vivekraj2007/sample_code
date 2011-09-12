@@ -1,0 +1,206 @@
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories">
+    <!--advertisement-div-start-->
+	
+	
+	<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement"><%= @top_adv.script %></div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement"><%= @bottom_adv.script %></div>
+      
+      </div>
+    </div>
+    
+    <!--advertisement-div-end-->
+    <!--stories start-->
+    <div class="stories_rightbar">
+      <div class="stories_rightbar_inner">
+        <div class="story_cal1">
+		<img src="/images/home/stories/story_myworld.gif" style="padding-right:5px;"/>
+		<% if check_login(@user_profile.id)  %>My<% else %><%= profile_name(@user_profile.screen_name) %><% end %> Stories
+		 <font style="color:#736F66;">
+          <% if @total.blank? %>
+           0 - 0 of 0
+          <% else %>
+          <% if @total.size > 4 %>
+          <% if params[:page] %>
+         <%= (params[:page].to_i * 5) - 4  %> -
+          <% if (params[:page].to_i * 5) > @total.size %>
+          <%= @total.size %>
+          <% else %>
+          <%= (params[:page].to_i * 5)  %>
+          <% end %>
+          <% else %>
+           1 - <%= @stories.size %>
+          <% end %>
+          of <%= @total.size %>
+          <% else %>
+           1 - <%= @stories.size %> of <%= @total.size %>
+          <% end %>
+          <% end %>
+		 </font> 
+		 
+        </div>
+		
+		
+		
+        <!--SELECT BOX DIV START HERE	-->
+        <div style="float:right; margin-top:5px; margin-left:30px;">
+          <% form_for :myworld, :url =>{ :controller =>'/myworld/stories', :action => 'preview'} do %>
+          <select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+            <option>Choose a Story...</option>
+            <%#= options_from_collection_for_select @user_stories_published, "permalink", 'title' %>
+          </select>
+          <% end %>
+        </div>
+        <!--SELECT BOX DIV END HERE	-->
+		
+		
+		
+		
+		
+        <!--SEARCH START HERE	-->
+        <!--<div class="story_search">
+		    <%# form_for :storysearch,:url => {:controller => "/myworld/stories", :action => "search"} , :html => {:onsubmit=>'return storysearch();'} do  %>	
+			<div style="float:left; width:auto;">	
+			<input name="search" id="search" value="" src="/images/home/stories_search.jpg" type="image">
+		    </div>
+			
+			<div>			
+			<input name="search" value="" type="text" id = "search_word" class="input"/>
+			</div>
+			
+			<div style="float:left;">
+			<img src="/images/home/stories_search_right.jpg" alt="" />
+			</div>
+			<%# end %>
+			</div>-->
+        <!--SEARCH END HERE	-->
+		
+		
+		
+      </div>
+	  
+	  
+      <% if !@total.blank? %>
+	  
+	  
+      <% for story in @stories %>
+	  
+	  
+      <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+	  
+      <!--stories content start-->
+      <div class="stories_rightbar_inner111">
+	  
+        <div class="stories_home"> <%= title_slice(story.title,15) %> <%#= title_tcase(story.where_is) %> </div>
+		
+        <div> <span class="stories_tag"><%= title_tcase(story.tag) %></span> </div>
+		
+        <div class="stories_date">
+        <div class="friends_flo">
+		 <%= myworld_dateformat(story.created_at) %> <span class="home"> <%= story.story_comments.length %> Comments </span>
+		 </div>
+		 
+          <div class="stories_rating" id ="star-ratings-block"> 
+		  <%= render :partial => 'myworld/stories/ratee', :locals => {:story => @story = story }%>
+		  </div>
+		   
+          </div>
+		
+		
+        <div class="stories_tag_text">
+		 <%= title_slice_withoutcap(story.write_it,460) %>
+		 <% if !story.write_it.blank? %>
+		<!--  <span class="story_view" style="float:right;">-->
+		  <%= link_to "View this Story", storypermalink_url(:continent =>check_continent(story.continent),:country => check_country(story.country), :state => check_state(story.state), :location => check_location(story.location),:id => story.permalink), {:class => 'story_view',:title =>"Click here to view the story details" } %>
+		 <!-- </span> -->
+		 <% end %>
+		  </div>
+		  
+		  
+		  
+		  
+        <!--slide images start here-->
+		
+  <% if !story.slideshow_id.blank? && story.slideshow_id != 0 %>		
+  <div class="stories_rightbar_inner2">		
+  <% totalphotos = Photo.find(:all, :conditions =>["photoset_id like ?",story.slideshow_id], :select => "image, id", :limit => 9) %>		 
+          <% for photoimages in totalphotos %>
+		  <% if !photoimages.image.blank? %>
+          <div style="padding-left:5px; float:left;">
+		  <%= image_tag(url_for_file_column(photoimages, "image","thumbnail"))%> 
+		  </div>
+		  <% end %>
+          <% end %>
+	  
+   </div>
+		
+		
+  <% elsif !story.added_images.blank? %>
+   <div class="stories_rightbar_inner2">
+		
+          <% for storyid in story.added_images.split(',') %>		  
+           <% photoadded = Photo.find_by_id(storyid) %>
+		   <% if !photoadded.image.blank? %>
+           <div style="padding-left:5px; float:left;"> 
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %> 
+		   </div>
+		   <% end %>
+		   <% end %>	
+		   	   
+  </div>	
+		   	   
+  <% end %>
+		  
+   <!--  slide show end-->
+  </div>
+	  
+	  
+	  
+      <!--stories content end-->
+  <% end %>
+	  
+  <div class="stories_rightbar_inner111"> <img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+	  
+      <div align="center"> <strong>	  
+	   <%= will_paginate (@stories,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" style=" vertical-align:bottom;" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" style=" vertical-align:bottom;" />'}) %> </strong></div>
+	   
+      <% else %>
+	  
+	  
+         <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+      <div class="stories_rightbar_inner1"><br/>
+        <div class="stories_home">
+          <center>
+            No Stories
+            <% if @message %>
+            found for your search keyword.
+            <% end %>
+          </center>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <!--stories end-->
+  </div>
+  <!--left stories end-->
+</div>

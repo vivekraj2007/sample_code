@@ -1,0 +1,109 @@
+
+
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+							<div class="left_bar_stories_new1">
+				
+				
+				<!--advertisement-div-start-->
+						
+						
+	<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">
+<% if !@left_top_adv.blank? %>
+<%= @left_top_adv %>
+<% end %>
+		  </div>    
+      </div>
+    
+	
+	
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement">		  
+	<% if !@left_bottom_adv.blank? %>
+	<%= @left_bottom_adv %>
+	<% end %>
+		  </div>      
+      </div>
+	  
+	  
+    </div>
+							
+						<!--advertisement-div-end-->
+		<div class="stories_rightbar_new">
+		
+		
+		<div class="stories_rightbar_inner_photo">
+	
+			   <div class="friends_flo"><img src="/images/home/gloab_1.jpg" alt=""/></div>
+			   
+		   
+			   <div class="worldmap_paintball">  Map  </div>
+			   
+			   
+		   <% form_for :myworld, :url =>{ :controller =>'/see/map', :action => 'index'} do %>  
+			<div class="my_world_bottom friends_flo1">
+          
+          <select class="worldmap_select_story" id="types" name="types" onchange="this.form.submit(); ">	
+		   <% if @map %>
+		   <option value="<%= @map %>"><%= @map %></option>
+		   <% else %>
+		   <option value="">Show me...</option> 
+		   <% end %>
+        
+            <option value="Photo Sets">Photo Sets</option>
+           <!-- <option value="Video Sets">Video Sets</option>-->
+            <!--<option value="Reviews">Reviews</option>-->
+            <option value="Stories">Stories</option>
+            <!--<option value="Travelogs">Travelogs</option>-->
+            <!--<option value="Plans">Plans</option>-->
+           <!-- <option value="Tags">Tags</option>-->
+          </select>
+       
+			   
+			  </div> 
+			  <% end %>
+		
+        </div>		
+					
+					<div class="clear"></div>
+			   
+	        <div  class="see_map_index" >
+		
+		
+		<% if @map == 'Photo Sets' %>
+		<%= render :partial => 'photosets_map' %>
+		<% elsif @map == 'Stories' %>
+		<%= render :partial => 'stories_map' %>	
+		<%# elsif @map == 'Video Sets' %>
+		<%#= render :partial => 'videosets_map' %>		
+		<%# elsif @map == 'Reviews' %>
+		<%#= render :partial => 'reviews_map' %>	
+		<%# elsif @map == 'Travelogs' %>
+		<%#= render :partial => 'travelogs_map' %>	
+		<%# elsif @map == 'Friends' %>
+		<%#= render :partial => 'friends_map' %>			
+		<%# elsif @map == "Where I'm Going" %>
+		<%#= render :partial => 'where_i_am_going' %>	
+		<%# elsif @map == "Favorite Places" %>
+		<%#= render :partial => 'favourite_places' %>						
+		<% else %>		
+		<%= render :partial => 'map' %>
+		<% end %>
+	
+		
+		</div>
+		
+				
+				</div>
+		
+		
+		
+	
+						</div>
+						<!--left stories end-->
+</div>

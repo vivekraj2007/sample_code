@@ -1,0 +1,107 @@
+<% if !@cart.lat.blank? || !@cart.longt.blank? %>
+<%= render :partial => 'confirm_map'%>
+<% else %>
+
+
+
+
+
+
+<html>
+<head>
+<title>Uncharted.net - Adding Geo locations for Travelog</title>
+<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ"
+            type="text/javascript"></script>
+			
+			
+			
+<script>
+window.onload=function()
+{
+initialize();
+geo_fileds();
+}	
+</script>
+
+
+
+<script type="text/javascript">
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(21.796875, 31.952162),1);
+        GEvent.addListener(map, "drag", function() {
+		var ctr = map.getCenter();
+		var lt =ctr.lat();
+		var lng=ctr.lng();
+	    document.getElementById('longt').value = lng;
+	    document.getElementById('lat').value = lt;
+		geo_fileds();
+        });
+
+map.addControl(new GSmallMapControl());
+map.addControl(new GMapTypeControl());
+
+      }
+    }  
+    </script>
+	
+	
+<!--field validations-->
+<script type="text/javascript">
+	function geo_fileds()	
+	{
+	lat = document.getElementById('lat').value
+	longt = document.getElementById('longt').value	
+	locat = document.getElementById('location').value
+	
+	
+	if( (lat =="" || longt =="") && locat=="" )
+	{
+	document.getElementById('geo_tag').src='/images/home/save_b.jpg';
+	document.getElementById('geo_tag').disabled=true;
+	}
+	
+	else
+	{    
+	document.getElementById('geo_tag').src='/images/home/save_g_b.jpg';
+	document.getElementById('geo_tag').disabled=false;	
+	}
+	}	
+	</script>
+	
+	
+<%= javascript_include_tag "numberonly" %>
+<%= stylesheet_link_tag 'style_menu','style11' %>
+</head>
+
+
+
+
+<body onUnload="GUnload()" class="map_back">
+<div class="map_main">
+  <div>
+    <div id="map_canvas" style="width: 485px; height: 280px; margin:5px 5px 0px 5px; float:left;"></div>
+  </div>
+  <div class="map_main">
+    <% form_for :geotag,:url => {:controller => "/share/travelogs", :action => "map" } do  %>
+    <% if flash[:notice] %>
+    <div class="home_map1"> The address you have mentioned is unknown, please enter correct address </div>
+    <% end %>
+    <div class="clear"></div>
+    <div class="home_map">Geo-coord (Latitude, Longitude)</div>
+    <div class="clear"></div>
+    <div class="map_text"> <%= text_field_tag 'lat' , '',:style => "width:82px;", :class => 'default_style', :id=>'lat',:onfocus => "geo_fileds();", :onkeyup => "geo_fileds();", :onkeypress=>"return numberonly(event,false);" %> &nbsp; <%= text_field_tag  'longt' ,'', :style => "width:82px;", :class => 'default_style', :id=>'longt',:onfocus => "geo_fileds();", :onkeyup => "geo_fileds();",:onkeypress=>"return numberonly(event,false);"   %> &nbsp;
+	 </div>
+    <div class="home_map">(OR)</div>
+    <div class="home">Enter Address, State/Prov, Country </div>
+    <div class="map_text"> <%= text_field_tag 'location' ,'',:class => 'default_style_textarea_h3', :id=>'location',:onfocus => "geo_fileds();", :onkeyup => "geo_fileds(); "  %> </div>
+    <div class="map_text1">
+      <input name="geo_tag" id="geo_tag" value="save" src="/images/home/save_b.jpg" type="image" disabled = true >
+    </div>
+    <% end %>
+  </div>
+</div>
+</body>
+</html>
+<% end %>

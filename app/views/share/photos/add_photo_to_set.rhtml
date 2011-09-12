@@ -1,0 +1,196 @@
+
+<div class="left_bar_1">
+  <div class="nav_box">
+    <div class="left_bar_12">
+      <div class="left_bar_13">
+        <div class="text_who">1.Create a new photo set</div>
+        <div class="share_add_set">
+	<% form_for :photos,:url => {:controller => "share/photos",:action => "edit_photoset"} do  %>
+          <select id="photoset" name="photoset" onchange="this.form.submit();">
+            <option value="edit">Edit Existing Photo Set</option>
+            <%= options_from_collection_for_select @user_photsets, "permalink", 'sliced_title' %>
+          </select>
+          <% end %>
+        </div>
+        <% form_for :photos, :url => {:action => "update_photoset", :id => @photoset.permalink} do %>
+        <div class="home">Title</div>
+        <div class="my_mar_left"> <%= text_field 'photoset', 'title' ,:style => "width:180px; height:18px;", :class => 'default_style', :id=>'title', :disabled => 'disabled' %> </div>
+        <div class="home">Description</div>
+        <div class="my_mar_left"> <%= text_area 'photoset', 'description',:class => 'default_style_textarea_new', :id => 'description', :style=> "height:66px;", :disabled => 'disabled'%> </div>
+        <div class="my_world_preview"> <%= image_tag ("/images/home/save_n.jpg") %> </div>
+        <% end %>
+      </div>
+    </div>
+    <!--middle content-->
+	
+
+    <div class="friends_flo">
+      <div class="index_top">
+        <div class="top_1">&nbsp;</div>
+        <div class="top_middile">&nbsp;</div>
+        <div class="top_right">&nbsp;</div>
+      </div>
+      <div class="clear"></div>
+	  <%= javascript_include_tag 'multifile_compressed' %>	
+      <div class="middile">
+	
+	 <% form_for :user,  :url => { :action => "add_photo", :id => @photoset.permalink } , :html => {:multipart => true} do  %> 
+<%# form_remote_tag :url => {:action => 'add_photo',:id => @photoset.permalink},
+#:html => {:multipart => true, :action => { :action => 'add_photo', :id => @photoset.permalink}},:update => 'patient_search',:before => "Element.show('upload_image');", :complete => "Element.hide('upload_image');" do %>  
+       
+		
+        <div class="mid" >
+          <div class="mid1">
+            <div class="text_who">2. Add photos to this Set
+			<%= image_tag '/images/home/spinner.gif', :id=>'upload_image', :style=>"display:none;" %>
+			</div>
+            <div class="home">Sets may contain up to 100 photos.</div>
+            <div class="share_add_set1" id="patient_search">
+		<input id="photo_image" type="file" name="file_1" class="share_width">
+			</div>
+			
+			
+			<div id="files_list" class="share_column"></div>
+<script>
+	
+	    var multi_selector = new MultiSelector( document.getElementById( 'files_list' ), 5 );	
+		multi_selector.addElement( document.getElementById( 'photo_image' ) );
+</script>
+			
+<% image_error_message = error_message_on :photo, :image %>
+<% if !image_error_message.blank? %>
+    <div class="errormessage_border">
+    <div class="errormessage my_mar_left">Image <%= error_message_on :photo, :image %> </div>
+</div>
+<% end %>  
+            <div>
+              <select name="linkset" id="linkset" class="share_add_set" onchange="photoset_linkset_fields();" >
+			  
+                <% if  !@photoset.linksets.blank?  %>
+                <%= linkset_optionvalue(@photoset.id,'photoset')%>
+                <% else %>
+                <option value="">Link this Set to....</option>
+                <% end %>
+				
+                
+                <% if @user_photsets.size != 0 %>
+                <option value="" style="share_column_value">Photo Sets</option>
+                <% for set in @user_photsets %>
+                <option value="p_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= set.sliced_title.to(20) %></option>
+                <% end %>
+                <% end %>
+				
+				
+                <%# if @user_videosets.size != 0 %>
+               <!-- <option value="" style="font-weight:bold; color:#FF0000;">Video Sets</option>-->
+                <%# for set in @user_videosets %>
+               <!-- <option value="v_<%#= set.id %>">&nbsp;&nbsp;&nbsp;<%#= set.title.humanize %></option>-->
+                <%# end %>
+                <%# end %>
+				
+				
+                <%# if @user_reviews.size != 0 %>
+                <!--<option value="" style="font-weight:bold; color:#FF0000;">Reviews</option>-->
+                <%# for set in @user_reviews  %>
+                <!--<option value="r_<%#= set.id %>">&nbsp;&nbsp;&nbsp;<%#= set.title.humanize %></option>-->
+                <%# end %>
+                <%# end %>
+              </select>
+            </div>
+			
+			
+			
+			
+            <div class="share_add_set">
+			
+		<input name="ptotosetaddphotosave" id="ptotosetaddphotosave" value="save" src="/images/home/save_g_b.jpg" type="image" >&nbsp;
+			
+			<% if !@photoset.photos.blank? %>
+			<%= link_to (image_tag("/images/home/add_tag.jpg"), :action => "add_tag", :id => @photoset.permalink )%>
+			<% end %>
+            </div>
+			
+          </div>
+        </div>
+ <% end %>
+		
+		
+      </div>
+	  
+	  
+      <div class="clear"></div>
+      <div class="index_top">
+        <div class="bottom_left">&nbsp;</div>
+        <div class="bottom_middile">&nbsp;</div>
+        <div class="bottom_right">&nbsp;</div>
+      </div>
+    </div>
+    <!--middle content end 	-->
+    <!--right content-->
+    <div class="middle1">
+      <div class="mid_right1">
+        <div class="text_who">3.Tag,title and caption Photos</div>
+        <div class="home5"></div>
+        <div class="home">Descriptive tags for the whole Set</div>
+        <div class="my_mar_left"> <%= text_area 'photoset', 'tag',:class => 'default_style_textarea_new', :disabled => 'disabled',:style=> "height:66px;" %> </div>
+        <div class="home">Geo-coord (Latitude, Longitude)</div>
+        <div class="share_column_padding"> <%= text_field 'photoset', 'lat' , :value => @photoset.lat,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'lat',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();", :disabled => 'disabled'  %> &nbsp; <%= text_field 'photoset', 'longt' , :value => @photoset.longt,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'longt',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();", :disabled => 'disabled'  %> </div>
+        <div class="home">Address, State/Prov, Country </div>
+        <div class="share_column_padding"> <%= text_area 'photoset', 'address' , :value => @photoset.address,:class => 'default_style_textarea_h3_new', :id=>'location',:onfocus => "photo_fileds_create();", :onkeyup => "photo_fileds_create();" , :disabled => 'disabled',:style=> "height:50px;" %> </div>
+        <div><img src="/images/home/save1.jpg" alt=""  class="my_world_preview"/></div>
+      </div>
+    </div>
+    <!--right content end-->
+  </div>
+  <div class="clear"></div>
+  
+  
+  
+  
+  <!--photoset photos-->
+  
+  <% if !@photoset.photos.blank? %>
+  
+  <div class="map_1">
+  
+
+    <% if @photoset.photos.length > 5 %>
+    <div class="middle2">
+	<% else %>
+	<div class="share_column_main">
+	<% end %>
+	
+	
+      <% count = 1 %>
+	  
+      <% for photo in @photoset.photos %>
+	  
+      <div  class= <% if count%2 == 0%>"middle31"<% else %>"middle3"<% end %> >
+      <div class="middle4"><%= image_tag(url_for_file_column(photo, "image","submain"))%> </div>
+      <div class="middle5" ><%= hidden_field "photo[#{count}]", 'id', :value => photo.id %>
+      <div class="middle6">
+      <div class="home friends_flo"> Cover <%= radio_button "photoset", "coverimage_id", photo.id, :disabled => 'disabled' %> </div>
+      <div class="home friends_flo1"> Delete&nbsp; <%= link_to image_tag("/images/home/delete.jpg"), :controller => "/share/photos", :action => "delete_photo", :id => photo.id  %> </div>
+      </div>
+     <div class="middle6">
+            <div class="home see_map_inner_flo">Title</div>
+            <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'title', :value => photo.title, :class => "share_column_inner", :disabled => 'disabled' %> </div>
+          </div>
+     <div class="middle6">
+            <div class="home see_map_inner_flo">Caption</div>
+            <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'caption', :value => photo.caption,  :class => "share_column_inner", :disabled => 'disabled' %> </div>
+          </div>
+     <div class="middle7">
+            <div class="home see_map_inner_flo">Tags</div>
+            <div class="home share_column_title"> <%= text_field "photo[#{count}]", 'tags', :id => "phototag_#{count}", :value => photo.tags, :class => "share_column_inner", :disabled => 'disabled'%> </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <% count = count+1 %>
+      <% end %>
+      <div class="clear"></div>
+    </div>
+  </div>
+  <% end %>
+</div>

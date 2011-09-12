@@ -1,0 +1,166 @@
+
+<style type="text/css">
+.menu_nyros{
+       font-family:Arial, Helvetica, sans-serif;
+	   font-size:12px;
+	   color:#787878;
+	   text-align:left;
+	   text-decoration:none;
+	   font-weight:bold;
+	   height:20px;
+	   line-height:20px;
+	   width:104px;
+	   }
+.menu_nyros:hover{
+           color:#FFFFFF;
+		  
+		   text-decoration:none;
+		 	 width:104px;
+			
+           }
+</style>
+
+
+
+
+<div class="photosat_left_bar">
+				
+			<!--advertisement-div-start-->
+						<div class="photosat_left">
+						
+						<div class="friend_left_inner Advertisement">Advertisement</div>
+						
+						<div class="friend_left_inner_12 Advertisement">Advertisement</div>
+						
+						</div>	
+				<!--advertisement-div-end-->
+
+				<!--center photos-->
+			
+					<div class="photosat_right">
+					
+					<div class="photosat_rightbar_inner_story">
+					<div class="photosat_friend">
+					  
+					  <div class="story_cal1">
+		<img src="/images/home/videoset_picture1.gif" style="padding-right:5px;"/>
+		 Video Sets
+		 <font style="color:#736F66;">
+          <% if @total.blank? %>
+           0 - 0 of 0
+          <% else %>
+          <% if @total.size > 44 %>
+          <% if params[:page] %>
+         <%= (params[:page].to_i * 45) - 44  %> -
+          <% if (params[:page].to_i * 45) > @total.size %>
+          <%= @total.size %>
+          <% else %>
+          <%= (params[:page].to_i * 45)  %>
+          <% end %>
+          <% else %>
+           1 - <%= @videosets.size %>
+          <% end %>
+          of <%= @total.size %>
+          <% else %>
+           1 - <%= @videosets.size %> of <%= @total.size %>
+          <% end %>
+          <% end %>
+		 </font> 
+		 
+        </div>
+		<div class="select_photoset">
+		<% form_for :seevideosets, :url =>{ :controller =>'/see/videos', :action => 'index'} do %>		
+		<select  id="user_country" name="user[country]" onchange="this.form.submit();" class="story_select_story">
+		<option value="">Choose a Videoset</option>
+		<option value="Today">Today</option>
+		<option value="Yestarday">Yestarday</option>
+		<option value="Last Week">Last week</option>
+		<option value="Most popular">Most popular</option>
+		<%= options_from_collection_for_select @countries, "name", "name" %>
+		</select>
+		<% end %>						 	
+		</div>	
+		</div>
+		</div>
+			
+		<% if @videosets.blank? %>
+		<div class="photosat_right_inner">	
+		 <div class="story_cal1">
+		 <% if @message %>
+		 <%= @message %>
+		 <% else %>
+		  &nbsp;&nbsp;No Videosets
+		  <% end %>
+		</div>
+		</div>
+		<% else %>
+		
+			
+			
+			
+
+		<div class="photosat_right_inner">							
+			<% @videosets.each_with_index do |videoset,i| %>					
+					
+			<div class="photosat_image" style="padding-bottom:5px;">			
+							
+			 <div style="width:104px; height:104px; border:0px solid #FF0000;">
+			 			
+            <div>	
+					 
+		   	<% if !videoset.covervideo_id.blank? && videoset.covervideo_id != 0 %>
+ 	             <% video = Video.find(videoset.covervideo_id)%>
+			   
+        	    <% if !video.blank?  && !video.video_image.blank? %>
+				<%= link_to(image_tag("/video/videofile/#{videoset.covervideo_id}/main/#{videoset.covervideo.video_image}",:style => "width:104px; height:104px;"), videopermalink_url(:continent =>check_continent(videoset.continent),:country => check_country(videoset.country), :state => check_state(videoset.state), :location => check_location(videoset.location),:id => videoset.permalink))%>
+				<% else %>
+				<%= link_to(image_tag(("/images/home/black_blankimage.jpg"),:style => "width:104px;height:104px;"),videopermalink_url(:continent =>check_continent(videoset.continent),:country => check_country(videoset.country), :state => check_state(videoset.state), :location => check_location(videoset.location),:id => videoset.permalink))%>
+			    <% end %>
+				
+				
+			<% else %>
+			<%= link_to(image_tag(("/images/home/black_blankimage.jpg"),:style => "width:104px;height:104px;"),videopermalink_url(:continent =>check_continent(videoset.continent),:country => check_country(videoset.country), :state => check_state(videoset.state), :location => check_location(videoset.location),:id => videoset.permalink))%>
+			<% end %>
+			
+		     </div>
+		   
+		   
+		<!--   popupdiv start here-->
+		   
+           
+		  
+		  
+		  <!--   popupdiv end here-->
+			
+		  </div>
+
+								<div>
+								<div class="Hiker friends_flo" align="center"><%= videoset.title %></div>
+								<div class="friends_flo1 friends_mar">
+								
+								</div>
+								
+								</div>
+								</div>
+							
+			<% end %>
+					
+					</div>
+					
+					<div class="clear"></div>
+				<div>
+			<div align="center"><b><%= will_paginate (@videosets,{:prev_label =>'<img src="/images/home/photos/black_prev.jpg" alt="previous" style=" vertical-align:bottom;" />',:next_label =>'<img src="/images/home/photos/black_next.jpg" alt="next" style=" vertical-align:bottom;" />',:class => 'pagination_photos' }) %></b></div>		
+					</div>
+					
+					
+				<% end %>	
+					
+					
+					
+					
+					</div>
+						<!--center photos end-->
+			
+															
+															
+					</div>

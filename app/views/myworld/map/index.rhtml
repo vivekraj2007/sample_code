@@ -1,0 +1,348 @@
+
+<%= stylesheet_link_tag 'myworld_style' %>
+
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories_new1">
+    <!--advertisement-div-start-->
+    <div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement"><% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %></div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement"><% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %></div>
+      
+      </div>
+    </div>
+    <!--advertisement-div-end-->
+    <!--stories start-->
+    <div class="stories_rightbar_new">
+	
+	
+	
+      <!--top select-->
+      <div class="stories_rightbar_inner_photo">
+
+	   
+	    <div class="friends_flo"><img src="/images/home/glob.gif" alt=""/></div>
+		
+		
+        <div class="worldmap_paintball">
+          <% if check_login(@user.id)  %>
+          My
+          <% else %>
+          <%= profile_name(@user.screen_name) %>'s&nbsp;
+          <% end %>
+          World </div>
+	   
+
+		  
+		  
+		  
+        <div class="friends_flo my_map_world_left">
+          <% form_for :myworld, :url =>{ :controller =>'/myworld/map', :action => 'index',:id => @user.screen_name.gsub(' ', '_')} do %>
+          <select class="worldmap_select_story" id="types" name="types" onchange="this.form.submit();">
+		   <% if @map %>
+		   <option value="<%= @map %>"><%= @map %></option>
+		   <% else %>
+		   <option value="">Show me...</option> 
+		   <% end %>
+            
+           <!-- 
+            
+            <option value="Friends">Friends</option>-->
+	<% if !@user.profile.places_lived_1.blank? || !@user.profile.places_lived_2.blank? || !@user.profile.places_lived_3.blank? %>
+			<option value="Where I've lived">Where I've lived</option>
+	<% end %>
+	<% if !@user.profile.places_want_to_explore_1.blank? || !@user.profile.places_want_to_explore_2.blank? || !@user.profile.places_want_to_explore_3.blank? %>
+			<option value="Where I'm Going">Where I'm Going</option>
+	<% end %>
+	<% if !@user.profile.favorite_place_1.blank? || !@user.profile.favorite_place_2.blank? || !@user.profile.favorite_place_3.blank? %>
+			<option value="Favorite Places">Favorite Places</option>
+	<% end %>	
+	
+            <option value="Photo Sets">Photo Sets</option>
+            <option value="Stories">Stories</option>
+          </select>
+          <% end %>
+        </div>
+		
+		
+        <div class="worldmap_cal1_story">
+          <div class="top_images"> 
+		  <%= link_to image_tag("/images/home/comment2.gif"),profile_url(:id => @user.screen_name.gsub(' ', '_')),:title => "Click here to view latest Posts" %> 
+		  </div>
+		  
+		  
+          <div class="friends_flo">
+           <div class="myworldmap_images1211"><%= image_tag("/images/home/profile_tab.gif")%></div>
+          </div>
+		  
+		  
+          <% if check_login(@user.id) %>
+          <div class="top_images">
+		   <%= link_to image_tag(("/images/home/edit_1.gif"),:class => "my_map_world_padding"), {:controller=>'/account',:action=>'edit'},:title => "Click here to edit user profile" %>
+		    </div>
+          <% end %>
+		  
+		  
+        </div>
+      </div>
+      <!--top select end-->
+	  
+	  
+	  
+	  
+      <!--line div start-->
+      <!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+      <!--line div end-->
+	  
+	  
+      <!--stories content start-->
+      <div  class="my_map_world_content">
+	      
+		
+		<% if @map == 'Photo Sets' %>
+		<%= render :partial => 'photosets_map' %>
+		<% elsif @map == 'Stories' %>
+		<%= render :partial => 'stories_map' %>	
+		<% elsif @map == 'Friends' %>
+		<%= render :partial => 'friends_map' %>			
+		<% elsif @map == "Where I'm Going" %>
+		<%= render :partial => 'where_i_am_going' %>
+		<% elsif @map == "Where I've lived" %>
+		<%= render :partial => 'where_i_have_been' %>	
+		<% elsif @map == "Favorite Places" %>
+		<%= render :partial => 'favourite_places' %>						
+		<% else %>		
+		<%= render :partial => 'map' %>
+		<% end %>
+		
+
+		
+      </div>
+	  
+	  
+      <!--stories content end-->
+    </div>
+    <!--stories end-->
+    <div class="world_mainmap my_map_margin">
+      <!--one-->
+      <div class="world_mainmap1">
+        <div class="map_textdiv map_text2">Who I am</div>
+        
+		<div class="map_textdiv map_text3">
+		<strong>Screen Name:</strong>&nbsp;
+		<span class="my_map_world_color"><%= @user.screen_name.to(50) %></span>
+		</div>
+		
+        <div class="map_textdiv map_text3">
+		
+		<strong>Age:</strong>
+		<% if !@user.profile.dob.blank? %>
+		<span class="my_map_world_color"><%= Time.now.year - @user.profile.dob.year %></span>
+		<% else %>
+		&nbsp;&nbsp;
+		<% end %>
+		 <strong>Gender:</strong>&nbsp;
+		 <span class="my_map_world_color"><%= @user.profile.gender %></span>
+		 
+		 </div>
+		 
+		 
+        <div class="map_textdiv map_text3">
+		<strong>Status:</strong>&nbsp;
+		<span class="my_map_world_color"><%= title_slice(@user.profile.m_status,50) %></span>
+		</div>
+		
+        <div class="map_textdiv map_text3">
+		<strong>Hometown:</strong>&nbsp;
+		<span class="my_map_world_color"><%= @user.city.to(100) %><% if !@user.state.blank? %>,<br/><%= @user.state.to(100) %><% end %></span>
+		</div>
+		
+        <div class="map_textdiv map_text3">
+		<strong>Joined:</strong>&nbsp;
+		<span class="my_map_world_color"><%= @user.created_at.strftime("%B %Y")%></span>
+		</div>
+		
+        <div class="map_textdiv map_text3">
+		<strong>Languages:</strong>&nbsp;
+		<span class="my_map_world_color"><%= @user.profile.total_languages %>
+          </span>
+		</div>
+		
+        <div class="map_textdiv map_text3">
+		<strong>Website/Blog:</strong><br />
+          <span class="my_map_world_color"><%= @user.profile.website%></span>
+		</div>
+		  
+		 <br/> 
+        <div class="map_textdiv map_text2">What I love</div>
+		
+        <div class="map_textdiv map_text3">
+		<strong>Interests:</strong>&nbsp;
+		<span class="my_map_world_color">
+		<%= @user.profile.hobbies.to(100) %></span></div>
+				
+        <div class="map_textdiv map_text3">
+		<strong>Favorite Foods:</strong>&nbsp;
+		<span class="my_map_world_color"><%= !@user.profile.fav_foods.blank? ? @user.profile.fav_foods.to(100) : @user.profile.fav_foods %>
+		</span></div>
+		
+        <div class="map_textdiv map_text3">
+		<strong>Books:</strong>&nbsp;
+		<span class="my_map_world_color">
+		<%= !@user.profile.fav_books.blank? ? @user.profile.fav_books.to(100) : @user.profile.fav_books %></span></div>
+		
+		
+        <div class="map_textdiv map_text3">
+		<strong>Music:</strong>&nbsp;
+		<span class="my_map_world_color">
+		<%= !@user.profile.fav_music.blank? ? @user.profile.fav_music.to(100) : @user.profile.fav_music %></span></div>
+						
+        <div class="map_textdiv map_text3">
+		<strong>Afilliations, Clubs:</strong>&nbsp;
+		<span class="my_map_world_color">
+		<%= !@user.profile.affiliations.blank? ? @user.profile.affiliations.to(100) : @user.profile.affiliations %></span></div>
+		 
+		 <br/>
+		 
+		  <div class="map_textdiv map_text2">Things&nbsp;to&nbsp;do&nbsp;before&nbsp;I&nbsp;die</div>
+		  
+		  <div class="map_textdiv map_text3"><% if !@user.profile.before_die_1.blank? %>
+			<span class="my_map_world_color">1.&nbsp;<%= @user.profile.before_die_1 %></span><% end %></div>
+		  
+		  <div class="map_textdiv map_text3">
+		<% if !@user.profile.before_die_2.blank? %>
+		<span class="my_map_world_color">2.&nbsp;<%= @user.profile.before_die_2 %></span><% end %></div>
+		  
+		  <div class="map_textdiv map_text3"><% if !@user.profile.before_die_3.blank? %>
+		<span class="my_map_world_color">3.&nbsp;<%= @user.profile.before_die_3 %></span><% end %></div>
+		  
+		 
+      </div>
+      <!--one end-->
+      <!--two-->
+      <div class="world_mainmap2">
+        <div class="map_textdiv map_text2">Why I'm here</div>
+		
+		
+		 <div class="map_textdiv map_text3">
+		<span class="my_map_world_color">
+		<%= !@user.profile.description.blank? ? @user.profile.description.gsub(/,/,'<br>') : @user.profile.description %>
+		</span></div>
+		
+		<br/>
+		 <div class="map_textdiv map_text2">How I prefer to travel</div>
+		 
+		 <div class="map_textdiv map_text3">
+		 <strong>Transportation</strong><br/>
+		<% if !@user.profile.explorer_list.nil? %>
+		 <% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",1]) %>
+		 <% for transpo in transporation %>
+		 	 <% if @user.profile.explorer_list.include?("#{transpo.id}") %>
+				<span class="my_map_world_color"><%= transpo.title %></span><br/>
+			<% end %>
+		<% end %>
+		<% end %>
+		</div>
+		 
+		 
+		 <div class="map_textdiv map_text3">
+		 <strong>Accomodations</strong><br/>
+		<% if !@user.profile.explorer_list.nil? %>
+		 <% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",2]) %>
+		 <% for transpo in transporation %>
+		 	 <% if @user.profile.explorer_list.include?("#{transpo.id}") %>
+				<span class="my_map_world_color"><%= transpo.title %></span><br/>
+			<% end %>
+		<% end %>
+		<% end %>
+		</div>
+		
+		
+		<div class="map_textdiv map_text3">
+		 <strong>Sight-Seeing</strong><br/>
+		<% if !@user.profile.explorer_list.nil? %>
+		 <% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",3]) %>
+		 <% for transpo in transporation %>
+		 	 <% if @user.profile.explorer_list.include?("#{transpo.id}") %>
+				<span class="my_map_world_color"><%= transpo.title %></span><br/>
+			<% end %>
+		<% end %>
+		<% end %>
+		</div>
+		
+		<div class="map_textdiv map_text3">
+		 <strong>Activity Level</strong><br/>
+		<% if !@user.profile.explorer_list.nil? %>
+		 <% transporation = ExplorerType.find(:all, :conditions => ["parient_id LIKE ?",4]) %>
+		 <% for transpo in transporation %>
+		 	 <% if @user.profile.explorer_list.include?("#{transpo.id}") %>
+				<span class="my_map_world_color"><%= transpo.title %></span><br/>
+			<% end %>
+		<% end %>
+		<% end %>
+		</div>
+		 
+	        
+       
+      </div>
+      <!--two end-->
+    
+	  <!--three-->
+      <div class="world_mainmap3">
+	  
+	  <div class="map_textdiv map_text2">Where I'm going</div>
+	  
+        <div class="map_textdiv map_text3">
+		<span class="my_map_world_color"><%= @user.profile.places_want_to_explore_1%></span>
+		</div>
+        <div class="map_textdiv map_text3">
+		<span class="my_map_world_color"><%= @user.profile.places_want_to_explore_2%></span></div>
+        <div class="map_textdiv map_text3">
+		<span class="my_map_world_color"><%= @user.profile.places_want_to_explore_3%></span></div><br/>
+		
+		
+		<div class="map_textdiv map_text2">Where I've lived</div>
+	           
+        <div class="map_textdiv map_text3"><span class="my_map_world_color"><%= @user.profile.places_lived_1 %></span></div>
+        <div class="map_textdiv map_text3"><span class="my_map_world_color"><%= @user.profile.places_lived_2 %></span></div>
+        <div class="map_textdiv map_text3"><span class="my_map_world_color"><%= @user.profile.places_lived_3 %></span></div><br/>
+	  
+	  
+	  <!-- <div class="map_textdiv map_text2">Where I've been</div>-->
+	   <%# if !@user.profile.exploredplaces_list.blank? %>
+	   <%# for loc in @user.profile.exploredplaces_list.split(',') %>
+	   <%# location = Location.find_by_id(loc) %>
+	   <!--<div class="map_textdiv map_text3"><span class="my_map_world_color"><%#= location.name %></span></div>-->
+	   <%# end %>
+	   <%# end %>
+	  <br/>
+        <div class="map_textdiv map_text2">My favorite places</div>
+		
+        <div class="map_textdiv map_text3">
+		<span class="my_map_world_color">
+		<%= !@user.profile.favorite_place_1.blank? ? @user.profile.favorite_place_1.to(100) : @user.profile.favorite_place_1 %>
+		</span></div>
+        <div class="map_textdiv map_text3">
+		<span class="my_map_world_color">
+		<%= !@user.profile.favorite_place_2.blank? ? @user.profile.favorite_place_2.to(100) : @user.profile.favorite_place_2 %>
+		</span></div>
+       
+		<div class="map_textdiv map_text3">
+		<span class="my_map_world_color">
+		<%= !@user.profile.favorite_place_3.blank? ? @user.profile.favorite_place_3.to(100) : @user.profile.favorite_place_3 %>
+		</span> </div>
+		
+	
+     
+      </div>
+      <!--three end-->
+    </div>
+  </div>
+  <!--left stories end-->
+</div>

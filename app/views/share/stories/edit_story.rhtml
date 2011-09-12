@@ -1,0 +1,180 @@
+<div class="nav_box_new_story_feb">
+
+
+<!--LEFT DIV START-->
+<div class="created_un_top">
+<!--top-->
+			<div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile_un">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+<!--top-->
+
+<div style=" background-color:#d1caa4; width:786px; height:auto; overflow:hidden; float:left;">
+
+<div class="middile">
+          <!--  backgroun style for div end -->
+		  
+		  
+          <div class="text_who">1.Create a new Story</div>
+          
+		  <div style="float:left; padding-left:10px; padding-top:6px;">
+            <% form_for :stories,:url => {:controller => "/share/stories",:action => "edit_story"} do  %>
+            <select id="storyedit" name="storyedit" onchange="this.form.submit();" class="story_select_un">
+              <option value="edit">Edit Existing Story</option>
+              <%= options_from_collection_for_select @user_stories, "permalink", "sliced_title" %>
+            </select>
+	  <% end %>
+          </div>
+	
+		  <%= hidden_field_tag 'page_action', '', :value => "#{params[:action]}", :id => 'page_action' %>
+		  	   <div style="clear:both;"></div>
+        <% form_for :newstory, :url => {:action => "update_story", :id => @story.permalink,:value => params[:value]} do %>
+          <div class="home_un" >Title</div>
+
+	
+          <div class="story_text">
+		   <%= text_field 'story', 'title' , :class => 'default_style_un', :style => "height:18px;",:id=>'title',:tabindex=>"1",:onblur => "story_edit_fields();", :onfocus => "story_edit_fields();", :onkeyup => "story_edit_fields();" %>
+		  </div>
+			
+          <div class="story_text">
+		   <%= error_message_on :story, :title, 'Title '%> 
+		   </div>
+		   
+          <div class="home_un">Subtitle</div>
+		  
+          <div class="story_text"> 		
+	     <%= text_area 'story', 'sub_title', :class => 'default_style_textarea_un', :style => "resize: none;", :id => 'sub_title', :tabindex=>"2",:onblur => "story_edit_fields();" , :onfocus => "story_edit_fields();" , :onkeyup => "story_edit_fields();" %> 
+		  </div>
+		  
+          <div class="story_text">
+		   <%= error_message_on :story, :sub_title, 'Subtitle '%> 
+		   </div>
+		   
+		  <div class="home_un">Enter location or drag map pointer</div>
+		  
+        
+	          <div class="story_text">
+	   <%= text_area 'story', 'where_is' , :class => 'default_style_textarea_un', :id => 'where_is', :tabindex=>"3",:onblur => "story_edit_fields();", :onfocus => "story_edit_fields();", :onkeyup => "story_edit_fields();"  %>
+		   </div>
+	 
+        
+          <div class="story_text"> 
+		  <%= error_message_on :story, :where_is, 'Where is '%> 
+		  </div>
+		  
+		 <div class="story_publish" style="width:200px;">
+	   <div class="home_un">Geo-coordinates&nbsp;(Optional)  </div>
+	   
+          <div class="share_column_padding">
+		<div class="friends_flo"> <%= text_field 'story', 'lat',:style => "width:84px; height:18px;", :id => 'lat',:tabindex=>"4",:class => 'default_style', :onblur => "story_edit_fields();" , :onfocus => "story_edit_fields();" , :onkeyup => "story_edit_fields();",:onkeypress=>"return numberonly(event,false);"%> </div>
+		<div class="friends_flo"> <%= text_field 'story', 'longt' ,:style => "width:84px; height:18px; margin-left:5px;", :id => 'longt',:tabindex=>"5",:class => 'default_style', :onblur => "story_edit_fields();" , :onfocus => "story_edit_fields();", :onkeyup => "story_edit_fields();",:onkeypress=>"return numberonly(event,false);" %></div>
+		  
+		    </div>
+			 
+	  </div> 		   
+		   
+		  <!-- conditions for latitude and logitude-->
+	<div  style="padding-top:20px; width:220px; float:left;">
+      <div style="float:left; padding-left:10px;"> <input name="storysave" id="storysave" value="save" src="/images/home/save_b.jpg" type="image" disabled = true></div>
+	  
+	  <div style="float:right;">
+	  <% if @story.title.blank? || @story.sub_title.blank? || @story.where_is.blank? || @story.lat.blank? || @story.longt.blank? %>
+	  <%= image_tag("/images/home/stories/step2.gif") %>
+	  <% else %>
+	  <%= link_to image_tag(("/images/home/stories/g2.gif")), :action => 'add_tag', :id => @story.permalink  %>
+	  <% end %>
+	  
+	  </div>
+	   
+	</div>
+		  
+		  
+		  <div style="float:right; width:130px; padding-top:10px;">
+			
+			
+			
+			<div id="before" style="display:block; float:right; padding-right:20px;" align="left">
+			<a href="#" onmouseover="Element.hide('before');Element.show('after');Element.show('text');">
+			<img src="/images/home/before_delete.gif"></a>
+			</div>
+	
+		
+			
+			<div id="text" style="display:none;  font-family: Arial,Helvetica,sans-serif; color: #a48046; font-size:12px; text-align: left;float:left;">
+			Delete this Story
+			</div>
+			<div id="after" style="display:none; float:right;  padding-right:20px;">
+			<%= link_to image_tag("/images/home/delete_red.gif"),{:action => 'delete_story',:id =>  @story.permalink},{:onmouseout => "Element.show('before');Element.hide('after');Element.hide('text');",:confirm => 'Are you sure want to delete this story?', :method => :post} %>
+			</div>
+			
+		
+			
+			</div>
+		  
+           <div style="clear:both;"></div>
+        </div>
+		
+		
+		
+		<div class="story_step3_new_background">
+	
+      <div class="text_who style_write1" align="left">&nbsp;</div>
+        
+      	<div class="share_leftbar_photos" style="height:300px;">
+	        <% if @story.lat.blank? || @story.longt.blank?  %>
+        <%= render :partial => "/share/stories/map" %>
+        <% else %>
+        <%= render :partial => "/share/stories/confirm_map" %>
+        <% end %>
+       </div>
+ <% end %>	
+      <div class="style_write" align="left">
+	  
+	  </div>  
+	  
+    </div>
+		
+
+</div>
+
+<!--bottom-->
+		<div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile_un">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+<!--bottom end-->
+
+
+
+</div>
+<!--LEFT DIV End-->
+ 
+ <div class="created_un_top">
+ <div class="home">&nbsp;</div>
+      <div class="left_bar_13">
+        <div class="text_who" align="left">2.Tag and Link your story</div>
+        <div class="story_select" align="left"  style="margin-left:0px; padding-left:10px;"> 
+		<%= text_area 'story', 'tag',:class => 'default_style_textarea_un', :id => 'tag', :disabled => 'disabled', :tabindex=>"6" %> </div>
+        <div >  <select name="link_set" id="link_set" style="margin-left:12px; margin-top:10px; width:200px;" disabled="disabled">
+		   <option value="">Link this Set to....</option>
+		    <% if @user_photsets.size != 0 %>
+			<option value="" style="font-weight:bold; color:#AB0300;">Photo Sets</option>
+				 <% for set in @user_photsets %>
+			 <option value="p_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= set.title.to(20)%></option>
+			 <% end %>
+			<% end %> </select> </div>
+        <div style="width:215px; overflow:hidden;">
+		
+		<div align="left" style="margin-left:2px; padding:5px 0px 0px 8px; float:left;"> 
+		<%= image_tag ("/images/home/save_n.jpg") %> </div>
+		<div style="float:right; padding-top:5px;"> 
+		<%= image_tag ("/images/home/stories/step3.gif") %> </div>
+		</div>
+        <div style="clear:both;"></div>
+      </div>
+    </div>
+ </div>
+ 

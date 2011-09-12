@@ -1,0 +1,46 @@
+   <% if @videos.size == 0 %>
+   <div class="clear" style="font-family:Arial, Helvetica, sans-serif; font-size: 12px; color:#000000; margin-left:18px; margin-top:7px;">
+   There are no Videos in this Video set....
+   </div>
+   
+   <% else %>
+   
+   <script type="text/javascript">
+	runTest();
+	</script>
+<div class="clear" style="font-family:Arial, Helvetica, sans-serif; font-size: 12px; color:#9b854f; margin-left:18px; margin-top:7px;">Drag and Drop individual videos into Story </div>
+<div class="scroll_main_container"> 
+   
+    <div id="horizontal_carousel" >
+	<div class="rouneded_corner"><%= image_tag("/images/imgslide/left_b.gif")%></div>
+      <div class="previous_button">
+	  
+	  </div>  	  
+      <div class="container">
+       <ul>
+	   
+	    <% for video in @videos %>	
+		 <% if !video.video_image.blank? %>
+          <li>
+		   <%# if !video.video_image.blank? %>
+		   <%= image_tag("/video/videofile/#{video.id}/thumb/#{video.video_image}")%> 
+		  <br />		  
+          <%= video.title %><br />
+		  </li>	
+		<% end %>
+		  <% end %>        
+        </ul>
+		
+      </div>
+      <div class="next_button"></div>
+	   <div class="rouneded_corner"><%= image_tag("/images/imgslide/right_b.gif")%></div>
+      </div>    
+     <script type="text/javascript">
+      function runTest() {
+        hCarousel = new UI.Carousel("horizontal_carousel");
+           }
+    </script>
+	
+	</div>
+	
+	<% end %>

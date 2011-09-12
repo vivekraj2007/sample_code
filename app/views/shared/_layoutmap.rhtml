@@ -1,0 +1,73 @@
+
+<script language="JavaScript" src="http://j.maxmind.com/app/geoip.js"></script>
+<script type="text/javascript">    
+    function loadmap() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map"));
+		if(geoip_latitude() !='' && geoip_longitude() != '')
+		{
+		map.setCenter(new GLatLng(geoip_latitude(),geoip_longitude()), 6,G_PHYSICAL_MAP);
+		}
+		else
+		{
+		map.setCenter(new GLatLng(21.796875, 31.952162), 6,G_PHYSICAL_MAP);
+		}
+	
+		map.addMapType(G_PHYSICAL_MAP);
+		map.addControl(new GSmallMapControl());
+ 			
+	 // Create our "tiny" marker icon
+        var blueIcon = new GIcon(G_DEFAULT_ICON);
+      // blueIcon.image = "/images/home/map/default_point.png";
+	   blueIcon.shadow=""
+	   blueIcon.iconSize = new GSize(16, 15);
+	   blueIcon.iconAnchor = new GPoint(5, 13);
+	   blueIcon.label = {"url":"http://www.uncharted.net"}
+		
+	var photos = new GIcon(blueIcon, "/images/home/map/map_photos.png"); 	
+	var story = new GIcon(blueIcon, "/images/home/map/map_story.png"); 	
+	//var video = new GIcon(blueIcon, "/images/home/map/map_video.png"); 
+	//var review = new GIcon(blueIcon, "/images/home/map/map_review.png"); 
+		
+	// Set up our GMarkerOptions object
+		//markerOptions = { icon:storyIcon };
+			
+	// default icon
+          function createMarker(point,icon,city)
+		   {
+          var marker = new GMarker(point,icon);
+		 
+          GEvent.addListener(marker, "click", function() {
+		     window.location = city;
+		                
+          });
+          return marker;
+        }
+		
+		
+	    <% if @layout_map_photosets %>
+		<% for photos in @layout_map_photosets %>	
+		  var point = new GLatLng(<%= photos.lat %>,<%= photos.longt %>);
+		
+		  var marker = createMarker(point,photos,'<%= photopermalink_url(:continent => !photos.continent.blank? ? photos.continent.gsub(/ /,'-') : 'continent',:country => !photos.country.blank? ? photos.country.gsub(/ /,'-') : 'country', :state => !photos.state.blank? ? photos.state.gsub(/ /,'-') : 'state', :location => !photos.location.blank? ? photos.location.gsub(/ /,'-') : 'location', :id => photos.permalink) %>');
+		 map.addOverlay(marker);			
+		<% end %>
+		<% end %>
+	
+		<% if @layout_map_stories %>
+		<% for story in @layout_map_stories %>		 
+		  var point = new GLatLng(<%= story.lat %>,<%= story.longt %>);
+		  var marker = createMarker(point,story,'<%= storypermalink_url(:continent =>!story.continent.blank? ? story.continent.gsub(/ /,'-') : 'continent',:country => !story.country.blank? ? story.country.gsub(/ /,'-') : 'country', :state => !story.state.blank? ? story.state.gsub(/ /,'-') : 'state', :location => !story.location.blank? ? story.location.gsub(/ /,'-') : 'location',:id => story.permalink)%>');
+		   map.addOverlay(marker);	
+		   <% end %>
+		<% end %>
+
+	 }
+	}
+    </script>
+  
+
+
+
+<div id="map" style="width:200px; height:214px; overflow :hidden;"></div>
+

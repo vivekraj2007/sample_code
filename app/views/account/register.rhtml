@@ -1,0 +1,247 @@
+<style>
+.reg_top
+{
+style="width:97%;  background-color:#e2dcc6;"
+}
+.gap_5
+{
+style="height:50px;"
+}
+
+</style>
+
+
+<div class="top_mid_page3 reg_top" >
+          <div class="top_mid_page4">
+            <div class="top_mid_page5">
+						
+			<% if params[:value] == 'terms' %>
+			 <div style="width:485px; margin-left:20px; float:left; height:auto; display:block;" id="termsandconditions">
+			<% else %>
+			 <div style="width:485px; margin-left:20px; float:left; height:auto; display:none;" id="termsandconditions">
+			<% end %> 
+			 <div><img src="/images/home/terms_top_bg.gif"></div>
+			
+		<div class="register_main_1">
+
+			 
+			 <div style="width:448px; height:400px; overflow-y:scroll; overflow-x:hidden; padding:10px 18px 10px 18px;">
+			 Uncharted User Agreement, Terms of Use and Privacy Policy<br/><br/>
+Please read this user agreement, effective as of June 1, 2007, before using our service. If you don't, any fortune cookie fortunes you receive in the future will be of the bland, banal type that could apply to anyone. Additionally, it will disappoint the nuns who started this user agreement as a chain letter in South Korea in 1957.<br/><br/>
+
+By continuing to use www.uncharted.net, you agree to comply with the agreement as outlined here. Also, be aware that by registering you agree to receive occasional and sometimes ridiculous emails from your new friends at Uncharted.<br/><br/>
+
+This user agreement is a legal agreement between you and Great Divide Media, LLC, "the Company" for your use of www.uncharted.net "the Site". By using the Site you agree to the terms indicated. You also agree to any additional terms and guidelines posted in relation to individual sections of the Site.<br/><br/>
+
+Please also review our privacy policy included at the conclusion of this agreement. If you do not agree to any of the terms or guidelines outlined on the Site, or are unhappy with any Site content or quality of service, your main resource is to stop visiting, or, at most, bad-mouth us to your friends, co-workers and casual acquaintances. More importantly, if you have any issue with the quality or content of the Site, Please let us know.<br/><br/>
+
+The Company reserves the right to change these terms, agreements and guidelines without prior notice. (The Company also reserves the right to insert such nonsense words like  "thoop-thoop-thoop" in its User Agreement, because darn few people read these things anyway.)<br/><br/>
+
+The Site is owned by the Company, which goes without saying. All the content featured on the Site including, but not limited to, photographs, text, video, graphic designs, audio recordings (Content) is owned or licensed by the Company. Advertisements for third-party companies are not considered Content in this section. However, advertisements are owned or licensed by the respective third-party companies and are subject to whatever protections their lawyers deem fit. Individuals wishing to submit/post material agree to comply with the Company's Editorial Style Guide (to be posted soon)<br/><br/>
+
+The Company reserves the right of first use. We'd rather not re-publish material you've had published elsewhere. We strongly encourage original work, be it written, photographic, audio or visual. If it's not your original work, the Company doesn't want it. Please remember this applies to video and music clips as well as the written word. If, however, you have material published elsewhere you'd like reproduced on our Site, please contact us. If you own the copyright, good news. If someone else owns the copyright, it's your responsibility to obtain permission from the copyright holder for the Company to use your material on our Site. (See our copyright guidelines, which start right after this parenthetical phrase.)<br/><br/>
+
+Remember, www.uncharted.net is about local culture. If you want music to go along with a video you've done, find a local band drooling for more exposure. You score a great score for your clip, that local band gets another portal on the Internet, and nobody gets grumpy. <br/><br/>
+
+That being said, we will also follow common fair use practices, as outlined by the U.S. Copyright Office at http://www.copyright.gov/fls/fl102.html. In brief, fair use allows for the quotation of excerpts of printed, audio or visual matter in reviews or criticism "for the purpose of illustration or comment." There are no clear guidelines on the number of words, the length of an audio or visual clip that may be reproduced and considered fair use. And remember, a work need not be published to be copyrighted. As far as the Company goes, this is the most important thing to remember about fair use (quoted directly from the U.S. Copyright Office link): <br/><br/>
+
+"The safest course is always to get permission from the copyright owner before using copyrighted material. The Copyright Office cannot give this permission. When it is impracticable to obtain permission, use of copyrighted material should be avoided unless the doctrine of "fair use" would clearly apply to the situation. The Copyright Office can neither determine if a certain use may be considered 'fair' nor advise on possible copyright violations. If there is any doubt, it is advisable to consult an attorney."<br/><br/>
+
+We cannot give copyright permission either, nor advise you in any way on fair use or copyright law - aside from advising you to contact an attorney for advice.<br/><br/>
+
+The Company may act quickly to remove any material claimed to be infringing. If you suspect material on the Site is not used under fair use practices or violates your copyright, notify us in writing at:<br/><br/>
+
+Great Divide Media LLC<br/>
+ATTN: Brian Davidson<br/>
+PO Box 585, Logan, UT, 84323<br/><br/>
+
+or by e-mail at brian@uncharted.net. This e-mail address is being protected from spam bots, you need JavaScript enabled to view it . Your communication must include<br/><br/>
+
+ </div>
+			 </div>
+			 
+			  <div><img src="/images/home/terms_bottom_bg.gif"></div>
+			 
+			 </div>
+			  
+			  <% if params[:value] == 'terms' %>
+			  <div style="width:485px; float:left; margin-top:60px; margin-left:20px; display:none;" id="justgoimage" >
+			  <% else %>
+              <div style="width:485px; float:left; margin-top:60px; margin-left:20px;" id="justgoimage">
+			  <% end %>
+			  <img src="/images/home/text_image.jpg" alt="" />
+			  </div>
+			  
+              <div class="gap_5"></div>
+			  
+<!--           <div class="text" style="padding-left:10px;">
+			  *Only your Screen Name and Location will be seen by others, all other info is for registration purposes only.
+			  </div>-->
+			  
+              </div>
+            
+			      <div class="top_mid_page6">
+				  <% form_for :user,:url => { :action => "create" },:html => {:name=> 'user_form', :onsubmit=>'return userregistration();'} do %>
+				  
+				   <div style="width:230px;" class="text">Name (First, Middle intial, Last) &nbsp;(Private)</div>
+				  
+				  <div class="top_mid_page7">
+                <div class="top_input"> <%= text_field 'user', 'first_name', :style => "width:90px; height:18px;",:id=>'firstname', :class => 'default_style',:autocomplete => "off" %> </div>
+                <div class="top_input1"> <%= text_field 'user', 'middle_name' ,:style => "width:21px; height:18px;",:id=>'middlename', :class => 'default_style',:autocomplete => "off" %> </div>
+                <div class="top_input2"> <%= text_field 'user', 'last_name',:style => "width:90px; height:18px;",:id=>'lastname', :class => 'default_style',:autocomplete => "off" %> </div>
+                <!--<div style="float:right;"><img src="/images/home/star.jpg" alt=""/></div>-->
+				<% firstname_error_message = error_message_on :user, :user_fname %>
+				<% if !firstname_error_message.blank? %>						
+                <div class="errormessage_border">
+                   <%= error_message_on :user, :first_name, 'First Name ', 'errormessage'%> 
+                </div>
+				<% end %>
+				<% lastname_error_message = error_message_on :user, :last_name %>
+				<% if !lastname_error_message.blank? %>
+                <div class="errormessage_border">
+                 <%= error_message_on :user, :last_name, 'Last Name ','errormessage'%> 
+                </div>
+				<% end %>
+              </div>
+			  
+			   <div style="clear:both;"></div>
+			  
+			  <div class="top_middle">
+                <div style="width:230px;" class="text">Email&nbsp;(Private)</div>
+                <div align="left"><%= text_field 'user', 'email' ,:style => "width:216px; height:18px;", :id=>'account_email', :class => 'default_style',:autocomplete => "off" %></div>
+				<% email_error_message = error_message_on :user, :email %>
+				<% if !email_error_message.blank? %>
+                <div class="errormessage_border">
+                  <%= error_message_on :user, :email, 'Email ','errormessage'%>
+                </div>
+				<% end %>
+              </div>
+			  
+			      <div style="clear:both;"></div>
+				  
+				  <div class="top_middle">
+                <div style="width:230px;" class="text">Create Screen Name</div>
+             <div align="left"><%= text_field 'user', 'screen_name',:style => "width:216px; height:18px;",:id=>'screenname', :class => 'default_style',:autocomplete => "off" %></div>
+				<% screen_name_error_message = error_message_on :user, :screen_name %>
+				<% if !screen_name_error_message.blank? %>
+                <div class="errormessage_border">
+                 <%= error_message_on :user, :screen_name, 'Screen name ','errormessage'%>
+                </div>
+				<% end %>
+              </div>
+				  
+				      <div style="clear:both;"></div>
+					  
+					  <div class="top_middle">
+                <div style="width:230px; " class="text">Create Password&nbsp;(Private)</div>
+                <div align="left"><%= password_field 'user', 'password' ,:id=>'password1',:style => "width:216px; height:18px;" , :class => 'default_style'%></div>			<% password_error_message = error_message_on :user, :password %>
+				<% if !password_error_message.blank? %>
+                <div class="errormessage_border">
+                 <%= error_message_on :user, :password, 'Password ','errormessage'%>
+                </div>
+				<% end %>
+				</div>
+				  
+				  <div style="clear:both;"></div>
+				  
+				  <div class="top_middle">
+                <div style="width:230px;" class="text">Retype Password&nbsp;(Private) </div>
+              <div align="left"><%= password_field 'user', 'confirm_password' ,:id=>'passwordconfirm',:style => "width:216px; height:18px;", :class => 'default_style'%> </div>
+				
+				<% confirm_password_error_message = error_message_on :user, :confirm_password %>
+				<% if !confirm_password_error_message.blank? %>
+                <div class="errormessage_border">
+                 <%= error_message_on :user, :confirm_password, 'Retype password ','errormessage'%> 
+                </div>
+				<% end %>
+              </div>
+				  
+				   <div style="clear:both;"></div>
+				   
+				  <div class="top_middle">
+                <div style="width:230px;" class="text">City</div>
+               <div align="left"><%= text_field 'user', 'city',:style => "width:216px; height:18px;",:id=>'city', :class => 'default_style',:autocomplete => "off" %></div>
+              
+			  	<% city_error_message = error_message_on :user, :city %>
+				<% if !city_error_message.blank? || @address_message %>			  
+			    <div class="errormessage_border">
+                  <div class="errormessage"> <%= error_message_on :user, :city, 'City '%>
+				  <%= @address_message %>
+				   </div>
+                </div>
+				<% end %>
+				
+              </div>
+			  
+			  <div style="clear:both;"></div>
+			  
+			  <div class="top_mid_page7">
+			  <div style="width:230px;" class="text">
+			  <div style="width:150px;float:left;">State/Province</div><div style="width:60px;float:left;">Zipcode</div>
+			  </div> 
+			  
+                <div class="top_input_new">
+				 <%= text_field 'user', 'state', :style => "width:137px; height:18px;",:id=>'state', :class => 'default_style',:autocomplete => "off" %>
+				  </div>               
+                <div class="top_input2_new"> <%= text_field 'user', 'zip',:style => "width:70px; height:18px;",:id=>'zip', :class => 'default_style',:autocomplete => "off" %> 
+				</div>
+              
+				<% state_error_message = error_message_on :user, :state %>
+				<% if !state_error_message.blank? %>						
+                <div class="errormessage_border">
+                 <%= error_message_on :user, :state, 'State ','errormessage'%> 
+                </div>
+				<% end %>
+				<%# zip_error_message = error_message_on :user, :zip %>
+				<%# if !zip_error_message.blank? %>
+               <!-- <div class="errormessage_border">
+                  <div class="errormessage"> <%#= error_message_on :user, :zip, 'Zip '%> </div>
+                </div>-->
+				<%# end %>
+		         </div>
+				 
+				  <div style="clear:both;"></div>
+				  
+				  <div class="top_middle">
+                <div style="width:230px;" class="text">Country</div>
+               <div align="left">
+                  <% @countries = Country.find(:all,:conditions => ['continent!=""'],:order => 'name ASC') %>
+                  <select id="user_country" name="user[country_id]" class="text" style="width:218px;">
+                    <option value="">Select Country</option>
+                    <%= options_from_collection_for_select @countries, "id", 'name' %>
+                  </select>
+                </div>
+				<% country_id_error_message = error_message_on :user, :country_id %>
+				<% if !country_id_error_message.blank? %>
+				
+                <div class="errormessage_border">
+              <%= error_message_on :user, :country_id, 'Country ','errormessage'%> 
+                </div>
+				<% end %>
+              </div>
+			  
+			  <div style="clear:both;"></div>
+			  <div class="top_middle">
+                <div class="top_middle1">
+                  <div align="left" class="top_middle2"> <%= check_box_tag 'user','agree',checked=false,{:name => 'user[agree]',:id => 'trm_con' } %> </div>
+                  <div style="width:auto; float:left;" class="text">I have read, understand and agree <br />
+                    to the
+		<span id="term1"><a href="javascript://" onclick="Element.hide('justgoimage'); Element.hide('term1');  Element.show('term2');Element.show('termsandconditions');" class="terms">Terms of Service</a></span>
+		<span id="term2" style="display:none;"><a href="javascript://" onclick="Element.hide('termsandconditions'); Element.show('term1'); Element.hide('term2'); Element.show('justgoimage');" class="terms">Terms of Service</a></span>
+					agreement.</div>
+				   </div>
+              </div>
+			   <div style="clear:both;"></div>
+              <div style="height:30px;"></div>
+			  
+			  <div>
+                <input name="adminloginok" id="adminloginok" value="registration" src="/images/home/register.jpg" type="image">
+              </div>
+				  
+				  <% end %>
+				  </div>
+			
+			
+				
+          </div>
+        </div>

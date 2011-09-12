@@ -1,0 +1,133 @@
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories">
+    <!--advertisement-div-start-->
+	
+	
+    <!--<div class="stories_leftbar">
+      <div class="adver_stories">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+      <div class="adver_stories2">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+    </div>-->
+	
+	<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement"><%= @top_adv.script %></div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement"><%= @bottom_adv.script %></div>
+      
+      </div>
+    </div>
+	
+	
+    <!--advertisement-div-end-->
+    <!--stories start-->
+    <div class="stories_rightbar">
+      <!--top select-->
+      <div class="stories_rightbar_inner_story">
+        <div class="story_cal1_story">
+          <div class="stories_map_1">
+		<%= link_to "Inbox", inbox_messages_url(:id => @user_profile.screen_name.gsub(' ', '_')), {:class => "stories_map_1",:title => "Click here to view all inbox messages"}%>   		  
+		  </div>
+          <div class="stories_map_1">
+		  <%= link_to "Sent", sent_messages_url(:id => @user_profile.screen_name.gsub(' ', '_')), {:class => "stories_map_1",:title => "Click here to view all sent messages"}%> 
+		  </div>
+          <div class="friends_flo">
+            <div class="myworld_images1"></div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+	  
+	
+      <!--write new-->
+      <div class="myworld_new">
+	 <% form_for :newmessage, :url => {:action => "create_message",:id => @user_profile.screen_name.gsub(' ', '_')} ,:html => { :onsubmit => "return write_message_submit();" }do %>
+        <div class="myworld_newinner">
+          <div class="home_comment12">Send to</div>
+          <div>
+		  <%# if @message.email_address %>
+		  <%#= @message.email_address %>
+		  <%# else %>
+		 <%= text_field 'message', 'email_address',:value => !@message.email_address.blank? ? @message.email_address : "Email addresses or screen names separated by commas", :class => 'msg_default_style', :style => !@message.email_address.blank? ? "color:black;" : "color:#cbcbcb;" "width:400px; height:20px;",:onfocus => "if(this.value=='Email addresses or screen names separated by commas') this.value=''; change_msg_style(this.id);",:onBlur =>  "if(this.value=='') this.value='Email addresses or screen names separated by commas'; change_msg_style(this.id);",:id => 'email_address', :onkeyup => "change_msg_style(this.id);", :onkeydown => "change_msg_style(this.id);"  %> 	  
+          <%# end %>
+		   
+		   
+          </div>
+          <div class="home_comment12">Subject</div>
+          <div>
+            <%= text_field 'message', 'subject' , :class => 'msg_default_style my_world_newmsgs',:id=>'subject' %>
+          </div>
+          <div class="home_comment12">Message</div>
+		  <div class="clear"></div>
+          <div align="left">
+            <%= text_area 'message', 'message', :class => 'msg_default_style_textarea_new my_world_comment' ,:id => 'message',:onblur=>"new_msg_fields();", :style=>"float:left;width:400px; height:100px;",:onkeydown=>"new_msg_fields();", :onfocus=>"new_msg_fields();", :onkeyup=>"new_msg_fields();" %> 
+          </div>
+		    <div class="clear"></div>
+          <div>
+		  <input name="messagesave" id="messagesave" value="save" src="/images/messages/send.gif" type="image" class="my_world_newsave" disabled = true>
+		   </div>
+        </div>
+		  <% end %>
+      </div>
+      <!--write new end-->
+	
+	  
+	  
+	  
+	  
+      <!--top select end-->
+      <!--line div start-->
+      <!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+      <!--line div end-->
+      <!--stories content start-->
+      <div class="stories_rightbar_inner1">
+        <!--<div class="stories_rightbar_innercomment1">
+		
+				
+				<div class="stories_comment_inner">
+				<div><span class="story_cal1">Galegao</span><span class="home_comment">Mon. June 2, 2008 9:13 am</span></div>
+				<div class="stories_comment_text">I gotta admit that when the girl at the counter handed the large, warm bundle to me, I excitedly received it with both hands so it wouldn't tear through the bag, it was at least 4 pounds. I couldn't help but think that the feelings i had on that occasion were not unlike those of a pound feather holding his newborn child for the firsttime - My precious treasure, wrapped in a white blanket, soft and warm. I gently peeled down the wrapper, to reveal the beautiful newborn burrito... </div>
+				
+				</div>
+				
+				<div class="stories_comment_inner11">
+				<div><span class="story_cal1">Galegao</span><span class="home_comment">Mon. June 2, 2008 9:13 am</span></div>
+				<div class="stories_comment_text">I gotta admit that when the girl at the counter handed the large, warm bundle to me, I excitedly received it with both hands so it wouldn't tear through the bag, it was at least 4 pounds. I couldn't help but think that the feelings i had on that occasion were not unlike those of a pound feather holding his newborn child for the firsttime - My precious treasure, wrapped in a white blanket, soft and warm. I gently peeled down the wrapper, to reveal the beautiful newborn burrito... </div>
+				
+				</div>
+				
+				<div class="stories_rightbar_inner_story">&nbsp;</div>
+				
+				</div>-->
+        <!--text area-->
+        <!--<div>
+			<div class="story_cal1">Post a Comment</div>
+			<div class="clear"></div>
+			<div class="home_comment12">Name or Uncharted Username</div>
+			<div><input name="" type="text" /></div>
+			<div class="home_comment12">Email</div>
+			<div><input name="" type="text" /></div>
+			<div class="home_comment12">Comment</div>
+			<div><textarea cols="30" rows="5"></textarea></div>
+			<div><img src="images/post.jpg" alt=""  style="margin-top:10px;"/></div>
+			</div>-->
+        <!--text area-end-->
+      </div>
+      <!--stories content end-->
+    </div>
+    <!--stories end-->
+  </div>
+  <!--left stories end-->
+</div>

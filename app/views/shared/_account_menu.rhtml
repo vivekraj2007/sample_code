@@ -1,0 +1,70 @@
+
+<div class="nav">
+<div class="shared_account_menu"> <img src="/images/home/nav_1.jpg" alt="" /></div>
+
+
+<div class="shared_account_image">
+
+<!--<ul id="treemenu1">-->
+<%# if params[:controller] == 'myworld/friends' || params[:controller] == 'myworld/photos' || params[:controller] == 'myworld/videos'%>
+<!--<ul class="fmenu">
+--><%# else %>
+<ul class="hmenu">
+<%# end %>
+
+<li class=" if <% if params[:controller] == 'myworld/latest' || params[:controller] == 'myworld/map' || ( params[:controller] == 'account' && params[:action] == 'edit' ) || ( params[:controller] == 'account' &&  params[:action] == 'change_photo') %> current1 <% else %>  <% end %>" >
+ <a href="<%= profile_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="My World"><b>My World</b><em></em></a>
+</li>
+
+<% if session[:user_id] == @user_profile.id %>
+<li class=" if <% if params[:controller] == 'account' && params[:action] == 'change_password' %> current1 <% else %>  <% end %>" >
+ <a href="<%= changepassword_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Change Password"><b>Change Password</b><em></em></a>
+</li>
+<% end %>
+
+
+<% if session[:user_id] == @user_profile.id %>
+  <li class=" if <% if params[:controller] == 'myworld/messages' %> current1 <% else %> <% end %>">
+  <a href="<%= messages_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Messages"><b>Messages</b><em></em></a>
+  </li>
+ <% end %>
+ 
+ 
+  <li class=" if <% if params[:controller] == 'myworld/friends' %> current2 <% else %>  <% end %>">
+  <a href="<%= friends_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Friends"><b>Friends</b><em></em></a>
+  </li>
+ 
+  <li class=" if <% if params[:controller] == 'myworld/photos' %> current2 <% else %> <% end %>">
+  <a href="<%= photos_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Photos"><b>Photos</b><em></em></a>
+  </li>
+ 
+ <!-- <li class=" if <%# if params[:controller] == 'myworld/videos' %> current2 <%# else %> <%# end %>">
+  <a href="<%#= videos_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Videos"><b>Videos</b><em></em></a>
+  </li>-->
+  
+ <li class=" if <% if params[:controller] == 'myworld/stories' %> current1 <% else %> <% end %>">
+ <a href="<%= stories_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Stories"><b>Stories</b><em></em></a>
+ </li>
+ 
+ <!-- <li class=" if <%# if params[:controller] == 'myworld/reviews' %> current1 <%# else %> <%# end %>">
+  <a href="<%#= reviews_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Reviews"> Reviews<em></em></a>
+  </li> --> 
+ 
+ <!-- <li class=" if <%# if params[:controller] == 'myworld/travelogs' %> current1 <%# else %> <%# end %>">
+  <a href="<%#= travelogs_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Travelogs"> Travelogs<em></em></a>
+  </li>--> 
+
+
+</ul>
+
+<br class="shared_clear"/>
+
+</div>
+
+
+
+<%= render :partial => "shared/login"%>
+
+</div>
+
+

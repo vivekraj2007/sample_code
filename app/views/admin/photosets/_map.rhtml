@@ -1,0 +1,46 @@
+<%#= stylesheet_link_tag 'myworld_style' %>  
+    <script type="text/javascript">
+	
+	 function createMarker(point,html)
+	   {
+	   
+	   
+      var marker = new GMarker(point, {draggable: true}); 
+
+		GEvent.addListener(marker, "click", function(){});
+				GEvent.addListener(marker, "dragend", function(){
+       var ctr = marker.getPoint();
+		var lt =ctr.lat();
+		var lng=ctr.lng();
+	    document.getElementById('longt').value = lng;
+	    document.getElementById('lat').value = lt;
+   		return photo_fileds_create();
+       }
+	   );
+		
+        return marker;
+        }
+     
+
+	  
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(21.796875, 31.952162),1);
+		
+		var point = new GLatLng(21.796875, 31.952162);
+	    
+		
+		var marker = createMarker(point,'')		
+			        
+map.addControl(new GSmallMapControl());
+map.addControl(new GMapTypeControl());
+map.addOverlay(marker);
+
+      }
+    }  
+    </script>
+
+
+    <div id="map_canvas" style="width:400px; height:280px;"></div>
+    <div id="message"></div>

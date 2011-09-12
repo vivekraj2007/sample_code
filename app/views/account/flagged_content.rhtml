@@ -1,0 +1,43 @@
+<script type="text/javascript">
+popup_div();
+</script>
+
+<style>
+
+ .myBox1
+{
+    margin: 0 auto;
+    border: 0px solid green;
+    color: #ffffff;
+    width:304px;
+	height:auto;
+    padding: 20px;
+	overflow:hidden;
+	text-align: left;
+    background-color: #e2ddc7;
+    /*
+    background-image: url(back_test2.jpg);
+    background-repeat: no-repeat;
+    */
+}
+
+</style>
+<div class="myBox1" >
+<div class="flaged_top" align="left">
+<div class="text_who">
+<%= @message %>
+</div>
+
+    
+<div style="padding-left:80px; margin-top:10px;">
+<input type="image" id ="send" value = "send" src="/images/home/close.gif" border="0" onclick="document.getElementById('flag_content').style.display = 'none';"/>
+</div>
+
+
+<div style="clear:both;"></div>
+
+</div>
+
+
+</div>
+

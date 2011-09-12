@@ -1,0 +1,251 @@
+
+	<script type="text/javascript">
+	function inbox(inbox_id)
+	{
+	document.location.href = inbox_id;
+	}
+
+	function sentmail(sentmail_id)
+	{
+	document.location.href = sentmail_id;
+	}
+	
+	
+		
+	function messagereply()
+	{
+	document.getElementById('forward_delete').style.display='none';	
+	document.getElementById('message_reply').style.display='block';
+	}
+	
+	
+	function messagecancel(type)
+	{
+	
+	document.getElementById('forward_delete').style.display='block';
+		if(type=='reply')
+		{	
+		document.getElementById('message_reply').style.display='none';
+		}
+		else
+		{
+		document.getElementById('message_forward').style.display='none';
+		}
+	}
+	
+	function messageforward()
+	{
+	document.getElementById('forward_delete').style.display='none';	
+	document.getElementById('message_forward').style.display='block';	
+	}
+	
+	
+	</script>
+<div class="left_bar1">
+  <!--left stories-->
+  <div class="left_bar_stories_new">
+    <!--advertisement-div-start-->
+	
+	
+    <!--<div class="stories_leftbar">
+      <div class="adver_stories">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+      <div class="adver_stories2">
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+        </div>
+      </div>
+    </div>-->
+	
+	<div class="photosat_left">
+						
+						<div class="friend_left_inner Advertisement"><%= @top_adv.script %></div>
+						
+						<div class="friend_left_inner_12 Advertisement"><%= @bottom_adv.script %></div>
+						
+						</div>
+	
+	
+    <!--advertisement-div-end-->
+    <!--world start-->
+    <div class="myworld_rightbar">
+	
+	
+	
+      <!--top select-->
+      <div class="myworld_rightbar_inner_story">
+
+   <div class="world_cal1_story">
+		
+		<div class="stories_map_3">
+		 <%= link_to "Inbox", messages_url(:id => @user_profile.screen_name.gsub(' ', '_')), {:class => "stories_map_3",:title => "Click here to view all messages"}%> 
+		 </div>
+          <div class="friends_flo">
+            <div class="myworld_images_sent my_cursor" onclick="sentmail('<%= sent_messages_url(:id => @user_profile.screen_name.gsub(' ', '_')) %>')"></div>
+          </div>
+         
+		 <% if check_login(@user_profile.id)  %>
+         <div class="stories_map_3">
+		 <%= link_to "Write", write_message_url(:id => @user_profile.screen_name.gsub(' ', '_')),{:class => "stories_map_3",:title => "Click here to write new message"}%>		
+		  </div>
+		   <% end %>
+        </div>
+		
+		
+		
+        </div>
+      <!--top select end-->
+	  
+	  
+	  
+      <!--line div start-->
+      <!--	<div class="stories_rightbar_inner3"><img src="images/stories_line.jpg" alt="" width="518px" /></div>-->
+      <!--line div end-->
+	  
+	
+	  
+      <!--world content start-->
+      <div class="myworld_rightbar_inner1">
+        <div class="world_message1" >
+          <!--messages-->
+          <div class="world_message my_world_messages">
+		  
+		  <div class="my_world_inner_main">
+		  
+		  
+         <div class="home_world friends_flo">	
+		  <strong>Messages</strong>
+		     <%= @page_no %> of <%=  @total.size %>
+		</div>	 
+		
+	      <div class="home_world1 my_world_padding">
+		   <%= will_paginate(@sent_messages,:page_links => false) %>
+		  </div>		  
+		  </div>
+          </div>
+          <!--messages end-->
+        </div>
+		
+		
+        <!--world lightcolor div-->
+        <div class="world_light_new">
+		
+	
+          <!--middle image-->
+          <div class="light_image">
+            <div class="light_innerimage">
+    	    <% if !@selected_message.to_id.profile.profile_image.blank? %>
+		    <%= link_to(image_tag(url_for_file_column(@selected_message.to_id.profile, "profile_image","thumbnail")) , profile_url(:id => @selected_message.to_id.screen_name.gsub(' ', '_')), {:title => "#{@selected_message.to_id.screen_name}"}) %>
+			<% else %>
+			<%= link_to( image_tag("/images/home/no-image_tumb.gif"), profile_url(:id => @selected_message.to_id.screen_name.gsub(' ', '_')), {:title => "#{@selected_message.to_id.screen_name}"}) %>
+			<% end %>			
+		  </div>
+            <div class="world_middle1">
+              <div class="myworld_text">
+			  <img src="/images/messages/world_mail.jpg" alt="" class="my_world_mid"/>
+			  <%= @message.subject%>
+			  </div>
+              <div class="myworld_text1"><%= profile_name(@selected_message.to_id.screen_name) %></div>
+              <div class="myworld_text2"><%= myworld_dateformat(@selected_message.date_sent)%></div>
+            </div>
+          </div>
+          <!--middle image end-->
+
+		  
+          <div class="clear"></div>
+          <!--content-->
+          <div class="light_image">
+            <div class="home_world2">
+          <%= @selected_message.message %>
+            </div>
+          </div>
+          <!--content end-->
+
+          <div></div>
+		   <% if check_login(@user_profile.id)  %>
+          <div class="world_footbg_1">
+       <div class="my_world_friends_image">&nbsp;</div>
+			
+              <div class="world_imgfoot" id="forward_delete">
+              <div class="world_imgfoot1">		
+			  <% if params[:action] !=  'sent_message_details'%>	  
+		      <img src="/images/messages/reply.jpg" onclick="messagereply();" alt="reply"/> &nbsp;&nbsp; 
+			  <% end %>
+			  <img src="/images/messages/forward.jpg" onclick="messageforward();" alt="forward" />
+			  </div>
+              <div class="friends_flo">
+		  <%= link_to (image_tag("/images/messages/delete_button.jpg"), sentmsg_delete_url(:id => @user_profile.screen_name.gsub(' ', '_'),:message =>@selected_message.id),{:title => "Click here to delete this message", :confirm => "Are you sure you want to remove this message?"}) %>		  
+			   </div>
+            </div>
+			
+			
+			
+			<div class="world_imgfoot my_world_display"  id="message_forward">			
+			<div class="world_imgfoot1">
+			<% form_for :messageforward,:url => {:controller => "myworld/messages",:action => "create_message", :id => @user_profile.screen_name.gsub(' ', '_')} do  %>
+			<%= hidden_field 'message', 'subject', :value => 'Forward' %>
+			<%= hidden_field 'message', 'message', :value => @selected_message.message %>
+			
+			<%= text_field 'message', 'email_address', :value => !@message.email_address.blank? ? @message.email_address : "Email addresses or screen names separated by commas", :class => 'msg_default_style', :style => !@message.email_address.blank? ? "color:black;" : "color:#cbcbcb;" "width:400px; height:20px;",:onfocus => "if(this.value=='Email addresses or screen names separated by commas') this.value=''; change_msg_style(this.id); forward_msg_fields(this.id);",:onBlur =>  "if(this.value=='') this.value='Email addresses or screen names separated by commas'; change_msg_style(this.id); forward_msg_fields(this.id);",:id => 'forwardmessage', :onkeyup => "change_msg_style(this.id); forward_msg_fields(this.id);", :onkeydown => "change_msg_style(this.id); forward_msg_fields(this.id);"  %>
+			 <br/><br/>
+			 
+			<input name="messageforward" id="messageforward" value="save" src="/images/messages/forward_white.gif" type="image" disabled = true >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/messages/cancel.jpg" alt="" onclick="messagecancel('forward');"/>
+			<% end %>
+			</div>
+			
+			
+			
+		
+						</div>
+			
+			
+			
+			
+			<div class="world_imgfoot my_world_display" id="message_reply">
+			
+			
+			<div class="world_imgfoot1">
+			<% form_for :messagereply,:url => {:controller => "myworld/messages",:action => "reply_message", :id => @user_profile.screen_name.gsub(' ', '_'), :message_id => @selected_message.id } do  %>
+			<%= hidden_field 'message', 'subject', :value => 'Reply' %>
+			
+			<%= text_area 'message', 'message', :class => 'msg_default_style_textarea_new my_world_area' ,:id => 'message1', :onBlur=>"msg_fields();",:onkeydown=>"msg_fields();", :onfocus=>"msg_fields();",:onkeyup=>"msg_fields();" %> 
+			<br/><br/>
+			<input name="messagereply" id="messagereply" value="save" src="/images/messages/send_b.gif" type="image"  disabled = true>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/messages/cancel.jpg" alt="" onclick="messagecancel('reply');"/>
+			<% end %>
+			</div>
+			
+			
+			
+			
+						</div>
+			
+          </div>
+		  <% end %>
+        </div>
+        <!--world lightcolor div end-->
+		
+		
+		
+      </div>
+      <!--world content end-->
+	  
+      <!--world foot start-->
+      <div class="myworld_rightbar_inner2"></div>
+      <!--world foot end-->
+      <div class="clear"></div>
+      <%# if !@total.blank? %>
+      <!--<div class="world_message2">
+        <div style="float:left; padding-left:150px; padding-top:5px;">
+	    <%#= will_paginate (@inbox_messages,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" style=" vertical-align:bottom;" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" style=" vertical-align:bottom;" />'}) %>
+      </div>
+        
+      </div>-->
+	  <%# end %>
+    </div>
+    <!--world end-->
+  </div>
+  <!--left stories end-->
+</div>

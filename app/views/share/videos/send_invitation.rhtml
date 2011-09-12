@@ -1,0 +1,23 @@
+<div class="photoinvite" align="left">
+        <% if @message %>
+		<div class="text_who"><%= @message %></div>
+		<% else %>
+		
+	
+
+
+         <div class="text_who">Share the love</div>
+        <% form_for :photos, :url => {:action => "send_invitation", :id => @videoset.permalink} do %>
+        <div class="home textalignment">Invite my friends to view this Videoset ! <br class="br12"/>
+		Enter emails separated by commas.</div>
+        
+        <div class="marign_textinput" align="left">
+		 <%= text_area_tag'invitation', '',:class => 'default_style_textarea_new', :id => 'invitation_email', :onfocus => "photo_invitation();", :onkeyup => "photo_invitation();" %> </div>
+        
+        <div style="padding-left:10px; margin-top:10px;">
+          <input name="invitesave" id="invitesave" value="save" src="/images/home/send.gif" type="image" disabled = true>
+        </div>
+        <% end %>
+        <div style="clear:both;"></div>
+			<% end %>
+</div>

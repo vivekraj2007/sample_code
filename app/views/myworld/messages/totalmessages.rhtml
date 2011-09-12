@@ -1,0 +1,15 @@
+  
+	  <%= stylesheet_link_tag 'myworld_style' %>
+<div class="profile_bg1">
+        <div class="right_in">
+          <div class="right_in126">
+            <div class="my_world_total">
+		 <a href="<%= messages_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Messages"  class="profile_cal1_new"><img src="/images/home/email.jpg" alt="" class="my_world_total_1"/><%= @user_messages.length %>&nbsp;New&nbsp;Messages</a></div>
+          </div>
+        <!--  <div  class="profileright_in2">
+           
+          </div>-->
+        </div>
+        <div class="clear"></div>
+      </div>  
+	  

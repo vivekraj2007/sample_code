@@ -1,0 +1,60 @@
+<% total = 0 %>	
+ <% if !@user_stories_published.length != 0 %>
+   <% total = @user_stories_published.length %>
+ <% end %>
+	  
+<div id="totaluser_user_stories" style="display:none;"  class="profile_inneruser">
+<div class="right_in">
+<div class="profileright_in1">
+        <div class="newphoto_call"> 
+ <%= total %> Stories
+		  </div>
+		  </div>
+     <div>
+         <a href="javascript://" onclick="Effect.toggle('totaluser_user_stories', 'blind', {duration:0.6}); Element.show('totaluser_stories');" class="newphoto_call2"><img src="/images/home/up_arrow.jpg" alt="" /></a>
+           
+   	  </div>
+		</div>
+
+<div class="clear"></div>
+      <div class="profile_right6">
+	   
+		  <% @user_stories_published.each_with_index do |story,i| %>
+      	 
+ <div style="width:170px; float:left;  font-family:Arial, Helvetica, sans-serif;font-size:12px;  color:#000000; font-weight:bold; text-align:left; height:15px; line-height:15px; padding-left:10px; margin:0px;">
+	   	  <%= link_to "#{story.title.gsub(/'/,'').to(25)}",storypermalink_url(:continent =>!story.continent.blank? ? story.continent.gsub(/ /,'-') : 'continent',:country => !story.country.blank? ? story.country.gsub(/ /,'-') : 'country', :state => !story.state.blank? ? story.state.gsub(/ /,'-') : 'state', :location => !story.location.blank? ? story.location.gsub(/ /,'-') : 'location',:id => story.permalink),{:class=> 'story_cal1_new', :title => "#{story.title}"} %>
+		   </div>
+<div style="width:170px; float:left; font-family:Arial, Helvetica, sans-serif;font-size:11px;	color:#a48046; text-align:left; padding-left:10px;  height:15px; line-height:15px; margin:0px;" title="<%= story.sub_title %>">
+		  <%= story.sub_title.to(30) %>
+		   </div>
+		 <% if i== 4 %>
+		<% break %>
+		<% end %>
+	  <% end %>
+       
+      </div>
+</div>
+<div class="clear"></div>
+
+
+<div class="profile_bg1"  id="totaluser_stories">	
+        <div class="right_in">
+          <div class="profileright_in1">
+         <div class="profile_cal1">
+	
+	<% if total != 0 %>	 
+       <%= link_to "#{total} Stories",stories_url(:id => @user_profile.screen_name.gsub(' ', '_')),:title => 'Click here to view the stories list', :class=> 'profile_cal1_new' %>
+	 <% else %>
+	 <%= total %> Stories
+	 <% end %> 
+            </div>
+          </div>
+           <div >
+        <% if total!=0 %>
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_stories', 'blind', {duration:0.6}); Element.hide('totaluser_stories');" class="profileright_in2"><img src="/images/home/down_arrow.jpg" alt="" /></a>
+        <% end %>
+      </div>
+        </div>
+        <div style="clear:both;"></div>
+      </div>
+

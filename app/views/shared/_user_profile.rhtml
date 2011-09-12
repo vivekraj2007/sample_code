@@ -1,0 +1,117 @@
+<style>
+.webs {color:#000000;}
+.webs:hover{color:#FFFFFF;}
+</style>
+<div class="middle_right121">
+  <!--  search drop down start here-->
+  <%#= render :partial => '/shared/search' %>
+  <!--  search drop down end here-->
+  <!--login drop down code starts here-->
+  <%= render :partial => 'shared/login_dropdown' %>
+  <!--login drop down code ends here-->
+  <!--rightblock-->
+  <div class="right_121">
+    <div class="right_bg121">
+      <!--  <div>-->
+      <div id ="user_profile" class="user_profile_bg">
+        <div>
+          <div class="right_in">
+            <div class="profileright_in1">
+              <div class="profile_cal1"><%= profile_name(@user_profile.screen_name) %></div>
+            </div>
+            <div class="profileright_in2"> <a href="javascript://" onclick="Effect.toggle('user_profile', 'blind', {duration:0.6}); Element.show('profile');"> <img src="/images/home/up_arrow.jpg" alt="" /></a></div>
+          </div>
+        </div>
+        <div style="clear:both;"></div>
+        <div style="margin:0px 10px 0px 12px; background:url(<%= profile_image(@user_profile.id) %>) no-repeat; cursor:pointer;"  class="div_browse1" id = "image_upload" onmouseover="show_relavent();" onmouseout="hide_relavent();" onclick="profile_user('<%= profile_url(:id => @user_profile.screen_name.gsub(' ', '_'))%>');">
+          <div id="show_relavent" style="display:none;">
+            <% if check_login(@user_profile.id)  %>
+            <div style="width:171px; height:auto; top:147px; position:relative;" > <%= render :partial => 'shared/edit_photo'%> </div>
+            <% else %>
+            <%= render :partial => 'shared/add_friend'%>
+            <% end %>
+          </div>
+        </div>
+        <div>
+          <div class="right_in">
+            <div class="right_in11">
+              <div class="user_cal1"> Uncharted <%= @user_profile.level.humanize %> </div>
+            </div>
+            <div  class="right_in222"> <%= image_tag(url_for_file_column(@user_profile.country, "image","main")) %> </div>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+        <div style="width:190px; overflow:hidden; margin:0px; padding:0px;">
+          <div class="right_in">
+            <div class="right_in3">
+              <div class="user_home">Home:</div>
+            </div>
+            <div style="width:110px; height:30px; float:left; padding-top:3px;">
+              <div class="home1"><%= profile_home(@user_profile.city,@user_profile.state) %></div>
+            </div>
+          </div>
+          <div style="clear:both;"></div>
+          <div class="right_in">
+            <div class="right_in3">
+              <div class="user_home">Interests:</div>
+            </div>
+            <div style="width:115px; float:left; padding-top:3px;">
+              <div class="home1"><%= user_passion(@user_profile.profile.hobbies) %></div>
+            </div>
+          </div>
+          <div style="clear:both;"></div>
+          <div class="right_in">
+            <div class="right_in16">
+              <div class="user_home">Site:</div>
+            </div>
+            <div style="width:110px; float:left; padding-top:3px;">
+              <div class="home1"> <a href="http://<%= @user_profile.profile.website%>" target="blank" class="story_view12"> <%= user_website(@user_profile.profile.website) %> </a></div>
+            </div>
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+      <div class="profile_bg1" style="display:none;" id="profile">
+        <div class="right_in">
+          <div class="profileright_in1">
+            <div class="profile_cal1"><%= profile_name(@user_profile.screen_name) %></div>
+          </div>
+          <div> <a href="javascript://" onclick="Effect.toggle('user_profile', 'blind', {duration:0.6}); Element.hide('profile');" class="profileright_in2"><img src="/images/home/down_arrow.jpg" alt="" /></a></div>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+      <!-- user messages-->
+      <% if session[:user_id] == @user_profile.id %>
+      <div id="update_messages">
+        <div class="profile_bg1">
+          <div class="right_in">
+            <div class="right_in126">
+              <div style="float:left; width:200px;"> <a href="<%= messages_url(:id => @user_profile.screen_name.gsub(' ', '_') )%>" title="Messages"  class="profile_cal1_new"><img src="/images/home/email.jpg" alt="" style="padding:8px 5px 0px 10px;"/><%= @user_messages.length %>&nbsp;New&nbsp;Messages</a></div>
+            </div>
+            <!--  <div  class="profileright_in2">
+           
+          </div>-->
+          </div>
+          <div style="clear:both;"></div>
+        </div>
+      </div>
+      <%#= periodically_call_remote(:frequency => 10,:update => 'update_messages', :url => {:controller =>"/myworld/messages", :action => 'totalmessages',:id => session[:user_screenname]}) %>
+      <% end %>
+      <%= render :partial => '/shared/totalfriends' %>
+	  <%= render :partial => '/shared/totalphotos' %>
+	  <%= render :partial => '/shared/totalstories' %> 
+	  <%#= render :partial => '/shared/totalvideos' %>
+	  <%#= render :partial => '/shared/totalreviews' %>
+	  <%#= render :partial => '/shared/totaltravelog' %>
+	  <%#= render :partial => '/shared/totalplans' %>
+	  <%#= render :partial => '/shared/totaltags' %>
+      <div class="right_space18">
+        <div class="right_space19_new"></div>
+        <%= render :partial => '/shared/right_bottom' %>
+        <div class="right_space19_new"></div>
+      </div>
+      <!--</div>-->
+    </div>
+  </div>
+  <!--rightblock-div-end-->
+</div>

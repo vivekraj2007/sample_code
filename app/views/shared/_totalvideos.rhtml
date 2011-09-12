@@ -1,0 +1,100 @@
+
+
+<div id="totaluser_user_videos" style="display:none;"  class="profile_inneruser">
+<% @total = 0 %>		 
+<%	if @user_videosets.length != 0 %>
+ <% for videoset in @user_videosets %>
+<% total_videos_in_set = videoset.videos.length %>
+<% @total = @total + total_videos_in_set  %>
+ <% end %>
+<% end %>
+<div class="right_in">
+<div class="profileright_in1">
+        <div class="newphoto_call">
+ 
+ <% if @total != 0 %>
+          <%= @total %>
+          <% else %>
+          0
+          <% end %>
+          Videos,
+          <% if !@user_videosets.blank? %>
+          <%= @user_videosets.length %>
+          <% else %>
+          0
+          <% end %>
+          Sets
+		  </div>
+		  </div>
+     <div>
+         <a href="javascript://" onclick="Effect.toggle('totaluser_user_videos', 'blind', {duration:0.6}); Element.show('totaluser_videos');" class="newphoto_call2"><img src="/images/home/up_arrow.jpg" alt="" /></a>
+           
+   	  </div>
+		</div>	  
+		<div class="clear"></div>
+		  
+      <div class="profile_right6 ">
+	 
+	 <div style="width:200px; height:auto; overflow:hidden; margin:0 0 0 7px; ">
+        <% @user_videosets.each_with_index do |videoset,i| %>
+         <div  style=" padding:4px; float:left;">
+			<% if !videoset.covervideo_id.blank? && videoset.covervideo_id != 0 %>
+ 	             <% video = Video.find(videoset.covervideo_id)%>
+				 
+		<%= link_to(image_tag("/video/videofile/#{videoset.covervideo_id}/thumb/#{videoset.covervideo.video_image}",:style => "border:1px solid #e1ae62;float:left;"),videopermalink_url(:continent =>check_continent(videoset.continent),:country => check_country(videoset.country), :state => check_state(videoset.state), :location => check_location(videoset.location),:id => videoset.permalink)) %>
+
+
+		<% else %>		
+		<%= link_to(image_tag("/images/home/no-image_tumb.gif",:style => "border:1px solid #e1ae62;float:left;"),videopermalink_url(:continent =>check_continent(videoset.continent),:country => check_country(videoset.country), :state => check_state(videoset.state), :location => check_location(videoset.location),:id => videoset.permalink)) %>	
+		<% end %>
+		<% if i == 8 %>
+		<% break %>
+		<% end %>	
+		 </div>
+		 
+        <% end %>
+      </div>
+	  </div>
+	  
+	  
+</div>
+<div class="clear"></div>
+
+
+<div class="profile_bg1" id="totaluser_videos">	
+      <div class="right_in">
+      <div class="profileright_in1">
+
+         <div class="profile_cal1">
+		 
+
+
+
+  <% if @total != 0 %>
+  <%= link_to "#{@total} Videos,",videos_url(:id => @user_profile.screen_name.gsub(' ', '_')),:title => 'Click here to view the videoset list', :class=> 'profile_cal1_new' %> 
+ <% else %>
+ <%= @total %> Videos,
+ <% end %>
+ 
+ 
+<% if !@user_videosets.blank? %>
+<%= link_to "#{@user_videosets.length} Sets",videos_url(:id => @user_profile.screen_name.gsub(' ', '_')),:title => 'Click here to view the videoset list', :class=> 'profile_cal1_new' %> 
+<% else %>
+ 0 Sets
+<% end %> 
+		
+		  
+		  </div>
+      </div>	
+	  
+	  
+      <div > 
+        <% if !@user_videosets.blank? %>
+        <a href="javascript://" onclick="Effect.toggle('totaluser_user_videos', 'blind', {duration:0.6}); Element.hide('totaluser_videos'); " class="profileright_in2"><img src="/images/home/down_arrow.jpg" alt="" /></a>
+        <% end %>
+      </div>
+
+    </div>
+	<div style="clear:both;"></div>
+  </div>
+

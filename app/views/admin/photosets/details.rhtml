@@ -1,0 +1,203 @@
+<div class="story_title" > 
+<div class="story_font">
+<%= link_to 'Photosets' ,{:controller => '/admin/photosets',:action => 'index' }, :style => 'text-decoration:none'%>  > <%= @photoset.title.titlecase %> Details</div> 
+
+<!--photosets div start-->
+
+<div style="clear:both;"></div><br/>
+
+<div class="stories_rightbar_inner1"><img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+
+<!--photosets div end-->
+
+<!--videoset div start-->
+
+<!--videoset div end-->
+
+<!--Reviews div start-->
+
+
+</div><br/>
+
+<div class="story_title1" >
+<div style="float:left;">
+<div style="float:left; width:500px; ">
+<div style="float:left;" >
+<div class="story_place_font story_place_flo">Title </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;"><%= check_blank_condition(@photoset.title) %></div>
+
+</div>
+
+<div class="clearer"></div>
+
+
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Description </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;">
+<%= check_blank_condition(@photoset.description) %>
+
+</div>
+</div>
+<div class="clearer"></div>
+<div>
+<div class="story_place_font story_place_flo">Tags </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;">
+<%= check_blank_condition(@photoset.tag) %>
+
+</div>
+</div>
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Address </div>
+<div class="story_place_flo">:</div>
+
+<div class="story_place_flo story_place_font1" style="width:250px;">
+<%= @photoset.address %>
+</div>
+</div>
+
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Uploaded By </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;">
+
+<%#= link_to "#{@photoset.user.screen_name}",profile_url(:id => @photoset.user.screen_name.gsub(' ', '_')), {:title=>'Click here to view ' + "#{@photoset.user.screen_name}" + ' profile '} %>
+
+<%= link_to @photoset.user.screen_name, :controller => 'users', :action => 'profile', :id => @photoset.user.id %>
+
+	<span>	(<%= link_to (image_tag("/images/home/2.jpg"), {:controller => "admin/users",:action => "send_emailnotification", :id => @photoset.user.id }, :style => "text-decoration:none;",:title => "Click here to send admin message",:popup => ['new_window','height=350,width=600']) %>) </span>
+
+
+</div>
+</div>
+
+<div>
+<div class="story_place_font story_place_flo">Created on </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:250px;">
+<%=  user_dateformate(@photoset.created_on) %>
+</div>
+</div>
+<div class="clearer"></div>
+
+
+<div>
+<div class="story_place_font story_place_flo">Updated on </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:250px;">
+<%=  user_dateformate(@photoset.updated_on) %>
+</div>
+</div>
+<div class="clearer"></div>
+
+</div>
+<div style="float:left; padding-left:10px; width:100px;">
+<% if !@photoset.coverimage.blank?%>
+       
+	    <%= image_tag(url_for_file_column(@photoset.coverimage, "image","submain"),:style => "border:1px solid #e1ae62;")%>
+		<% else %>		
+		<%= image_tag "/images/home/no-image_tumb.gif",:style => "border:1px solid #e1ae62; width:97px; height:97px;" %>
+		<% end %>
+</div>
+<div class="story_place_font" style="float:left; padding-left:15px; width:100px; padding-top:10px;">
+Cover Image
+</div>
+
+<div class="clearer"></div>
+
+<div>
+<div class="story_place_font story_place_flo">Permalink </div>
+<div class="story_place_flo">:</div>
+<div class="story_place_flo story_place_font1" style="width:300px;">
+<% if !@photoset.lat.blank? && !@photoset.longt.blank? %>
+<%= link_to @photoset.title, photopermalink_url(:continent =>check_continent(@photoset.continent),:country => check_country(@photoset.country), :state => check_state(@photoset.state), :location => check_location(@photoset.location),:id => @photoset.permalink),{:title => 'Click here to view ' + "#{@photoset.title}" + ' details', :target => 'blank'} %>
+<% else %>
+Unpublished Photoset 
+<% end %>
+</div>
+</div>
+
+<div class="clearer"></div><br/>
+
+</div>
+<div>
+
+
+<% if @photos.size > 2 %>
+<div style="width:700px;height:230px; overflow-y:scroll; overflow-x:hidden; border:0px solid #663366; float:left;">
+<% else %>
+<div style="width:700px;height:230px; border:0px solid #663366; float:left;">
+<% end %>
+<div class="story_place_font story_place_flo">Photos</div>
+<% if !@photos.blank? %>
+<% for photo in @photos %>
+<div  style="width:700px; float:left; padding:10px 0px 10px 0px;">
+
+<div style="width:97px; height:97px; float:left;"><%=  image_tag(url_for_file_column(photo,"image","submain")) %></div>
+<div style="width:auto; height:97px; float:left;">
+
+<div style="width:auto; float:left; padding-left:10px;">
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding:0px 0px 5px 10px; font-weight:600; float:left; width:100px;">Title</div>
+<div style="float:left;">:</div>
+<div style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding-left:20px; width:200px;" align="justify"><%= check_blank_condition(photo.title) %></div>
+
+</div>
+<div style="clear:both;"></div>
+<div style="width:auto;float:left; padding-left:10px;">
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding:0px 0px 5px 10px; font-weight:600; float:left;  width:100px;">Caption </div>
+<div style="float:left;">:</div>
+<div style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding-left:20px; width:400px;" align="justify"><%= check_blank_condition(photo.caption) %></div>
+</div>
+<div style="clear:both;"></div>
+<div style="width:auto;float:left; padding-left:10px;">
+<div style="font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding:0px 0px 5px 10px; font-weight:600; float:left;  width:100px;">Uploaded On </div>
+<div style="float:left;">:</div>
+<div style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:14px; color:#000000; text-align:left; padding-left:20px;"><%= myworld_dateformat(photo.created_on) %></div>
+</div>
+</div>
+
+</div>
+<% end %>
+<div style="clear:both;"></div>
+<% end %>
+</div>
+
+
+
+
+</div>
+<div class="clearer"></div>
+
+
+
+<div style="padding-top:10px;">
+<div class="story_place_font story_place_flo">&nbsp; </div>
+<div class="story_place_flo">&nbsp;</div>
+<div  class="story_place_font1" style="float:right;">
+
+
+
+
+<div><%= link_to (image_tag("/images/admin/back_list.gif"), {:controller => 'admin/photosets', :action => 'index'},{:title => "Click here to view photoset list"}) %> &nbsp;&nbsp;&nbsp;
+<%= link_to (image_tag("/images/admin/edit.gif"), {:controller => 'admin/photosets', :action => 'edit',:id => @photoset.permalink},{:title => "Click here to edit photoset details"}) %>&nbsp;&nbsp;&nbsp;
+<%= link_to( image_tag("/images/admin/delete_new.gif"), {:controller => 'admin/photosets',:action => 'delete',:id => @photoset.permalink}, :confirm => 'Are you sure want to delete this photoset?', :method => :post,:title => "Click here to delete photoset( #{@photoset.title} ) details.",:class => 'story_place_font' )%>
+</div>
+</div>
+</div>
+</div>
+
+
+
+<!--disply the right side image-->
+
+<div style="float:"></div>
+
+
+<!--End of right side image-->

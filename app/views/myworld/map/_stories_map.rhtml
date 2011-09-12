@@ -1,0 +1,56 @@
+<script type="text/javascript">
+ function see_stories(id)
+ {
+document.location.href = "/myworld/stories/search_map/"+id;
+ }
+</script> 
+ 
+ <script type="text/javascript">
+    
+   function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+       <% if !@user.lat.blank? && !@user.longt.blank?  %>
+		map.setCenter(new GLatLng(<%= @user.lat.to_f %>,<%= @user.longt.to_f %>),2,G_PHYSICAL_MAP);
+		<% else %>
+        map.setCenter(new GLatLng(16.936063,82.232838),2,G_PHYSICAL_MAP);
+		<% end %>
+		map.addMapType(G_PHYSICAL_MAP);
+		map.addControl(new GLargeMapControl());
+		map.addControl(new GMapTypeControl());
+		// Create our "tiny" marker icon
+        var photoIcon = new GIcon(G_DEFAULT_ICON);
+        photoIcon.image = "/images/home/map/map_story.png";
+		photoIcon.shadow = "";
+		photoIcon.iconSize = new GSize(16, 15);
+		photoIcon.iconAnchor = new GPoint(5, 13);
+		
+		// Set up our GMarkerOptions object
+		markerOptions = { icon:photoIcon };
+ 			
+		// default icon
+          function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		<% for story in @myworld_stories %>
+		  var point = new GLatLng(<%= story.lat %>,<%= story.longt %>);
+ var marker = createMarker(point,'<div class="map_main_map" onClick="see_stories(<%= story.id%>);"><div class="map_left"><div class="map_left1"><%=  "#{story.title.gsub(/'/,'').to(50)}" %></div><div class="map_title"><%= "#{story.sub_title.gsub(/'/,'').to(20)}" %></div><div class="map_title"><%= map_date(story.created_at) %></div></div><div class="map_image"><div  class="map_image1"><img src="/images/home/map/map_story.jpg"/></div><div class="map_date"><%= image_tag("/photo/image/#{story.image_id}/thumbnail/#{story.image}",:class => "map_inner") %></div></div></div>');
+		  map.addOverlay(marker);	
+
+		<% end %>
+		
+	
+         }
+	}
+    </script>
+ 
+
+
+<div id="mapsearch" style="width:600px; height:450px;"></div>
+

@@ -1,0 +1,127 @@
+<script language="javascript" type="text/javascript">
+var inputs = 0;
+var total_inp = "";
+var wordid_string = new Array();
+function addControl(){    
+	var table = document.getElementById('contacts');    
+	var tr = document.createElement('TR');    
+	var td1 = document.createElement('TD');    
+	var td2 = document.createElement('TD');    
+	var td3 = document.createElement('TD');    
+	
+	var inp1 = document.createElement('INPUT');  
+	//var inp2 = document.createElement('INPUT');
+	//var inp5 = document.createElement('INPUT');
+	///////////////////////////////////////////
+	////// Add for Mufti Discount Price////////
+	//var inp7 = document.createElement('INPUT');
+	 
+	//var inp8 = document.createElement('SPAN'); 
+	////////////////////////////////////////////
+	
+	
+	
+	
+	//var inp3 = document.createElement('SPAN'); 
+	 
+	var inp4 = document.createElement('SPAN');
+	//var inp6 = document.createElement('SPAN');  
+	var max_inp = document.createElement('INPUT');    
+	
+	var img = document.createElement('IMG');        
+	img.setAttribute('src', '/images/home/delete.jpg');  
+	img.setAttribute('alt', 'Remove');      
+	img.onclick = function(){            
+	removeWord(tr);        
+	}        
+	td1.appendChild(img);    
+		
+	var size_inp = "sizeprice_size" +inputs;
+	inp1.setAttribute('name',size_inp);
+	inp1.setAttribute('id',size_inp);
+	inp1.setAttribute('size','9');
+	
+	//var size_price_inp = "sizeprice_price" +inputs;
+	//inp2.setAttribute('name',size_price_inp);
+	//inp2.setAttribute('id',size_price_inp);
+	//inp2.setAttribute('size','9');
+	
+	
+	
+	/********************** Starting Of Discount Price *********************************/
+	/*var price_dis_inp = "discount_sizeprice_price" +inputs;
+	inp7.setAttribute('name',price_dis_inp);
+	inp7.setAttribute('id',price_dis_inp);
+	inp7.setAttribute('size','9');*/
+	
+	/********************** End Of Discount Price *********************************/
+	
+	
+	
+	
+	/*var pricetxt_inp = "sizeprice_pricetxt" +inputs;
+	inp5.setAttribute('name',pricetxt_inp);
+	inp5.setAttribute('id',pricetxt_inp);
+	inp5.setAttribute('size','9');
+	*/
+	
+	max_inp.setAttribute('type','hidden');
+	max_inp.setAttribute('name','max_inp');
+	max_inp.setAttribute('id','max_inp');
+	max_inp.setAttribute('value',inputs);
+	
+	
+	inp4.innerHTML = " ";    
+	//inp3.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp; Price: &pound;";
+	//////////////// Add For Dicount Price ////////////////////
+	//inp8.innerHTML = "&nbsp;&nbsp;&nbsp;&nbsp; Dicount Price: &pound;";
+	////////////////////////////////////////////////////////////
+	
+	
+	
+	//inp6.innerHTML = "&nbsp; Price Text: ";
+	
+	
+	table.appendChild(tr);    
+	tr.appendChild(td1);    
+	tr.appendChild(td2);    
+	tr.appendChild(td3);
+	
+	///////////// Size 
+	td2.appendChild(inp4);
+	td2.appendChild(inp1); 
+	/*/////////////////// Price Text
+	//td2.appendChild(inp3);
+	td2.appendChild(inp6);
+	td2.appendChild(inp5);
+	
+	///////////// Price	
+	td2.appendChild(inp3);
+	td2.appendChild(inp2);
+	
+	///////////////////////////////////
+	///////////// Discount Price///////
+	td2.appendChild(inp8);
+	td2.appendChild(inp7);*/
+	////////////Discount Price/////////
+	/////////////////////////////////
+	
+	
+	
+	td3.appendChild(max_inp);
+	inputs++;
+	}
+	
+	function removeWord(tr){
+	tr.parentNode.removeChild(tr);
+	}
+	
+</script>
+<div style="margin-left:12px;">
+<table><tbody id="contacts">
+<tr><td colspan="3">
+<a href="javascript:addControl();" class="tahoma11boldblack">
+<img src="/images/home/add_textbox.jpg" alt="" style="vertical-align:middle;">
+</a></td></tr>
+</tbody></table>
+</div>

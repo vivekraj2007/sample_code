@@ -1,0 +1,338 @@
+<!--script for print option-->
+<script type="text/javascript">
+function print1()
+{
+window.print();
+}
+</script>
+	
+<script type="text/javascript">
+		function show_title()
+		{
+		document.getElementById('show_title').style.display = 'block';
+		}		
+		function hide_title()
+		{
+		document.getElementById('show_title').style.display = 'none';
+		}				
+</script>
+
+
+<script type="text/javascript">
+		function show_photo()
+		{
+		document.getElementById('photo_title').style.display = 'block';
+		}		
+		function hide_photo()
+		{
+		document.getElementById('photo_title').style.display = 'none';
+		}				
+</script>
+
+
+
+<!--link to remote functions -->
+<script type="text/javascript">
+function image_border(x)
+{
+<% @count = 1 %>
+<% for videoimages in @videoset.videos %>	
+document.getElementById('thumb_image_'+<%= @count %>).style.border = '0px';
+<% @count = @count+1 %>
+<% end %>
+document.getElementById('thumb_image_'+x).style.border = '3px solid #FED403';
+document.getElementById('coverimage_div_id').value=x;
+check_photoset()
+}
+
+
+function coverimage_div()
+{
+document.getElementById('coverimage_place').innerHTML=document.getElementById('coverimage_div_id').value;
+<!--alert(document.getElementById('coverimage_div_id').value);-->
+}
+
+function check_photoset()
+{
+
+<!--alert(document.getElementById('coverimage_div_id').value);-->
+document.getElementById('nag').innerHTML=document.getElementById('coverimage_div_id').value;
+<!--alert(document.getElementById('nag').innerHTML);-->
+}
+</script>
+
+
+
+
+
+
+<!--link to remote functions end-->
+
+
+
+
+<div class="photosat_left_bar_new">
+
+
+<!--advertisement-div-start-->
+<div class="photosat_left">
+  <div class="friend_left_inner Advertisement">Advertisement</div>
+  <div class="friend_left_inner_12 Advertisement">Advertisement</div>
+</div>
+<!--advertisement-div-end-->
+
+
+
+<!--photos start-->
+<div class="photosat_right">
+
+<div id="photo_thumbnail_stage">
+   <!--top navigation divs -->
+
+  <div class="photosat_rightbar_inner_story" id="story" style="display:block;">
+  
+  
+  
+  <!--  navigation divs-->
+    <div style="float:left; width:180px;">
+	
+	 <%# if params[:value] != 'map' %>
+     <div class="photosat_friend" id="photoset_div" style="display:block;"> <%# else %>
+     <!--<div class="photosat_friend" id="photoset_div" style="display:none;">-->
+     <%# end %>
+		
+		
+        <div class="top_images12">
+							<%= link_to (image_tag("/images/home/videoset_picture1.gif")),videopermalink_url(:continent =>check_continent(@videoset.continent),:country => check_country(@videoset.country), :state => check_state(@videoset.state), :location => check_location(@videoset.location),:id => @videoset.permalink), {:class=> "stories_map_1", :title => "Click here to view videoset details" } %></div>
+		
+		
+        <div class="friends_flo">
+							<div class="photoset_comments"></div>
+							</div>
+		  
+        <div class="top_images12">
+          <!--	<a href="javascript://" onclick="Element.show('photoset_map');Element.show('map_div');Element.hide('photoset_image');Element.hide('photoset_div');">-->
+          <div class="stories_map_1">
+            <!--<img src="/images/home/photos/black_map.gif" />-->
+          </div>
+          <!--</a>-->
+        </div>
+		
+		
+      </div>
+    </div>
+	  <!--  navigation divs end -->
+	
+	
+	
+    <div class="photoset_select_story">
+		<% form_for :myworld, :url =>{ :controller =>'/myworld/videos', :action => 'search'} do %>		
+		<select  id="id" name="id" onchange="this.form.submit();" class="photoset_select_story">
+		<option value="">Choose a Videoset...</option>
+		<%= options_from_collection_for_select @user_videosets, "permalink", 'sliced_title' %>
+		</select>
+		<% end %>
+    </div>
+	
+	
+    <div class="photos_right">
+	 <img src="/images/home/photos/full_screen.gif" alt="stories_box" />&nbsp;
+	  <img src="/images/home/photos/email.gif" alt="stories_mail" />&nbsp; 
+	  <img src="/images/home/photos/print.gif" alt="stories_print" />&nbsp;
+      <% if session[:user_id] == @videoset.user.id %>
+				<%= link_to image_tag ("/images/home/photos/edit.gif"), {:controller => "/share/videos", :action => "add_video_to_set",:id => @videoset.permalink},{ :title => "Click here to edit this videoset"} %> 
+				<% end %>
+    </div>
+	
+ </div>
+  <!--top navigation divs end-->
+ <div class="clear"></div>
+ 
+ 
+
+ 
+  <div class="photoset_rightbar_inner1">
+  
+    <div class="story_cal1 friends_flo">
+	 <%= @videoset.covervideo.title.titlecase if !@videoset.covervideo.blank?  %>
+	 </div>
+	 
+    <div style="float:right;">
+      <div  style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#5F5F5F; text-align:left; height:24px; line-height:24px; padding-right:20px;"><%= @videoset.title %></div>
+      <div  style="float:left; font-family:Arial, Helvetica, sans-serif; font-size:13px; font-weight:bold; color:#ab0300; text-align:left; height:24px; line-height:24px;"><span id="coverimage_place"></span>&nbsp;of&nbsp;<%= @videoset.videos.size %></div>
+    </div>
+	
+
+			  
+    <div style="clear:both;"></div>
+	
+    <%# if params[:value] != 'map' %>
+    <div  id="photoset_image" style="display:block;">
+	<%# else %>
+    <!--<div id="photoset_image" style="display:none;">-->
+    <%# end %>
+	
+	
+    <div align="center" style="width:600px; height:490px; padding-bottom:20px;" >
+        <div align="center" style="width:600px; height:450px;" onmouseover="show_title();", onmouseout="hide_title();">
+          <% if !@videoset.covervideo_id.nil? %>		  
+		  <%= media_player({:file =>  "/video/videofile/#{@videoset.covervideo_id}/flv_file/#{@videoset.covervideo_id}.flv"}, {:width =>"600px;",:height =>"450px",:thumbsinplaylist => true} )%>
+          <%#= image_tag(url_for_file_column(@photoset.coverimage,"image","main"),:name => 'ChangingPix',:id => 'ChangingPix',:onmouseover=>"show_title();", :onmouseout=>"hide_title();") %>
+          <% end %>
+        </div>
+		
+        <div id="show_title" style="display:none; background-color:#242422; width:600px; height:auto;" align="center">
+          <div style="font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#FFFFFF; text-align:left; padding:5px 10px 5px 10px;"> <%= @videoset.covervideo.caption.titlecase if !@videoset.covervideo.blank? %></div>
+        </div>
+      </div>
+	  
+	  
+	  
+    </div>
+	
+	</div>
+	
+	</div>
+	
+	
+
+    <!--photoset map start-->
+    <%# if params[:value] == 'map' %>
+    <!--<div id="photoset_map" style="display:block;">
+	<%# else %>
+	<div id="photoset_map" style="display:none;">
+	<%# end %>
+
+	<%#= render :partial => '/myworld/photos/map' %> 
+	</div></div>-->
+    <!--photoset map end-->
+	
+  <div class="photoset_rightbar_inner1">
+	
+	<!--thumbnail images start-->
+	<div align="center">
+	 <%= image_tag("/images/home/spinner.gif",
+             :align => "absmiddle",
+              :border => 0,
+              :id => "spinner",
+              :style =>"display: none;" ) %>
+	</div>
+	
+	
+    <div class="photoset_rightbar_inner2">
+	
+      <% if @videoset.videos.size > 9 %>
+   <div style="width:600px; overflow-x:scroll; overflow-y:hidden; height:80px; float:left; background-color:#1D1D1D; clear:both;">
+    <% else %>
+   <div style="width:600px; overflow-y:hidden; height:80px; float:left; background-color:#1D1D1D; clear:both;">
+    <% end %>
+	
+   <div style="padding-left:5px; float:left; height:10px; width:<%= ((@videoset.videos.size) * 4.88)%>em;">
+   <% @count = 1 %>
+   <% for videoimages in @videoset.videos %>
+   
+   <div id="thumb_image_<%= @count %>"  style="float:left; margin:5px 5px 5px 5px; padding:0px; <% if videoimages.id == @videoset.covervideo_id %> border:3px solid #FED403; <% end %>">
+  <% if videoimages.id == @videoset.covervideo_id %>
+  <%= hidden_field_tag 'coverimage_div_id', '', :value => @count, :id => "coverimage_div_id" %>
+  <% end %>
+  
+   <%= link_to_remote image_tag("/video/videofile/#{videoimages.id}/thumb/#{videoimages.video_image}",:onclick => "image_border(#{@count});"),
+								:update => 'photo_thumbnail_stage',
+								:before => "Element.show('spinner')",
+                  				:success => "Element.hide('spinner')",
+								:url => {:action=>'video',:id => videoimages.id} %>
+
+  </div>   
+
+ <% @count = @count +1 %>
+ 
+  <% end %>
+          </div>
+        </div>
+     
+      <!--thumbnail images end -->
+	  <div style="margin-top:100px;">
+	  
+      <div class="story_cal1">
+		<%= @comments.size %> Comments on this Set
+	  </div>
+		
+		
+		<div style="clear:both;"></div>
+		  <% if !@comments.blank? %>	
+		<% if @comments.size > 6 %>				
+			<div class="photoset_rightbar_inner3">
+		<% else %>
+			<div class="photoset_rightbar_inner3_none">
+		<% end %>
+		
+		 <% for commentdetails in @comments %>
+		<% if session[:user_id] != commentdetails.user_id %>
+		<div class="stories_comment_inner">
+		<% else %>
+		<div class="photoset_comment_inner11">
+		<% end %>
+		
+				<div style="float:left;"><span class="story_cal1"><%= commentdetails.user.screen_name %></span><span class="photoset_home_comment"><%= myworld_dateformat(commentdetails.created_at) %> <%= commentdetails.created_at.strftime(" %I:%M %p") %></span>
+				</div>
+				
+				<div style="float:right; margin-top:8px; margin-right:10px;">
+				<% if session[:user_id] == commentdetails.videoset.user.id %>
+				<%= link_to image_tag("/images/home/red_delete.gif"), videodelete_url(:id => commentdetails.id) %>
+				<% end %>
+				</div>
+				
+				<div class="clear"></div>
+				<div class="photoset_comment_text"><%= commentdetails.comment %></div>
+				
+				</div>
+		<% end %>
+		
+		</div>
+		<% end %>
+		
+				
+					<div style="clear:both;"></div>
+					
+		<% form_for :videoset_comments,:url=> {:controller =>'/myworld/videos',:action => 'save_comment',:id => @videoset.permalink},:html => { :onsubmit =>"return valid();" } do %>
+			<div style="margin-top:20px;">
+			<div class="story_cal1">Post a comment about this Set</div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12"  style="float:left;">Name or Uncharted Username :&nbsp;&nbsp;</div>
+			<div class="clear"></div>
+			<div class="home_comment12" style="float:left; line-height:25px; color:#000000;">
+			<input type="text" value="<%= @user.screen_name if !@user.blank? %>" disabled="disabled"/></div>
+			<div class="clear" style="height:1px;"></div>
+			<div class="home_comment12" style="float:left;">Email :&nbsp;&nbsp;</div><div class="clear"></div>
+			<div class="home_comment12" style="float:left; line-height:25px; color:#000000;">
+			<input type="text" value="<%= @user.email if !@user.blank? %>" disabled="disabled"/></div>
+			<div class="clear" style="height:1px;"></div>
+			
+			
+			<div class="home_comment12">Comment :</div>
+			<div>
+			<textarea cols="30" rows="5" name="comment[comment]" id="comment" onblur="photoset_comment_fields();" onkeydown="photoset_comment_fields();" onfocus="photoset_comment_fields();" onkeyup="photoset_comment_fields();"></textarea>
+			</div>
+			
+			<div>
+			<input name="photoset_commnetsave" id="photoset_commnetsave" value="save" src="/images/home/photos/black_post.gif" type="image" style="margin-top:10px;" disabled = true >
+			</div>
+			
+			</div>
+			<!--text area-end-->
+			<% end %>				
+				
+				
+		</div>
+		</div>	
+		</div>
+	  
+	  
+      
+    </div>
+  </div>
+  <!--photos end-->
+</div>
+
+
+</div>

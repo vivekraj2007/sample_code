@@ -1,0 +1,151 @@
+<div class="left_bar_1">
+  <div class="nav_box">
+    <div class="left_bar_12">
+      <div class="left_bar_13">
+        <div class="index_top">
+          <div class="top_1">&nbsp;</div>
+          <div class="top_middile">&nbsp;</div>
+          <div class="top_right">&nbsp;</div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="middile">
+          <div class="text_who">1.Edit Existing photo set</div>
+          <div style="margin-left:12px; margin-top:10px;">
+            <% form_for :photos,:url => {:controller => "share/photos",:action => "edit_photoset"} do  %>
+            <select id="photoset" name="photoset" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Photo Set</option>
+              <%= options_from_collection_for_select @user_photsets, "permalink", 'sliced_title' %>
+            </select>
+            <% end %>
+          </div>
+          <% form_for :photos, :url => {:action => "update_photoset", :id => @photoset.permalink} do %>
+          <div class="home">Title</div>
+          <div style="margin-left:12px;"> <%= text_field 'photoset', 'title' ,:style => "width:180px;", :class => 'default_style', :id=>'title',:onfocus => "photo_fileds();", :onkeyup => "photo_fileds();" %> </div>
+          <div class="home">Description</div>
+          <div style="margin-left:12px;"> <%= text_area 'photoset', 'description',:class => 'default_style_textarea_new', :id => 'description', :onfocus => "photo_fileds();", :onkeyup => "photo_fileds();"%> </div>
+          <div style="padding-left:10px; margin-top:10px; float:left;">
+            <input name="ptotosetsave" id="ptotosetsave" value="save" src="/images/home/save_g_b.jpg" type="image">
+			&nbsp;&nbsp;
+			</div>
+			
+			<div id="text" style="display:none; float:left; width:auto; padding-top:20px; padding-right:5px; font-family: Arial,Helvetica,sans-serif; color: #a48046; font-size:12px; text-align: left;">
+			Delete this Set
+			</div>
+			
+			<div style="float:left;">
+			
+			<div id="before" style="display:block; width:98px; padding-top:20px; " align="right">
+			<a href="#" onmouseover="Element.hide('before');Element.show('after');Element.show('text');">
+			<img src="/images/home/before_delete.gif"></a>
+			</div>
+			<div id="after" style="display:none;  padding-top:20px;">
+			<%= link_to image_tag("/images/home/delete_red.gif"),{:action => 'delete_photoset',:id =>  @photoset.permalink},{:onmouseout => "Element.show('before');Element.hide('after');Element.hide('text');",:confirm => 'Are you sure want to delete this photoset?', :method => :post} %>
+			</div>
+			
+			</div>
+		<!--<div id="after" style="display:none; float:left; width:100px; padding-top:20px; margin-right:20px; font-family: Arial,Helvetica,sans-serif; color: #a48046; font-size:12px; text-align: left;">
+		Delete this Set&nbsp;<%#= link_to image_tag("/images/home/delete_red.gif"),{:action => 'delete_photoset',:id =>  @photoset.permalink },{:onmouseout => "Element.show('before');Element.hide('after');Element.hide('text');"} %>
+		</div>-->
+		
+          <% end %>
+		  
+		 
+		
+          <div style="clear:both;"></div>
+        </div>
+        <div style="clear:both;"></div>
+        <div class="index_top">
+          <div class="bottom_left">&nbsp;</div>
+          <div class="bottom_middile">&nbsp;</div>
+          <div class="bottom_right">&nbsp;</div>
+        </div>
+      </div>
+    </div>
+	
+	
+
+    <!--middle content-->
+    <div class="mid_photos" >
+      <div class="mid1">
+        <div class="text_who">2. Add photos to this Set</div>
+        <div class="home"><!--Select entire folders or individually.-->
+          Sets may contain up to 100 photos.</div>
+        <div style="padding-top:15px; padding-left:12px;">
+		<input id="photo_image" type="file" name="file_1" size="8%" >
+		 <%#= file_column_field 'photo', 'image', :size => '8%', :class => 'default_style' %> </div>
+		 
+           <div> <%= render :partial => 'shared/link_sets'%> </div>
+        <div><img src="/images/home/save1.jpg" alt=""  style="margin-left:12px; margin-top:10px;"/></div>
+      </div>
+    </div>
+    <!--middle content end-->
+    <!--	right tag -->
+    <div class="middle_photos">
+      <div class="mid_right1">
+        <div class="text_who">3.Tag,title and caption Photos</div>
+        <div class="home5"></div>
+        <div class="home">Descriptive tags for the whole Set</div>
+        <div style="margin-left:12px;">
+		 <%= text_area 'photoset', 'tag', :class => 'default_style_textarea_new', :disabled => 'disabled' %> </div>
+        <div class="home">Geo-coord (Latitude, Longitude)</div>
+        <div style="padding-left:12px;"> 
+		<%= text_field 'photoset', 'lat', :style => "width:82px;", :class => 'default_style' , :disabled => 'disabled'%>
+		 &nbsp;
+	    <%= text_field 'photoset', 'longt' ,:style => "width:82px;", :class => 'default_style' , :disabled => 'disabled'%> </div>
+        <div class="home">Address, State/Prov, Country </div>
+        <div style="margin-left:12px;">
+		 <%= text_area 'photoset', 'address' , :class => 'default_style_textarea_h3_new', :disabled => 'disabled'%>
+    
+        </div>
+        <div><img src="/images/home/save1.jpg" alt=""  style="padding-left:10px; margin-top:10px;"/></div>
+      </div>
+    </div>
+    <!--right tag end -->
+   </div>
+  <div style="clear:both;"></div>
+  
+   <% if !@photoset.photos.blank? %>
+  
+  <div class="map_1">
+  
+
+    <% if @photoset.photos.length > 5 %>
+    <div class="middle2">
+	<% else %>
+	<div style="width:700px; margin:auto;">
+	<% end %>
+	
+	
+      <% count = 1 %>
+	  
+      <% for photo in @photoset.photos %>
+	  
+      <div  class= <% if count%2 == 0%>"middle31"<% else %>"middle3"<% end %> >
+      <div class="middle4"><%= image_tag(url_for_file_column(photo, "image","submain"))%> </div>
+      <div class="middle5" ><%= hidden_field "photo[#{count}]", 'id', :value => photo.id %>
+      <div class="middle6">
+      <div class="home" style="float:left;"> Cover <%= radio_button "photoset", "coverimage_id", photo.id, :disabled => 'disabled' %> </div>
+      <div class="home" style="float:right;"> Delete&nbsp; <%= link_to image_tag("/images/home/delete.jpg"), {:controller => "/share/photos", :action => "delete_photo", :id => photo.id},:confirm => 'Are you sure want to delete this photo?', :method => :post  %> </div>
+      </div>
+     <div class="middle6">
+            <div class="home" style="float:left; width:60px;">Title</div>
+            <div class="home" style="float:left; width:300px;"> <%= text_field "photo[#{count}]", 'title', :value => photo.title, :style => "width:300px; margin-left:12px; border:1px solid #c4bb9d;", :disabled => 'disabled' %> </div>
+          </div>
+     <div class="middle6">
+            <div class="home" style="float:left; width:60px;">Caption</div>
+            <div class="home" style="float:left; width:300px;"> <%= text_field "photo[#{count}]", 'caption', :value => photo.caption,  :style => "width:300px; margin-left:12px; border:1px solid #c4bb9d;", :disabled => 'disabled' %> </div>
+          </div>
+     <div class="middle7">
+            <div class="home" style="float:left; width:60px;">Tags</div>
+            <div class="home" style="float:left; width:300px;"> <%= text_field "photo[#{count}]", 'tags', :id => "phototag_#{count}", :value => photo.tags, :style => "width:300px;margin-left:12px; border:1px solid #c4bb9d;", :disabled => 'disabled' %> </div>
+          </div>
+        </div>
+      </div>
+      <div style="clear:both;"></div>
+      <% count = count+1 %>
+      <% end %>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <% end %>
+</div>

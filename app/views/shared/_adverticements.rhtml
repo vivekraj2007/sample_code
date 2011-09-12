@@ -1,0 +1,13 @@
+<%# home_rmiddle = Advertisement.find(:first,:conditions => ["id like ? and status like ?",ad_id,1])%>
+<%# if !home_rmiddle.blank? %>
+<%#= home_rmiddle.script %>
+<%# else %>
+<!--<img src="/images/home/home_top_add.jpg" alt="" />-->
+
+<%# end %>
+<% if !@header_adv.blank? %>
+<%= @header_adv.script %>
+<% end %>
+
+
+

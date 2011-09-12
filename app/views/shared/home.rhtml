@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<% if @page_title %>
+<title>UNCHARTED//<%= @page_title %></title>
+<% else %>
+<title>UNCHARTED</title>
+<% end %>
+<%= javascript_include_tag :defaults %>
+<%= stylesheet_link_tag 'style_menu','style11' %>
+<%= javascript_include_tag 'field_sets' %>
+<%= javascript_include_tag 'ufo' %>
+<%= stylesheet_link_tag 'njquery' %>
+<%= javascript_include_tag 'profile_image' %>
+<%= javascript_include_tag 'validations' %>
+
+
+<script>
+window.onload=function()
+{
+
+<% if params[:controller] == 'share/events' %>
+
+event_fileds();
+
+
+
+<% elsif params[:controller] == 'share/videos' %>
+
+             <% if params[:action] == 'index' || params[:action] == 'edit_videoset' || params[:action] == 'new_videoset' || params[:action] == 'update_videoset' %>
+
+             video_fileds();
+			 
+			 <% end %>
+
+<% elsif params[:controller] == 'share/photos' %>
+
+            <% if params[:action] == 'index' || params[:action] == 'edit_photoset' ||  params[:action] == 'new_photoset' || params[:action] == 'update_photoset' %>
+
+            photo_fileds();
+ 
+            <% elsif params[:action] == 'add_photo_to_set' || params[:action] == 'add_photo' %>
+             photoset_linkset_fields();
+ 
+ 
+             <% elsif params[:action] == 'add_tag' || params[:action] == 'display_geo_location' ||  params[:action] == 'update_taglocation' %>
+              initialize();
+              photo_fileds_create();
+
+
+             <% elsif params[:action] == 'send_invitation' %>
+              photo_invitation();
+
+
+             <% end %>
+
+<!--conditions for stories module-->
+<% elsif params[:controller] == 'share/stories' %>
+
+
+            <% if  params[:action] == 'index' || params[:action] == 'set_location' || params[:action] == 'edit_story' || params[:action] == 'edit_location' %>				
+			maplocation();
+			story_fields();
+			<% end %>
+
+
+			<% if params[:action] == 'add_tag' %>
+			story_tag_fields();
+			<% end %>
+			
+			<% if params[:action] == 'publish' %>
+			story_write_fields();
+			<% end %>
+
+
+
+<% elsif params[:controller] == 'share/reviews' %>
+
+review_fileds();
+
+            <% if  params[:action] == 'index' || params[:action] == 'set_location' || params[:action] == 'edit_review' || params[:action] == 'edit_location' %>				
+			maplocation();
+			review_fileds();
+			<% end %>
+
+
+			<% if params[:action] == 'add_tag' %>
+		  story_tag_fields();
+			<% end %>
+			
+			<% if params[:action] == 'publish' %>
+			<!--story_write_fields();-->
+			<% end %>
+
+
+
+
+
+			
+
+<% elsif params[:controller] == 'myworld/stories' %>
+ 
+   		 	<% if params[:action] == 'preview' %>
+			<% if @story.added_videos.blank? && !@story.added_images.blank? %>
+  		 	 startPix();
+			 <% end %>
+ 		    <% end %>
+			
+<% elsif params[:controller] == 'account' %>
+          latlongload();			
+			
+			
+
+<% end %>
+}
+ </script>
+ 
+<!-- end fo all onload functions-->
+
+
+
+
+</head>
+<body>
+<!--main-->
+<div id="main">
+<!--header-->
+
+
+
+<div id="header">
+  <div style="width:auto; float:left;"><img src="/images/home/top_left.jpg"  alt=""/></div>
+  <div class="top">
+    <div class="top1">
+      <div style="width:257px; margin-top:10px;"> <a href="#" title="uncharted"><img src="/images/home/logo1.jpg" alt="uncharted" /></a></div>
+      <div class="toplink">
+        <div class="go"><a href="#" title="go"><img src="/images/home/go.jpg" alt="go"/></a></div>
+        <div class="see1"><a href="#" title="see"><img src="/images/home/see1.jpg" alt="see" /></a></div>
+        <div  class="see1"><a href="#" title="do"><img src="/images/home/do1.jpg" alt="do" /></a></div>
+      </div>
+    </div>
+    <div class="search_box">
+      <div style="width:85px; float:left; margin-top:60px;">
+        <div style="margin-top:4px;"> <%= link_to_if( params[:controller] != "share/photos", image_tag("/images/home/share.jpg"), {:controller => '/share/photos'}, :title => 'Share')%></div>
+        <!--<a href="#" title="share"><img src="/images/home/share.jpg" alt="share" /></a>-->
+      </div>
+      <div style="width:2px; float:left;"><img src="/images/home/back_strip.jpg" alt="" /></div>
+      <div class="quick_box">
+        <div class="quick_box1">
+          <div class="quick">Quick Tour</div>
+          <div class="quick">Register</div>
+          <div class="quick">
+            <div style="float:left; width:auto;"><img src="/images/home/search_left.jpg" alt="" /></div>
+            <div>
+              <input name="" type="text" class="input"/>
+            </div>
+            <div style="float:left;"><img src="/images/home/corner.jpg" alt="" /></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="width:auto; float:right;"><img src="/images/home/top_right.jpg" alt="" /></div>
+</div>
+<!--header-div-end-->
+
+
+
+
+<!--content start-->
+
+<div class="content">
+
+
+<!--menu-->
+  <% if params[:controller] == 'account' || params[:controller] == 'stories' || params[:controller] == 'photos' || params[:controller] == 'myworld/stories' || params[:controller] == 'myworld/friends' || params[:controller] == 'myworld/map' || params[:controller] == 'myworld/latest' || params[:controller] == 'myworld/reviews' || params[:controller] == 'myworld/photos' || params[:controller] == 'myworld/videos' %>
+  <%= render :partial => 'shared/account_menu'%>
+  <% elsif params[:controller] == 'share/photos' || params[:controller] == 'share/videos' || params[:controller] == 'share/events' || params[:controller] =='share/reviews' || params[:controller] == 'share/stories'%>
+  <%= render :partial => 'shared/share_menu'%>
+  <% end %>
+<!--menu-div-end-->
+
+
+  <div style="clear:both;" ></div>
+  
+
+<% if params[:controller] == 'myworld/friends' || params[:controller] == 'myworld/photos' || params[:controller] == 'myworld/videos'%>
+<div class="black_top3">
+<% else %>
+   <div class="content_new" >
+<% end %>
+  
+  
+      <div class="left_bar1" >
+        <% if flash[:notice] %>
+        <div align="center" style="font-family:Arial, Helvetica, sans-serif;padding-top:5px;font-size:15px;color:#AB0300;height:18px;text-align:center;"> <%= flash[:notice]  %> </div>
+        <% end %>
+		
+		
+        <%= yield %>
+		</div>
+		
+		
+		
+      <!--right-->
+      <div class="middle_right">	  
+      <!--right block-->
+        <% if session[:user_id].blank? %>
+        <%= render :partial => "/shared/right_block"%>
+        <% else %>
+        <%= render :partial => "/shared/user_profile"%>
+        <% end %>
+        <!--rightblock-div-end-->
+      </div>
+	  
+      <!--right-div-end-->
+	  
+	  
+
+    </div>
+</div>
+
+	
+    <div style="clear:both;"></div>
+	
+      <!--	footer start here-->
+    <div style="background-color:#444444;">
+	
+      <div class="main_foot">
+      <div id="footer">
+	  
+	  
+          <div style="width:720px;" class="footerlinks">
+		   <a href="" class="footerlinks1">Home</a> | 
+		   <a href="" class="footerlinks1">Blog</a> | 
+		   <a href="" class="footerlinks1">Contact</a> | 
+		   <a href="" class="footerlinks1">Legal</a> | 
+		   <a href="" class="footerlinks1">Privacy Policy</a> | 
+		   <a href="" class="footerlinks1">Tearms of Use</a> | 
+		   <a href="" class="footerlinks1">Honor Code</a> | 
+		   <br />
+            <div class="foot_link">Copyright &copy;  2008 Uncharted tm Greate Divide Media LLC All Rights Reserved </div>
+          </div>
+		  
+        </div>
+		
+      </div>
+    </div>
+	<!--	footer end here-->
+	</div>
+
+  <!--content-div-end-->
+</div>
+
+<!--main-div-end-->
+
+</body>
+</html>

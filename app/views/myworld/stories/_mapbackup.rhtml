@@ -1,0 +1,54 @@
+
+<html>
+ 
+  <script src="http://maps.google.com/maps?file=api&v=2&markers=16.965127,82.216256,blues|16.93128,82.238277,tinygreen&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+    type="text/javascript"></script>
+  <!--<script src="http://www.google.com/uds/api?file=uds.js&v=1.0&key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ" 
+    type="text/javascript"></script>-->
+	
+  <%#= javascript_include_tag "gsmapsearch.js" %>
+  <%#= stylesheet_link_tag "gsmapsearch", "gsearch" %>
+ 
+
+  
+ <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+        map.setCenter(new GLatLng(16.936063,82.232838), 1);
+ 		
+		// default icon
+      function createMarker(point, text, title) {
+          var marker =
+          new GMarker(point,{title:title});
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(text);
+          });
+          return marker;
+        }
+	  <% if !@story.lat.blank? && !@story.longt.blank? %>
+		  var point = new GLatLng(<%= @story.lat %>,<%= @story.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+	
+		  <% if !@story.title.blank? %>
+		   var marker = createMarker(point,"<%= @story.title %>");
+		  <% else %>
+		   var marker = createMarker(point,"<%= @story.id %>");
+		  <% end %>
+		 
+		  map.addOverlay(marker);		  
+		  <% end %>
+
+	
+         }
+	}
+    </script>
+ 
+
+<body onLoad="initialize()" onUnload="GUnload()">
+<div id="mapsearch" style="width:518px; height: 400px;"></div>
+
+</body></html>

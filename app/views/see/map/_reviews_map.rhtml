@@ -1,0 +1,69 @@
+
+<script type="text/javascript">
+function see_reviews(id)
+{
+document.location.href = "/myworld/reviews/search_map/"+id;
+}
+</script>
+ 
+  
+ <script type="text/javascript">
+    
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("mapsearch"));
+       <% if !@browser_ip.blank?%>
+		<% if !@browser_ip.browser_lat.blank? && !@browser_ip.browser_longt.blank? %>
+		map.setCenter(new GLatLng(<%= @browser_ip.browser_lat %>,<%= @browser_ip.browser_longt %>), 9,G_PHYSICAL_MAP);
+       	<% else %>
+		 map.setCenter(new GLatLng(16.936063,82.232838), 9,G_PHYSICAL_MAP);
+		<% end %>
+		<% else %>
+		map.setCenter(new GLatLng(16.936063,82.232838), 9,G_PHYSICAL_MAP);
+		<% end %>
+		map.addMapType(G_PHYSICAL_MAP);
+		
+		
+		// Create our "tiny" marker icon
+        var storyIcon = new GIcon(G_DEFAULT_ICON);
+        storyIcon.image = "/images/home/map/map_review.png";
+		storyIcon.iconSize = new GSize(16, 15);
+		storyIcon.shadow = "/images/home/map/shadow-map_review.png";
+		//storyIcon.shadow = ""
+		// Set up our GMarkerOptions object
+		markerOptions = { icon:storyIcon };
+ 			
+		// default icon
+          function createMarker(point, html, title) {
+          var marker =
+          new GMarker(point,markerOptions);
+          GEvent.addListener(
+          marker, "mouseover", function() {
+            marker.openInfoWindowHtml(html);
+          });
+          return marker;
+        }
+		
+		<% for review in @reviews %>
+		  <% if !review.lat.blank? && !review.longt.blank? %>
+		  var point = new GLatLng(<%= review.lat %>,<%= review.longt %>);
+		  map.addControl(new GLargeMapControl());
+		  map.addControl(new GMapTypeControl());
+		  <% if !review.title.blank? %>
+		   var marker = createMarker(point,'<div class="see_map_reviews" onclick="see_reviews(<%= review.id %>);"><div class="see_map_inner_review"><div class="see_map_text_review"><%=  "#{title(review.title.gsub(/'/,''),50)}" %></div><div class="see_map_text_review1"><%= "#{title(review.description.gsub(/'/,''),20)}" %></div><div class="see_map_text_review1"><%= map_date(review.created_on) %></div></div><div class="see_map_inner_flo"><div class="see_map_in_flo"><img src="/images/home/map/map_review.jpg"/></div><div class="see_map_flo"><%= image_tag "/images/home/no-image_tumb.gif",:class => "see_map_border" %></div></div></div>');
+		  <% else %>
+		   var marker = createMarker(point,'<%= review.id %>');
+		  <% end %>	 
+		  map.addOverlay(marker);		  
+		  <% end %>
+		<% end %>
+		
+	
+         }
+	}
+    </script>
+ 
+
+
+<div id="mapsearch" class="see_map_map"></div>
+

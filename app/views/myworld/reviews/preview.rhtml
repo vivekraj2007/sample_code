@@ -1,0 +1,273 @@
+
+<!--script for print option-->
+
+<script type="text/javascript">
+function print1()
+{
+window.print();
+}
+</script>
+
+<div class="left_bar1">
+						
+					
+						<!--left stories-->
+						<div class="left_bar_stories">
+						
+						
+						<!--advertisement-div-start-->
+						
+						<div class="stories_leftbar">
+  
+        <div class="adver_stories1">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+     
+      </div>
+    
+        <div class="adver_stories2">
+          <div class="friend_left_inner Advertisement">Advertisement</div>
+      
+      </div>
+    </div>	
+						<!--advertisement-div-end-->
+						
+						<!--stories start-->
+						<div class="stories_rightbar">
+								<!--top select-->
+								<% if params[:value] == 'map' %>
+								<div class="stories_rightbar_inner_story" id="story" style="display:none;">
+								<% else %>
+								<div class="stories_rightbar_inner_story" id="story" style="display:block;">
+								<% end %>
+								<div class="story_cal1_story">
+								
+							<div class="friends_flo">
+							<a href="javascript://" onclick="Element.show('image'); Element.show('story');Element.hide('map'); Element.hide('story_map');">
+							<div class="review_images"></div></a>
+							</div>
+							
+						<div class="top_images11">
+							<%= link_to image_tag("/images/home/stories/comment_black.gif"), {:controller => '/myworld/reviews', :action => 'comments', :id => @review.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this Review" }%>
+							</div>	
+							
+					<div class="top_images12">		
+		<a href="javascript://" onclick="Element.show('map'); Element.show('story_map');Element.hide('image'); Element.hide('story');"><div class="stories_map_1"  title="Click here to view location of the review"><img src="/images/home/stories/map_black.gif" /></div></a>					
+							
+							</div>	
+								</div>
+								
+							
+								
+								<div class="story_select_story">
+								<% form_for :myworld, :url =>{ :controller =>'/myworld/reviews', :action => 'preview'} do %>		
+								<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+								<option value="">Choose a Review...</option>
+								<%#= options_from_collection_for_select @user_reviews_published, "permalink", 'title' %>
+								</select>
+						        <% end %>						 	
+								</div>
+								
+							
+								
+								
+								
+				<div class="stories_right">
+				
+				<img src="/images/home/stories/stories_box.gif" alt="stories_box" />&nbsp;
+				<img src="/images/home/stories/stories_mail.gif" alt="stories_mail" />&nbsp;
+				<img src="/images/home/stories/stories_print.gif" alt="stories_print" />&nbsp;
+				<% if session[:user_id] == @review.user_id %>
+				<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/reviews", :action => "edit_review",:id => @review.permalink},{ :title => "Click here to edit this review"} %> 
+				<% end %>			
+				</div>
+				</div>
+				
+			<!--	map start-->
+				<% if params[:value] == 'map' %>
+				<div class="stories_rightbar_inner_story" id="story_map" style="display:block;">
+				<% else %>
+						<div class="stories_rightbar_inner_story" id="story_map" style="display:none;">
+				<% end %>				
+								<div class="story_cal1_story121_new">
+								
+								<div class="top_images11"><a href="javascript://" onclick="Element.show('image'); Element.show('story');Element.hide('map'); Element.hide('story_map');"><div class="stories_map_2" title="Click here view the review"><img src="/images/home/review_image.jpg"/></div></a></div>
+								
+								<div class="top_images13"><%= link_to image_tag("/images/home/stories/comment_black.gif"), {:controller => 'myworld/reviews', :action => 'comments', :id => @review.permalink} , {:class=> "stories_map_1",:title => "Click here to view/post Comments for this Review" }%></div>
+								
+								<div class="friends_flo"><a href="javascript://" onclick="Element.show('map'); Element.show('story_map');Element.hide('image'); Element.hide('story');"><div class="stories_map_images121"></div></a></div>
+					
+						
+								</div>
+	
+								<div class="story_select_story">
+								<% form_for :myworld, :url =>{ :controller =>'/myworld/reviews', :action => 'preview'} do %>		
+								<select  id="id" name="id" onchange="this.form.submit();" class="story_select_story">
+								<option value="">Choose a Review...</option>
+								<%= options_from_collection_for_select @user_reviews_published, "permalink", 'title' %>
+								</select>
+						        <% end %>						 	
+								</div>
+								
+		
+								
+				<div class="stories_right">
+				
+				<img src="/images/home/stories/stories_box.gif" alt="stories_box" />&nbsp;
+				<img src="/images/home/stories/stories_mail.gif" alt="stories_mail" />&nbsp;
+				<img src="/images/home/stories/stories_print.gif" alt="stories_print" />&nbsp;
+				<% if session[:user_id] == @review.user.id %>
+				<%= link_to image_tag ("/images/home/stories/stories_edit.gif"), {:controller => "/share/reviews", :action => "edit_review",:id => @review.permalink},{ :title => "Click here to edit this review"} %> 
+				<% end %>			
+				</div>
+				</div>		
+								
+													
+								
+				
+					<!--	map end-->
+				
+				
+				
+				
+				
+				
+									<!--top select end-->
+									
+									<!--line div start-->
+									
+			<!--	<div class="stories_rightbar_inner3">
+			<img src="images/stories_line.jpg" alt="" width="518px" />
+			</div>-->
+									<!--line div end-->
+									
+									
+				
+			<!--stories content start-->	
+				<div class="stories_rightbar_inner1">
+				
+				
+				<div class="stories_paintball">
+				<%= title_slice(@review.title,50) %></div>
+				<div class="clear"></div>
+				<div class="stories_shooting"><%#= title_slice(@review.sub_title,50) %></div>
+				<div class="clear"></div>
+				
+				<div class="stories_date">
+				<div class="friends_flo">
+				<%= myworld_dateformat(@review.created_on) %>
+				<span class="home">
+				<%= @review.review_comments.length %> Comments
+				</span>
+				</div>
+				<div class="stories_rating" id ="star-ratings-block">
+				<% if @review.rated_by_user?(session[:user_id]) %>
+			     <%= render :partial => 'myworld/reviews/ratee'%>						
+				<% else %>
+				<%= render :partial => 'myworld/reviews/rating'%>						
+				<% end %>
+				</div>
+				</div>
+				
+										
+
+				<div class="clear"></div>
+				
+				<% if params[:value] == 'map' %>
+				<div class="stories_rightbar_inner1" id="image" style="display:none;">
+				<% else %>
+				<div class="stories_rightbar_inner1" id="image" style="display:block;">
+				<% end %>
+				
+				<% if !@review.added_videos.blank? %>
+				
+				<% vid_id = @review.added_videos.split(',') %>
+				<% vid = Video.find_by_id(vid_id[0]) %>
+				
+				<% if vid %>
+				<%= media_player({:file =>  url_for_file_column(vid, "videofile")}, {:width =>522,:height => 392,:autostart => false} )%>		
+				<% end %>
+				
+				<% elsif !@review.slideshow_id.blank? && @review.slideshow_id != 0 %>
+				<img name="ChangingPix" src="/images/home/stories/stories_mainimage.gif"  border=0 >
+				
+				
+				<% elsif !@review.added_images.blank? %>								
+				<img name="ChangingPix" src="/images/home/stories/stories_mainimage.gif"  border=0 >
+				
+				
+				<% else %>
+				<img src="/images/home/stories/stories_mainimage.gif"  border=0>
+				
+				
+				<% end %>
+
+				</div>
+				
+				<% if params[:value] != 'map'%>
+				<div class="stories_rightbar_inner1" id="map" style="display:none;">
+				<% else %>
+				<div class="stories_rightbar_inner1" id="map" style="display:block;">
+				<% end %>
+								
+				<%= render :partial => 'map' %>
+				
+				</div>
+				
+				
+	<!--	image thumbnail slide start here	-->	
+				
+				
+		<% if !@review.slideshow_id.blank? && @review.slideshow_id != 0 %>
+		
+     
+	    <% totalphotos = Photo.find(:all, :conditions =>["photoset_id like ?",@review.slideshow_id]) %>
+		
+		<% if totalphotos.size > 8 %>	
+		    <div style="width:500px; overflow-x:scroll; overflow-y:hidden; height:70px; float:left">		
+            <div style="padding-left:5px; float:left; height:10px; width:1000px; ">
+		    <% for photoimages in totalphotos %>
+		    <%= image_tag(url_for_file_column(photoimages, "image","thumbnail"))%>
+			<% end %>
+		   </div>
+           </div>
+		
+		<% end %>
+		
+				
+        <% elsif !@review.added_images.blank? %>
+        <div class="stories_rightbar_inner2">
+          <% for reviewid in @review.added_images.split(',') %>
+          <% photoadded = Photo.find_by_id(reviewid) %>
+		  <% if photoadded %>
+          <% if !photoadded.image.blank? %>
+          <div style="padding-left:5px; float:left;">
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %>
+		    </div>
+          <% end %>
+		  <% end %>
+          <% end %>
+        </div>
+        <% end %>
+				
+			<!--	image thumbnail slide end here	-->	
+			
+			<div class="clear"></div>	
+				<div class="stories_tag_text">
+				<%= @review.how_was_it %>
+				</div>
+				
+				</div>
+				
+				
+				
+			<!--stories content end-->	
+									
+
+						</div>
+						<!--stories end-->
+						
+						</div>
+						<!--left stories end-->
+						</div>
+	
+				

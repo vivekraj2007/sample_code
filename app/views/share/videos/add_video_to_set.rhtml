@@ -1,0 +1,245 @@
+<% image_error_message = error_message_on :video, :videofile %>
+<% if !image_error_message.blank? %>
+<div align="center" class="top_errormessage_border">
+  <div align="center" class="top_errormessage">Image <%= error_message_on :video, :videofile %> </div>
+</div>
+<% end %>
+
+<div class="left_bar_1">
+  <div class="nav_box">
+  
+  
+  
+    <div class="left_bar_12">
+      <div class="left_bar_13">
+        <div class="text_who">1.Create a new video set</div>
+		
+		
+        <div style="margin-left:12px; margin-top:10px;">
+          <% form_for :videos,:url => {:controller => "share/videos",:action => "edit_videoset"} do  %>
+          <select id="videoset" name="videoset" onchange="this.form.submit();">
+            <option value="edit">Edit Existing video Set</option>
+            <%= options_from_collection_for_select @user_videosets, "permalink", 'sliced_title' %>
+          </select>
+          <% end %>
+        </div>
+		
+		
+        <% form_for :videos, :url => {:action => "update_videoset", :id => @videoset.permalink} do %>
+		
+        <div class="home">Title</div>
+        <div style="margin-left:12px;">
+		 <%= text_field 'videoset', 'title' , :class => 'default_style', :style => "width:180px; height:18px;",:id=>'title', :disabled => 'disabled' %>
+	    </div>
+		
+        <div class="home">Description</div>
+        <div style="margin-left:12px;">
+	    <%= text_area 'videoset', 'description',:class => 'default_style_textarea_new', :id => 'description',:disabled => 'disabled'%>
+	    </div>
+		
+        <div style="padding-left:10px; margin-top:10px;">
+		 <%= image_tag ("/images/home/save_n.jpg") %>
+        </div>
+		
+        <% end %>
+		
+        <div style="clear:both;"></div>
+		
+      </div>
+    </div>
+   
+    <!--middle content-->
+    <div style="float:left;">
+      <div class="index_top">
+        <div class="top_1">&nbsp;</div>
+        <div class="top_middile">&nbsp;</div>
+        <div class="top_right">&nbsp;</div>
+      </div>
+      <div style="clear:both;"></div>
+	   <%= javascript_include_tag 'multifile_compressed' %>	
+      <div class="middile">
+     <% form_for :user,  :url => { :action => "add_video", :id => @videoset.permalink } , :html => {:multipart => true} do  %>
+        <div class="mid" >
+          <div class="mid1">
+            <div class="text_who">2. Add videos to this Set</div>
+            <div class="home">
+              Sets may contain up to 10 videos.</div>
+              <div style="padding-top:10px; padding-left:12px;">			
+        	<%= file_column_field 'video', 'videofile', :size => '8%', :class => 'default_style',:id => "video_file", :onchange => "videoset_videos();" %>
+            </div>
+			
+	<div>
+			
+              <select name="linkset" id="linkset" style="margin-left:12px; margin-top:10px;" onchange="photoset_linkset_fields();" >
+			    <% if  !@videoset.linksets.blank?  %>
+                <%= linkset_optionvalue(@videoset.id,'videoset')%>
+                <% else %>
+                <option value="">Link this Set to....</option>
+                <% end %>                
+                <% if @user_photsets.size != 0 %>
+                <option value="" style="font-weight:bold; color:#FF0000;">Photo Sets</option>
+                <% for set in @user_photsets %>
+                <option value="p_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= title_slice(set.title,20) %></option>
+                <% end %>
+                <% end %>
+                <% if @user_videosets.size != 0 %>
+                <option value="" style="font-weight:bold; color:#FF0000;">Video Sets</option>
+                <% for set in @user_videosets %>
+                <option value="v_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= title_slice(set.title,20) %></option>
+                <% end %>
+                <% end %>
+                <% if @user_reviews.size != 0 %>
+                <option value="" style="font-weight:bold; color:#FF0000;">Reviews</option>
+                <% for set in @user_reviews  %>
+                <option value="r_<%= set.id %>">&nbsp;&nbsp;&nbsp;<%= title_slice(set.title,20) %></option>
+                <% end %>
+                <% end %>
+              </select>
+			  
+            </div>
+			
+            <div style="margin-left:12px; margin-top:10px;">
+			<!--<input name="ptotosetaddphotosave" id="ptotosetaddphotosave" value="save" src="/images/home/save_b.jpg" type="image" disabled = true>&nbsp;-->
+			
+			<input name="ptotosetaddphotosave" id="ptotosetaddphotosave" value="save" src="/images/home/save_g_b.jpg" type="image" >&nbsp;
+			
+			
+			<% if !@videoset.videos.blank? %>
+			<%= link_to (image_tag("/images/home/add_tag.jpg"), :action => "add_tag", :id => @videoset.permalink )%>
+			<% end %>
+			
+		   </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+      <div style="clear:both;"></div>
+      <div class="index_top">
+        <div class="bottom_left">&nbsp;</div>
+        <div class="bottom_middile">&nbsp;</div>
+        <div class="bottom_right">&nbsp;</div>
+      </div>
+    </div>
+    <!--middle content end 	-->
+	
+	
+	
+	
+	
+  
+    <!--right content-->
+    <div class="middle1">
+      <div class="mid_right1">
+        <div class="text_who">3.Tag,title and caption videos</div>
+        <div class="home5"></div>
+        <div class="home">Descriptive tags for the whole Set</div>
+        <div style="margin-left:12px;">
+		 <%= text_area 'videoset', 'tag',:class => 'default_style_textarea_new', :disabled => 'disabled' %>
+        </div>
+		
+		
+		
+		<div class="home">Geo-coord (Latitude, Longitude)</div>							
+		<div style="padding-left:12px;">
+		<%= text_field 'videoset', 'lat' , :value => @videoset.lat, :class => 'default_style', :style => "width:82px; height:18px;",:id=>'lat',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();", :disabled => 'disabled'  %>	
+		&nbsp;
+		<%= text_field 'videoset', 'longt' , :value => @videoset.longt,:style => "width:82px; height:18px;", :class => 'default_style', :id=>'longt',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();", :disabled => 'disabled'  %>	
+		</div>
+		
+		<div class="home">Address, State/Prov, Country </div>
+		<div style="padding-left:12px;">
+		<%= text_field 'videoset', 'address' ,:class => 'default_style_textarea_h3_new', :id=>'location',:onfocus => "video_fileds_create();", :onkeyup => "video_fileds_create();" , :disabled => 'disabled' %>	
+        </div>
+		
+		
+        <div><img src="/images/home/save1.jpg" alt=""  style="padding-left:10px; margin-top:10px;"/></div>
+      </div>
+    </div>
+    <!--right content end-->
+	
+	
+	
+    </div>
+	
+  <div style="clear:both;"></div>
+  
+  
+  <!--videoset videos-->
+
+  <% if !@videoset.videos.blank? %>
+  
+  
+  <div class="map_1">
+      <% if @videoset.videos.length > 5 %>
+    <div class="middle2">
+	<% else %>
+	<div style="width:700px; margin:auto;">
+	<% end %>
+  
+    <% count = 1 %>
+      <% for video in @videoset.videos %>
+      <div  class= <% if count%2 == 0%>"middle31"<% else %>"middle3"<% end %> >
+	  
+      <div class="middle4">
+	   <% if !video.video_image.blank? %>
+	   <%= image_tag("/video/videofile/#{video.id}/main/#{video.video_image}",:style => "width:97px; height:97px;")%>
+	   <% else %>
+	   <%= image_tag("/images/home/black_blankimage.jpg", :style => "width:97px; height:97px;") %>
+	   <% end %>	  
+	   <%#= media_player( {:file =>  url_for_file_column(video,"videofile")},{:width =>100,:height => 100})%>
+      </div>
+	  
+	  
+	  
+      <div class="middle5" >
+	  
+	  <%= hidden_field "video[#{count}]", 'id', :value => video.id %>
+     <div class="middle6">
+     <div class="home" style="float:left;">
+	 Cover <%= radio_button "videoset", "covervideo_id", video.id, :disabled => 'disabled' %>
+	  </div>
+     <div class="home" style="float:right;"> Delete&nbsp; 
+     <%= link_to image_tag("/images/home/delete.jpg"), {:controller => "/share/videos", :action => "delete_video", :id => video.id },:confirm => 'Are you sure want to delete this video?', :method => :post %>
+     </div>
+     </div>
+	 
+	 
+	 
+          <div class="middle6">
+            <div class="home" style="float:left; width:60px;">Title</div>
+            <div class="home" style="float:left; width:300px;">
+	 <%= text_field "video[#{count}]", 'title', :value => video.title, :style => "width:300px; margin-left:12px; border:1px solid #c4bb9d;", :disabled => 'disabled' %>
+            </div>
+          </div>
+		  
+		  
+          <div class="middle6">
+            <div class="home" style="float:left; width:60px;">Caption</div>
+            <div class="home" style="float:left; width:300px;">
+			 <%= text_field "video[#{count}]", 'caption', :value => video.caption,  :style => "width:300px; margin-left:12px; border:1px solid #c4bb9d;", :disabled => 'disabled' %>
+             </div>
+          </div>
+		  
+		  
+          <div class="middle7">
+            <div class="home" style="float:left; width:60px;">Tags</div>
+            <div class="home" style="float:left; width:300px; ">
+			 <%= text_field "video[#{count}]", 'tags', :id => "videotag_#{count}", :value => video.tags, :style => "width:300px;margin-left:12px; border:1px solid #c4bb9d;", :disabled => 'disabled'%>             
+            </div>
+          </div>
+		  
+		  
+        </div>
+		
+      </div>
+      <div style="clear:both;"></div>
+      <% count = count+1 %>
+      <% end %>
+	  
+      <div style="clear:both;"></div>
+	  
+    </div>
+  </div>
+  <% end %>
+
+</div>

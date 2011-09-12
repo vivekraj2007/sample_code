@@ -1,0 +1,47 @@
+<div style="padding: 0px; background-position: 0px -17px; display:none; position: absolute; left: 380px; top:450px; " class="myBox" id="share_the_love">
+ 
+  <div class="my_photos_cancel" align="right">
+  <a href="javascript://" onclick="document.getElementById('share_the_love').style.display = 'none';" title="Close">
+  <img src="/images/home/red_delete.gif"/></a>
+  </div>
+  
+ <div class="clear"></div>
+ 
+<div class="flaged_top" align="left">
+ 
+       <div class="text_who"><img src="/images/home/mail.gif">&nbsp;Email this Photo to friends&nbsp;</div>
+		
+		<% form_remote_tag(:url => {:action => "share_the_love", :id => @permalink}, 
+									 :update => 'share_the_love',
+									 :before => "Element.show('search_spinner');",
+									 :complete => "Element.hide('search_spinner');") do %>
+     
+         <div class="home">Emails separated by commas:</div>
+		  <div class="my_mar_left">
+		<%= text_area_tag 'invitation','',  :id =>'invitation_email' ,:class => 'default_style_textarea_new',:style => "width:220px;", :onkeyup => "stl_validation(); ", :onblur => "stl_validation();", :onfocus => "stl_validation();"  %>	
+		  </div>
+		 
+<!--		  <div class="home">Your name:</div>
+-->		  <!--<div class="my_mar_left">
+		 <%#= text_field_tag 'your_name',session[:user_screenname], :id =>'email' ,:class => 'default_style',:style => "width:220px; height:18px;"  %>
+		  </div>-->
+		 
+		 <!--	<div class="home">Message (optional)</div>-->
+		  <!--<div class="my_mar_left">
+			 <%#= text_area_tag'message', 'Check out this photo from Uncharted!',:class => 'default_style_textarea_new', :id => 'invitation_email', :style => "width:220px;" %>
+												
+
+		  </div>-->
+        
+		 <div class="my_world_preview">
+<input type="image" id ="sent" value = "send" src="/images/home/send.gif" border="0" disabled = true />
+<span id="search_spinner" style="display:none;">&nbsp;&nbsp;<img src="/images/home/spinner.gif"/></span>
+</div>
+        <% end %>
+		
+			
+			 <div class="clear"></div>
+			
+</div>
+ 
+  </div>

@@ -1,0 +1,90 @@
+
+
+ <% form_for :ad, :url=> {:action => 'update_advertisement', :id => @adv.id } do  %>
+ 
+  <table width="700px"  border="0" cellspacing="2" cellpadding="2"  class="inerfontkicolor" align="center" style="border-bottom:#CCCCCC 1px solid; border-collapse:collapse;" >
+  
+  <tr><td colspan="3"align="left" style="padding-left:15px;"><b>Edit Advertisement > <%= @adv.title %></td></tr>
+  
+  </table>
+    <table width="700px"  border="0" cellspacing="2" cellpadding="2"  class="inerfontkicolor" align="center" >
+  
+  <tr><td>&nbsp;</td></tr>
+  
+  			<tr>
+			 <td width="20%" align="center" >
+			 <label for="role_title" >Title</label>
+		     </td>
+			 <td width="5%" align="center" class="regtext1">:</td>
+			 <td width="30%" align="left" class="regtext1">
+             <%= text_field 'adv', 'title', :id => 'title' ,:onfocus => "adv_field_set();", :onkeyup => "adv_field_set();"  %></td>
+			 </tr>
+  
+  
+   		     <tr>
+			 <td width="20%" align="center" >
+			 <label for="role_title" >Company Name</label>
+		     </td>
+			 <td width="5%" align="center" class="regtext1">:</td>
+			 <td width="30%" align="left" class="regtext1">
+             <%= text_field 'adv', 'sponser_name', :id => 'sponser' ,:onfocus => "adv_field_set();", :onkeyup => "adv_field_set();"  %> (Ex: Google Ads.)</td>
+			 </tr>
+			 
+			 <tr>
+			 <td width="20%" align="center" >
+			 <label for="role_title" >Location</label>
+		     </td>
+			 <td width="5%" align="center" class="regtext1">:</td>
+			 <td width="30%" align="left" class="regtext1">		 
+			 <% if @adv.parient_id == 0 %>
+			  	<%= hidden_field_tag 'position', '', :value => "Default Ad", :id => "position" %> Default Ad	
+			 <% else %>
+		   <select id="position" name="adv[parient_id]" style="width:190px;" onchange="adv_field_set();">			 
+         	<option value="">Select Location</option>
+                 <option value="17"  <% if @adv.parient_id==17%> selected <% end %>>Header</option>
+				  <option value="1" <% if @adv.parient_id==1%> selected <% end %>>Left top</option>
+				 <option value="6" <% if @adv.parient_id==6%> selected <% end %>>Left bottom</option>
+				 <option value="29" <% if @adv.parient_id==29%> selected <% end %>>Right</option>        
+        	 </select>
+			 <% end %>
+			 
+             <%#= text_field 'adv', 'position', :id => 'position' ,:onfocus => "adv_field_set();", :onkeyup => "adv_field_set();"  %> </td>
+			 </tr>
+			 
+ 		     <tr>
+			 <td width="15%" align="center" >
+			 <label for="role_title" style="vertical-align:top;">Script</label>
+		     </td>
+			 <td width="5%" align="center" class="regtext1">:</td>
+			 <td width="30%" align="left" class="regtext1">
+             <%= text_area 'adv', 'script', :id => 'script', :cols => '60', :rows =>'8' ,:onfocus => "adv_field_set();", :onkeyup => "adv_field_set();"  %></td>
+			 </tr>
+			 
+			 <!--<tr>
+			 <td width="15%" align="center" >
+			 <label for="role_title" >Status</label>
+		     </td>
+			 <td width="5%" align="center" class="regtext1">:</td>
+			 <td width="30%" align="left" class="regtext1">
+             <%#= radio_button 'adv', 'status', '1'  %>&nbsp;Active&nbsp;&nbsp;&nbsp;&nbsp;
+			 <%#= radio_button 'adv', 'status','0'  %>&nbsp;Inactive
+			  </td></tr>-->
+			 
+			 <tr>			 
+			 <td width="15%" align="center" >			 
+			 </td>
+			 <td align="right">&nbsp;</td>
+			 <td align="left" >	
+			 		
+			 <input type="image" name="add_save" id="add_save" value="save" src="/images/admin/save_n.jpg"  disabled = true>				 			 &nbsp;&nbsp;&nbsp;
+			 <%= link_to( image_tag("/images/admin/cancel_b.jpg"), :action => 'index') %>
+			 <% if @adv.parient_id != 0 %>
+			 &nbsp;&nbsp;&nbsp;<%= link_to( image_tag("/images/admin/delete_b.jpg"),{ :action => 'delete_advertisement',:id =>@adv.id, :page => @page},{ :title => "Click here to delete advertisement #{@adv.title} ",:confirm => "Are you sure you want to delete this Advertisement ?"}) %>
+			 <% end %>
+			 </td>					 	 
+		</tr>
+</table> 
+
+ <% end %>
+
+

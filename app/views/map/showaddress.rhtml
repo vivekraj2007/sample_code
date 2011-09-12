@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Google maps example</title>
+    <!-- This includes the google maps API code. 
+          You need to put your own key here -->
+    <script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=ABQIAAAAVoAlk6p9spXkKKCobYyalBSxDBg6VbqL5YBidq16oieNebByGxR07qeIKDHJ3Xv2_WgtDdsq35qZXQ"
+            type="text/javascript"></script>
+    <script type="text/javascript">
+    function initialize() {
+      if (GBrowserIsCompatible()) {
+        var map = new GMap2(document.getElementById("map_canvas"));
+        map.setCenter(new GLatLng(16.969621, 82.238138), 13);
+        GEvent.addListener(map, "click", function() {
+          var center = map.getCenter();
+          document.getElementById("message").innerHTML = center.toString();
+        });
+
+map.addControl(new GSmallMapControl());
+map.addControl(new GMapTypeControl());
+<%#*map.addControl(new GScaleControl( ));%>
+      }
+    }  
+    </script>
+    
+  </head>
+  <body onLoad="initialize()" onUnload="GUnload()">
+    <div id="map_canvas" style="width: 700px; height: 500px"></div>
+    <div id="message"></div>
+  </body>
+</html>

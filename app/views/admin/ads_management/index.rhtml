@@ -1,0 +1,62 @@
+<div style="margin-left:15px;">
+<table width="700px" cellspacing="2" cellpadding="2" class="inerfontkicolor" align="center">
+  <tr>  
+    <td align="left" height="10px;" > </td>
+  </tr>
+  
+  <tr><td align="center" style="background-color:#E1F497"><font style="size:2px; color:#000000">Ads Management</font></td></tr>
+    <tr>  
+    <td align="left" height="10px;" > </td>
+  </tr>
+    <tr>  
+    <td align="center">Home page &nbsp;/&nbsp;
+	<%= link_to "Stories page ", :action => 'stories_page' %>&nbsp;/&nbsp;
+<!--<%#= link_to "My World page ", :action => 'myworld_page' %> &nbsp;/&nbsp;-->
+	<%= link_to "Photos page ", :action => 'photos_page'%> &nbsp;/&nbsp;
+<!--	<%#= link_to "Videos page ", :action =>'videos_page' %> Videos page&nbsp;/&nbsp;
+	<%#= link_to "Friends page ", :action => 'friends_page' %> Friends page&nbsp;/&nbsp;-->
+	</td>
+  </tr>
+      <tr>  
+    <td align="left" height="10px;" > </td>
+  </tr>
+</table>
+<br/>
+<br/>
+
+<table width="400px" border="1" cellspacing="2" cellpadding="2" class="inerfontkicolor" align="center">
+  <tr>
+    <td colspan="3" height="35" align="center">
+	<font style="size:2px; color:#F03432;">Top Header Advertisements </font><br/><br/>
+	<% if @home_page.advertisement_id == 0 || @home_page.advertisement_id.nil? %>
+	<%= link_to "Add Default Adverisement",:action => 'add_home_page_default_adv', :parient_id => 1 ,:id => 1 %>		
+	<% else %>
+	<%= link_to "Edit",:action => 'add_home_page_default_adv', :parient_id => 1 ,:id => 1 %>&nbsp;( <%= @home_page.adv_list.title %>)
+    <% end %>		
+			  
+    </td>
+  </tr>
+</table>
+<br/><br/>
+
+
+
+<table width="700px" border="1" cellspacing="2" cellpadding="2" class="inerfontkicolor" align="center">
+  <tr>
+    <td colspan="2" height="35" align="center">Header</td>
+  </tr>
+  <tr>
+    <td align="center" height="50px;">Content</td>
+	
+    <td width="200" align="center"> Google Map	</td>
+  </tr>
+  
+  <tr>
+    <td colspan="2" height="35" align="center">Footer</td>
+  </tr>
+</table>
+
+
+<br />
+
+</div>

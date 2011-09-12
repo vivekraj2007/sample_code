@@ -1,0 +1,168 @@
+<script type="text/javascript">	  
+function view_story(story)
+{
+document.location.href = story;
+}
+</script>
+
+
+
+
+<div class="left_bar1">
+  <!--left stories-->
+  
+  
+  
+  <div class="left_bar_stories">
+    <!--advertisement-div-start-->
+    <div class="stories_leftbar">
+      <div class="adver_stories2"> <% if !@left_top_adv.blank? %><%= @left_top_adv %><% end %> </div>
+      <div class="adver_stories2"> <% if !@left_bottom_adv.blank? %><%= @left_bottom_adv %><% end %> </div>
+    </div>
+    <!--advertisement-div-end-->
+	
+	
+	
+	
+    <!--stories start-->
+    <div class="stories_rightbar">
+      <div class="stories_rightbar_inner">
+        <div class="story_cal1">
+		<img src="/images/home/stories/story_myworld.gif" style="padding-right:5px;"/>
+		Stories
+		 <font style="color:#736F66;">
+		 <%= render :partial => '/shared/pagination', :locals => {:total => @total, :type => @see_stories, :pgmax => 6 } %>	 
+		 </font> 
+		 
+        </div>
+		
+		
+		
+        <!--SELECT BOX DIV START HERE	-->
+		
+		 <div style="float:right; margin-top:5px; margin-left:30px;">
+		<% form_for :seephotosets, :url =>{ :controller =>'/see/stories', :action => 'index'} do %>		
+		<select  id="search_by" name="search_by" onchange="this.form.submit();" class="story_select_story">
+		<% if @place.blank? %>
+		<option value="">Choose a Story...</option>
+		<% else %>
+		<option value="<%= params[:search_by] %>"><%= params[:search_by] %></option>
+		<% end %>
+		<%= options_from_collection_for_select @countries, "name", "name" %>
+		</select>
+		<% end %>						 	
+		</div>
+        
+        <!--SELECT BOX DIV END HERE	-->
+		
+     </div>
+	  
+	  
+      <% if !@see_stories.blank? %>
+	  
+	  
+      <% for story in @see_stories %>
+	  
+	  
+      <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+
+      <!--stories content start-->
+      <div class="stories_rightbar_inner111" style="cursor:pointer;" onclick="view_story('<%= storypermalink_url(:continent =>!story.continent.blank? ? story.continent.gsub(/ /,'-') : 'continent',:country => !story.country.blank? ? story.country.gsub(/ /,'-') : 'country', :state => !story.state.blank? ? story.state.gsub(/ /,'-') : 'state', :location => !story.location.blank? ? story.location.gsub(/ /,'-') : 'location',:id => story.permalink) %>');">
+	  
+        <div class="stories_home"> <%= title_slice_withoutcap(story.title,50) %> </div>
+		
+		
+        <div class="stories_tag"><%= title_slice_withoutcap(story.sub_title,75) %> </div>
+		
+        <div class="stories_date">
+        <div class="friends_flo">
+		 <%= myworld_dateformat(story.created_at) %> 
+		 <span class="home"> <%= story.story_comments.length %> Comments </span>
+		 
+		 </div>
+		 
+          <div class="stories_rating" id ="star-ratings-block"> 
+		  <%= render :partial => 'myworld/stories/ratee', :locals => {:story => @story = story }%>
+		  </div>
+		   
+          </div>
+		
+
+		
+		<div class="clear"></div>
+		
+		
+        <div class="stories_tag_text">
+		<div>		
+		 <% data = sanitize story.write_it, :tags => %w(table tr td), :attributes => %w(id class style) %> 
+
+		 <%= title_slice_withoutcap(data,460) %>		
+	    </div>
+    	  <span class="story_view" style="float:right;">
+		  View this Story
+		  </span> 
+	
+		  </div>
+		  
+		  
+		  
+		  
+        <!--slide images start here-->
+ <% if !story.dragged_images.blank? %>
+   <div class="stories_rightbar_inner2">		
+          <%# for photoadded in story.dragged_images %>	
+		  <% story.dragged_images.each_with_index do |photoadded,i|%>  	  
+           <div style="padding-left:5px; float:left;"> 
+		   <%= image_tag(url_for_file_column(photoadded, "image","thumbnail")) %> 
+		   </div>
+		     <% if i== 8 %> <% break %> <% end %>
+		   <% end %>	
+		   	   
+  </div>			   	   
+  <% end %>
+		  
+   <!--  slide show end-->
+  </div>
+	  
+	  
+	 <div class="clear"></div>
+      <!--stories content end-->
+  <% end %>
+	  
+  <div class="stories_rightbar_inner111"> <img src="/images/home/stories_line.jpg" alt="" width="518px" /></div>
+	  
+      <div align="center"> <strong>	  
+	   <%= will_paginate (@see_stories,{:prev_label =>'<img src="/images/home/previous.jpg" alt="previous" style=" vertical-align:bottom;" />',:next_label =>'<img src="/images/home/next.jpg" alt="next" style=" vertical-align:bottom;" />',:params => {:search_by => params[:search_by]} }) %> </strong></div>
+	   
+      <% else %>
+	  
+	  
+         <!--line div start-->
+      <div class="stories_topimg">
+	   <img src="/images/home/stories_line.jpg" alt="" width="518px" /> 
+	   </div>
+      <!--line div end-->
+	  
+	  
+      <div class="stories_rightbar_inner1"><br/>
+        <div class="stories_home">
+          <center>
+            No Stories
+            <% if @message %>
+            found for your search keyword.
+            <% end %>
+          </center>
+        </div>
+      </div>
+      <% end %>
+    </div>
+    <!--stories end-->
+  </div>
+  <!--left stories end-->
+</div>
+<div class="clear"></div>

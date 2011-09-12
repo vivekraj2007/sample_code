@@ -1,0 +1,168 @@
+<style type="text/css">
+.story_main
+{
+	width:700px;
+	margin:0 auto 0 auto;
+}
+.story_left
+{
+	width:204px;
+	height:auto;
+	float:left;
+}
+.story_left1
+{
+	width:142px;
+	height:500px;
+	background:url(/images/home/story_leftbg.jpg) repeat-y;
+}
+
+.story_right
+{
+	width:485px;
+	height:auto;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#000000; text-align:left;
+	line-height:20px;
+	
+}
+.story_right1
+{
+	width:485px;
+	height:1px;
+	float:left;
+}
+
+.story_image{
+           width:460px; height:259px; overflow:hidden;
+            }
+.story_image1{
+           width:460px; height:62px; overflow:hidden;
+            }
+.story_page
+{
+	width:485px;
+	height:auto;
+	float:left;
+	font-family:Arial, Helvetica, sans-serif; font-size:12px; color:#ff0000; text-align:center;
+	line-height:40px;
+	
+}
+
+.clear
+{
+	
+	margin:0px;
+	padding:0px;
+	clear:both;
+}
+.float_left{
+           float:left;
+           }
+.float_right{
+           float:right;
+           }
+.story_select{
+         float:left;
+		 padding-left:40px;
+		 padding-top:3px;
+            }
+.story_edit
+{
+	height:50px;
+	float:none;
+}
+.story_title
+{
+	font-family:arial;
+	font-weight:bold;
+	color:#000;
+	font-size:17px;
+}
+	
+</style>
+<div class="left_bar_1">
+  <div class="nav_box">
+<!-----------------------------Middlecontent-start---------------------------->
+	<div class="story_main" align="center">
+		<div class="story_left">
+		   <div class="story_left1">&nbsp;</div>
+		</div>
+		<div class="story_right">
+		   <!--storys-top-->
+		    <div class="story_right">
+			<div class="float_left cal1">My Stories </div>
+			<div class="story_select">
+				 <% form_for :stories,:url => {:controller => "stories",:action => "index"} do  %>
+            <select id="story" name="story" onchange="this.form.submit();">
+              <option value="edit">Edit Existing Story</option>
+              <%= options_from_collection_for_select @user_stories, "id", 'title', 'params[:story]' %>
+            </select>
+            <% end %>
+			</div>
+			
+			<!--story search start-->
+			<div class="story_search">
+		    <% form_for :storysearch,:url => {:action => "search"} , :html => {:onsubmit=>'return storysearch();'} do  %>	
+			<div style="float:left; width:auto;">	
+			<input name="storysearch" id="storysearch" value="search" src="/images/home/story_search_left.gif" type="image">
+		    </div>
+			
+			
+			<div>
+			
+			<input name="search" value="" type="text" id = "search_word" class="input"/>
+			</div>
+			
+			<div style="float:left;">
+			<img src="/images/home/story_search_right.gif" alt="" />
+			</div>
+			<% end %>
+			</div>
+			
+			<!--story search end-->
+			
+			<div class="clear"></div>
+			
+			 <div class="story_right1"><img src="/images/home/story_line.jpg"></div>
+			<div class="clear"></div>
+			<% if @story.blank? %>
+			 <div class="story_right">&nbsp; </div>
+			<div class="story_page">
+			<% if @search_result %>
+			No result found
+			<% end %></div>
+			<% else %>
+			<div align="right">
+			<span style="color:#a69774;">Edit this Review</span> 
+			<%= link_to image_tag ("/images/home/story_edit.gif"), {:controller => "/share/stories", :action => "edit_story",:id => @story.id}, :title => "Click here to edit this story" %> 
+			</div>
+			
+			<div class="clear"></div>
+			<div class="story_image"><img src="/images/home/story_image.jpg"></div>
+			<div class="story_image1">Images</div>
+			<div class="story_right story_title">
+			<%= @story.title %>
+			</div>
+			<div class="story_right">By: <%= profile_name(@user_profile.screen_name) %></div>
+			<div class="story_right"><%= @story.created_at.strftime("%A  %B %d %Y  %I:%M%p")  %></div>
+			<div class="story_right">Tags: <%= @story.tag %></div>
+			<div class="story_right"><%= @story.write_it %> </div>
+			<!--<div class="story_page">Pages:2</div>-->
+			
+			<% end %>
+			</div>
+			  <!--storys-top-div-end-->
+			 
+		
+		</div>
+		<div class="clear"></div>
+	</div>
+
+
+
+<!-----------------------------Middlecontent-end---------------------------->		  
+ <div style="clear:both;"></div>
+ </div>
+</div>
+<div style="clear:both;"></div>
