@@ -1,0 +1,168 @@
+<%
+title 'Tatango Billing FAQ'
+meta 'Find answers to our most frequently asked billing questions.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2>Video Lessons</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2>Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">FAQ's</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li class="active"><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1 class="border">Frequently Asked Questions about Tatango Billing</h1>
+					<h2>How much does Tatango cost?</h2>
+					<p>
+Tatango starts at just $24/month for unlimited text messaging at up to 250 subscribers. This also includes unlimited SMS keywords.
+					</p>
+					<h2>Are there any setup fees? </h2>
+					<p>
+No, none at all.
+					</p>
+					<h2>How will I be billed for Tatango?</h2>
+					<p>
+Tatango charges a monthly subscription fee based on the amount of SMS subscribers you have in your account. Each Tatango subscription plan comes with unlimited text messages and SMS keywords.
+					</p>
+					<h2>Are there any hidden fees?</h2>
+					<p>
+Unlike the local used car dealership, Tatango shows you upfront the exact monthly price you will be paying to use our SMS service.
+					</p>
+					<h2>Do you charge per text message or per subscriber?</h2>
+					<p>
+We charge you for the amount of subscribers in your Tatango account. You get free, unlimited text messages with each account. Enjoy!
+					</p>
+					<h2>When you say unlimited text messages, do you really mean it?</h2>
+					<p>
+Here at Tatango we don't joke about something as serious as unlimited text message marketing. When we say unlimited, we really mean it. Send an unlimited amount of text messages with Tatango.
+					</p>
+					<h2>Do I need to sign a monthly contract?</h2>
+					<p>
+At Tatango we don't lock you into a contract, allowing you to cancel at anytime if you aren't 100% satisfied.
+					</p>
+					<h2>When will I be billed?</h2>
+					<p>
+Tatango bills monthly for the total amount of SMS subscribers in your account.
+					</p>
+					<h2>Will I receive a receipt when I'm billed?</h2>
+					<p>
+Yes, every month you will receive a receipt of payment in your email inbox for the Tatango service.
+					</p>
+					<h2>Will my subscribers be charged for messages?</h2>
+					<p>
+Tatango only sends standard rate messages, which means your SMS subscribers won't be charged anymore than if you were to text message them from your own mobile phone.
+					</p>
+					<h2>Do you accept check payment?</h2>
+					<p>
+No, only plastic. Sorry.
+					</p>
+					<h2>Will I be charged for opt-ins, replies and opt-outs?</h2>
+					<p>
+Tatango only charges for the amount of SMS subscribers you have in your account, which means all text messages are always free. Every single one.
+					</p>
+					<h2>What about upgrading when I get more subscribers?</h2>
+					<p>
+No need to worry about upgrading, we automatically upgrade your account on your next billing cycle if you surpass the amount of SMS subscribers that is included in your current subscription plan.
+					</p>
+					<h2>Do you charge more for additional keywords or campaigns?</h2>
+					<p>
+Unlike other SMS providers that charge anywhere from $15-$30 per additional SMS keyword, Tatango allows you to create as many SMS keywords and campaigns as you want for free.
+					</p>
+					<h2>Really, unlimited SMS keywords and campaigns?</h2>
+					<p>
+Yea, no joke.
+					</p>
+					<h2>How are subscribers counted under my account?</h2>
+					<p>
+Your subscriber lists are independent of each other and if a subscriber is on more than one list in your account they will be counted for each instance. Lists in your Tatango account don't talk to other lists or share any information, so you would be charged for each instance of an phone number that appears on multiple lists.
+					</p>
+					<h2>What if I have more questions about the cost of SMS marketing?</h2>
+					<p>
+We have Tatango billing experts standing by 24/7 to answer any questions you may have. <br />Reach these experts by <a href="<%= url_for contact_path %>">contacting us</a> today.
+					</p>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

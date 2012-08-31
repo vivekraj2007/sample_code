@@ -1,0 +1,181 @@
+<%
+title 'SMS Keyword and Short Code Videos Lessons'
+meta 'Learn more about getting SMS keywords and SMS short codes with Tatango video lessons.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Video Lessons</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li class="active"><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2>Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2>FAQ's</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>SMS Keyword and Short Code Video Lessons</h1>
+					<p class="intro border">
+Want to become an SMS keyword and short code expert? Luckily for you, we've pulled together all the video lessons we could find on these two topics, and included them below. Learn the difference between vanity and random short codes, how to transfer SMS short codes mid-campaign and even tips on how to select the best SMS keyword for your own text message marketing campaign. Unfortunately we don't have a diploma for being an expert in SMS keywords and short codes, but it's a good feeling to be smarter than everyone else in the office right? Isn't that enough?
+					</p>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_sms_keywords_short_codes_path %>" title="SMS Marketing Keywords and Short Codes">SMS Marketing Keywords and<br /> Short Codes</a></h2>
+							<p>
+At the heart of any SMS marketing campaign is the SMS keyword and short code. Derek Johnson, CEO of Tatango discusses these two different parts of SMS marketing and how they function together.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_sms_keywords_short_codes_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_sms_keywords_short_codes_path %>" title="Watch Video"><img src="<%= asset_path 'videos/sms-marketing-keywords-short-codes.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_selecting_sms_keywords_path %>" title="How to Select SMS Keywords">How to Select SMS Keywords</a></h2>
+							<p>
+Every SMS marketing campaign has a unique SMS keyword and it's extremely important to pick the best SMS keywords possible for your text messaging campaign. Derek Johnson, CEO of Tatango discusses the five keys to selecting a good SMS keyword.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_selecting_sms_keywords_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_selecting_sms_keywords_path %>" title="Watch Video"><img src="<%= asset_path 'videos/how-to-select-sms-keyword.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_vanity_random_short_code_path %>" title="Vanity Short Code vs Random Short Code">Vanity Short Code vs Random<br /> Short Code</a></h2>
+							<p>
+There are two different types of short codes, vanity short codes and random short codes. Derek Johnson, CEO of Tatango discusses the difference between the two, including which one costs twice as much as the other!
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_vanity_random_short_code_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_vanity_random_short_code_path %>" title="Watch Video"><img src="<%= asset_path 'videos/vanity-short-code-vs-random-short-code.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_transferring_sms_short_codes_path %>" title="Transferring SMS Short Codes">Transferring SMS Short Codes</a></h2>
+							<p>
+Do you need to transfer your subscribers to a new SMS short code? Derek Johnson, CEO of Tatango breaks down the rules behind transferring subscribers from one short code to another as outlined by the Mobile Marketing Association’s Best Practices.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_transferring_sms_short_codes_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_transferring_sms_short_codes_path %>" title="Watch Video"><img src="<%= asset_path 'videos/transferring-sms-short-codes.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_dedicated_shared_short_code_path %>" title="Dedicated Short Code vs Shared Short Code">Dedicated Short Code vs Shared Short Code</a></h2>
+							<p>
+Have you heard people talk about a dedicated short code or shared short code, but not known the difference between the two? Derek Johnson, CEO of Tatango discusses the differences between the two different types of short codes and why each one exists.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_dedicated_shared_short_code_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_dedicated_shared_short_code_path %>" title="Watch Video"><img src="<%= asset_path 'videos/dedicated-short-code-vs-shared-short-code.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_common_sms_keyword_mistakes_path %>" title="Common SMS Keyword Mistakes">Common SMS Keyword Mistakes</a></h2>
+							<p>
+Want to know how to do a quick test, which shows you if your SMS provider really has their system dialed in? Derek Johnson, CEO of Tatango explains how to do this quick SMS keyword test, which will help you pick the right SMS provider for your businesses marketing campaign.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_common_sms_keyword_mistakes_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_common_sms_keyword_mistakes_path %>" title="Watch Video"><img src="<%= asset_path 'videos/common-sms-keyword-mistakes.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

@@ -1,0 +1,273 @@
+<% title 'Send Text Message' %>
+
+<% current_tab :lists %>
+<% current_action :send_message %>
+
+<script type="text/javascript">
+  var updateMessage = function(e){
+    $('#phone_preview_message').html($('#message_content').val().replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g, "<br/>"));
+    var remain = <%= @message.message_max_size %> - gsmCharCount($('#message_content').val());
+    $('#characters_left').html(remain);
+    if(remain == 1){
+      $('#characters_plural').html('');
+    } else {
+      $('#characters_plural').html('s');
+    }
+  };
+
+  var preventOverflow = function(e){
+    content = $('#message_content').val();
+    var remain = <%= @message.message_max_size %> - gsmCharCount(content);
+    if(remain < 0){
+      $('#message_content').val(content.substring(0, content.length-1));
+    }
+  };
+
+  $(document).ready(function(){
+    updateMessage();
+    $('#message_content').keyup(updateMessage);
+    $('#message_content').keyup(preventOverflow);
+			
+    $('.defaultDOMWindow').openDOMWindow({ 
+        eventType:'click', 
+        height:500,
+        width:500,
+        windowPadding:0,
+        overlayOpacity:'60',
+        windowBGColor:'transparent',
+        borderSize:'0',
+        positionType:'centerTop'
+    });
+  });
+</script>
+
+<% js_var :membership_counts, @list.memberships_count %>
+<% js_var :trial, @list.creator.trial? %>
+
+<div class="admin-center shadow">
+
+  <!-- LEFT CONTENT -->
+  <div class="content-left admin">
+    <%= render :partial => 'lists/action_nav' %>
+  </div>
+  <!-- #END of left content -->
+        
+  <!-- RIGHT CONTENT -->
+  <div class="content-right admin">
+    <h1>Send Text Message</h1>
+  
+    <div class="admin-stripes-box">			
+      <div class="stripes-left-admin">
+        <%= form_for([@list, @message], :html => {:id => 'send_message_form', :style => 'width:380px;'}) do |f| %>
+          <fieldset>
+            <legend>Send Text Message</legend>
+            <% if @message.errors %>
+              <div class="validationError">
+                <% for error in @message.errors.full_messages %>
+                  <label class="error"><%= error %></label>
+                <% end %>
+              </div>
+            <% end %>
+            <p>Enter your text message below...</p>
+            <div class="box">
+              <%= f.text_area :content, :size => '24x7', :maxlength => @message.message_max_size, :class => 'message_content'+(@message.errors.empty? ? '' : ' error') %>
+            </div>
+            <p class="comment"><i><span id="characters_left"><%= @message.message_max_size %></span> character<span id="characters_plural">s</span> remaining</i></p>
+            <div class="clear">&nbsp;</div>
+			<div class="box timeCB" style="padding-bottom:15px">
+				<label>
+                    <input id="sendNow" type="radio" value="false" name="schedule" checked="checked" /> Send Now
+				</label>
+				<label style="padding-left:20px">
+                    <input id="schedule" type="radio" value="true" name="schedule" /> Schedule
+				</label>
+			</div>
+			<div class="schedule1" style="padding-bottom:15px;overflow:hidden;position:relative;">
+				<div class="clear">&nbsp;</div>
+				<p class="green-btn" style="float:left;width:220px;margin-top:10px"><a href="#pop-up" class="defaultDOMWindow"><span>Send Text Message</span></a></p>
+				<p style="float:left;margin-top:23px;font-size:18px;"><%= link_to 'Cancel', new_list_message_path(@list), :style=>"color:#888;text-decoration:underline", :confirm => 'Are you sure?' %></p>
+			</div>
+      <%= stylesheet_link_tag 'pepper-grinder/jquery-ui-1.8.22.custom' %>
+      <script tyoe="text/javascript">
+        $(document).ready(function(){
+          $('#pickdate').datepicker({minDate: 0 });
+        });
+      </script>
+			<div class="schedule2" style="padding-bottom:15px;overflow:hidden;position:relative;display:none;">
+				<p>Delivery date &amp; time: <span style="color:#bbb;font-size:90%;">(<%= current_user.tz.to_s.gsub(/^[^ ]* /, '') %>)</span></p>
+				<div>
+					<div style="float:left">
+						<div>
+							<div>
+								<input type="text" id="pickdate" name="scheduled_day" />
+							</div>
+						</div>
+					</div>
+					<div class="pick_date_details" style="float:left">
+						<div>
+							<select name="scheduled_hour">
+								<option value="1">1</option> <option value="2">2</option> <option value="3">3</option> <option selected="" value="4">4</option> <option value="5">5</option> <option value="6">6</option> <option value="7">7</option> <option value="8">8</option> <option value="9">9</option> <option value="10">10</option> <option value="11">11</option> <option value="12">12</option>
+							</select>
+							<select name="scheduled_minute">
+								<option value="00">:00</option> <option value="15">:15</option> <option value="30">:30</option> <option value="45">:45</option>
+							</select>
+							<select name="scheduled_ampm">
+								<option value="AM">AM</option> <option selected="" value="PM">PM</option>
+							</select>
+						</div>
+						<style>
+							input#pickdate { 
+								background:#fff url('/assets/internal/date_picker_ico.png') no-repeat 93% 45%;
+								border: 1px solid #CECCD7 !important;
+								border-radius: 6px 6px 6px 6px;
+								color: #333333 !important;
+								float: left;
+								font-family: 'MyriadWebCondensed';
+								font-size: 15px;
+								height: 16px;
+								line-height: 16px;
+								margin: 5px 10px 5px 0;
+								padding: 7px 10px;
+								width: 130px;
+							}
+							div.pick_date_details select { 
+								background:#fff;
+								border: 1px solid #CECCD7 !important;
+								border-radius: 6px 6px 6px 6px;
+								color: #333333 !important;
+								float: left;
+								font-family: 'MyriadWebCondensed';
+								font-size: 15px;
+								height: 31px;
+								line-height: 16px;
+								margin: 5px 10px 5px 0;
+								padding: 6px;
+								width: 65px;
+							}
+							div.pick_date_details select:last-child { margin-right:0 }
+						</style>
+					</div>
+                </div>
+				<div class="clear">&nbsp;</div>
+				<p class="green-btn" style="float:left;width:260px;margin-top:10px"><a href="#pop-up2" class="defaultDOMWindow"><span>Schedule Text Message</span></a></p>
+				<p style="float:left;margin-top:23px;font-size:18px;"><%= link_to 'Cancel', new_list_message_path(@list), :style=>"color:#888;text-decoration:underline", :confirm => 'Are you sure?' %></p>
+			</div>
+			<script type="text/javascript">
+        var updateScheduledMenu = function(){				
+          if ($('input[type=radio]:checked').val() == "true"){
+            $(".schedule2").css("display","block");
+            $(".schedule1").css("display","none");
+          }
+          if ($('input[type=radio]:checked').val() == "false"){
+            $(".schedule2").css("display","none");
+            $(".schedule1").css("display","block");
+          }
+        };
+        
+        $(".timeCB input[type=radio]").change(function(){
+          updateScheduledMenu();
+        });
+
+				$(document).ready(function(){
+          updateScheduledMenu();
+				});
+			</script>
+			
+			
+          </fieldset>
+        <% end %>
+      </div>
+      <div id="pop-up" style="display:none;">
+        <div class="pop-up-window-admin">
+          <div class="pop-up-window-top-admin">
+            <h1>Confirm Send</h1>
+          </div>
+          <div class="pop-up-content-admin">
+            <div class="center">
+              <p class="semibold">
+                You are about to send this message to <%= pluralize(@list.memberships_count, 'subscriber') %> of the <%= @list.resolved_name %> list.
+              </p>
+              <p class="semibold">
+                Are you sure you want to continue?
+              </p>
+              <div class="clear">&nbsp;</div>
+              <p class="green-btn" style="float:left;width:220px;margin-top:10px"><a href="javascript:;" onclick="$('#send_message_form').submit();"><span>Send Text Message</span></a></p>
+              <p class="grey-btn" style="float:right;width:100px;margin-top:10px"><a href="javascript:;" onclick="$('.defaultDOMWindow').closeDOMWindow();"><span>Cancel</span></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+	  <div id="pop-up2" style="display:none;">
+        <div class="pop-up-window-admin">
+          <div class="pop-up-window-top-admin">
+            <h1>Confirm Send</h1>
+          </div>
+          <div class="pop-up-content-admin" style="padding:15px 35px 25px;width:361px;">
+            <div class="center" style="width:361px;">
+              <p class="semibold">
+                You are about to schedule this message to every subscriber of the <%= @list.resolved_name %> list.
+              </p>
+              <p class="semibold">
+                Are you sure you want to continue?
+              </p>
+              <div class="clear">&nbsp;</div>
+              <p class="green-btn" style="float:left;width:260px;margin-top:10px"><a href="javascript:;" onclick="$('#send_message_form').submit();"><span>Schedule Text Message</span></a></p>
+              <p class="grey-btn" style="float:right;width:100px;margin-top:10px"><a href="javascript:;" onclick="$('.defaultDOMWindow').closeDOMWindow();"><span>Cancel</span></a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stripes-right-admin mobile">
+        <div class="mobile">
+          <p class="number semibold"><%= pluralize(@list.memberships_count, 'Subscriber') %></p>
+          <div class="txt dark" style="margin-top:0">
+            <p id="phone_preview_message" style="height:auto">
+            </p>
+            <p>
+              <%= Message.footer %>
+            </p>
+			<div class="btm">&nbsp;</div>
+          </div>
+          <p class="preview bold">Preview</p>
+        </div>
+      </div>
+      <div class="widebox-line">
+        <div class="icon-txt video">
+          <h2>Video Lesson</h2>
+          <script type="text/javascript" src="https://static.wistia.com/popover/popover.js"></script>
+          <%
+          videos = ['<p class="regular">Learn how often you should be sending text messages.
+          <a href="https://fast.wistia.com/embed/iframe/9004ee268e?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+          <script type="text/javascript">
+          //<![CDATA[
+          Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a149834960_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+          //]]>
+          </script>',
+          '<p class="regular">Learn how to safely advertise alcohol in your messages.
+          <a href="https://fast.wistia.com/embed/iframe/42a5be0dd8?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+          <script type="text/javascript">
+          //<![CDATA[
+          Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a906283504_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+          //]]>
+          </script>',
+          '<p class="regular">Learn how to use phone numbers & web links in your messages.
+          <a href="https://fast.wistia.com/embed/iframe/bc94e87db8?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+          <script type="text/javascript">
+          //<![CDATA[
+          Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a840149289_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+          //]]>
+          </script>',
+          '<p class="regular">Learn what makes the perfect text message.
+          <a href="https://fast.wistia.com/embed/iframe/cbfc4e3200?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+          <script type="text/javascript">
+          //<![CDATA[
+          Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a439809492_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+          //]]>
+          </script>']
+          %>
+          <%= videos.sample.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

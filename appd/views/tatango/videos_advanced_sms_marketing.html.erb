@@ -1,0 +1,155 @@
+<%
+title 'Advanced SMS Marketing Video Lessons'
+meta 'Learn more about advanced text message marketing techniques with Tatango video lessons.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Video Lessons</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li class="active"><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2>Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2>FAQ's</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Advanced Text Message Marketing Techniques</h1>
+					<p class="intro border">
+Ready to take your SMS marketing campaign to the next level? Learn from the experts at Tatango about advanced SMS marketing topics ranging from how to use SMS autoresponders to growing an SMS subscriber list to the best strategies to use when dealing with a multiple business location campaign. Be warned though, these topics are advanced and may just make you an expert overnight.
+					</p>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_sms_autoresponders_mass_messaging_path %>" title="Using SMS Autoresponders with Mass Messaging">Using SMS Autoresponders with Mass Messaging</a></h2>
+							<p>
+Have you built a large database of SMS subscribers and looking for new and unique ways to engage with them? Have you tried sending a mass text message encouraging SMS subscribers to interact with an SMS Autoresponder? If not, Derek Johnson, CEO of Tatango discusses how you can do this for your own SMS marketing campaign.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_sms_autoresponders_mass_messaging_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_sms_autoresponders_mass_messaging_path %>" title="Watch Video"><img src="<%= asset_path 'videos/using-autoresponders-with-mass-messaging.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_growing_sms_subscribers_path %>" title="Growing SMS Subscribers with SMS Autoresponders">Growing SMS Subscribers with SMS Autoresponders</a></h2>
+							<p>
+Did you know that a great way to grow your mobile subscribers for a mass text messaging campaign is by using an SMS autoresponder? Derek Johnson, CEO of Tatango discusses how you can use this strategy in your own text message marketing campaign, allowing you to grow your SMS subscribers faster than ever before.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_growing_sms_subscribers_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_growing_sms_subscribers_path %>" title="Watch Video"><img src="<%= asset_path 'videos/growing-sms-subscribers-with-sms-autoresponders.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_multiple_location_sms_marketing_path %>" title="SMS Marketing for Multiple Locations">SMS Marketing for Multiple Locations</a></h2>
+							<p>
+Are you a business with multiple locations interested in SMS marketing? One of the most common mistakes made by businesses with multiple locations is that they setup separate SMS campaigns for each location. Derek Johnson, CEO of Tatango discusses three reasons why this is never a good idea for any business with multiple locations.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_multiple_location_sms_marketing_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_multiple_location_sms_marketing_path %>" title="Watch Video"><img src="<%= asset_path 'videos/sms-marketing-multiple-locations.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_mo_mt_sms_messaging_path %>" title="Mobile Originated VS Mobile Terminated SMS Messaging">Mobile Originated VS Mobile Terminated SMS Messaging</a></h2>
+							<p>
+Ever heard the term "mobile originated" or "mobile terminated" messaging and scratched your head in confusion? Derek Johnson, CEO of Tatango explains the difference between mobile originated and mobile terminated SMS messaging and even shares with you their popular acronyms.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_mo_mt_sms_messaging_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_mo_mt_sms_messaging_path %>" title="Watch Video"><img src="<%= asset_path 'videos/mobile-originated-vs-mobile-terminated-sms.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

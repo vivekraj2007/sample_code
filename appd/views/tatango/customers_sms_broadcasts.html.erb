@@ -1,0 +1,143 @@
+<%
+title 'Customers Using SMS Broadcasts'
+meta 'Learn how Tatango customers are using SMS Broadcasts in their mobile marketing campaigns.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<p class="big">Some of Our Successful Customers</p>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2>Customers by Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurants">Restaurants</a></li>
+								<li><a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></li>
+								<li><a href="<%= url_for salons_sms_path %>" title="Salons &amp; Spas">Salons &amp; Spas</a></li>
+								<li><a href="<%= url_for church_sms_path %>" title="Ministry">Ministry</a></li>
+								<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></li>
+								<li><a href="<%= url_for political_sms_path %>" title="Political">Political</a></li>
+								<li><a href="<%= url_for conference_sms_path %>" title="Conferences">Conferences</a></li>
+								<li><a href="<%= url_for group_text_messaging_path %>" title="Groups &amp; Organizations">Groups &amp; Organizations</a></li>
+								<li><a href="<%= url_for marketing_agencies_sms_path %>" title="Agencies">Agencies</a></li>
+								<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency SMS Alerts">Emergency SMS Alerts</a></li>
+								<li><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services">Professional Services</a></li>
+								<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate">Real Estate</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Customers by Product</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li class="active"><a href="<%= url_for customers_sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for customers_sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for customers_sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for customers_sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+
+					<p class="signupfree"><%= link_to "Sign Up Free", signup_path %></p>
+					<p class="call-grey">Call: (888) 517-6345</p>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Customers Using SMS Broadcasts</h1>
+					<p class="intro">
+						Learn how the following businesses are using Tatango SMS Broadcasts to announce new deals, promotions and even events. Find out more information within our 
+						Tour section about <a href="<%= url_for sms_broadcasts_path %>" title="How SMS Broadcasts work">how SMS Broadcasts work</a> and how you can use them for your own business.
+					</p>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'pilot-travel-sms-marketing-campaign-color.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Franchise SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>Pilot Travel Centers</h2>
+							<p class="location">Knoxville, TN</p>
+							<p class="location">Industry: <a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></p>
+							<p>
+								Pilot Travel Centers, the largest Truck Stop chain in the United States, came to Tatango with the task of rolling out a SMS marketing campaign to over 550 locations in partnership with Arby's and Subway. Their SMS marketing campaign was quickly embraced by customers, which resulted in significant growth for the campaign. Increased revenues resulted from the use of Tatango as each promotion encouraged customers to purchase specific bundled products.
+							</p>
+							<p>
+								Since 2007 Tatango has had the opportunity to work with some of the most well known brands in America. Don't trust your restaurant SMS campaigns to just anyone, call the experts to help. 
+								<a href="https://www.box.com/shared/static/80344ef6af314334b105.pdf" title="Download PDF Case Study" rel="nofollow">Download PDF Case Study</a>
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'wendys-sms-marketing-campaign-color.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Fast Food SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>Wendy’s</h2>
+							<p class="location">Westport, CT</p>
+							<p class="location">Industry: <a href="<%= url_for restaurant_text_messaging_path %>" title="Food &amp; Beverage">Food &amp; Beverage</a></p>
+							<p>
+								With thousands of customers joining their Tatango campaign, the franchise was able to reach their customer base more efficiently than ever before. SMS marketing has led to increased customer visits and order sizes, thus boosting business across the entire franchise.
+							</p>
+							<p>
+								Tatango has experience in helping a wide array of both franchisees and franchises achieve their marketing goals with SMS marketing. Contact one of our experts today to start your restaurant SMS 
+								campaign. <a href="https://www.box.com/shared/static/066e462657b5f76d5e77.pdf" title="Download PDF Case Study" rel="nofollow">Download PDF Case Study</a>
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'acme-bowling-sms-marketing-campaign-color.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Bowling Alley SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>ACME Bowling</h2>
+							<p class="location">Seattle, WA</p>
+							<p class="location">Industry: <a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></p>
+							<p>
+								ACME Bowling, Billiards & Events came to Tatango looking for a fun, unique way to encourage their customers to come play more often through. text message marketing. This beyond bowling venue is able to send promotions via Tatango, which increases customer visits, and has resulted in greater customer loyalty. Customers not only look forward to a round of bowling, but also receiving their weekly Tatango promotion.
+							</p>
+							<p>
+								Tatango works with a variety of businesses in the entertainment industry such as paintball fields, billiard halls, arcades, water-parks, museums and even zoos. Let Tatango help your entertainment SMS campaign reach it's full potential.
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

@@ -1,0 +1,167 @@
+<% title 'My Account' %>
+<% current_tab account_path %>
+
+<div class="admin-center account">
+
+  <!-- LEFT CONTENT -->
+  <div class="content-left account">
+
+    <div class="admin-stripes-box accountform">	
+    
+      <div class="form-header">
+        <h2 class="icon infocard">Personal Information</h2>
+      </div>
+
+      <%= form_for @account, :url => account_path, :html => { :method => :put, :id => 'main_account_form' } do |f| %>
+	<% if flash[:error] %>
+		<div class="validationError"><label class="error"><%= flash[:error] %></label></div>
+	<% end %>
+	<% if flash[:notice] %>
+		<div class="validationSuccess"><label class="success"><%= flash[:notice] %></label></div>
+	<% end %>
+          <div class="box wide">
+            <div class="box">
+              <label for="username">Username</label><br />
+              <%= f.text_field :username, :required => 'required', :tabindex => 1, :size => 22 %><span class="end"></span>
+            </div>
+            <div class="box right">
+              <label for="company">Name</label><br />
+              <%= f.text_field :name, :required => 'required', :tabindex => 2, :size => 22 %><span class="end"></span>
+            </div>
+          </div>
+          <div class="box single">
+            <label for="email">E-mail</label> <em class="comment">(We will use this email if we ever need to get in touch with you.)</em><br />
+              <%= f.text_field :email, :required => 'required', :tabindex => 3, :size => 22, :style => 'width:463px;' %><span class="end"></span>
+          </div>
+          <div class="box wide">
+            <div class="box">
+              <label for="password">Current password</label><br />
+              <%= f.password_field :current_password, :tabindex=>"4", :size=>"22" %><span class="end"></span>
+            </div>
+            <div class="box right">
+              <label for="password-new">New password</label><br />
+              <%= f.password_field :password, :tabindex => "5", :size=>"22" %><span class="end"></span>
+            </div>
+            <div class="box">
+              <p><em>(Password must be 6 characters or longer. <br />Add at least one number for extra safety.)</em></p>
+            </div>
+            <div class="box right">
+              <label for="password-new2">Re-enter new password</label><br />
+              <%= f.password_field :confirm_password, :tabindex => "6", :size => "22" %><span class="end"></span>
+            </div>
+          </div>
+          <div class="box single nobg">
+            <label for="timezone">Timezone</label><br />
+            <select id="account_tz" name="account[tz]" tabindex="7"> <%# save to tz because it checks for blank (first option: None) %>
+              <%= time_zone_options_for_select(@account.tz.name, nil, 
+                (Class.new do
+                  def self.all
+                    ActiveSupport::TimeZone.us_zones 
+                  end
+                end)) %>
+            </select><span class="end"></span>
+          </div>
+          <div class="clear">&nbsp;</div>
+          <div class="input-green-btn" style="float:left;">
+            <label><input type="submit" value="Save Changes" /></label>
+          </div>
+          <div class="input-grey-btn" style="float:right;padding-right:13px">
+            <label><input type="submit" value="Cancel" /></label>
+          </div>
+        <% end %>
+      
+    </div>
+  </div>
+  <!-- #END of left content -->
+
+
+  <!-- RIGHT CONTENT -->
+  <div class="content-right account">
+  
+    <div class="admin-stripes-box accountform" style="width:330px;padding-bottom:15px;margin-bottom:25px;">			
+      
+      <div class="form-header">
+        <h2 class="icon plan">My Plan</h2>
+      </div>
+      <% if @account.plan %>
+        <table class="minimal" summary="My Plan">
+          <tbody>
+            <tr>
+              <td class="longer">
+                Monthly Plan: <br />
+        &nbsp;<br />
+                Total Subscribers:
+              </td>
+              <td class="right">
+                <%= @account.plan.name %> - $<%= @account.plan.price.to_f.round %><br />
+        <a class="link-arrow headline" href="<%= url_for edit_plan_path %>">Change</a><br />
+                <%= number_with_delimiter(@account.memberships_count) %>
+              </td>
+            </tr>
+            <tr>
+              <td class="longer last">
+                <span class="headline">Billing Info</span><br />
+                Next Cycle Date: <br />
+                <% if @account.plan.subscription and (@account.plan.subscription.try(:credit_card) rescue false) %>
+                  Credit Card: 
+                <% end %>
+              </td>
+              <td class="right last">
+                <a class="link-arrow headline" href="<%= url_for edit_plan_path(:cc=>'update') %>">Change</a><br />
+                <%= @account.plan.resolved_cycle_at.in_time_zone(@account.tz).strftime("%m/%d/%Y") %><br />
+                <% if @account.plan.subscription and (@account.plan.subscription.try(:credit_card) rescue false) %>
+                  <%= @account.plan.subscription.credit_card.try(:masked_card_number) %>
+                <% end %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      <% else %>
+        <p class="semibold">You have not yet chosen a subscription plan!</p>
+        <p class="green-btn"><a href="<%= url_for new_plan_path %>"><span>Upgrade Now</span></a></p>
+      <% end %>
+					
+      
+    </div>
+    
+    <div class="admin-stripes-box accountform" style="width:330px;">			
+      <%= form_for @account, :url => update_notifications_account_path, :html => { :method => :post, :id => 'notifications_form' } do |f| %>
+        <div class="form-header">
+          <h2 class="icon notifications">Notifications</h2>
+        </div>
+        <p class="semibold">Customize how Tatango sends you notifications.</p>
+        <div class="box" style="margin-top:10px">
+          <%= check_box :notifications, :newsletter %> Tatango Monthly Newsletter
+          <div class="clear"></div>
+          <%= check_box :notifications, :updates %> Informational and Product Updates
+        </div>
+        <div class="input-green-btn-smaller" style="float:left;">
+          <label><input type="submit" value="Update Notification Settings" /></label>
+        </div>
+      <% end %>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          $.getJSON("<%= get_notifications_account_path %>", function(data){
+            $('#notifications_form .checkbox').each(function(){
+              $(this).removeAttr('checked');
+            });
+            for(var i = 0; i < data.length; i++){
+              $('#notifications_' + data[i]).prop('checked', 'true');
+            }
+          });
+        });
+      </script>
+    </div>
+  </div>
+</div>
+				
+<% if current_user.plan and flash[:first_plan] %>
+  <!-- Offer Conversion: Tatango -->
+  <iframe src="http://tatango.go2cloud.org/SL1?amount=<%= current_user.plan.price %>&s_account_id=<%= current_user.id %>" scrolling="no" frameborder="0" width="1" height="1"></iframe>
+  <!-- // End Offer Conversion -->
+  <!-- Offer Conversion: Super Affiliates Offer -->
+  <iframe src="https://tatango.go2cloud.org/SLg?amount=<%= current_user.plan.price %>" scrolling="no" frameborder="0" width="1" height="1"></iframe>
+  <!-- // End Offer Conversion -->
+
+  <img src="https://buzzreferrals.com/buzzView.ashx?rid=1058&txnid=<%= current_user.id %>&amt=<%= current_user.plan.price %>&email=<%= current_user.email %>" width="1" height="1" />
+<% end %>

@@ -1,0 +1,24 @@
+<%
+title 'Contact Submission'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">Contact Tatango</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			
+			
+				<!-- LEFT CONTENT -->
+			<div class="content-left noshadow" style="min-height:340px;padding-top:5px">
+			
+				<h1>Contact Submission</h1>
+        <% if @success %>
+  				<p>Thank you for contacting Tatango. Your request was successfully submitted and we will get back to you shortly.</p>
+        <% else %>
+          <p>There was an error submitting your request. Please email <a href="mailto:support@tatango.com">support@tatango.com</a> to contact us.</p>
+        <% end %>
+				
+			</div>
+			<!-- #END of left content -->

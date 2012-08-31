@@ -1,0 +1,9 @@
+Congrats! You've received a contest entry from someone who texted <%= @contest.resolved_name %>.
+
+
+<% for number in @numbers %>
+  Mobile Phone Number: <%= PhoneNumber.new(number).to_formatted_s %>
+<% end %>
+
+
+It feels good to be loved.

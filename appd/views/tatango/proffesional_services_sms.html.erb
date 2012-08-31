@@ -1,0 +1,109 @@
+<%
+title 'Professional Services SMS Campaign Testimonial'
+meta 'Professionals in all walks of life use Tatango to send text messages to their customers and clients.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<p class="big">Some of Our Successful Customers</p>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2 class="select ">Customers by Industry</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurants">Restaurants</a></li>
+								<li><a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></li>
+								<li><a href="<%= url_for salons_sms_path %>" title="Salons &amp; Spas">Salons &amp; Spas</a></li>
+								<li><a href="<%= url_for church_sms_path %>" title="Ministry">Ministry</a></li>
+								<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></li>
+								<li><a href="<%= url_for political_sms_path %>" title="Political">Political</a></li>
+								<li><a href="<%= url_for conference_sms_path %>" title="Conferences">Conferences</a></li>
+								<li><a href="<%= url_for group_text_messaging_path %>" title="Groups &amp; Organizations">Groups &amp; Organizations</a></li>
+								<li><a href="<%= url_for marketing_agencies_sms_path %>" title="Agencies">Agencies</a></li>
+								<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency SMS Alerts">Emergency SMS Alerts</a></li>
+								<li class="active"><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services">Professional Services</a></li>
+								<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate">Real Estate</a></li>
+							</ul>
+						</div>
+						<h2>Customers by Product</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for customers_sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for customers_sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for customers_sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for customers_sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+
+					<p class="signupfree"><%= link_to "Sign Up Free", signup_path %></p>
+					<p class="call-grey">Call: (888) 517-6345</p>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Professional Services Text Messaging</h1>
+					<p class="intro">
+Tatango works with a wide array of professional services, including real estate agents, salons, therapists and caregivers--and that's just to name a few of our professional service customers. Much like the diversity of our professional service customers, their text message usage ranges from simple SMS reminders to sending messages about events, promotions and coupons.
+No matter what type of professional service industry you're in, Tatango has the SMS marketing tools for you to attract new customers, in addition to building loyalty with your existing customer base.
+					</p>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'real-estate-productivity-coach.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Coach SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>Real Estate Productivity Coach</h2>
+							<p class="location">Bellingham, WA</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+Chris McNamara is a real estate productivity coach, and uses Tatango to keep in touch with 90+ real estate agents looking to become more productive in their industry.
+							</p>
+							<p>
+Chris came to Tatango after realizing that his email reminders sent an hour before a seminar started, were not being opened in time. After replacing email alerts with text message alerts powered by Tatango, attendance immediately increased. This is because the average text message alert is opened within 4 minutes of being sent, allowing real estate agents enough time to shift gears and make their way to the meeting location.
+							</p>
+							<p>
+"The problem was solved by mass text messaging and it took less than 3 minutes to implement. So in short, yes, Tatango was the answer." - Chris McNamara
+							</p>
+						</div>
+					</div>
+					
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

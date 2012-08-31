@@ -1,0 +1,88 @@
+<% title 'Subscribers' %>
+
+<% current_tab :lists %>
+<% current_action list_memberships_path(@list) %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    var renderViewMembership = function(oObj){
+      return "<p class=\"btn-small-grey\"><a href=\"" + oObj.aData[oObj.iDataColumn] + "\"><span>view</span></a></p>";
+    };
+
+    membershipsTable = $('#gradient-style').dataTable({
+      "sDom": "lrtip",
+      "bLengthChange": false,
+      "sPaginationType": "full_numbers",
+      "bInfo": false,
+      "bAutoWidth": false,
+      "bProcessing": true,
+      "bServerSide": true,
+      "iDisplayStart": 0,
+      "iDisplayLength": 10,
+      "sAjaxSource": '<%= list_memberships_path(@list) %>',
+      "aaSorting": [[2, "desc"]],
+      "oLanguage": {
+        "sZeroRecords": "Could not find that phone number in your subscribers.",
+        "sEmptyTable": "You don't have any subscribers in your list yet. <% if @list.keyword %>Text <%= @list.resolved_name %> to 68398 to be the first to join your list.<% end %>"
+      },
+      "aoColumnDefs": [
+        {"bSearchable": false, "aTargets": [1,2,3,4]},
+        {"fnRender": renderViewMembership, "aTargets": [4]}
+      ]
+    });
+    
+    var SEARCH_LABEL = "Search subscribers phone numbers...";
+
+    updateSearch =  function(){
+      membershipsTable.fnFilter($('#memberSearch').val().replace(SEARCH_LABEL, ''));
+    }
+    updateSearch();
+
+    $('#memberSearch').keyup(function(){
+      updateSearch();
+    });
+  });
+</script>
+                
+<div class="admin-center shadow">
+
+  <!-- LEFT CONTENT -->
+  <div class="content-left admin">
+    <%= render :partial => 'lists/action_nav' %>
+  </div>
+  <!-- #END of left content -->
+        
+  <!-- RIGHT CONTENT -->
+  <div class="content-right admin">
+    <h1>Subscribers <span style="font-size:15px; font-weight: normal; font-family: 'MyriadWebCondensed',arial,sans-serif;"><a href="<%= export_list_path(@list) %>" class="link-arrow">Export</a></span></h1>
+    <div class="clear"></div>
+    <div class="memberSearchWrap">
+        <input id="memberSearch" type="text" tabindex="1" size="22" value="Search subscribers phone numbers..." name="username" onblur="if(this.value=='') this.value='Search subscribers phone numbers...';" onfocus="if(this.value=='Search subscribers phone numbers...') this.value='';" /><span class="end"></span>
+    </div>
+    <h1 style="float:right;margin-top:10px">Total Subscribers: <span style="color:#42a543"><%= number_with_delimiter(@list.memberships_count) %></span></h1>
+    <div class="clear"></div>
+
+    <div class="admin-large-table">			
+      
+        <table id="gradient-style" summary="Data">
+
+          <thead> <!-- table header -->
+            <tr>
+              <th scope="col">Phone number</th>
+              <th scope="col"><span class="sort up">Carrier</span></th>
+              <th scope="col"><span class="sort down">Date Subscribed</span></th>
+              <th scope="col"><span class="sort down">Date Unsubscribed</span></th>
+              <th class="last" scope="col">&nbsp;</th>
+            </tr>
+          </thead>
+          
+          <tbody> <!-- table content -->
+          </tbody>
+          
+      </table>
+      
+      <div class="table-btm"><!----></div>
+      
+    </div>
+  </div>
+</div>

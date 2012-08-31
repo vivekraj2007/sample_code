@@ -1,0 +1,199 @@
+<%
+title 'Text Message Marketing Terms'
+meta 'See a list of the most used SMS marketing terms and their definitions.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2>Video Lessons</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Industry</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li class="active"><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2>FAQ's</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>SMS Marketing Glossary</h1>
+					<p class="intro border">
+Knowing the lingo is half the battle when becoming a text message marketing ninja. Below are the most used terms in the SMS marketing industry, and what they mean.
+					</p>
+					<h2 style="padding-top:25px">Msg&amp;Data Rates May Apply:</h2>
+					<p>
+There is no extra cost to receive Tatango alerts, but standard message rates and data charges from your carrier apply when sending and/or receiving text messages. Check with your carrier if you have questions about your plan and costs. Most phone plans have a cost associated with receiving text messages, either as part of an unlimited plan or at pennies per text.
+					</p>
+					<h2>SMS Marketing Provider:</h2>
+					<p>
+This is what Tatango is, a technology platform or software provider that allows businesses and organizations the ability to send and receive short code text messages.
+					</p>
+					<h2>Click-to-Call:</h2>
+					<p>
+Ever receive a phone number in a text message that you can click to initiate a call? That's what this means.
+					</p>
+					<h2>Common Short Code Administrator (CSCA): </h2>
+					<p>
+When you want your own short code, these are the guys you have to pay.
+					</p>
+					<h2>SMS Aggregator:</h2>
+					<p>
+SMS marketing providers like Tatango have to connect to an SMS aggregator in order to send text messages to your mobile phone. This isn't free, it's actually pretty costly.
+					</p>
+					<h2>Short Code: </h2>
+					<p>
+These are the 5 or 6 digit phone numbers that SMS marketing providers use to send your text messages. Crazy fact: short codes are the only phone numbers approved by wireless providers to transmit marketing or promotional text messages.
+					</p>
+					<h2>SMS Keyword: </h2>
+					<p>
+You know those words that you text to a short code to join an SMS campaign? Yea, those are what are know as SMS keywords. Each short code can have thousands of different SMS keywords.
+					</p>
+					<h2>Wireless Carrier: </h2>
+					<p>
+A fancy name for the people who send you your monthly cell phone bill.
+					</p>
+					<h2>MMS:</h2>
+					<p>
+ MMS stands for Multimedia Messaging Service and is like the pretty sister to SMS. Unlike SMS, which can only transmit 160 characters of plain text, MMS can transmit sound, images, video and much more text. Be careful, MMS has been known for getting celebrities and politicians into trouble, so don't say we didn't warn you.
+					</p>
+					<h2>Unlimited Text Message Marketing: </h2>
+					<p>
+A pipe-dream until Tatango came on the scene and went against the SMS marketing status quo.
+					</p>
+					<h2>MO Message: </h2>
+					<p>
+MO stands for "mobile originated", but please don't sound like a text message marketing snob, just call it a text message sent from a mobile phone.
+					</p>
+					<h2>MT Message: </h2>
+					<p>
+Again, avoid acronyms or risk being labeled a text message marketing snob. MT stands for "mobile terminated", but really means a text message sent to a mobile phone.
+					</p>
+					<h2>Random Short Code: </h2>
+					<p>
+These are random 5 or 6 digit phone numbers that are leased to an SMS marketing provider from the guys at the Common Short Code Administration. Random short codes can be leased for $500/month and are yours as long as your check doesn't bounce.
+					</p>
+					<h2>Vanity Short code: </h2>
+					<p>
+Vanity short codes are like vanity license plates, they're custom, but completely useless and much more money than a random short code. Vanity short codes can be leased for $1,000/month and are yours as long as your check doesn't bounce.
+					</p>
+					<h2>Shared Short Code: </h2>
+					<p>
+A short code that that's used for multiple marketing campaigns through the leasing of keywords to different entities.
+					</p>
+					<h2>SMS: </h2>
+					<p>
+SMS stands for Short Messaging Service, or as we say on the streets of Seattle, text messaging. Pretty much every phone has it (if you don't, it's time to upgrade) and it allows the delivery of short messages (160 characters) between mobile phones and other handheld devices. 
+					</p>
+					<h2>SMS Marketing: </h2>
+					<p>
+Seriously, do we really need to define this for you? Okay just kidding, it's the marketing of your business or organization through frequent text messages and autoresponse messages. It's entirely permission-based.
+					</p>
+					<h2>Tatango: </h2>
+					<p>
+Only the best SMS marketing provider in the entire world.
+					</p>
+					<h2>SMPP Messaging: </h2>
+					<p>
+Commonly referred to as "Short Code" or "Express" text messaging is technically called "Short Message Peer-to-Peer Protocol" or SMPP. This is the preferred method as it is used when you are sending text messages back and forth between a friend on your own mobile phone. These messages go through the carriers' cell networks, as compared to the carriers' email network called SMTP.
+					</p>
+					<h2>SMTP Messaging: </h2>
+					<p>
+Commonly refereed to as "Email To SMS" or "Standard Delivery" text messaging is technically called "Simple Mail Transfer Protocol," or SMTP. To send a text message via the SMTP method, all one must do is attach their phone number to the beginning of of the carriers SMTP email address and send it just like any other email.
+					</p>
+					<h2>CTIA</h2>
+					<p>
+These guys partner with wireless carriers to make rules about text message marketing and enforce them through random audits. You break the rules, you lose your short code.
+					</p>
+					<h2>MMA</h2>
+					<p>
+These guys make really long best practices documents about mobile marketing, which aren't enforced. 
+					</p>
+					<h2>TCPA</h2>
+					<p>
+This acronym stands for the Telephone Consumer Protection Act. This act was signed into law in 1991 and protects consumers from receiving annoying telemarketing messages, including text message spam. Watch out, we're not talking about best practices here, this is federal law, the kind of law that sends you to jail if you violate it.
+					</p>
+					<h2>Derek Johnson</h2>
+					<p>
+The CEO of Tatango and the self-proclaimed world famous text message marketing expert.
+					</p>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

@@ -1,0 +1,36 @@
+<%
+title 'SMS Marketing Newsletter'
+meta 'Sign up for the Tatango SMS marketing newsletter and receive monthly updates.'
+meta_key 'Tatango, sms marketing, text message marketing, sms marketing newsletter'
+body_class 'wide'
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<h1 class="big">SMS Marketing Newsletter</h1>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			
+			
+				<!-- LEFT CONTENT -->
+			<div class="content-left noshadow" style="min-height:340px;padding-top:5px">
+			
+				<h2>Sign Up To Receive Our Monthly Newsletter</h2>
+				<p>Enter your email address below to receive Tatango's monthly mobile marketing newsletter.</p>
+				
+				<div class="stripes-box contact">			
+					<form method="post" action="http://tatango.us1.list-manage.com/subscribe/post?u=2f955de43e14473a70198f238&id=f25de1db39">
+						<fieldset>
+							<legend>Sign Up To Receive Our Monthly Newsletter</legend>
+							<div class="box newsltr">
+								<label for="email">Your E-mail Address</label><br />
+								<input type="email" tabindex="1" size="22" value="name@email.com" name="EMAIL" onblur="if(this.value=='') this.value='name@email.com';" onfocus="if(this.value=='name@email.com') this.value='';" />
+                <span class="end"></span>
+							</div>
+							<input class="signup" type="submit" value="Sign Up" tabindex="2" name="submit" />
+						</fieldset>
+					</form>
+				</div>
+				
+			</div>
+			<!-- #END of left content -->

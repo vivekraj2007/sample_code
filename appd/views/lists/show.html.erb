@@ -1,0 +1,250 @@
+<% title 'Keyword Overview' %>
+<% body_class 'admin' %>
+<% current_tab :lists %>
+<% current_action list_path(@list) %>
+
+<div class="admin-center shadow">
+
+  <!-- LEFT CONTENT -->
+  <div class="content-left admin">
+    <%= render :partial => 'lists/action_nav' %>
+  </div>
+  <!-- #END of left content -->
+        
+  <!-- RIGHT CONTENT -->
+  <div class="content-right admin">
+                
+    <h1>Keyword Overview</h1>
+  
+    <div class="admin-stripes-box">			
+      <div class="stripes-left-admin">
+        <h2>Subscriber Growth</h2>
+        <%
+          grow = []
+          grow << @list.memberships_count - @list.joins_within(2.month.ago..0.months.ago)
+          grow << @list.memberships_count - @list.joins_within(1.month.ago..0.months.ago)
+          grow << @list.memberships_count
+          grow_max = [2, grow.max].max
+        %>
+        <div class="growth-graph">
+          <div class="bargraph" style="width:340px;">
+            <ul class="bars">
+              <li class="bar1" style="height:<%= ((grow[0].to_f/grow_max)*190).round %>px;width:56px;left:37px;"></li>
+              <li class="bar2" style="height:<%= ((grow[1].to_f/grow_max)*190).round %>px;width:56px;left:145px;"></li>
+              <li class="bar3" style="height:<%= ((grow[2].to_f/grow_max)*190).round %>px;width:56px;left:255px;"></li>
+            </ul>
+            <ul class="label">
+              <li style="width:109px;"><%= 2.months.ago.strftime("%b") %></li>
+              <li style="width:109px;"><%= 1.months.ago.strftime("%b") %></li>
+              <li style="width:109px;"><%= 0.months.ago.strftime("%b") %></li>
+            </ul>
+            <ul class="y-axis">
+              <li class="top"><%= grow_max %></li>
+              <li class="middle"><%= grow_max/2 %></li>
+              <li class="zero">0</li>
+            </ul> 
+          </div>
+        </div>
+      </div>
+      <div class="stripes-right-admin">
+        <div class="current-details">
+          <h2>Subscribers</h2>
+          <% subscribers = @list.memberships_count %>
+          <p class="big-green"><%= number_with_delimiter(subscribers) %></p>
+          <p class="normal">
+            <%
+              joins_last_month = @list.joins_within(1.month.ago..Time.now)
+              if joins_last_month < 1 %>
+              &nbsp;
+            <% else %>
+               <%= joins_last_month %> - Over last month</p>
+              <p class="up-down up" title="Up"><span>Up</span></p>
+            <% end %>
+        </div>
+        <div class="current-details">
+          <h2>Happiness Rating</h2>
+          <% happiness = @list.retention*100 %>
+          <p class="big-green">
+            <%= number_to_percentage(happiness, :precision => 1) %>
+            <p class="tipsy">
+              <a class="tipike" href="" title="Tells you the retention rate of subscribers compared to your list's true reach.">Tooltip</a>
+            </p>
+          </p>
+          <p class="normal">
+            <% if happiness < 90.0 %>
+              &nbsp;
+            <% else %>
+              <%= number_to_percentage(happiness - 90.0, :precision => 0) %> - Over industry average
+            <% end %>
+          </p>
+          <% if happiness > 90.0 and @list.created_at < 1.month.ago %>
+            <p class="up-down up" title="Up"><span>Up</span></p>
+          <% end %>
+        </div>
+        <div class="current-details last">
+          <h2>Customer Reach</h2>
+          <% reach = @list.recipients_within(Time.at(0)..Time.zone.now) %>
+          <p class="big-green">
+            <%= number_with_delimiter(reach) %>
+            <p class="tipsy">
+              <a class="tipike" href="" title="Tells you the lifetime amount of text messages sent to subscribers.">Tooltip</a>
+            </p>
+          </p>
+          <% 
+          reach_gain = [0, reach - (@list.recipients_within(Time.at(0)..(Time.zone.now - 2.month)))].max
+          if reach == 0 or reach_gain == 0 %>
+            <p class="normal"><%= number_with_delimiter(reach_gain) %> - Over last month</p>
+          <% end %>
+          <% if reach_gain > 0 and @list.created_at < 1.month.ago %>
+            <p class="up-down up" title="Up"><span>Up</span></p>
+          <% end %>
+        </div>
+      </div>
+      <div class="widebox-line">
+        <div class="icon-txt video">
+          <h2>Video Lesson</h2>
+          <script type="text/javascript" src="https://static.wistia.com/popover/popover.js"></script>
+          <%
+            videos = ['<p class="regular">Learn how to grow your subscrubers by using QR codes.
+                <a href="https://fast.wistia.com/embed/iframe/3407353425?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a522134569_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn how to measure the success of your SMS marketing.
+                <a href="https://fast.wistia.com/embed/iframe/506ae52642?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a405341087_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn how to use SMS marketing for multiple business locations.
+                <a href="https://fast.wistia.com/embed/iframe/a4188749e2?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a499021024_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn how to use SMS marketing with Groupon.
+                <a href="https://fast.wistia.com/embed/iframe/d1e82de671?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a297948457_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn how to use SMS marketing with location based check-in Services.
+                <a href="https://fast.wistia.com/embed/iframe/5efce4fb5a?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a718602623_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn how to use Tatango to generate more sales for your business.
+                <a href="https://fast.wistia.com/embed/iframe/11daf5e970?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a451584583_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn the best places to advertise your keyword.
+                <a href="https://fast.wistia.com/embed/iframe/0737697d75?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a351109021_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>',
+                '<p class="regular">Learn the best practices when advertising your keyword.
+                <a href="https://fast.wistia.com/embed/iframe/2fee9ad313?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">[Watch Now]</a>
+                <script type="text/javascript">
+                //<![CDATA[
+                Wistia.requireFancyBoxAssets(function() {Wistia.fancyBoxJQuery("#a887702342_videoPopup").fancybox({type: "iframe",width: 640,height: 360});});
+                //]]>
+                </script>']
+          %>
+            <%= videos.sample.html_safe %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% if flash[:newkeyword] %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $.openDOMWindow({ 
+      windowSourceID:'#created-keyword-pop-up',
+      height:900,
+      width:700,
+      windowPadding:0,
+      overlayOpacity:'60',
+      windowBGColor:'transparent',
+      borderSize:'0',
+      positionType:'centerTop'
+    });
+  });
+  </script>
+
+  <div id="created-keyword-pop-up" style="display:none;">
+    <div class="pop-up-window-lists">
+      <div class="pop-up-window-top-lists">
+        <h1>Congrats! Keyword created.</h1>
+        <a class="pop-up-close" onclick="$.closeDOMWindow({windowSourceID:'#pop-up'})" title="Close"></a>
+      </div>
+      <div class="pop-up-content-lists">
+        <div class="things-admin">
+          <h1>Text your Keyword</h1>
+          <p class="middle">
+            <%= @list.resolved_name %>
+          </p>
+          <p class="third">
+            to the phone number<span>68398</span><br />
+            to be the first to subscribe
+          </p>
+        </div>
+        <div class="things-admin-btm">&nbsp;</div>
+        <div class="clear">&nbsp;</div>
+        <div class="things-admin-shadow">&nbsp;</div>
+        <div class="tf-social">
+          <p class="semibold">Invite people to subscribe on the following social networks.</p>                        
+          <ul>                    
+            <li class="nopadding">
+              <a class="twicon" target="_blank" href="http://twitter.com/share?url=&via=tatango&text=Text%20<%= @list.resolved_name %>%20to%2068398%20to%20get%20text%20promotions%204%2Fmonth.%20Msg%26data%20rates%20may%20apply%20%2F%20t%26c%20txt%20HELP%20%2F%20stop%20txt%20STOP.">Twitter</a>
+            </li>
+            <li class="nopadding">
+              <a class="fbicon" id="facebookPostFirst" href="javascript:;">Facebook</a>
+              <script type="text/javascript">
+                $(document).ready(function(){
+                  $('#facebookPostFirst').click(function(){
+                    
+                    FB.login(function(response){
+                      FB.api('/me/feed', 'post',
+                        {
+                          message: 'Text <%= @list.resolved_name %> to 68398 to get text promotions 30/month. Msg&data rates may apply / t&c txt HELP / stop txt STOP.'
+                        },
+                        function(response){
+                          //window.open("http://www.facebook.com/" + (response.id.replace(/_.*/,"")) + "/posts/" + (response.id.replace(/.*_/,"")))
+                          alert("Posted to Facebook");
+                        })
+                    },
+                    {scope: 'publish_stream'});
+                  });
+                });
+              </script>
+            </li>
+          </ul>
+        </div>
+        <div class="clear">&nbsp;</div>
+        <div class="tf-linkBox">
+          <p class="semibold">Or copy, paste the text below anywhere your customers eyes are.</p> 
+          <div class="copyCode">
+            <p>
+            <code id="selectme">
+              Text <%= @list.resolved_name %> to 68398 to get txt coupons <%= @list.message_volume %>/month. Msg&amp;data rates may apply / t&amp;c txt HELP / stop txt STOP.
+            </code>
+            </p>
+          </div>									
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

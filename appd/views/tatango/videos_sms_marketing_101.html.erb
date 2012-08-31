@@ -1,0 +1,168 @@
+<%
+title 'SMS Marketing 101 Videos Lessons'
+meta 'Learn more about SMS marketing with Tatango video lessons.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Video Lessons</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li class="active"><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2>Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2>FAQ's</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Text Messaging Marketing Video Lessons</h1>
+					<p class="intro border">
+Looking to dip your toe into the fabulous world of SMS marketing? Or maybe you want to jump in? Doesn't matter, you need to learn the basics of SMS marketing before you go any further. Below is a collection of video lessons that will not only help you get your bearings before embarking on your SMS marketing journey, it will put you on the path to becoming the SMS marketing smartypants in the office. Remember though, with great powers comes great responsibility.
+					</p>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_what_is_sms_marketing_path %>" title="What is SMS Marketing?">What is SMS Marketing?</a></h2>
+							<p>
+Are you not sure what is meant when a marketer says SMS Marketing, and maybe too shy to ask? Derek Johnson, CEO of Tatango breaks down what SMS marketing is and how it can work for your business. 
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_what_is_sms_marketing_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_what_is_sms_marketing_path %>" title="Watch Video"><img src="<%= asset_path 'videos/what-is-sms-marketing.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_five_reasons_to_use_tatango_path %>" title="5 Reasons to Use Tatango">5 Reasons to Use Tatango</a></h2>
+							<p>
+Still need convincing of why Tatango is the best text message marketing provider in the world? Derek Johnson, CEO of Tatango breaks down the five reasons why more businesses select Tatango for their text message marketing campaigns than any other SMS marketing platform.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_five_reasons_to_use_tatango_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_five_reasons_to_use_tatango_path %>" title="Watch Video"><img src="<%= asset_path 'videos/5-reasons-to-use-tatango.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_group_sms_path %>" title="Group SMS VS Text Message Marketing">Group SMS VS Text Message Marketing</a></h2>
+							<p>
+There is a lot of confusion from customers between group sms apps like GroupMe and text message marketing platforms like Tatango. Derek Johnson, CEO of Tatango explains how both group sms and text message marketing work and which SMS platform is the most appropriate for your situation.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_group_sms_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_group_sms_path %>" title="Watch Video"><img src="<%= asset_path 'videos/group-texting-vs-message-marketing.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_stop_sms_messaging_path %>" title="Leaving an SMS Marketing Campaign">Leaving an SMS Marketing Campaign</a></h2>
+							<p>
+The best part of SMS marketing is that it’s super simple for customers to opt-out of any SMS campaign if they don’t want to continue to receive messages. Derek Johnson, CEO of Tatango discusses the many different ways customers can leave an SMS marketing campaign.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_stop_sms_messaging_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_stop_sms_messaging_path %>" title="Watch Video"><img src="<%= asset_path 'videos/leaving-sms-marketing-campaign.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_sms_marketing_ecosystem_path %>" title="SMS Marketing Ecosystem">SMS Marketing Ecosystem</a></h2>
+							<p>
+Ever wonder how a text message gets from an SMS provider like Tatango all the way to an SMS subscribers mobile phone? Derek Johnson, CEO of Tatango breaks down the four pieces of the SMS marketing ecosystem, which include the SMS providers, SMS aggregators, wireless carriers and most importantly the SMS subscribers.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_sms_marketing_ecosystem_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_sms_marketing_ecosystem_path %>" title="Watch Video"><img src="<%= asset_path 'videos/sms-marketing-ecosystem.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

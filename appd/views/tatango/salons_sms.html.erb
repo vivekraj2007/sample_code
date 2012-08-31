@@ -1,0 +1,105 @@
+<%
+title 'Spa &amp; Salon Text Message Marketing Review'
+meta 'SMS marketing for salons and spas - Create, send, and track your SMS marketing campaigns with Tatango. Try Tatango for free!'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<p class="big">Some of Our Successful Customers</p>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2 class="select ">Customers by Industry</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurants">Restaurants</a></li>
+								<li><a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></li>
+								<li class="active"><a href="<%= url_for salons_sms_path %>" title="Salons &amp; Spas">Salons &amp; Spas</a></li>
+								<li><a href="<%= url_for church_sms_path %>" title="Ministry">Ministry</a></li>
+								<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></li>
+								<li><a href="<%= url_for political_sms_path %>" title="Political">Political</a></li>
+								<li><a href="<%= url_for conference_sms_path %>" title="Conferences">Conferences</a></li>
+								<li><a href="<%= url_for group_text_messaging_path %>" title="Groups &amp; Organizations">Groups &amp; Organizations</a></li>
+								<li><a href="<%= url_for marketing_agencies_sms_path %>" title="Agencies">Agencies</a></li>
+								<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency SMS Alerts">Emergency SMS Alerts</a></li>
+								<li><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services">Professional Services</a></li>
+								<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate">Real Estate</a></li>
+							</ul>
+						</div>
+						<h2>Customers by Product</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for customers_sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for customers_sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for customers_sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for customers_sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+
+					<p class="signupfree"><%= link_to "Sign Up Free", signup_path %></p>
+					<p class="call-grey">Call: (888) 517-6345</p>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Salon &amp; Spa Text Message Marketing Campaigns</h1>
+					<p class="intro">
+						In the salon and spa business, loyal customers are key to keeping your appointment book filled. To reward your most loyal customers, send them a text message. With SMS marketing software by Tatango you’re able to send your most loyal customers text messages about last minute appointment openings, beauty tips, special events and promotions. With text message marketing being a key component of many successful salon & spa marketing plans, it’s time you started using Tatango to help fill your own appointment book.
+					</p>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'vs-barbershop-sms-marketing-campaign-color.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Barbershop SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>V’s Barbershop</h2>
+							<p class="location">Bellingham, WA</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+								This barbershop came to Tatango looking for help in turning new customers into repeat customers. The barbershop was able to effectively promote repeat visits and was even able to encourage purchases of "premium" packages through SMS marketing. 
+							</p>
+							<p>
+								For most service businesses, turning new customers into repeat customers is essential. Don't go at it alone though; let us take your salon SMS campaign to a new level. 
+								<a href="https://www.box.com/shared/static/70f6a171156dab6061e4.pdf" title="Download PDF Case Study" rel="nofollow">Download PDF Case Study</a>
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

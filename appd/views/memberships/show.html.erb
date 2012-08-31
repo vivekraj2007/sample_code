@@ -1,0 +1,157 @@
+<% title 'Subscribers' %>
+
+<% current_tab :lists %>
+<% current_action list_memberships_path(@list) %>
+
+<div class="admin-center shadow">
+
+  <!-- LEFT CONTENT -->
+  <div class="content-left admin">
+    <%= render :partial => 'lists/action_nav' %>
+  </div>
+  <!-- #END of left content -->
+        
+  <!-- RIGHT CONTENT -->
+  <div class="content-right admin">
+    <h1 style="float:left">Subscriber: <%= @membership.phone %></h1>
+    <p class="semibold" style="float:right;padding-right:5px"><a href="<%= list_memberships_path(@membership.list) %>">Return to Subscribers</a></p>
+    <div class="clear"></div>
+    
+    <div class="admin-stripes-box" style="width:621px;padding-bottom:15px;padding-top:15px;margin-bottom:25px;">
+      <table class="minimal" summary="Subscriber" style="width:300px;float:left;">
+        <tbody>
+          <tr>
+            <td class="first">Subscriber State:</td>
+            <td><%= @membership.opted_out_at.nil? ? 'Subscribed' : 'Unsubscribed' %></td>
+          </tr>
+          <tr>
+            <td class="first">Mobile Phone Carrier:</td>
+            <td><%= @membership.phone.carrier_name %></td>
+          </tr>
+          <tr>
+            <td class="first last">Total Messages Received:</td>
+            <td class="last"><%= number_with_delimiter(@membership.messages_received) %></td>
+          </tr>
+        </tbody>
+      </table>
+      <table class="minimal" summary="Subscriber" style="width:300px;float:right;">
+        <tbody>
+          <tr>
+            <td class="first">First Subscription Date:</td>
+            <td><%= @membership.created_at.strftime("%b %d, %Y") %></td>
+          </tr>
+          <tr>
+            <td class="first">Subscription Method:</td>
+            <td>Keyword (<%= @membership.list.resolved_name %>)</td>
+          </tr>
+          <tr>
+            <td class="first last">Unsubscribe Date:</td>
+            <td class="last">
+              <% if @membership.opted_out_at %>
+                <%= @membership.opted_out_at.strftime("%b %d, %Y") %>
+              <% else %>
+                <%= link_to 'Unsubscribe Now', [@membership.list, @membership], :method => 'delete', :confirm => 'Are you sure you want to unsubscribe this number?', :class=>"normal" %>
+              <% end %>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+     <%# 
+    <h1>Subscriber History:</h1>
+    <div class="clear"></div>
+    
+      <p class="center regular">Coming Soon...</p>
+    <div class="admin-large-table grey">			
+        <table id="gradient-style" summary="Data">
+    
+          <thead> <!-- table header -->
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Direction</th>
+              <th scope="col">Message</th>
+              <th class="last" scope="col">Delivery<br />Status</th>
+            </tr>
+          </thead>
+          
+          <tfoot> <!-- table footer -->
+            <tr>
+              <td colspan="7">
+                <div class="pages"> <!-- Pages -->
+                  <ul class="page-links">
+                    <li><a href="#" class="last">&nbsp;</a></li>
+                    <li><a href="#" class="next">&nbsp;</a></li>
+                    <li><a href="#">5</a></li>
+                    <li style="padding:0 7px;">of</li>
+                    <li><a href="#">5</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#" class="active">3</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#" class="prev">&nbsp;</a></li>
+                    <li><a href="#" class="first">&nbsp;</a></li>
+                  </ul>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+          
+          <tbody> <!-- table content -->
+            <tr class="tableRow">
+              <td class="first"><nobr>09/28/2011 05:03pm</nobr></td>
+              <td><span class="outbound">Outbound</span></td>
+              <td class="tips" title="Interesting stuff, tell me more about that. Nemo enim ipsam voluptate quia voluptas spernatur aut odit aut fugit, sed qui consequuntur magni dolor."><nobr>Interesting stuff, tell me more about that...</nobr> </td><!-- <nobr> tagid, et IE8 tekst ja nooled ühel real oleksid. Mõjub kõikidele -->
+              <td><span class="failed">Failed</span></td>
+            </tr>
+            <tr class="tableRow alt">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="inbound">Inbound</span></td>
+              <td class="tips" title="STOP">STOP</td>
+              <td><span class="success">Success</span></td>
+            </tr>
+            <tr class="tableRow">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="inbound">Inbound</span></td>
+              <td class="tips" title="Interesting stuff, tell me more about that. Nemo enim ipsam voluptate quia voluptas spernatur aut odit aut fugit, sed qui consequuntur magni dolor.">Interesting stuff, tell me more about that... </td>
+              <td><span class="success">Success</span></td>
+            </tr>
+            <tr class="tableRow alt">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="inbound">Inbound</span></td>
+              <td class="tips" title="Voluptate quia voluptas spernatur aut odit aut fugit, sed qui consequuntur magni dolor.">Lorem ipsum dolor sit amet, consectetur...</td>
+              <td><span class="success">Success</span></td>
+            </tr>
+            <tr class="tableRow">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="outbound">Outbound</span></td>
+              <td class="tips" title="Interesting stuff, tell me more about that. Nemo enim ipsam voluptate quia voluptas spernatur aut odit aut fugit, sed qui consequuntur magni dolor.">Interesting stuff, tell me more about that... </td>
+              <td><span class="failed">Failed</span></td>
+            </tr>
+            <tr class="tableRow alt">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="inbound">Inbound</span></td>
+              <td class="tips" title="STOP">STOP</td>
+              <td><span class="success">Success</span></td>
+            </tr>
+            <tr class="tableRow">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="outbound">Outbound</span></td>
+              <td class="tips" title="Interesting stuff, tell me more about that. Nemo enim ipsam voluptate quia voluptas spernatur aut odit aut fugit, sed qui consequuntur magni dolor.">Interesting stuff, tell me more about that... </td>
+              <td><span class="failed">Failed</span></td>
+            </tr>
+            <tr class="tableRow alt">
+              <td class="first">09/28/2011 05:03pm</td>
+              <td><span class="inbound">Inbound</span></td>
+              <td class="tips" title="STOP">STOP</td>
+              <td><span class="success">Success</span></td>
+            </tr>
+          </tbody>
+          
+      </table>
+      
+      <div class="table-btm"><!----></div>
+      %>
+    </div>
+  </div>
+</div>

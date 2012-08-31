@@ -1,0 +1,13 @@
+Congrats! You've got new subscribers.
+
+List Name: <%=@list.resolved_name%>
+
+<% for opt in @list.joins_within_opts(@time_range) %>
+Mobile Phone Number: <%= PhoneNumber.new(opt.phone_number).to_formatted_s %>
+<% end %>
+
+It feels good to be loved.
+
+<% content_for :footer do %>
+  Visit <%= edit_list_url(@list) %> to edit these notifications.
+<% end %>

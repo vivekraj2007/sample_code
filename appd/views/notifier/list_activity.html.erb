@@ -1,0 +1,15 @@
+<p>Congrats! You've got new subscribers.</p>
+
+<p>List Name: <%=link_to @list.resolved_name, list_url(@list, :host=>'tatango.com')%><br />
+<br />
+<% for opt in @list.joins_within_opts(@time_range) %>
+  Mobile Phone Number: <%= PhoneNumber.new(opt.phone_number).to_formatted_s %><br />
+<% end %>
+</p>
+
+<p>It feels good to be loved.</p>
+<br />
+
+<% content_for :footer do %>
+  <p>Visit your <%= link_to 'list settings', edit_list_url(@list) %> to edit these notifications.</p>
+<% end %>

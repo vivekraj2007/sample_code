@@ -1,0 +1,144 @@
+<%
+title 'SMS Subscriber Management'
+meta 'Tatango helps you easily manage, sort and export all your mobile subscribers from right within your Tatango account.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">Tatango Tour</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content tour-new-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2>Products</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Features</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for unlimited_text_messaging_path %>" title="Unlimited Text Messaging">Unlimited Text Messaging</a></li>
+								<li><a href="<%= url_for unlimited_sms_keywords_path %>" title="Unlimited SMS Keywords">Unlimited SMS Keywords</a></li>
+								<li><a href="<%= url_for sms_short_code_messaging_path %>" title="Short Code Messaging">Short Code Messaging</a></li>
+								<li><a href="<%= url_for sms_campaign_management_path %>" title="Campaign Management">Campaign Management</a></li>
+								<li class="active"><a href="<%= url_for subscriber_management_path %>" title="Subscriber Management">Subscriber Management</a></li>
+								<li><a href="<%= url_for sms_campaign_reports_path %>" title="Campaign Analytics">Campaign Analytics</a></li>
+								<li><a href="<%= url_for sms_delivery_reports_path %>" title="SMS Delivery Reports">SMS Delivery Reports</a></li>
+								<li><a href="<%= url_for social_sharing_tools_path %>" title="Social Sharing">Social Sharing</a></li>
+								<li><a href="<%= url_for customer_support_path %>" title="Amazing Customer Support">Amazing Customer Support</a></li>
+								<li><a href="<%= url_for best_practice_compliant_path %>" title="Best Practices Compliant">Best Practices Compliant</a></li>
+								<li><a href="<%= url_for advanced_features_path %>" title="Advanced Features">Advanced Features</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour-new right">
+			
+					<h1>SMS Subscriber Management</h1>
+					<img src="<%= asset_path 'tour_sms_subscriber_management.jpg' %>" width="664" height="380" alt="SMS Subscriber Management" />
+					<p class="border normal">
+Managing hundreds or even hundreds of thousands of mobile phone numbers is a breeze with the Tatango SMS marketing software. To learn more about how easy it is to sort, export and manage your subscribers, see below.
+					</p>
+					
+					<div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>Export Your Data</h2>
+								<p>
+With Tatango you own all of your mobile subscriber data. This means you can easily export all of your data at anytime into a nice little .CSV file. What you do with the data is up to you.
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_sms_campaign_reports_data.jpg' %>" width="322" height="214" alt="Export Your Data" />
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<img src="<%= asset_path 'tour_sms_subscriber_management_alerts.jpg' %>" width="322" height="214" alt="New Subscriber Email Alerts" />
+							</div>
+							<div class="tour-right-left-right">
+								<h2>New Subscriber Email Alerts</h2>
+								<p>
+With Tatango you get alerts sent directly to your email when you have a new mobile subscriber, either as-it-happens, daily or even both. 
+These email alerts include mobile phone numbers and the exact time you gained your new subscriber.
+								</p>
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>Individual Data</h2>
+								<p>
+Tatango gives you insight into each mobile subscriber, by giving you their subscriber state, mobile phone carrier, total SMS message received, first opt-in date, 
+opt-in method and the opt-out date if applicable. Now that's a lot of data!
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_sms_subscriber_management_individual.jpg' %>" width="322" height="214" alt="Individual Data" />
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<img src="<%= asset_path 'tour_sms_subscriber_management_search.jpg' %>" width="322" height="214" alt="Search" />
+							</div>
+							<div class="tour-right-left-right">
+								<h2>Search</h2>
+								<p>
+Quickly search through all your mobile subscribers, both current and past. Only know the last four digits of the mobile phone number, no problem, 
+Tatango will help you narrow down your search with only a few digits of a mobile phone number.
+								</p>
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>Sort Data</h2>
+								<p>
+Want to sort your SMS subscribers? Tatango allows you to sort subscribers by wireless carrier, opt-in date and opt-out date. Sort all you want, we encourage it.
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_sms_subscriber_management_sort.jpg' %>" width="322" height="214" alt="Sort Data" />
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

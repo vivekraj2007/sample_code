@@ -1,0 +1,152 @@
+<%
+title 'SMS Campaign Messaging FAQ'
+meta 'Find answers to our most frequently asked SMS messaging questions.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2>Video Lessons</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2>Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">FAQ's</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li class="active"><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1 class="border">SMS Messaging FAQ</h1>
+					<h2>Do you charge for incoming text messages?</h2>
+					<p>
+No, we only charge for subscribers, so all text messages are free, whether they're going out or coming in.
+					</p>
+					<h2>How many characters can I include in a mass text message?</h2>
+					<p>
+In mass text messages you get 137 characters as by default we use 23 characters at the bottom of your text message to give instructions on how SMS subscribers are able to unsubscribe.
+					</p>
+					<h2>How many characters can I include in SMS Autoresponders?</h2>
+					<p>
+In SMS Autoresponders you get 160 characters.
+					</p>
+					<h2>How long does it take to deliver a text message?</h2>
+					<p>
+Most text messages will arrive on your subscribers mobile phones within a few seconds. The rumors are true, the movie The Fast and the Furious was created after after watching how fast Tatango text messages are sent.
+					</p>
+					<h2>Will you send advertisements via text message to my contacts?</h2>
+					<p>
+No. Never.
+					</p>
+					<h2>Can I choose what to send to my customers?</h2>
+					<p>
+You're actually the only person that can decide what your customers receive from your business. You control what to send and when to send it with your SMS campaign. Tatango puts the power in your hands.
+					</p>
+					<h2>Can I receive replies to my mass text messages?</h2>
+					<p>
+Yes, SMS subscribers are able to reply to any mass text message that you send them. These replies will be stored under the reports for each individual mass text messaging campaign.
+					</p>
+					<h2>Can I send mass messages from my mobile phone?</h2>
+					<p>
+Yea, we're innovative like that. The best part is that you don't need to download an app or have internet on your mobile phone, you just need to know how to text message.
+					</p>
+					<h2>What carriers does tatango work on?</h2>
+					<p>
+The better question is to ask what U.S. wireless carriers Tatango doesn't work onÉ the answer is zero.
+					</p>
+					<h2>Can I customize the opt-in message SMS subscribers receive?</h2>
+					<p>
+Yep! With all of the legal stuff we have to include in an opt-in message, you're allowed 75 characters for customization. We call this opt-in message the "Reward Message" because the majority of Tatango customers use these available characters to give some kind of reward to their customers for joining their SMS campaign.
+					</p>
+					<h2>Does Tatango allow SMS subscribers to unsubscribe from mass messages?</h2>
+					<p>
+Any SMS subscriber that wants to leave your subscriber list has to simply respond to any text message they receive from your SMS campaign with the word "STOP" or "UNSUBSCRIBE". This happens automatically, so no need to worry about creating extra work for yourself.
+					</p>
+					<h2>Does Tatango do MMS?</h2>
+					<p>
+Not at this time, but maybe in the future we'll let you know if we do.
+					</p>
+					<h2>What if I have more questions about sending text messages?</h2>
+					<p>
+That's what we're here for at Tatango, to help you send text messages. If you still have questions about sending text messages for your own SMS campaign, please <a href="<%= url_for contact_path %>">contact us</a>.
+					</p>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

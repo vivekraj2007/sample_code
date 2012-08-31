@@ -1,0 +1,35 @@
+<div class="phone" id="phone_<%= phone.number %>">
+	<h3><%= link_to_function 'remove', "$(this).parent().parent().remove();clearInterval(periodically_call_remote_timers[#{phone.number}])", :class => 'header_link' %><%= phone %></h3>
+	<form action="#" method="get" onsubmit="
+		$.ajax({
+			async:true,
+			data:'<message><sender>'+$('#phone_<%= phone.number %> [name=phone]').val()+'</sender><content>'+$('#phone_<%= phone.number %> #message').val()+'</content></message>',
+			dataType:'xml',
+			contentType:'text/xml',
+			type:'post',
+			url:'/mo'
+		});
+		$('#phone_<%= phone.number %> #message').val('');
+		restart_inactivity_timeout('<%= phone.number %>');
+		start_polling_if_needed('<%= phone.number %>');
+		return false;">
+			<%= hidden_field_tag :phone, phone.number, :id => nil %>
+			<%= text_field_tag :message, {}, :size => '16' %>
+			<%= submit_tag 'send' %>
+	</form>
+	
+	<h4><%= link_to_function 'clear', '$(this).parent().next().children().remove()', :class => 'header_link' %> Messages</h4>
+	<ul id="phone_<%= phone.number %>_messages">
+		<li>You have no messages yet</li>
+	</ul>
+	
+	<div class="status"></div>
+
+
+	
+	<script type="text/javascript">
+	//<![CDATA[
+		start_polling('<%= phone.number %>');		
+	//]]>
+	</script>
+</div>

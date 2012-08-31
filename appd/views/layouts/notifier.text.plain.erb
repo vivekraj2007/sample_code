@@ -1,0 +1,11 @@
+<% if @account %>Hi <%= @account.first_name %>,<% end %>
+
+<%= yield %>
+
+
+Best Regards,
+
+The Tatango Team
+http://www.tatango.com
+
+<%= yield :footer %>

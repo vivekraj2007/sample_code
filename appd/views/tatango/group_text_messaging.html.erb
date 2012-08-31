@@ -1,0 +1,149 @@
+<%
+title 'Group &amp; Organization Testimonials &amp; Reviews'
+meta 'Group text messaging for groups and organizations - Create, send, and track your group text messages with Tatango. Try Tatango for free!'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<p class="big">Some of Our Successful Customers</p>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2 class="select ">Customers by Industry</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurants">Restaurants</a></li>
+								<li><a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></li>
+								<li><a href="<%= url_for salons_sms_path %>" title="Salons &amp; Spas">Salons &amp; Spas</a></li>
+								<li><a href="<%= url_for church_sms_path %>" title="Ministry">Ministry</a></li>
+								<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></li>
+								<li><a href="<%= url_for political_sms_path %>" title="Political">Political</a></li>
+								<li><a href="<%= url_for conference_sms_path %>" title="Conferences">Conferences</a></li>
+								<li class="active"><a href="<%= url_for group_text_messaging_path %>" title="Groups &amp; Organizations">Groups &amp; Organizations</a></li>
+								<li><a href="<%= url_for marketing_agencies_sms_path %>" title="Agencies">Agencies</a></li>
+								<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency SMS Alerts">Emergency SMS Alerts</a></li>
+								<li><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services">Professional Services</a></li>
+								<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate">Real Estate</a></li>
+							</ul>
+						</div>
+						<h2>Customers by Product</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for customers_sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for customers_sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for customers_sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for customers_sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+
+					<p class="signupfree"><%= link_to "Sign Up Free", signup_path %></p>
+					<p class="call-grey">Call: (888) 517-6345</p>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Group &amp; Organization Text Message Alerts</h1>
+					<p class="intro">
+Anyone that has ever managed a group or organization knows that communication with members is critical. Unfortunately the old methods of group communications such as phone trees and email lists just aren’t cutting it anymore, which is most likely why you’re here at Tatango. With Tatango, you’re able to send group text messages directly from your computer or mobile phone with the simple click of a button. With group text messaging powered by Tatango, there’s no longer a valid excuse for your members to not know about your next meeting or event. 
+					</p>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'boy-scouts-group-sms-color.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Group SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>Boy Scouts of America</h2>
+							<p class="location">Westlake Village, CA</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+Communication is key when managing an organization that does as many activities as the Boy Scouts. National jamborees, weekly meetings, community service days and camping trips are what the Boy Scouts are all about, and for this troop they rely on group SMS with Tatango to stay in touch and keep everyone safe at all times. Group SMS is used for student, parent and leader communication and has been the glue that holds this tight knit, mobile group together.
+							</p>
+							<p>
+Tatango works with organizations such as the Boy Scouts of America, DECA, 4H, Key Club and the Susan G. Komen foundation at both the national and chapter level. When it comes to group SMS, Tatango is the answer. 
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'lsu-cheerleading.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Cheerleading SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>LSU Cheerleading</h2>
+							<p class="location">Baton Rouge, LA</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+Communication is key to the success of any organization, and cheerleading is no exception. With cheerleaders juggling school, personal lives, practices, games and competitions, having a direct communication line to each cheerleader is critical for a cheerleading captain.
+							</p>
+							<p>
+Jamie Mascari, captain of the Louisiana State University cheerleaders came to Tatango after realizing that emails and social networks weren't effective in getting messages to fellow cheerleaders, especially in time sensitive situations. One thing she did realize was that every cheerleader was constantly text messaging. By combining her teammates love for text messaging and the power of Tatango group text messaging, she was quickly able to improve group communications. With a simple text message alert, she was able to get fellow teammates attention within minutes, rather than hours or days as experienced with email.
+							</p>
+							<p>
+"Tatango is pretty much a life saver. Teammates have said that these texts have been so helpful in reminding them about upcoming events, which makes my job ten times easier!" - Jamie Mascari (LSU Cheer Captain)
+							</p>
+							<p>
+Tatango group text messaging is perfect for any athletic team looking to improve group communications.
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'delta-upsilon.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Fraternity SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>Delta Upsilon</h2>
+							<p class="location">Seattle, WA</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+Anyone who has ever managed a fraternity or sorority knows that a good communications system can be the difference between holding events with full attendance and nobody showing up.
+							</p>
+							<p>
+This was no different for the members of Delta Upsilon at the University of Washington. They came to Tatango looking for a fraternity text messaging system that would work to alert members and pledges of meetings, events, parties and important announcements. What they found with Tatango was not only an improved way to communicate with their members, but a group text messaging software that wouldn't break the bank. Now Delta Upsilon members at the University of Washington have no excuse thanks to group text messaging powered by Tatango.
+							</p>
+							<p>
+Tatango powers group text messaging for individual fraternities, sororities and entire Greek systems at university campuses across the nation. Let Tatango help your Greek organization improve it's communications with text messaging.
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

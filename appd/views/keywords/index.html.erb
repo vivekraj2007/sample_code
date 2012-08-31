@@ -1,0 +1,896 @@
+<% title "Welcome #{current_user.first_name}!" %>
+
+<script type="text/javascript">
+  $(document).ready(function(){
+    $('.keywords_list_table').dataTable({
+      "bFilter": false,
+      "bLengthChange": false,
+      "sPaginationType": "full_numbers",
+      "iDisplayLength": 7,
+      "aaSorting": [[2, "desc"]],
+      "aoColumnDefs": [
+        { "bSortable": false, "aTargets": [ 3 ] }
+      ],
+      "bInfo": false
+    });
+  });
+</script>
+
+
+<script type="text/javascript">
+  $(document).ready(function(){
+			
+			
+			$('.listsCreatePopup').openDOMWindow({ 
+				eventType:'click', 
+				height: 900,
+				width: 800,
+				windowPadding:0,
+				overlayOpacity:'60',
+				windowBGColor:'transparent',
+				borderSize:'0',
+				<% if flash[:force_create_keyword] %>
+				  modal: 1,
+				<% end %>
+				positionType:'centerTop'
+			});
+			<% if flash[:attempt_bounceback] %>
+			  $('.listsCreatePopup').click();
+			<% end %>
+			$('.autorespondersCreatePopup').openDOMWindow({ 
+				eventType:'click', 
+				height: 900,
+				width: 800,
+				windowPadding:0,
+				overlayOpacity:'60',
+				windowBGColor:'transparent',
+				borderSize:'0',
+				<% if flash[:force_create_keyword] %>
+				  modal: 1,
+				<% end %>
+				positionType:'centerTop'
+			});
+			<% if flash[:attempt_message] %>
+			  $('.autorespondersCreatePopup').click();
+			<% end %>
+			$('.contestsCreatePopup').openDOMWindow({ 
+				eventType:'click', 
+				height: 900,
+				width: 800,
+				windowPadding:0,
+				overlayOpacity:'60',
+				windowBGColor:'transparent',
+				borderSize:'0',
+				<% if flash[:force_create_keyword] %>
+				  modal: 1,
+				<% end %>
+				positionType:'centerTop'
+			});
+			<% if flash[:attempt_message] %>
+			  $('.contestsCreatePopup').click();
+			<% end %>
+			$('.pollsCreatePopup').openDOMWindow({ 
+				eventType:'click', 
+				height: 900,
+				width: 800,
+				windowPadding:0,
+				overlayOpacity:'60',
+				windowBGColor:'transparent',
+				borderSize:'0',
+				<% if flash[:force_create_keyword] %>
+				  modal: 1,
+				<% end %>
+				positionType:'centerTop'
+			});
+			<% if flash[:attempt_message] %>
+			  $('.pollsCreatePopup').click();
+			<% end %>
+			jQuery('.defaultDOMWindow').openDOMWindow({ 
+				eventType:'click', 
+				height: 900,
+				width: 800,
+				windowPadding:0,
+				overlayOpacity:'60',
+				windowBGColor:'transparent',
+				borderSize:'0',
+				positionType:'centerTop'
+			});
+			
+			var debug = function(v)
+			{
+				console.debug(v);
+			}
+			
+     var setKeyUps = function()
+     {
+             $(".somebox .line input.keyword_name_field").keyup(function() {
+                     input = $(this);
+                     kexywords = [];
+                     parents = $(input).parents(".noline");
+                     parents.find("input.keyword_name_field").last().each(function() {
+                             v = $(this).val();
+                             if (v) 
+                             {
+                                     kexywords.push(v);
+                             }
+                     })
+                     parents.find(".mobile-key p").html(kexywords.join(", "))
+             });
+     }
+     setKeyUps();
+  });
+</script>
+
+<div class="admin-center newadmin">
+	
+	<!-- LEFT CONTENT -->
+	<div class="content-left admin-new">
+				
+		<ul class="dropdown">
+			<li class="top"><a href="javascript:void(0);">Create Campaign</a>
+				<ul class="sub_menu">
+					<li class="first"><a href="#create-sms-broadcast" class="listsCreatePopup" title="SMS Broadcasts">SMS Broadcasts</a></li>
+					<li><a href="#create-sms-contest" class="contestsCreatePopup" title="SMS Contests">SMS Contests</a></li>
+					<li><a href="#create-sms-poll" class="pollsCreatePopup" title="SMS Polls">SMS Polls</a></li>
+					<li><a href="#create-sms-autoresponder" class="autorespondersCreatePopup" title="SMS Autoresponders">SMS Autoresponders</a></li>
+				</ul>
+			</li>
+		</ul>
+				
+		<div class="left-menu-wrap-admin2">
+			<ul class="left-menu-admin2">
+				<li><a <% if request.path == keywords_path %>class="active"<% end %> title="All Campaigns" href="<%= url_for keywords_path %>">All Campaigns</a></li>
+				<li><a <% if request.path == broadcasts_keywords_path %>class="active"<% end %> title="SMS Broadcasts" href="<%= url_for broadcasts_keywords_path %>">SMS Broadcasts</a></li>
+				<li><a <% if request.path == contests_keywords_path %>class="active"<% end %> title="SMS Contests" href="<%= url_for contests_keywords_path %>">SMS Contests</a></li>
+				<li><a <% if request.path == polls_keywords_path %>class="active"<% end %> title="SMS Polls" href="<%= url_for polls_keywords_path %>">SMS Polls</a></li>
+				<li><a <% if request.path == autoresponders_keywords_path %>class="active"<% end %> title="SMS Autoresponders" href="<%= url_for autoresponders_keywords_path %>">SMS Autoresponders</a></li>
+			</ul>
+			<div class="left-menu-btm-admin2"><!----></div>
+		</div>
+		
+		<!-- STARTING POPUPS -->
+		
+		<div id="create-sms-broadcast" style="display:none;"> <!-- Pop-up create broadcast -->
+			<% if current_user.trial? and current_user.created_lists.size != 0 %>
+				<div class="pop-up-window-subs">
+				  <div class="pop-up-window-top-subs">
+					<h1>Create SMS Broadcast</h1> 
+					<% if !flash[:force_create_keyword] %>
+					  <a class="pop-up-close" onclick="jQuery('.contestsCreatePopup').closeDOMWindow()" title="Close"></a>
+					<% end %>
+				  </div>
+				  <div class="pop-up-content-subs">
+					  <p class="normal">
+              During the free trial you can only have one of each type of keyword. You can always delete an existing keyword to add a new keyword, or <a class="blue" href="<%= new_plan_path %>">upgrade here</a> and get an unlimited amount of keywords.
+					  </p>
+					  <div class="clear">&nbsp;</div>
+					  <p class="green-btn" style="float:left;"><a href="<%= new_plan_path %>"><span>Upgrade</span></a></p>
+            <div class="clear" style="height: 30px;">&nbsp;</div>
+				  </div>
+				</div>
+			<% else %>
+						<div class="pop-up-window-subs">
+							<div class="pop-up-window-top-subs">
+								<h1>Create SMS Broadcast</h1>
+								<% if !flash[:force_create_keyword] %>
+									<a class="pop-up-close" onclick="jQuery('.listsCreatePopup').closeDOMWindow()" title="Close"></a>
+								<% end %>
+							</div>
+							<div class="pop-up-content-subs">
+								<%= form_for(@new_keyword, :html => {:class => 'someform', :style => 'width:656px;margin-top:0'}) do |f| %>
+									<input type="hidden" name="keywordtype" value="list" />
+									<fieldset>
+										<legend>Create SMS Broadcast</legend>
+										<div class="somebox" style="margin-bottom:10px;width:100%">
+											<div class="noline">
+												<div style="float:left;width:395px;">
+													<div class="line">
+														<h2 style="padding-bottom:10px;">Keyword</h2>
+														<%= f.text_field :name, :style => 'width:145px;', :required => 'required', :tabindex => 1, :size => 22, :maxlength => 15, :id => 'list_keyword_name', :class => 'keyword_name_field', :value => (flash[:attempt_name] or 'KEYWORD') %><span class="end"></span>
+                            <script type="text/javascript">
+                              $('#list_keyword_name').watermark('KEYWORD', {useNative: false});
+                            </script>
+														<p id="list_availability-yes" class="tick" style="display: none;"><span class="keyword_name_field"></span> is available</p>
+														<p id="list_availability-no" class="tick-none" style="display: none;"><span class="keyword_name_field"></span> <span id="list_not-available-reason"></span></p>
+														<div class="clear">&nbsp;</div>
+														<p style="padding:4px 0;font-size:14px"><i>Keywords must not contain spaces,!,/,$,%, or any other special characters.</i></p>
+													</div>
+													<h2 style="padding-bottom:10px;">Welcome Message</h2>
+													<textarea style="width:373px;height:130px;padding-bottom:5px;" id="list_bounceback" name="list[bounceback]" maxlength="<%= GLOBALS['bounceback_size'] %>" value="">Welcome to our mobile club, show this text for 20% off your next order.</textarea>
+                          <script type="text/javascript">
+                          $(document).ready(function(){
+                            $('#list_bounceback').watermark('Welcome to our mobile club, show this text for 20% off your next order.', {useNative: false});
+                          });
+                          </script>
+													<p style="float:right;font-size:14px"><i><span id="list_message_characters_left"><%= GLOBALS['bounceback_size'] %></span> characters available</i></p>
+													<script type="text/javascript">
+														var update_list_message = function(){
+																$('#list_message_characters_left').html(75 - $('#list_bounceback')[0].value.length);
+																$('#preview_list_bounceback').html($('#list_bounceback')[0].value.replace(/\n/g, "<br />"));
+															};
+															$(document).ready(function(){
+																$('#list_bounceback').keyup(update_list_message);
+                                
+														});
+													</script>
+													<div class="clear">&nbsp;</div>
+													<div class="input-green-btn" style="padding:15px 0;float:left;">
+														<label><input class="list_claim_submit" type="submit" value="Create SMS Broadcast" disabled="true" /></label>
+													</div>
+												</div>
+												<div class="mobile-larger" style="float:right;">
+													<p class="shownumber bold">68398</p>
+													<div class="mobile-key">
+														<p>KEYWORD</p>
+													</div>
+													<div class="mobile-txt">
+														<p>
+															<span>Subscribed to Alerts.</span>
+														</p>
+														<p>
+															<span id="preview_list_bounceback">
+															</span>
+														</p>
+														<p>
+															<span id="messageVolumePreview"></span>30-mo/STOP to end /HELP for help /Msg&amp;Data Rates May Apply
+														</p>
+														<div class="mobile-btm">&nbsp;</div>
+													</div>
+													<p style="padding:0" class="preview bold">Preview</p>
+												</div>		
+												<div class="clear" style="height: 20px;">&nbsp;</div>
+											</div>
+										</div>
+									</fieldset>
+								<% end %>
+							</div>
+						</div>
+      <% end %>
+		</div> <!-- #END of POPUP -->
+		
+		<div id="create-sms-contest" style="display:none;"> <!-- Pop-up create contest -->
+			<% if current_user.trial? and current_user.created_contests.size != 0 %>
+				<div class="pop-up-window-subs">
+				  <div class="pop-up-window-top-subs">
+					<h1>Create SMS Contest</h1> 
+					<% if !flash[:force_create_keyword] %>
+					  <a class="pop-up-close" onclick="jQuery('.contestsCreatePopup').closeDOMWindow()" title="Close"></a>
+					<% end %>
+				  </div>
+				  <div class="pop-up-content-subs">
+					  <p class="normal">
+              During the free trial you can only have one of each type of keyword. You can always delete an existing keyword to add a new keyword, or <a class="blue" href="<%= new_plan_path %>">upgrade here</a> and get an unlimited amount of keywords.
+					  </p>
+					  <div class="clear">&nbsp;</div>
+					  <p class="green-btn" style="float:left;"><a href="<%= new_plan_path %>"><span>Upgrade</span></a></p>
+            <div class="clear" style="height: 30px;">&nbsp;</div>
+				  </div>
+				</div>
+			<% else %>
+						<div class="pop-up-window-subs">
+							<div class="pop-up-window-top-subs">
+								<h1>Create SMS Contest</h1>
+								<% if !flash[:force_create_keyword] %>
+									<a class="pop-up-close" onclick="jQuery('.contestsCreatePopup').closeDOMWindow()" title="Close"></a>
+								<% end %>
+							</div>
+							<div class="pop-up-content-subs">
+								<%= form_for(@new_keyword, :html => {:class => 'someform', :style => 'width:656px;margin-top:0'}) do |f| %>
+									<input type="hidden" name="keywordtype" value="contest" />
+									<fieldset>
+										<legend>Create SMS Contest</legend>
+										<div class="somebox" style="margin-bottom:10px;width:100%">
+											<div class="noline">
+												<div style="float:left;width:395px;">
+													<div class="line">
+														<h2 style="padding-bottom:10px;">Keyword</h2>
+														<div class="keyword_name_fieldWrapper">
+															<%= f.text_field :name, :style => 'width:145px;', :required => 'required', :tabindex => 1, :size => 22, :maxlength => 15, :id => 'contest_keyword_name', :class => 'keyword_name_field', :value => (flash[:attempt_name] or 'KEYWORD') %><span class="end"></span>
+                            <script type="text/javascript">
+                              $('#contest_keyword_name').watermark('KEYWORD', {useNative: false});
+                            </script>
+														</div>
+														<p id="contest_availability-yes" class="tick" style="display: none;"><span class="keyword_name_field"></span> is available</p>
+														<p id="contest_availability-no" class="tick-none" style="display: none;"><span class="keyword_name_field"></span> <span id="contest_not-available-reason"></span></p>
+														<div class="clear">&nbsp;</div>
+														<p style="padding:4px 0;font-size:14px"><i>Keywords must not contain spaces,!,/,$,%, or any other special characters.</i></p>
+													</div>
+													<h2 style="padding-bottom:10px;">Response</h2>
+													<textarea style="width:373px;height:130px;padding-bottom:5px;" id="contest_message" name="contest[message]" maxlength="<%= GLOBALS['max_chars'] %>"></textarea>
+                          <script type="text/javascript">
+                          $(document).ready(function(){
+                            $('#contest_message').watermark('You\'ve been entered to win! Winners will be announced this week, but in the meantime, show this text message for 20% off your next order.', {useNative: false});
+                          });
+                          </script>
+													<p style="float:right;font-size:14px"><i><span id="contest_message_characters_left"><%= GLOBALS['max_chars'] %></span> characters available</i></p>
+													<script type="text/javascript">
+														var update_contest_message = function(){
+															$('#contest_message_characters_left').html(160 - $('#contest_message')[0].value.length);
+															$('#preview_contest_message').html($('#contest_message')[0].value.replace(/\n/g, "<br />"));
+														};
+														$(document).ready(function(){
+															$('#contest_message').keyup(update_contest_message);
+                              update_contest_message();
+													  });
+													</script>
+													<div class="clear">&nbsp;</div>
+													<div class="input-green-btn" style="padding:15px 0;float:left;">
+														<label><input id="contest_claim_submit" type="submit" value="Create SMS Contest" disabled="true" /></label>
+													</div>
+												</div>
+												<div class="mobile-larger" style="float:right;">
+													<p class="shownumber bold">68398</p>
+													<div class="mobile-key">
+														<p>KEYWORD</p>
+													</div>
+													<div class="mobile-txt">
+														<p>
+															<span id="preview_contest_message">
+															</span>
+														</p>
+														<div class="mobile-btm">&nbsp;</div>
+													</div>
+													<p style="padding:0" class="preview bold">Preview</p>
+												</div>		
+												<div class="clear" style="height: 20px;">&nbsp;</div>
+											</div>
+										</div>
+									</fieldset>
+								<% end %>
+				</div>
+			</div>
+      <% end %>
+		</div> <!-- #END of POPUP -->
+		
+    <div id="create-sms-poll" style="display:none;"> <!-- Pop-up create poll -->
+			<% if current_user.trial? and current_user.created_polls.size != 0 %>
+				<div class="pop-up-window-subs">
+				  <div class="pop-up-window-top-subs">
+					<h1>Create SMS Poll</h1> 
+					<% if !flash[:force_create_keyword] %>
+					  <a class="pop-up-close" onclick="jQuery('.pollsCreatePopup').closeDOMWindow()" title="Close"></a>
+					<% end %>
+				  </div>
+				  <div class="pop-up-content-subs">
+					  <p class="normal">
+              During the free trial you can only have one of each type of keyword. You can always delete an existing keyword to add a new keyword, or <a class="blue" href="<%= new_plan_path %>">upgrade here</a> and get an unlimited amount of keywords.
+					  </p>
+					  <div class="clear">&nbsp;</div>
+					  <p class="green-btn" style="float:left;"><a href="<%= new_plan_path %>"><span>Upgrade</span></a></p>
+            <div class="clear" style="height: 30px;">&nbsp;</div>
+				  </div>
+				</div>
+			<% else %>
+						<div class="pop-up-window-subs">
+							<div class="pop-up-window-top-subs">
+								<h1>Create SMS Poll</h1>
+								<% if !flash[:force_create_keyword] %>
+									<a class="pop-up-close" onclick="jQuery('.pollsCreatePopup').closeDOMWindow()" title="Close"></a>
+								<% end %>
+							</div>
+							<div class="pop-up-content-subs">
+								<%= form_for(@new_keyword, :html => {:class => 'someform', :style => 'width:656px;margin-top:0'}) do |f| %>
+									<input type="hidden" name="keywordtype" value="poll" />
+									<fieldset>
+										<legend>Create SMS Poll</legend>
+										<div class="somebox" style="margin-bottom:10px;width:100%">
+											<div class="noline">
+												<div style="float:left;width:395px;">
+													<div class="line">
+														<h2 style="padding-bottom:10px;">Keyword</h2>
+														
+															<%= f.text_field :name, :style => 'width:145px;', :required => 'required', :tabindex => 1, :size => 22, :maxlength => 15, :id => 'poll_keyword_name', :class => 'keyword_name_field', :value => (flash[:attempt_name] or 'KEYWORD') %><span class="end"></span>
+                            <script type="text/javascript">
+                              $('#poll_keyword_name').watermark('KEYWORD', {useNative: false});
+                            </script>
+														
+														<p id="poll_availability-yes" class="tick" style="display: none;"><span class="keyword_name_field"></span> is available</p>
+														<p id="poll_availability-no" class="tick-none" style="display: none;"><span class="keyword_name_field"></span> <span id="poll_not-available-reason"></span></p>
+														<div class="clear">&nbsp;</div>
+														<p style="padding:4px 0;font-size:14px"><i>Keywords must not contain spaces,!,/,$,%, or any other special characters.</i></p>
+													</div>
+													<h2 style="padding-bottom:10px;">Response</h2>
+													<textarea style="width:373px;height:130px;padding-bottom:5px;" id="poll_message" name="poll[message]" maxlength="<%= GLOBALS['max_chars'] %>"></textarea>
+                          <script type="text/javascript">
+                          $(document).ready(function(){
+                            $('#poll_message').watermark('Thanks for voting! We will be announcing the poll results at the end of the conference today.', {useNative: false});
+                          });
+                          </script>
+													<p style="float:right;font-size:14px"><i><span id="poll_message_characters_left"><%= GLOBALS['max_chars'] %></span> characters available</i></p>
+													<script type="text/javascript">
+														var update_poll_message = function(){
+															$('#poll_message_characters_left').html(160 - $('#poll_message')[0].value.length);
+															$('#preview_poll_message').html($('#poll_message')[0].value.replace(/\n/g, "<br />"));
+														};
+														$(document).ready(function(){
+															$('#poll_message').keyup(update_poll_message);
+															update_poll_message();
+														});
+													</script>
+													<div class="clear">&nbsp;</div>
+													<div class="input-green-btn" style="padding:15px 0;float:left;">
+														<label><input id="poll_claim_submit" type="submit" value="Create SMS Poll" disabled="true" /></label>
+													</div>
+												</div>
+												<div class="mobile-larger" style="float:right;">
+													<p class="shownumber bold">68398</p>
+													<div class="mobile-key">
+														<p>KEYWORD</p>
+													</div>
+													<div class="mobile-txt">
+														<p>
+															<span id="preview_poll_message">
+															</span>
+														</p>
+														<div class="mobile-btm">&nbsp;</div>
+													</div>
+													<p style="padding:0" class="preview bold">Preview</p>
+												</div>		
+												<div class="clear" style="height: 20px;">&nbsp;</div>
+											</div>
+										</div>
+									</fieldset>
+								<% end %>
+							</div>
+						</div>
+			<% end %>
+		</div> <!-- #END of POPUP -->
+		
+		<div id="create-sms-autoresponder" style="display:none;"> <!-- Pop-up create autoresponder -->
+			<% if current_user.trial? and current_user.created_autoresponders.size != 0 %>
+				<div class="pop-up-window-subs">
+				  <div class="pop-up-window-top-subs">
+					<h1>Create SMS Autoresponder</h1> 
+					<% if !flash[:force_create_keyword] %>
+					  <a class="pop-up-close" onclick="jQuery('.autorespondersCreatePopup').closeDOMWindow()" title="Close"></a>
+					<% end %>
+				  </div>
+				  <div class="pop-up-content-subs">
+					  <p class="normal">
+              During the free trial you can only have one of each type of keyword. You can always delete an existing keyword to add a new keyword, or <a class="blue" href="<%= new_plan_path %>">upgrade here</a> and get an unlimited amount of keywords.
+					  </p>
+					  <div class="clear">&nbsp;</div>
+					  <p class="green-btn" style="float:left;"><a href="<%= new_plan_path %>"><span>Upgrade</span></a></p>
+            <div class="clear" style="height: 30px;">&nbsp;</div>
+				  </div>
+				</div>
+			<% else %>
+						<div class="pop-up-window-subs">
+							<div class="pop-up-window-top-subs">
+								<h1>Create SMS Autoresponder</h1>
+								<% if !flash[:force_create_keyword] %>
+									<a class="pop-up-close" onclick="jQuery('.autorespondersCreatePopup').closeDOMWindow()" title="Close"></a>
+								<% end %>
+							</div>
+							<div class="pop-up-content-subs">
+								<%= form_for(@new_keyword, :html => {:class => 'someform', :style => 'width:656px;margin-top:0'}) do |f| %>
+									<input type="hidden" name="keywordtype" value="autoresponder" />
+									<fieldset>
+										<legend>Create SMS Autoresponder</legend>
+										<div class="somebox" style="margin-bottom:10px;width:100%">
+											<div class="noline">
+												<div style="float:left;width:395px;">
+													<div class="line">
+														<h2 style="padding-bottom:10px;">Keyword</h2>
+														
+															<%= f.text_field :name, :style => 'width:145px;', :required => 'required', :tabindex => 1, :size => 22, :maxlength => 15, :id => 'autoresponder_keyword_name', :class => 'keyword_name_field', :value => (flash[:attempt_name] or 'KEYWORD') %><span class="end"></span>
+                            <script type="text/javascript">
+                              $('#autoresponder_keyword_name').watermark('KEYWORD', {useNative: false});
+                            </script>
+														
+														<p id="autoresponder_availability-yes" class="tick" style="display: none;"><span class="keyword_name_field"></span> is available</p>
+														<p id="autoresponder_availability-no" class="tick-none" style="display: none;"><span class="keyword_name_field"></span> <span id="autoresponder_not-available-reason"></span></p>
+														<div class="clear">&nbsp;</div>
+														<p style="padding:4px 0;font-size:14px"><i>Keywords must not contain spaces,!,/,$,%, or any other special characters.</i></p>
+													</div>
+													<h2 style="padding-bottom:10px;">Response</h2>
+													<textarea style="width:373px;height:130px;padding-bottom:5px;" id="autoresponder_message" name="autoresponder[message]" maxlength="<%= GLOBALS['max_chars'] %>"></textarea>
+                          <script type="text/javascript">
+                          $(document).ready(function(){
+                            $('#autoresponder_message').watermark('Currently we have a 2 bedroom apartment available for $999/month. For more info, call the apartment manager at 206.334.4012 or visit our website www.rent.com', {useNative: false});
+                          });
+                          </script>
+													<p style="float:right;font-size:14px"><i><span id="autoresponder_message_characters_left"><%= GLOBALS['max_chars'] %></span> characters available</i></p>
+													<script type="text/javascript">
+														var update_autoresponder_message = function(){
+															$('#autoresponder_message_characters_left').html(160 - $('#autoresponder_message')[0].value.length);
+															$('#preview_autoresponder_message').html($('#autoresponder_message')[0].value.replace(/\n/g, "<br />"));
+														};
+														$(document).ready(function(){
+															$('#autoresponder_message').keyup(update_autoresponder_message);
+															update_autoresponder_message();
+														});
+													</script>
+													<div class="clear">&nbsp;</div>
+													<div class="input-green-btn" style="padding:15px 0;float:left;">
+														<label><input id="autoresponder_claim_submit" type="submit" value="Create SMS Autoresponder" disabled="true" /></label>
+													</div>
+												</div>
+												<div class="mobile-larger" style="float:right;">
+													<p class="shownumber bold">68398</p>
+													<div class="mobile-key">
+														<p>KEYWORD</p>
+													</div>
+													<div class="mobile-txt">
+														<p>
+															<span id="preview_autoresponder_message">
+															</span>
+														</p>
+														<div class="mobile-btm">&nbsp;</div>
+													</div>
+													<p style="padding:0" class="preview bold">Preview</p>
+												</div>		
+												<div class="clear" style="height: 20px;">&nbsp;</div>
+											</div>
+										</div>
+									</fieldset>
+								<% end %>
+							</div>
+						</div>
+			<% end %>
+		</div> <!-- #END of POPUP -->
+		
+		<!-- #END of POPUPS -->
+
+	</div>
+	<!-- #END of left content -->
+	
+	<!-- RIGHT CONTENT -->
+	<div class="content-right admin-new">
+	
+	<% if @keyword_objects.empty? %>
+		<% if request.path == keywords_path %>
+				<h1>Create your first SMS campaign...</h1>
+				
+				<p class="arrowlink">Need help selecting a campaign type 
+				<a href="https://fast.wistia.com/embed/iframe/4744322d70?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">watch this video</a></p>
+				<script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script>
+
+				
+				<div class="four-offers admin-new">
+					<div class="four-offers-item">
+						<div class="four-item-img">
+							<a title="SMS Broadcasts powered by Tatango" class="blue" href="<%= broadcasts_keywords_path %>"><img width="93" height="92" alt="SMS Broadcast spowered by Tatango" src="<%= asset_path 'sms-marketing-newsletters.png' %>"></a>
+						</div>
+						<h2 class="orange semibold">SMS Broadcasts</h2>
+						<p>Send mass text messages to customers.</p>
+						<div class="clear"><!----></div>
+						<p class="create-sms-btn"><a href="#create-sms-broadcast" class="listsCreatePopup">Create SMS Broadcast</a></p>
+						<p class="arrowlink" style="float:left">
+							<a href="https://fast.wistia.com/embed/iframe/5c9bc126e4?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">Watch Tutorial</a>
+							<script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script>
+						</p>
+					</div>
+					<div class="four-offers-item">
+						<div class="four-item-img">
+							<a title="SMS contests powered by Tatango" class="orange" href="<%= contests_keywords_path %>"><img width="93" height="92" alt="SMS contests powered by Tatango" src="<%= asset_path 'sms-contests.png' %>"></a>
+						</div>
+						<h2 class="orange semibold">SMS Contests</h2>
+						<p>Let customers enter a contest with a text message.</p>
+						<div class="clear"><!----></div>
+						<p class="create-sms-btn"><a href="#create-sms-contest" class="contestsCreatePopup">Create SMS Contest</a></p>
+						<p class="arrowlink" style="float:left">
+							<a href="https://fast.wistia.com/embed/iframe/f178df3555?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">Watch Tutorial</a>
+							<script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script>
+						</p>
+					</div>
+					<div class="four-offers-item">
+						<div class="four-item-img">
+							<a title="SMS polling powered by Tatango" class="lilac" href="<%= polls_keywords_path %>"><img width="93" height="92" alt="SMS polling powered by Tatango" src="<%= asset_path 'sms-polling.png' %>"></a>
+						</div>
+						<h2 class="orange semibold">SMS Polls</h2>
+						<p>Let customers vote with a text message.</p>
+						<div class="clear"><!----></div>
+						<p class="create-sms-btn"><a href="#create-sms-poll" class="pollsCreatePopup">Create SMS Poll</a></p>
+						<p class="arrowlink" style="float:left">
+							<a href="https://fast.wistia.com/embed/iframe/9bd2cf19fa?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">Watch Tutorial</a>
+							<script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script>
+						</p>
+					</div>
+					<div class="four-offers-item last">
+						<div class="four-item-img">
+							<a title="SMS autoresponders powered by Tatango" class="green" href="<%= autoresponders_keywords_path %>"><img width="93" height="92" alt="SMS autoresponders powered by Tatango" src="<%= asset_path 'sms-autoresponders.png' %>"></a>
+						</div>
+						<h2 class="orange semibold">SMS Autoresponders</h2>
+						<p>Let customers get information with a text message.</p>
+						<div class="clear"><!----></div>
+						<p class="create-sms-btn"><a href="#create-sms-autoresponder" class="autorespondersCreatePopup">Create Autoresponder</a></p>
+						<p class="arrowlink" style="float:left">
+							<a href="https://fast.wistia.com/embed/iframe/a181639847?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">Watch Tutorial</a>
+							<script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script>
+						</p>
+					</div>
+				</div>
+				
+				<!-- HERE COMES SUBPAGES with more info -->
+				<% elsif request.path == broadcasts_keywords_path %>
+				<div id="subpage-1" style="position:relative;overflow:hidden;width:100%;">
+					<h1>D'oh! You haven't created an SMS Broadcast yet.</h1>
+					<div style="width:500px;float:left;padding:20px 0;">
+						<h2>SMS Broadcasts</h2>
+						<p style="padding:12px 0;">
+							Want to be able to text message all of your customers at the same time with a click of a button? If so, then you're in the right place and an SMS Broadcast is the solution you've been looking for. 
+							Create your first SMS Broadcast below or 
+							<a style="color:#135CC0;" href="https://fast.wistia.com/embed/iframe/5c9bc126e4?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">watch this video</a><script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script> 
+							about how you too can use SMS Broadcasts to communicate with your customers.
+						</p>
+						<p class="input-grey-btn">
+							<a href="#create-sms-broadcast" class="listsCreatePopup"><span>Create SMS Broadcast</span></a>
+						</p>
+					</div>
+					<div class="four-offers admin-new" style="width:165px;float:right;padding:20px 0;">
+						<div class="four-offers-item">
+							<div class="four-item-img">
+								<a title="SMS Broadcasts powered by Tatango" class="blue listsCreatePopup" href="#create-sms-broadcast"><img width="93" height="92" alt="SMS Broadcasts powered by Tatango" src="<%= asset_path 'sms-marketing-newsletters.png' %>"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<% elsif request.path == contests_keywords_path %>
+				<div id="subpage-2" style="position:relative;overflow:hidden;width:100%;">
+					<h1>Bummer! You haven't created an SMS Contest yet.</h1>
+					<div style="width:500px;float:left;padding:20px 0;">
+						<h2>SMS Contest</h2>
+						<p style="padding:12px 0;">
+							It looks like you haven't created an SMS contest yet, what gives? SMS contests are a great way to engage your customers, and not to mention, who doesn't like winning something? 
+							Create your first SMS Contest below or 
+							<a style="color:#135CC0;" href="https://fast.wistia.com/embed/iframe/f178df3555?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">watch this video</a><script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script> 
+							for more information on how you too can use SMS Contests in your own business.
+						</p>
+						<p class="input-grey-btn">
+							<a href="#create-sms-contest" class="contestsCreatePopup"><span>Create SMS Contest</span></a>
+						</p>
+					</div>
+					<div class="four-offers admin-new" style="width:165px;float:right;padding:20px 0;">
+						<div class="four-offers-item">
+							<div class="four-item-img">
+								<a title="SMS contests powered by Tatango" class="orange contestsCreatePopup" href="#create-sms-contest"><img width="93" height="92" alt="SMS contests powered by Tatango" src="<%= asset_path 'sms-contests.png' %>"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<% elsif request.path == polls_keywords_path %>
+				<div id="subpage-3" style="position:relative;overflow:hidden;width:100%;">
+					<h1>Whoops! You haven't created an SMS Polls yet.</h1>
+					<div style="width:500px;float:left;padding:20px 0;">
+						<h2>SMS Polls</h2>
+						<p style="padding:12px 0;">
+							You haven't created an SMS poll yet, don't you think it's about time? Create a quick SMS poll and let your customers give you feedback directly from their mobile phones. 
+							Create your first SMS Poll below or sit back and 
+							<a style="color:#135CC0;" href="https://fast.wistia.com/embed/iframe/9bd2cf19fa?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">watch this video</a><script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script> 
+							about how you too can use SMS Polls in your business.
+						</p>
+						<p class="input-grey-btn">
+							<a href="#create-sms-poll" class="pollsCreatePopup"><span>Create SMS Poll</span></a>
+						</p>
+					</div>
+					<div class="four-offers admin-new" style="width:165px;float:right;padding:20px 0;">
+						<div class="four-offers-item">
+							<div class="four-item-img">
+								<a title="SMS polling powered by Tatango" class="lilac pollsCreatePopup" href="#create-sms-poll"><img width="93" height="92" alt="SMS polling powered by Tatango" src="<%= asset_path 'sms-polling.png' %>"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<% elsif request.path == autoresponders_keywords_path %>
+				<div id="subpage-4" style="position:relative;overflow:hidden;width:100%;">
+					<h1>Oh no! You haven't created an SMS Autoresponder yet.</h1>
+					<div style="width:500px;float:left;padding:20px 0;">
+						<h2>SMS Autoresponders</h2>
+						<p style="padding:12px 0;">
+							Want to allow your customers the ability to request information anytime, anywhere from your business on their mobile phones? If so, an SMS Autoresponder is your answer. 
+							Create your first SMS Autoresponder below or 
+							<a style="color:#135CC0;" href="https://fast.wistia.com/embed/iframe/a181639847?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">enjoy this video</a><script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script> 
+							on how you too can use SMS Autoresponders in your business.
+						</p>
+						<p class="input-grey-btn">
+							<a href="#create-sms-autoresponder" class="autorespondersCreatePopup"><span>Create SMS Autoresponder</span></a>
+						</p>
+					</div>
+					<div class="four-offers admin-new" style="width:165px;float:right;padding:20px 0;">
+						<div class="four-offers-item">
+							<div class="four-item-img">
+								<a title="SMS autoresponders powered by Tatango" class="green autorespondersCreatePopup" href="#create-sms-autoresponder"><img width="93" height="92" alt="SMS autoresponders powered by Tatango" src="<%= asset_path 'sms-autoresponders.png' %>"></a>
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<!-- #end of subpages -->
+		
+		
+		
+		<% end %>
+	<% else %>
+
+                
+				<div class="admin-large-table newadmin">			
+					
+						<table id="gradient-style" summary="Data" class="keywords_list_table">
+				
+							<thead> <!-- table header -->
+								<tr>
+									<th style="width:180px" scope="col"><nobr><span class="sort up">Keyword</span></nobr></th><!-- <nobr> tags for IE8 text/arrows on one line -->
+									<th style="width:160px" scope="col"><nobr><span class="sort up">Type</span></nobr></th>
+									<th class="align-center" scope="col"><nobr><span class="sort down">Subscribers</span></nobr></th>
+									<th class="last align-center" scope="col">Actions</th>
+								</tr>
+							</thead>
+							
+							<tbody> <!-- table content -->
+								<% for keyword_object in @keyword_objects %>
+									<tr class="tableRow <%= cycle('alt','') %>">
+										<td class="first caps"><a href="<%= url_for keyword_object %>"><%= keyword_object.resolved_name %></a></td>
+										<td>SMS <% if keyword_object.is_a?(List) %>Broadcast<% elsif keyword_object.is_a?(Autoresponder) %>Autoresponder<% elsif keyword_object.is_a?(Contest) %>Contest<% else %>Poll<% end %></td>
+                    <td class="align-center"><%= keyword_object.subscribers_count %></td>
+										<td>
+											<p class="btn-small-grey" style="float:left;margin-top:6px"><a href="<%= url_for (keyword_object) %>"><span>Manage</span></a></p>
+											<span style="border-left:1px solid #B9C2C6;display:block;float:right;padding:0 12px 0 18px;"><%= link_to 'Delete', keyword_object, :method => 'delete', :confirm => 'Are you sure you want to delete this keyword? This can not be undone. All keyword settings, including your subscribers and all associated data will be deleted.' %></a></span>
+										</td>
+									</tr>
+								<% end %>
+							</tbody>
+							
+					</table>
+					
+					<div id="pop-up-delete" style="display:none;">
+						<div class="pop-up-window-lists">
+							<div class="pop-up-window-top-lists">
+								<h1 style="text-transform:none">Are you sure?</h1>
+								<a class="pop-up-close" onclick="jQuery('.defaultDOMWindow').closeDOMWindow()" title="Close"></a>
+							</div>
+							<div class="pop-up-content-lists">
+								<form method="post" action="" class="someform" style="width:566px;margin-top:0">
+									<fieldset>
+										<legend>Delete keyword</legend>
+										<div class="somebox" style="margin-bottom:10px;width:566px;padding-bottom:20px">
+											<div class="line">
+												<h2 style="color:#545454;padding-bottom:10px">Really delete the keyword <span style="color:#BA3B11"><%= keyword_object.resolved_name %></span>?</h2>
+												<p class="note">
+													All keyword settings and subscribers and all associated data will be deleted as well.
+												</p>
+											</div>
+											<div class="noline">
+												<p class="semibold">
+													Type "DELETE" to confirm deletion
+												</p>
+												<input style="width:195px" type="text" required="required" tabindex="1" size="22" value="" name="enterkeyword" /><span class="end"></span>
+												<div class="clear">&nbsp;</div>
+												<!--p class="tick" style="margin-left:0"><span>Done!</span></p-->
+												<p class="tick-none" style="margin-left:0"><span>Sorry</span>, please enter the text exactly as displayed to confirm deletion.</p>
+												<div class="clear">&nbsp;</div>
+												<p class="green-btn" style="float:left;margin-right:35px"><a href=""><span>Delete</span></a></p>
+												<p class="grey-btn" style="float:left;"><a href=""><span>Cancel</span></a></p>
+											</div>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					</div>
+					
+					<div class="table-btm newadmin"><!----></div>
+					
+				</div>
+				
+	<% end %>
+				
+	</div>
+	<!-- #END of right content -->
+
+</div>
+
+
+    <script type="text/javascript">
+      $(function(){
+
+        $('#list_keyword_name').keyup(function(event){
+          if(this.timer) 
+            clearTimeout(this.timer);
+
+          $('#list_availability-yes').hide();
+          $('#list_availability-no').hide();
+          $('.list_claim_submit').attr("disabled", true);
+
+          this.timer = setTimeout(function(){
+            jsonQuery = $.getJSON('<%= test_keywords_path %>',{name: $('#list_keyword_name').val()}, function(json){
+              if(typeof(json.name)=='string'){
+                $('#list_availability-yes').show();
+                $('#list_availability-no').hide();
+                $('#list_availability-yes .keyword_name_field').html($('#list_keyword_name').val());
+                $('.list_claim_submit').attr("disabled", false);
+              } else {
+                $('#list_availability-yes').hide();
+                $('#list_availability-no').show();
+                $('#list_availability-no .keyword_name_field').html($('#list_keyword_name').val());
+                $('.list_claim_submit').attr("disabled", true);
+                $('#list_not-available-reason').html(json["name"][0]);
+              }
+            }, 200);
+          });
+        });
+		
+		 $('#contest_keyword_name').keyup(function(event){
+          if(this.timer) 
+            clearTimeout(this.timer);
+
+          $('#contest_availability-yes').hide();
+          $('#contest_availability-no').hide();
+          $('#contest_claim_submit').attr("disabled", true);
+
+          this.timer = setTimeout(function(){
+            jsonQuery = $.getJSON('<%= test_keywords_path %>',{name: $('#contest_keyword_name').val()}, function(json){
+              if(typeof(json.name)=='string'){
+                $('#contest_availability-yes').show();
+                $('#contest_availability-no').hide();
+                $('#contest_availability-yes .keyword_name_field').html($('#contest_keyword_name').val());
+                $('#contest_claim_submit').attr("disabled", false);
+              } else {
+                $('#contest_availability-yes').hide();
+                $('#contest_availability-no').show();
+                $('#contest_availability-no .keyword_name_field').html($('#contest_keyword_name').val());
+                $('#contest_claim_submit').attr("disabled", true);
+                $('#contest_not-available-reason').html(json["name"][0]);
+              }
+            }, 200);
+          });
+        });
+        
+        $('#poll_keyword_name').keyup(function(event){
+          if(this.timer) 
+            clearTimeout(this.timer);
+
+          $('#poll_availability-yes').hide();
+          $('#poll_availability-no').hide();
+          $('#poll_claim_submit').attr("disabled", true);
+
+          this.timer = setTimeout(function(){
+            jsonQuery = $.getJSON('<%= test_keywords_path %>',{name: $('#poll_keyword_name').val()}, function(json){
+              if(typeof(json.name)=='string'){
+                $('#poll_availability-yes').show();
+                $('#poll_availability-no').hide();
+                $('#poll_availability-yes .keyword_name_field').html($('#poll_keyword_name').val());
+                $('#poll_claim_submit').attr("disabled", false);
+              } else {
+                $('#poll_availability-yes').hide();
+                $('#poll_availability-no').show();
+                $('#poll_availability-no .keyword_name_field').html($('#poll_keyword_name').val());
+                $('#poll_claim_submit').attr("disabled", true);
+                $('#poll_not-available-reason').html(json["name"][0]);
+              }
+            }, 200);
+          });
+        });
+
+        $('#autoresponder_keyword_name').keyup(function(event){
+          if(this.timer) 
+            clearTimeout(this.timer);
+
+          $('#autoresponder_availability-yes').hide();
+          $('#autoresponder_availability-no').hide();
+          $('#autoresponder_claim_submit').attr("disabled", true);
+
+          this.timer = setTimeout(function(){
+            jsonQuery = $.getJSON('<%= test_keywords_path %>',{name: $('#autoresponder_keyword_name').val()}, function(json){
+              if(typeof(json.name)=='string'){
+                $('#autoresponder_availability-yes').show();
+                $('#autoresponder_availability-no').hide();
+                $('#autoresponder_availability-yes .keyword_name_field').html($('#autoresponder_keyword_name').val());
+                $('#autoresponder_claim_submit').attr("disabled", false);
+              } else {
+                $('#autoresponder_availability-yes').hide();
+                $('#autoresponder_availability-no').show();
+                $('#autoresponder_availability-no .keyword_name_field').html($('#autoresponder_keyword_name').val());
+                $('#autoresponder_claim_submit').attr("disabled", true);
+                $('#autoresponder_not-available-reason').html(json["name"][0]);
+              }
+            }, 200);
+          });
+        });
+      });
+
+    </script>
+

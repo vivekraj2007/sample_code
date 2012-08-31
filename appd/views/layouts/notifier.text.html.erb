@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <style type="text/css">
+      a {
+        color: #0051BA;
+      }
+      a:hover {
+        color: #D14414; 
+      }
+      
+      strong { color:#F77F00; font-weight: bold; }
+      
+      body{ background: #fff; color: #22222C; font: small "Lucida Grande", Tahoma, "Helvetica Neue", Helvetica, Arial, Sans, sans-serif; max-width: 600px; position: relative; margin: 0 auto; }
+      
+      p{ line-height: 150%; margin-bottom: 1em;  }
+        
+      h1, h2, h3, h4, h5, h6{ font-family: "Helvetica Neue", Helvetica, Arial, Sans, sans-serif; font-weight: bold; letter-spacing: -1px; margin-bottom: .5em; }
+        
+      hr{ height: 2px; color: #99a; background: #99a; }
+    </style>
+  </head>
+  <body>
+    <% if @account %><p>Hi <strong><%= @account.first_name %></strong>,</p><% end %>
+    <%= yield %>
+    <br />
+    <p>Best Regards,<br />
+    <br />
+    The Tatango Team<br />
+    <a href="http://www.tatango.com">http://www.tatango.com</a>
+    <br />
+    <%= yield :footer %>
+  </body>
+</html>

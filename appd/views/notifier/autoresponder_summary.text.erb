@@ -1,0 +1,9 @@
+Congrats! You've sent an automated reply to someone who texted <%= @autoresponder.resolved_name %>.
+
+
+<% for number in @numbers %>
+  Mobile Phone Number: <%= PhoneNumber.new(number).to_formatted_s %>
+<% end %>
+
+
+It feels good to be loved.

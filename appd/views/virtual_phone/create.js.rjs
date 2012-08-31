@@ -1,0 +1,7 @@
+
+if @phone.valid?
+  page.replace_html 'message', ''
+  page.insert_html :bottom, 'phones', :partial => 'phone', :object => @phone
+else
+  page.replace_html 'message', "invalid phone number: #{params[:phone]}"
+end

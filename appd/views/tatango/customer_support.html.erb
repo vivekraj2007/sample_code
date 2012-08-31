@@ -1,0 +1,136 @@
+<%
+title 'Amazing Customer Support'
+meta 'Tatango has amazing customer support, with phone, email and live chat. Contact us today!'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">Tatango Tour</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content tour-new-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2>Products</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Features</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for unlimited_text_messaging_path %>" title="Unlimited Text Messaging">Unlimited Text Messaging</a></li>
+								<li><a href="<%= url_for unlimited_sms_keywords_path %>" title="Unlimited SMS Keywords">Unlimited SMS Keywords</a></li>
+								<li><a href="<%= url_for sms_short_code_messaging_path %>" title="Short Code Messaging">Short Code Messaging</a></li>
+								<li><a href="<%= url_for sms_campaign_management_path %>" title="Campaign Management">Campaign Management</a></li>
+								<li><a href="<%= url_for subscriber_management_path %>" title="Subscriber Management">Subscriber Management</a></li>
+								<li><a href="<%= url_for sms_campaign_reports_path %>" title="Campaign Analytics">Campaign Analytics</a></li>
+								<li><a href="<%= url_for sms_delivery_reports_path %>" title="SMS Delivery Reports">SMS Delivery Reports</a></li>
+								<li><a href="<%= url_for social_sharing_tools_path %>" title="Social Sharing">Social Sharing</a></li>
+								<li class="active"><a href="<%= url_for customer_support_path %>" title="Amazing Customer Support">Amazing Customer Support</a></li>
+								<li><a href="<%= url_for best_practice_compliant_path %>" title="Best Practices Compliant">Best Practices Compliant</a></li>
+								<li><a href="<%= url_for advanced_features_path %>" title="Advanced Features">Advanced Features</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour-new right">
+			
+					<h1>Amazing Customer Support</h1>
+					<img src="<%= asset_path 'tour_amazing_support.jpg' %>" width="664" height="304" alt="Amazing Customer Support" />
+					<p class="border normal">
+The team at Tatango wants to make sure that if you have a question, you can get an answer not only fast, but through the channel that you feel most comfortable using. 
+This means Tatango offers telephone, live chat and email support, in addition to a knowledge-packed knowldegebase where you can find the answers to your questions all on your own. 
+Learn more about the different channels Tatango uses to provide amazing customer support for all of our text messaging marketing customers.
+					</p>
+					
+					<div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>Telephone Support</h2>
+								<p>
+Give our telephone support team a call Monday through Friday from 9AM - 5PM PST at (888) 517-6345 and talk to a live SMS marketing expert.
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_amazing_support_phone.jpg' %>" width="322" height="214" alt="Telephone Support" />
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<img src="<%= asset_path 'tour_amazing_support_chat.jpg' %>" width="322" height="214" alt="Live Chat Support" />
+							</div>
+							<div class="tour-right-left-right">
+								<h2>Live Chat Support</h2>
+								<p>
+Do you like using your fingers to communicate? If so, Tatango gives you the option to talk to a live text message marketing expert through our live website chat. 
+To start a chat during normal business hours, <a href="javascript:;" onclick="SnapABug.startLink();">click here</a>.
+								</p>
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>Email Support</h2>
+								<p>
+Maybe you're looking to reach the support team at Tatango outside of normal business hours, or maybe you don't need an immediate response, feel free to send us an email. 
+Thanks to our wonderful email support team, don't expect to wait more than a few hours for a response to your email. <a href="javascript:;" onclick="SnapABug.startLink();">Contact Us</a>
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_amazing_support_email.jpg' %>" width="322" height="214" alt="Email Support" />
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<img src="<%= asset_path 'tour_amazing_support_knowledgebase.jpg' %>" width="322" height="214" alt="Knowledgebase" />
+							</div>
+							<div class="tour-right-left-right">
+								<h2>Knowledgebase</h2>
+								<p>
+Are you one of the those types of people that prefer to solve their own problems? If so, the Tatango knowledgebase will be perfect for you. 
+The knowledgebase contains all the answers to our most frequently asked questions and even some that are rarely ever asked, but we think it's always better to be on the safe side. 
+Check out the <a href="https://tatango.zendesk.com/home">Tatango knowledgebase</a>.
+								</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

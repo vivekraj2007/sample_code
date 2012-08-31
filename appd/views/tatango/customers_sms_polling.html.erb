@@ -1,0 +1,126 @@
+<%
+title 'Customers Using SMS Polls'
+meta 'Learn how Tatango customers are using SMS Polls in their mobile marketing campaigns.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<p class="big">Some of Our Successful Customers</p>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2>Customers by Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurants">Restaurants</a></li>
+								<li><a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></li>
+								<li><a href="<%= url_for salons_sms_path %>" title="Salons &amp; Spas">Salons &amp; Spas</a></li>
+								<li><a href="<%= url_for church_sms_path %>" title="Ministry">Ministry</a></li>
+								<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></li>
+								<li><a href="<%= url_for political_sms_path %>" title="Political">Political</a></li>
+								<li><a href="<%= url_for conference_sms_path %>" title="Conferences">Conferences</a></li>
+								<li><a href="<%= url_for group_text_messaging_path %>" title="Groups &amp; Organizations">Groups &amp; Organizations</a></li>
+								<li><a href="<%= url_for marketing_agencies_sms_path %>" title="Agencies">Agencies</a></li>
+								<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency SMS Alerts">Emergency SMS Alerts</a></li>
+								<li><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services">Professional Services</a></li>
+								<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate">Real Estate</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Customers by Product</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for customers_sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for customers_sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li class="active"><a href="<%= url_for customers_sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for customers_sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+
+					<p class="signupfree"><%= link_to "Sign Up Free", signup_path %></p>
+					<p class="call-grey">Call: (888) 517-6345</p>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Customers Using SMS Polls</h1>
+					<p class="intro">
+						Learn how the following businesses are using Tatango SMS Polls to better survey large audiences and quickly transmit results. Find out more information within our 
+						Tour section about <a href="<%= url_for sms_polling_path %>" title="how SMS Polls work">how SMS Polls work</a> and how you can use them for your own business.
+					</p>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'catalyst-conference-sms-marketing-campaign-color.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Religious Conference SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>Catalyst Conference</h2>
+							<p class="location">Atlanta, GA</p>
+							<p class="location">Industry: <a href="<%= url_for conference_sms_path %>" title="Conference &amp; Event">Conference &amp; Event</a></p>
+							<p>
+The Catalyst Conference came to Tatango with the challenge of connecting them with the over 10,000 young leaders a year attending their annual event through text message marketing. With Tatango, Catalyst was able to effecively alert attendees of schedule changes, special events, bands, speakers and SMS promotions throughout the event.
+							</p>
+							<p>
+We work with events of all sizes to help organizers stay better connected with attendees. Take your event SMS campaigns to the next level by calling us first. 
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'underground-conference.jpg' %>" width="141" height="85" alt="" />
+							<h2>- Marketing Conference SMS</h2>
+						</div>
+						<div class="txt">
+							<h2>The Underground Conference</h2>
+							<p class="location">Washington, D.C.</p>
+							<p class="location">Industry: <a href="<%= url_for conference_sms_path %>" title="Conference &amp; Event">Conference &amp; Event</a></p>
+							<p>
+If you're in the Internet marketing industry, a must-attend conference every year is the Underground Conference series, put on by legendary internet marketer, Yanik Silver. The conference series provides high-level Internet marketing information from real-world, in-the-trenches speakers who've had great success.
+							</p>
+							<p>
+Organizing Internet marketers at a conference can sometimes be like herding cats. This is why The Underground Conference organizers came to Tatango looking for a better way to communicate with staff and event attendees. The results… Instead of us telling you, we'll let the VP of Operations for the conference tell you how powerful conference text messaging with Tatango can be.
+							</p>
+							<p>
+ “The efficiency with which Tatango allowed us to communicate with attendees significantly enhanced the The Underground’s reputation as a first-class, cutting edge event. It even helped us track down an attendee's lost wallet!” - (Andrew Way – VP Operations)
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

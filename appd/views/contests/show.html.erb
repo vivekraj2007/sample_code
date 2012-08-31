@@ -1,0 +1,302 @@
+<% title 'SMS Contest Overview' %>
+<% body_class 'admin' %>
+	
+		<div class="admin-center account">
+				
+			<!-- LEFT CONTENT -->
+			<div class="content-left account" style="width:560px">
+				
+				<div class="admin-stripes-box " style="width:480px;padding:15px 27px 10px 28px">
+				
+				<% if @contest.errors %>
+				  <div class="validationError">
+					<% for error in @contest.errors.full_messages %>
+					  <label class="error"><%= error %></label>
+					<% end %>
+				  </div>
+				<% end %>
+				<% if @keyword.errors %>
+				  <div class="validationError">
+					<% for error in @keyword.errors.full_messages %>
+					  <label class="error"><%= error %></label>
+					<% end %>
+				  </div>
+				<% end %>
+				
+					<%= form_for(@contest, :html => {:class => 'someform', :style => 'width:480px;'}) do |f| %>
+							<fieldset>
+								<legend>Contest Keyword</legend>
+								<div class="somebox" style="width:480px;">
+									<div class="widebox-line btm nobg" style="position:relative;overflow:hidden;width:100%;height:auto;margin:0">
+										<div style="position:relative;float:left;width:480px;">
+											<div class="line">
+												<h2 style="padding-bottom:15px">Keyword</h2>
+												<%= fields_for @keyword do |k| %>
+												  <%= k.text_field :name, :size => 22, :class => "keyword_name_field", :style => 'width:145px;', :required => 'required', :tabindex => 1, :maxlength => 15, :id => 'edit_keyword_name' %><span class="end"></span>
+												<% end %>
+												<p id="availability-yes" class="tick" style="display: none;">Available</p>
+												<p id="availability-no" class="tick-none" style="display: none;">Not available</p>
+												<div class="clear">&nbsp;</div>
+												<p style="padding:5px 0 8px 0;"><i>Keywords must not contain spaces,!,/,$,%, or any other special characters.</i></p>
+											</div>
+											<div class="noline" style="float:left;width:242px;">
+												<h2 style="padding-bottom:15px">Response</h2>
+												<%= f.text_area :message, :id => 'bouncebackInput', :style => "width:220px;height:120px;", :maxlength => 160 %>
+												<div class="clear">&nbsp;</div>
+												<p style="padding-bottom:5px;float:right"><i><span id="bouncebackCharacterCount">160</span> characters left</i></p>
+												<div class="clear">&nbsp;</div>
+												<div class="input-green-btn-smaller" style="float:left;margin-right:25px">
+													<label><input type="submit" id="claim_submit" value="Save Changes" /></label>
+												</div>
+												<div class="input-grey-btn-smaller" style="float:left;">
+													<label><input type="reset" value="Cancel" /></label>
+												</div>
+											</div>
+											<div class="mobile" style="float:right;">
+												<div class="txt dark">
+													 <p>
+													  <span id="bouncebackPreview"></span>
+													</p>
+													<div class="btm">&nbsp;</div>
+												</div>
+												<p style="padding:0" class="preview bold">Preview</p>
+											</div>
+											<script type="text/javascript">
+                        var preventOverflow = function(e){
+                          var remain = 160 - gsmCharCount($('#bouncebackInput').val());
+                          if(remain == 0 && e.keyCode != 8 && e.keyCode != 46){
+                            e.preventDefault();
+                          }
+                        };
+											  var updateBounceback = function(){
+                          $('#bouncebackPreview').html($('#bouncebackInput').val());
+                          $('#bouncebackCharacterCount').html(160-gsmCharCount($('#bouncebackInput').val()));
+											  };
+											  $('#bouncebackInput').keyup(updateBounceback);
+                        $('#bouncebackInput').keydown(preventOverflow);
+											  updateBounceback();
+											</script>
+										</div>
+										
+									</div>
+									<div class="clear">&nbsp;</div>
+								</div>
+							</fieldset>
+					<% end %>
+					
+				</div>
+
+			</div>
+			<!-- #END of left content -->
+		
+		
+			<!-- RIGHT CONTENT -->
+            <div class="content-right account">
+				
+				<div class="admin-stripes-box accountform" style="width:330px;padding:0 25px;margin-bottom:30px;">			
+					
+					<div style="float:left;width:165px;border-right:1px solid #cecdd6;padding:15px 0 25px 0">
+						<h2 style="padding:10px 0">Subscribers: <span style="color:#42a543" id="contest_entries_count"><%= number_with_delimiter(@contest.subscribers_count) %></span></h2>
+            <p style="font-size:15px"><a href="<%= export_contest_path(@contest) %>" class="link-arrow">Export</a></p>
+					</div>
+					
+					<div style="float:left;width:144px;padding:15px 0 25px 20px">
+						<h2 style="padding:10px 0"><span style="color:#42a543" id="contest_winner_number"><%= @contest.winner.to_s if @contest.winner %></span></h2>
+						<p style="font-size:15px"><a href="javascript:;" id="select_winner_link" class="link-arrow">Select New Winner</a></p>
+            <script type="text/javascript">
+              $('#select_winner_link').click(function(){
+                $.post('<%= select_winner_contest_path(@contest) %>', function(data){
+                  $('#contest_winner_number').html(data);
+                });
+              });
+            </script>
+					</div>
+
+				</div>
+				
+				<div class="admin-stripes-box accountform" style="width:330px;padding:25px;margin-bottom:30px;">			
+				<%= form_for(@contest, :html => {:class => 'someform', :style => 'width:330px;'}) do |f| %>
+					<fieldset>
+						<h2>Email Settings</h2>
+						<p class="semibold" style="font-size:15px;padding:10px 0 5px 0;">
+							Send an email notification to:
+						</p>
+						<%= f.text_field :email, :size => 22, :style => 'width:195px;' %><span class="end"></span>
+						<div class="clear">&nbsp;</div>
+						<div class="somebox" style="float:left;width:130px;margin:10px 0">
+							<label style="width:130px;font-family: 'MyriadWebCondensed';"><%= f.check_box :instant_notification %> As It happens</label>
+						</div>
+						<div class="somebox" style="float:left;width:130px;margin:10px 0">
+							<label style="width:130px;font-family: 'MyriadWebCondensed';"><%= f.check_box :summary %> Daily Summary</label>
+						</div>
+						<div class="clear">&nbsp;</div>
+						<div class="input-green-btn-smaller">
+							<label><input type="submit" value="Save Changes" /></label>
+						</div>
+					</fieldset>
+				<% end %>
+				</div>
+				
+				<div class="admin-stripes-box accountform" style="width:330px;">			
+					
+					<h2 style="padding:10px 0">Delete SMS Contest</h2>
+					<p style="font-size:15px">
+					Deleting your SMS Contest will delete all entries. This cannot be undone. This will not cancel your account with Tatango. 
+					<%= link_to 'Delete this SMS Contest', @contest, :method => :delete, :confirm => "Are you sure you want to delete this SMS contest? This can not be undone.", :class => 'defaultDOMWindow link-arrow' %>
+					</p>
+					
+					<div id="pop-up" style="display:none;">
+						<div class="pop-up-window-lists">
+							<div class="pop-up-window-top-lists">
+								<h1 style="text-transform:none">Are you sure?</h1>
+								<a class="pop-up-close" onclick="jQuery('.defaultDOMWindow').closeDOMWindow()" title="Close"></a>
+							</div>
+							<div class="pop-up-content-lists">
+								<form method="post" action="" class="someform" style="width:566px;margin-top:0">
+									<fieldset>
+										<legend>Delete keyword</legend>
+										<div class="somebox" style="margin-bottom:10px;width:566px;padding-bottom:20px">
+											<div class="line">
+												<h2 style="color:#545454;padding-bottom:10px">Really delete the keyword <span style="color:#BA3B11">HAMBURGER</span>?</h2>
+												<p class="note">
+													All keyword settings and subscribers and all associated data will be deleted as well.
+												</p>
+											</div>
+											<div class="noline">
+												<p class="semibold">
+													Type "DELETE" to confirm deletion
+												</p>
+												<input style="width:195px" type="text" required="required" tabindex="1" size="22" value="Delete" name="enterkeyword" /><span class="end"></span>
+												<div class="clear">&nbsp;</div>
+												<!--p class="tick" style="margin-left:0"><span>Done!</span></p-->
+												<p class="tick-none" style="margin-left:0"><span>Sorry</span>, please enter the text exactly as displayed to confirm deletion.</p>
+												<div class="clear">&nbsp;</div>
+												<p class="green-btn" style="float:left;margin-right:35px"><a href=""><span>Delete</span></a></p>
+												<p class="grey-btn" style="float:left;"><a href=""><span>Cancel</span></a></p>
+											</div>
+										</div>
+									</fieldset>
+								</form>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				
+            </div>
+            <!-- #END of right content -->
+			
+		</div>
+	
+
+<script type="text/javascript">
+  $(function(){
+    $('#edit_keyword_name').keyup(function(event){
+      if(this.timer) 
+        clearTimeout(this.timer);
+
+      $('#availability-yes').hide();
+      $('#availability-no').hide();
+      $('#claim_submit').attr("disabled", true);
+
+      this.timer = setTimeout(function(){
+        jsonQuery = $.getJSON('<%= test_keywords_path %>',{name: $('#edit_keyword_name').val()}, function(json){
+          if(typeof(json.name)=='string'){
+            $('#availability-yes').show();
+            $('#availability-no').hide();
+            $('#availability-yes .keyword_name_field').html($('#edit_keyword_name').val());
+            $('#claim_submit').attr("disabled", false);
+          } else {
+            $('#availability-yes').hide();
+            $('#availability-no').show();
+            $('#availability-no .keyword_name_field').html($('#edit_keyword_name').val());
+            $('#claim_submit').attr("disabled", true);
+            $('#not-available-reason').html(json[0][1]);
+          }
+        }, 200);
+      });
+    });
+  });
+</script>
+
+<% if flash[:newkeyword] %>
+  <script type="text/javascript">
+  $(document).ready(function(){
+    $.openDOMWindow({ 
+      windowSourceID:'#created-keyword-pop-up',
+      height:900,
+      width:700,
+      windowPadding:0,
+      overlayOpacity:'60',
+      windowBGColor:'transparent',
+      borderSize:'0',
+      positionType:'centerTop'
+    });
+  });
+  </script>
+
+  <div id="created-keyword-pop-up" style="display:none;">
+    <div class="pop-up-window-lists">
+      <div class="pop-up-window-top-lists">
+        <h1>Congrats! Keyword created.</h1>
+        <a class="pop-up-close" onclick="$.closeDOMWindow({windowSourceID:'#pop-up'})" title="Close"></a>
+      </div>
+      <div class="pop-up-content-lists">
+        <div class="things-admin">
+          <h1>Text your Keyword</h1>
+          <p class="middle">
+            <%= @contest.resolved_name %>
+          </p>
+          <p class="third">
+            to the phone number<span>68398</span><br />
+            to be the first to subscribe
+          </p>
+        </div>
+        <div class="things-admin-btm">&nbsp;</div>
+        <div class="clear">&nbsp;</div>
+        <div class="things-admin-shadow">&nbsp;</div>
+        <div class="tf-social">
+          <p class="semibold">Invite people to subscribe on the following social networks.</p>                        
+          <ul>                    
+            <li class="nopadding">
+              <a class="twicon" target="_blank" href="http://twitter.com/share?url=&via=tatango&text=Text%20<%= @contest.resolved_name %>%20to%2068398%20to%20get%20text%20promotions%204%2Fmonth.%20Msg%26data%20rates%20may%20apply%20%2F%20t%26c%20txt%20HELP%20%2F%20stop%20txt%20STOP.">Twitter</a>
+            </li>
+            <li class="nopadding">
+              <a class="fbicon" id="facebookPostFirst" href="javascript:;">Facebook</a>
+              <script type="text/javascript">
+                $(document).ready(function(){
+                  $('#facebookPostFirst').click(function(){
+                    
+                    FB.login(function(response){
+                      FB.api('/me/feed', 'post',
+                        {
+                          message: 'Text <%= @contest.resolved_name %> to 68398 to get text promotions 4/month. Msg&data rates may apply / t&c txt HELP / stop txt STOP.'
+                        },
+                        function(response){
+                          //window.open("http://www.facebook.com/" + (response.id.replace(/_.*/,"")) + "/posts/" + (response.id.replace(/.*_/,"")))
+                          alert("Posted to Facebook");
+                        })
+                    },
+                    {scope: 'publish_stream'});
+                  });
+                });
+              </script>
+            </li>
+          </ul>
+        </div>
+        <div class="clear">&nbsp;</div>
+        <div class="tf-linkBox">
+          <p class="semibold">Or copy, paste the text below anywhere your customers eyes are.</p> 
+          <div class="copyCode">
+            <p>
+            <code id="selectme">
+              Text <%= @contest.resolved_name %> to 68398 for a chance to win! Msg&amp;data rates may apply.
+            </code>
+            </p>
+          </div>									
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

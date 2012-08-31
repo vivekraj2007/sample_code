@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <%= yield :first_head %>
+
+  <script type="text/javascript">
+    var _kmq = _kmq || [];
+    function _kms(u){
+      setTimeout(function(){
+        var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+        s.src = u; f.parentNode.insertBefore(s, f);
+      }, 1);
+    }
+    _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/eccba650a68c29cd2a3a2a6adfbfa3a41b8f9c9a.1.js');
+  </script>
+  
+    <title><%= render_title %></title>
+  	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+  <% if @noindex %>
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <% end %>
+	
+	<%= render_meta %>
+	
+  <%= stylesheet_link_tag 'internal' %>
+	
+  <%= javascript_include_tag "internal" %>
+  <script charset="ISO-8859-1" src="https://fast.wistia.com/static/popover-v1.js"></script>
+
+	<%= yield :head %>
+	
+	<script type="text/javascript">
+        jQuery(document).ready(function() {
+			
+			jQuery(".openlink").click(function(e) {
+                e.preventDefault();
+                jQuery(".nav-content").toggle();
+                jQuery(".openlink").toggleClass("menu-open");
+            });
+
+            jQuery(".nav-content").mouseup(function() {
+                return false
+            });
+            jQuery(document).mouseup(function(e) {
+                if(jQuery(e.target).parent("a.openlink").length==0) {
+                    jQuery(".openlink").removeClass("menu-open");
+                    jQuery(".nav-content").hide();
+                }
+            });
+
+            jQuery(".invite").click(function(e) {
+                e.preventDefault();
+                jQuery(".invite-content").toggle();
+                jQuery(".invite").toggleClass("menu-open");
+            });
+
+            jQuery(".invite-content").mouseup(function() {
+                return false
+            });
+            jQuery(document).mouseup(function(e) {
+                if(jQuery(e.target).parent("a.invite").length==0) {
+                    jQuery(".invite").removeClass("menu-open");
+                    jQuery(".invite-content").hide();
+                }
+            });
+			function SelectText(element) {
+					var doc = document;
+					var text = doc.getElementById(element);
+					if (doc.body.createTextRange) 
+					{
+						var range = document.body.createTextRange();
+						range.moveToElementText(text);
+						range.select();
+					}
+					else if (window.getSelection) 
+					{
+						var selection = window.getSelection();
+						if (selection.setBaseAndExtent) 
+						{
+							selection.setBaseAndExtent(text, 0, text, 1);
+						}
+						else 
+						{
+							var range = document.createRange();
+							range.selectNodeContents(text);
+							selection.removeAllRanges();
+							selection.addRange(range);
+						}
+					}
+				}
+				
+				jQuery('.invite-content-btm code').click(function() {
+					SelectText('selectme');
+					$("#pleaseCopy").css("display","block");
+				});
+
+        });
+</script>
+
+	<link rel="shortcut icon" href="/favicon.ico" id="favicon_link"/>
+</head>
+<body>
+	
+  <div class="wrapper">
+    
+    <!-- HEADER -->
+    <div class="header admin">
+      <div class="center">
+      
+        <h1 class="logo"><a href="<%= url_for keywords_path %>" title="Tatango">Tatango</a></h1>
+        
+        <div class="header-right">
+          <ul class="nav">
+            <li class="last"><a href="javascript:;" title="My Account" class="openlink"><span>My Account</span></a></li>
+            <li><%= link_to 'Resources', videos_sms_marketing_101_path, :target => "_blank" %></li>
+            <li><%= link_to 'Support', '/help/contact', :target => "_blank" %></li>
+            <li><a id="openRefer" href="javascript:;">Get $50 Credit</a></li>
+            <li><%= link_to 'Campaigns', keywords_path %></li>
+          </ul>
+          <div class="nav-content" style="width:150px">
+            <div class="box <% if !current_user.trial? %>last<% end %>">
+              <ul>
+                <li><%= link_to 'Account Settings', account_path %></li>
+                <li><%= link_to 'Log Out', logout_path %></li>
+              </ul>
+            </div> 
+            <% if current_user.trial? %>
+              <div class="box last">
+                <p class="green-btn"><%= link_to '<span>Upgrade</span>'.html_safe, edit_plan_path %></p>
+              </div>
+            <% end %>
+          </div>
+        </div>
+        
+      </div>
+    </div>
+    <!-- #END header -->
+    
+    <% if current_user.trial? %>
+      <div class="content admin" style="margin-bottom:10px">
+        <p class="regular" style="font-size:15px;text-align:center;padding:5px 0;">You have <%= current_user.days_left %> days left in your trial - <%= link_to 'Upgrade Now', edit_plan_path, :style => "text-transform:uppercase;" %></p>
+      </div>
+    <% end %>
+    
+    <div class="content admin">
+   
+      <% if @plan.nil? %>
+        <div class="admin-intro">
+          
+          <div class="left">
+            <% if @list or @contest or @autoresponder or @poll %>
+              <h1><%= (@list or @contest or @autoresponder or @poll).resolved_name %></h1> <% if @list %><%= link_to '', edit_list_path(@list), :class => 'edit' %><% end %>
+              <div class="clear"></div>
+              <% if (@list or @contest or @autoresponder or @poll).keyword and (@list or @contest or @autoresponder or @poll).keyword.id %>
+                <p class="regular"><span class="semibold"><%= (@list ? "Broadcast" : (@contest ? "Contest" : (@poll ? "Poll" : "Autoresponder"))) %></span>: Text <span class="semibold"><%= (@list or @contest or @autoresponder or @poll).resolved_name %></span> to <span class="semibold">68398</span></p>
+              <% elsif @list %>
+                <p class="regular">Please set your list name in <a href="<%= url_for edit_list_path(@list) %>" class="blue">list settings</a>.</p>
+              <% elsif @autoresponder %>
+                <p class="regular">Please set your reply keyword below..</p>
+              <% end %>
+            <% else %>
+              <h1 style="padding-top:12px"><%= @page_title %></h1>
+            <% end %>
+          </div>
+         
+          <% if @list or @contest or @autoresponder %>
+            <div class="invite-wrap">
+            
+              <div class="invite-link">
+                <a href="javascript:;" class="invite"><span>Invite</span></a>
+              </div>
+              <% if (@list or @contest or @autoresponder).keyword and (@list or @contest or @autoresponder).keyword.id %>
+                <div class="invite-content">
+                  <div class="invite-content-top">
+                    <div class="cols">
+                      <p class="regular">Places to share</p>
+                      <ul>
+                        <% message = nil
+                          if @list
+                            message = "Text #{@list.resolved_name} to 68398 to get text promotions #{@list.message_volume}/month. Msg&data rates may apply / t&c txt HELP / stop txt STOP."
+                          elsif @contest
+                            message = "Text #{@contest.resolved_name} to 68398 for a chance to win! Msg&data rates may apply."
+                          else
+                            message = "Text #{@autoresponder.resolved_name} to 68398 to get info. Msg&data rates may apply."
+                          end
+                        %>
+                        <li><a target="_blank" href="http://twitter.com/share?url=&via=tatango&text=<%= URI.escape(message, "&") %>">Twitter</a></li>
+                        <li id="facebookInviteLi"><a href="javascript:;" id="postFacebook">Facebook</a></li>
+                        <script type="text/javascript">
+                          $(document).ready(function(){
+                            $('#postFacebook').click(function(){
+                              
+                              FB.login(function(response){
+                                FB.api('/me/feed', 'post',
+                                  {
+                                    message: '<%= message %>'
+                                  },
+                                  function(response){
+                                    //window.open("http://www.facebook.com/" + (response.id.replace(/_.*/,"")) + "/posts/" + (response.id.replace(/.*_/,"")))
+                                    $('#facebookInviteLi').html("Posted to Facebook");
+                                  })
+                              },
+                              {scope: 'publish_stream'});
+                            });
+                          });
+                        </script>
+                      </ul>
+                    </div>
+                    <div class="cols">
+                      <p class="regular">Tools to help share</p>
+                      <ul>
+                        <li><%= link_to 'Create QR Code', sms_qr_code_generator_path(:keyword => ((@list or @contest or @autoresponder).keyword and (@list or @contest or @autoresponder).keyword.name)), :target => "_blank" %></li>
+                        <li><%= link_to 'Create PDF Flyer', "#{sms_marketing_flyer_generator_path}?keyword=#{(@list or @contest or @autoresponder).keyword and (@list or @contest or @autoresponder).keyword.name}#{@list.nil? ? "&volume=" : "&volume=#{@list.message_volume}"}&organization=&reward=#{@list.nil? ? "" : "and%20receive%2020%25%20off%20your%20purchase%20today!"}#{@autoresponder.nil? ? "" : "&message=Text%20for%20More%20Info!"}#{@contest.nil? ? "" : "&message=Enter%20for%20Chance%20to%20Win!"}", :target => "_blank" %> </li>
+                      </ul>
+                    </div>
+                    <div class="cols last">
+                      <p class="regular">Video Tutorials</p>
+                      <ul>
+                        <li>
+                          <a href="https://fast.wistia.com/embed/iframe/6463346791?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">Where to Advertise</a>
+                        </li>
+                        <li>
+                          <a href="https://fast.wistia.com/embed/iframe/d65b1f3240?videoWidth=640&videoHeight=360&controlsVisibleOnLoad=true&autoPlay=true&popover=true" class="wistia-popover[width=640,height=360,playerColor=#636155]">Best Practices for Advertising</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="invite-content-btm">
+                    <p class="regular">
+                      Or copy, paste the text below anywhere your customers eyes are.
+                    </p>
+                    <p>
+                      <code id="pleaseCopy" style="display:none;">
+                      To copy text press Ctrl+C
+                      </code>
+                    </p>
+                    <div class="generate-codeBox-grey">
+                      <p>
+                        <code id="selectme" style="z-index:6;">
+                          <% if @list %>
+                            Text <%= @list.resolved_name %> to 68398 to get text promotions <%= @list.message_volume %>/month. Msg&amp;data rates may apply / t&amp;c txt HELP / stop txt STOP.
+                          <% elsif @contest %>
+                            Text <%= @contest.resolved_name %> to 68398 for a chance to win! Msg&amp;data rates may apply.
+                          <% else %>
+                            Text <%= @autoresponder.resolved_name %> to 68398 to get more info! Msg&amp;data rates may apply.
+                          <% end %>
+                        </code>
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              <% elsif @list %>
+                <div class="invite-content" style="width:430px;">
+                  <div class="invite-content-top" style="width:390px;">
+                    <p class="semibold" style="padding:0">
+                      In order to share your keyword, you must first set your keyword name.<br />
+                      You can set your keyword name in <a href="<%= edit_list_path(@list) %>">list settings</a>.
+                    </p>
+                  </div>
+                </div>
+              <% elsif @autoresponder %>
+                <div class="invite-content" style="width:430px;">
+                  <div class="invite-content-top" style="width:390px;">
+                    <p class="semibold" style="padding:0">
+                      In order to share your keyword, you must first set your keyword name.<br />
+                      You can set your keyword name below.
+                    </p>
+                  </div>
+                </div>
+              <% end %>
+              
+            </div>
+          <% end %>
+          
+        </div>
+      <% end %>
+        
+          <!--<% if @list %>
+            <div class="left-menu-wrap-admin">
+              <ul class="left-menu-admin">
+                <%= menu_item 'Overview', list_path(@list), :id => 'overview' %>
+                <%= menu_item 'Send Message', new_list_message_path(@list), :id => 'sendmessage' %>
+                <%= menu_item 'Subscribers', list_memberships_path(@list), :id => 'subscribers' %>
+                <%= menu_item 'Sent Messages', list_messages_path(@list), :id => 'sentmessages' %>
+              </ul>
+              <div class="left-menu-btm-admin"></div>
+            </div>
+          <% end %> -->
+      <%= yield :above_content %>
+      <%= yield %>
+      <%= yield :below_content %>
+    </div>
+    <!-- #END of content -->
+    
+  </div>
+
+  <div class="footer">
+    <div class="footer-content home">
+      
+      <div class="social-btns">
+        <p class="left">Find us on</p>
+    		<p class="icon gg"><a href="https://plus.google.com/112860852130190668337" rel="publisher" target="_blank">Find us on Google+</a></p>
+        <p class="icon tw"><a href="http://twitter.com/tatango" title="Twitter" target="_blank">Twitter</a></p>
+        <p class="icon fb"><a href="http://www.facebook.com/tatango" title="Facebook" target="_blank">Facebook</a></p>
+      </div>
+      <div class="clear"></div>
+      
+      <ul class="right">
+        <li><a href="<%= url_for keywords_path %>" title="Home">Home</a></li>
+        <li><a href="<%= url_for terms_conditions_path %>" title="Terms">Terms</a></li>
+        <li><a href="<%= url_for privacy_policy_path %>" title="Privacy">Privacy</a></li>
+        <li><a href="<%= url_for anti_spam_policy_path %>" title="Spam Policy">Spam Policy</a></li>
+        <li><a href="http://www.tatango.com/blog" title="Blog">Blog</a></li>
+        <li class="last"><a href="<%= url_for contact_path %>" title="Contact">Contact</a></li>
+      </ul>
+      
+    </div>
+  </div>
+
+  <% if flash[:newkeyword] %>
+    <%# render :partial => 'welcome' %>
+
+    <% if Rails.env.production?  %>
+      <!-- Google Website Optimizer Tracking Script -->
+      <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['gwo._setAccount', 'UA-2656767-2']);
+        _gaq.push(['gwo._trackPageview', '/1272547144/goal']);
+        (function() {
+          var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+          ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+      </script>
+      <!-- End of Google Website Optimizer Tracking Script -->
+      <script type="text/javascript"> if (!window.mstag) mstag = {loadTag : function(){},time : (new Date()).getTime()};</script> <script id="mstag_tops" type="text/javascript" src="//flex.atdmt.com/mstag/site/fa6ae64d-358e-460a-814b-bb2cecd2a43d/mstag.js"></script> <script type="text/javascript"> mstag.loadTag("conversion", {cp:"5050",dedup:"1"})</script> <noscript> <iframe src="//flex.atdmt.com/mstag/tag/fa6ae64d-358e-460a-814b-bb2cecd2a43d/conversion.html?cp=5050&dedup=1" frameborder="0" scrolling="no" width="1" height="1" style="visibility:hidden;display:none"> </iframe> </noscript>
+
+      <!-- begin Marin Software Tracking Script -->
+      <script type='text/javascript'>
+          var _mTrack = _mTrack || [];
+          _mTrack.push(['addTrans', {
+              currency: 'USD'
+          }]);
+          _mTrack.push(['processOrders']);
+
+          (function() {
+              var mClientId = 'i8te4erjj0';
+              var mProto = ('https:' == document.location.protocol ? 'https://' : 'http://');
+              var mHost = 'pro.marinsm.com';
+              var mt = document.createElement('script'); mt.type = 'text/javascript'; mt.async = true;
+              mt.src = mProto + mHost + '/tracker/async/' + mClientId + '.js';
+              var fscr = document.getElementsByTagName('script')[0]; fscr.parentNode.insertBefore(mt, fscr);
+          })();
+      </script>
+      <!-- end Copyright Marin Software -->
+    <% end %>
+  <% end %>
+	
+  <%= render 'layouts/javascript_in_footer' %>
+  <% if current_user %>
+    <script type="text/javascript" src="https://d1ygf77yf1jfd8.cloudfront.net/Content/Scripts/R1058/widget.js"></script>
+    <script type="text/javascript">
+     bzz.createWithLogin('<%= current_user.email %>','<%= current_user.first_name %>','<%= current_user.last_name %>',{'elementId':'openRefer', 'useBuzzButton': 0, 'autosignup': 1});
+    </script>
+  <% end %>
+  <% if flash[:created_trial] %>
+    <img src="<%= asset_path 'https://aaf.tradatracker.net/track/conv.gif' %>?advertiser=bbf94b34eb32268ada57a3be5062fe7d&action=Welcome" />
+    <% TatangoLogger.tradaLog.log("Showed Pixel,#{Time.now},#{current_user.id},#{request.remote_addr},#{request.url}") %>
+  <% end %>
+
+  <div id="fb-root"></div>
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '<%= Rails.env == "production" ? "190156441034992" : "292647574120617" %>', // App ID
+        channelUrl : '//www.tatango.com/channel.html', // Channel File
+        status     : true, // check login status
+        cookie     : true, // enable cookies to allow the server to access the session
+        oauth      : true, // enable OAuth 2.0
+        xfbml      : true  // parse XFBML
+      });
+
+      // Additional initialization code here
+    };
+
+    // Load the SDK Asynchronously
+    (function(d){
+       var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+       js = d.createElement('script'); js.id = id; js.async = true;
+       js.src = "//connect.facebook.net/en_US/all.js";
+       d.getElementsByTagName('head')[0].appendChild(js);
+     }(document));
+  </script>
+</body>
+</html>

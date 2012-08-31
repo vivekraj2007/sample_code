@@ -1,0 +1,19 @@
+.phone_preview_without_background { border: none; color: #334; float: right; height: 200px; width: 300px; }
+
+.phone_preview { background: url(<%= asset_path 'phone.jpg' %>) no-repeat; border: none; color: #334; float: right; clear:right; height: 400px; width: 300px; }
+
+	.phone_preview .text{ font: small 'Monaco', 'Andale Mono', 'Lucida Console', monospace; margin: 70px 30px 0px 30px; height: 155px; width: 240px; overflow: auto; }
+	
+	.phone_preview .static_text { margin-left:30px; margin-right:30px; text-align:right; font-size:xx-small; }
+		
+	.panel .phone_preview{ background-image: url(<%= asset_path 'phone_small.jpg' %>); height: 275px; width: 225px; }
+		
+		.panel .phone_preview .text{ margin: 50px 20px; height: 120px; width: 180px; }
+
+.num_chars{ font-weight: bold; }
+
+.preview_header{ background: #334; color: #F7FDFF; margin-bottom: 1em; padding: .25em; text-align: center; text-transform: uppercase; }
+
+.phone_preview.mini { height: 275px; float:left; width: 225px; background: url(<%= asset_path 'phone_small_white.jpg' %>) no-repeat; margin-left: 40px; }
+	 /* height was 135, upped so that static_text would work in .mini */
+	.phone_preview.mini .text { padding: 0px; width: 193px; height: 124px; margin: 45px 0px 0px 15px; font-size: 11px; }

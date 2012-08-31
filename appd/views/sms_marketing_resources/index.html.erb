@@ -1,0 +1,69 @@
+<% 
+title 'SMS Marketing Resources'
+body_class 'wide' 
+%>
+			
+<div class="wide-content-intro nopadding">
+  <h1 class="big">SMS Marketing Resources</h1>
+  <p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+</div>
+
+<!-- Wide content -->
+<div class="wide-content">
+  <p>
+    Thanks for checking out the SMS marketing resources provided here at Tatango!<br> 
+Feel free to explore all of the resources Tatango offers, all here to help you grow your SMS marketing campaign. Enjoy!
+  </p>
+  
+</div>
+<!-- #END of wide content -->
+
+<div class="content marketing-tools"> <!-- Yes, this time we put the same level div inside of the similar div -->
+  <div class="center">
+    
+    <!-- Wide content -->
+    <div class="wide-content">
+      
+      <div class="marketing-tools-box left">
+        <img src="<%= asset_path 'icon-marketing-tool-learn.png' %>" width="153" height="123" alt="Learn SMS marketing" />
+        <div>
+          <h2>Learn SMS Marketing</h2>
+          <ul>
+            <li><%= link_to 'SMS Marketing Video Lessons', videos_sms_marketing_101_path %></li>
+            <li><a href="http://www.tatango.com/blog/beginners-guide-to-sms-marketing">Beginner's Guide to SMS Marketing</a></li>
+            <li><a href="http://www.tatango.com/blog/beginners-guide-to-sms-marketing-qr-codes">Beginner's Guide to SMS Marketing &amp; QR Codes</a></li>
+            <li><a href="http://www.tatango.com/blog">SMS Marketing Blog</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="marketing-tools-box right">
+        <img src="<%= asset_path 'icon-marketing-tools.png' %>" width="153" height="123" alt="SMS Marketing Tools" />
+        <div>
+          <h2>SMS Marketing Tools</h2>
+          <ul>
+            <li><%= link_to 'SMS QR Code Generator', sms_qr_code_generator_path %></li>
+            <li><%= link_to 'Marketing Flyer Generator', sms_marketing_tools_flyer_generator_path %></li>
+            <li>SMS Campaign Generator (Coming soon)</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div style="clear:both"><!----></div>
+      
+      <div class="marketing-tools-box left">
+        <p>
+          Learn to unleash the power of SMS Marketing for your business. We have all the resources you need to become an SMS marketing ninja, including guides, webinars, videos, infographics and blog posts.
+        </p>
+      </div>
+      <div class="marketing-tools-box right">
+        <p>
+          Create QR codes for you SMS campaign, generate text messages on the fly, even design your own marketing materials with the available SMS marketing tools Tatango offers.
+        </p>
+      </div>
+      
+    </div>
+    <!-- #END of wide content -->
+
+  </div>
+</div>
+<!-- #END of content -->

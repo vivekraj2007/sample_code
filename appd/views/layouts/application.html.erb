@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <%= yield :first_head %>
+
+  <script type="text/javascript">
+    var _kmq = _kmq || [];
+    function _kms(u){
+      setTimeout(function(){
+        var s = document.createElement('script'); var f = document.getElementsByTagName('script')[0]; s.type = 'text/javascript'; s.async = true;
+        s.src = u; f.parentNode.insertBefore(s, f);
+      }, 1);
+    }
+    _kms('//i.kissmetrics.com/i.js');_kms('//doug1izaerwt3.cloudfront.net/eccba650a68c29cd2a3a2a6adfbfa3a41b8f9c9a.1.js');
+  </script>
+  
+    <title><%= render_title %></title>
+  	<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=9" />
+
+  <% if @noindex %>
+    <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+  <% end %>
+	
+	<%= render_meta %>
+	
+	<%= render 'layouts/unobtrusive_hack' %>
+
+	<%= stylesheet_link_tag 'style' %>
+
+  <%= javascript_include_tag "application" %>
+
+	<%= yield :head %>
+	
+  <script type="text/javascript">
+		jQuery(document).ready(function(){
+			jQuery('#slider').bxSlider({
+				infiniteLoop: true,
+				auto: true,
+				mode: 'fade',
+				pager: true,
+				controls: false,
+				speed: 1000,
+				pause: 12000
+			});
+		});
+	</script>
+
+	<link rel="shortcut icon" href="/favicon.ico" id="favicon_link"/>
+</head>
+<body class="<%= render_body_class %>">
+  <div class="wrapper">
+
+    <!-- HEADER -->
+    <div class="header <%= render_body_class %>">
+      <div class="center">
+      
+        <div class="logo">
+          <% if !@body_class or (@body_class.split(' ') & ['signup', 'free7day', 'big']).empty? %>
+          <a<% if is_external_controller? %> href="/"<% end %>>
+          <% end %>
+            <img src="<%= asset_path 'tatango-logo.png' %>" alt="Tatango Text Message Marketing" />
+          <% if !@body_class or (@body_class.split(' ') & ['signup', 'free7day', 'big']).empty? %>
+          </a>
+          <% end %>
+        </div>
+       
+        <% if !@body_class or (@body_class.split(' ') & ['signup', 'free7day', 'big']).empty? %>
+          <div class="header-right">
+            <ul class="nav" style="margin:0px 0 25px 0">
+              <li id="login" class="last"><%= link_to('Login', login_path) %></li>
+              <li><a href="javascript:;" onclick="SnapABug.startLink();">Contact Our Sales Team</a>: <span>(888) 517-6345</span></li>
+            </ul>
+            <ul class="nav">
+              <li class="last"><%= link_to 'Resources', sms_marketing_guide_path %></li>
+              <li><%= link_to 'Customers', restaurant_text_messaging_path %></li>
+			  <li><%= link_to 'Enterprise', services_path %></li>
+              <li><%= link_to 'Pricing', sms_marketing_pricing_path %></li>
+              <li><%= link_to 'Tour', sms_broadcasts_path %></li>
+            </ul>
+          </div>
+        <% else %>
+          <% if !(@body_class.split(' ') & ['free7day', 'big']).empty? %>
+            <div class="login">
+              <p class="log-btn"><%= link_to 'Login', login_path %></p>
+            </div>
+          <% end %>
+          <div class="header-right">
+            <div class="questions">Questions?</div>
+            <h2>Call us toll free: (888) 517-6345</h2>
+          </div>
+        <% end %>
+        
+      </div>
+    </div>
+    <!-- #END header -->
+	
+    <div class="content <%= render_body_class %>">
+      <div class="center">
+        <!--[if lt IE 7]>
+          <div class="flash warning">
+            For the best experience using Tatango, please upgrade to a <a href="http://www.getfirefox.com">modern web browser</a>.
+          </div>
+        <![endif]-->
+        <noscript>
+          <div class="flash warning">
+            For the best experience using Tatango, please enable JavaScript.
+          </div>				
+        </noscript>
+
+        <%= render 'layouts/flashes' %>
+
+        <%= yield %>
+      </div>
+    </div>
+    <!-- #END of content -->
+
+    <%= yield :content_bottom %>
+
+  </div>
+  <!-- #END of wrapper -->
+	
+<div class="footer">
+    <%= yield :footer %>
+	<% if !(@body_class and !(@body_class.split(' ') & ['signup', 'free7day', 'big']).empty? ) %>
+    <div class="footer-home <%= render_body_class %>">
+		<div class="center">
+		
+			<div class="footer-links">
+			
+				<ul class="links wider">
+					<li class="semibold">Resources</li>
+					<li><%= link_to 'SMS Marketing Blog','http://www.tatango.com/blog' %></li>
+					<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="SMS Marketing Tools">SMS Marketing Tools</a></li>
+					<li><a href="<%= url_for sms_marketing_guide_path %>" title="SMS Marketing Guides">SMS Marketing Guides</a></li>
+					<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS Marketing Video Lessons">SMS Marketing Video Lessons</a></li>
+					<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Tatango FAQ">Tatango FAQ</a></li>
+					<li><a href="<%= url_for sms_marketing_terms_path %>" title="Text Message Marketing Terms">Text Message Marketing Terms</a></li>
+					<li><a href="<%= url_for sms_marketing_newsletter_path %>" title="Text Message Marketing Newsletter">Text Message Marketing Newsletter</a></li>
+				</ul>
+				<ul class="links wider">
+					<li class="semibold">Industries</li>
+					<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurant SMS Marketing">Restaurant SMS Marketing</a></li>
+					<li><a href="<%= url_for retail_sms_path %>" title="Retail SMS Marketing">Retail SMS Marketing</a></li>
+					<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment SMS Marketing">Entertainment SMS Marketing</a></li>
+					<li><a href="<%= url_for political_sms_path %>" title="Political Text Messaging">Political Text Messaging</a></li>
+					<li><a href="<%= url_for group_text_messaging_path %>" title="Group Text Messaging">Group Text Messaging</a></li>
+					<li><a href="<%= url_for church_sms_path %>" title="Church SMS">Church SMS</a></li>
+					<li><a href="<%= url_for salons_sms_path %>" title="Salons SMS">Salons SMS</a></li>
+					<li><a href="<%= url_for conference_sms_path %>" title="Conference SMS">Conference SMS</a></li>
+					<li><a href="<%= url_for marketing_agencies_sms_path %>" title="Agency SMS Marketing">Agency SMS Marketing</a></li>
+					<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency Text Messaging">Emergency Text Messaging</a></li>
+					<li><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services SMS">Professional Services SMS</a></li>
+					<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate SMS">Real Estate SMS</a></li>
+				</ul>
+				<ul class="links">
+					<li class="semibold">Enterprise</li>
+					<li><a href="<%= url_for sms_marketing_consulting_path %>" title="Advisory Services">Advisory Services</a></li>
+					<li><a href="<%= url_for dedicated_short_codes_path %>" title="Dedicated Short Codes">Dedicated Short Codes</a></li>
+					<li><a href="<%= url_for agency_sms_marketing_path %>" title="Agency Program">Agency Program</a></li>
+					<li><a href="<%= url_for bulk_sms_gateway_path %>" title="Bulk SMS Gateway">Bulk SMS Gateway</a></li>
+					<li><a href="<%= url_for design_services_path %>" title="Design Services">Design Services</a></li>
+					<li><a href="<%= url_for bulk_sms_path %>" title="Bulk SMS Messaging">Bulk SMS Messaging</a></li>
+					<li><a href="<%= url_for advanced_segmenting_path %>" title="Advanced Segmenting">Advanced Segmenting</a></li>
+					<li><a href="<%= url_for tatango_api_path %>" title="Tatango API">Tatango API</a></li>
+					<li><a href="<%= url_for vanity_short_code_path %>" title="Vanity Short Codes">Vanity Short Codes</a></li>
+					<li><a href="<%= url_for contact_us_path %>" title="Enterprise Contact">Enterprise Contact</a></li>
+				</ul>
+				<ul class="links">
+					<li class="semibold">Products/Features</li>
+					<li><a href="<%= url_for sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+					<li><a href="<%= url_for sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+					<li><a href="<%= url_for sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+					<li><a href="<%= url_for sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+					<li><a href="<%= url_for unlimited_text_messaging_path %>" title="Unlimited Text Messaging">Unlimited Text Messaging</a></li>
+					<li><a href="<%= url_for unlimited_sms_keywords_path %>" title="Unlimited SMS Keywords">Unlimited SMS Keywords</a></li>
+					<li><a href="<%= url_for sms_short_code_messaging_path %>" title="Short Code Messaging">Short Code Messaging</a></li>
+					<li><a href="<%= url_for sms_campaign_management_path %>" title="Campaign Management">Campaign Management</a></li>
+					<li><a href="<%= url_for subscriber_management_path %>" title="Subscriber Management">Subscriber Management</a></li>
+					<li><a href="<%= url_for sms_campaign_reports_path %>" title="Campaign Analytics">Campaign Analytics</a></li>
+					<li><a href="<%= url_for sms_delivery_reports_path %>" title="SMS Delivery Reports">SMS Delivery Reports</a></li>
+					<li><a href="<%= url_for social_sharing_tools_path %>" title="Social Sharing">Social Sharing</a></li>
+					<li><a href="<%= url_for customer_support_path %>" title="Amazing Customer Support">Amazing Customer Support</a></li>
+					<li><a href="<%= url_for best_practice_compliant_path %>" title="Best Practices Compliant">Best Practices Compliant</a></li>
+					<li><a href="<%= url_for advanced_features_path %>" title="Advanced Features">Advanced Features</a></li>
+				</ul>
+				<ul class="links">
+					<li class="semibold">Company</li>
+					<li><a href="<%= url_for company_path %>" title="About Us">About Us</a></li>
+					<li><a href="<%= url_for contact_path %>" title="Contact">Contact</a></li>
+					<li><a href="<%= url_for terms_conditions_path %>" target="_blank" title="Terms">Terms</a></li>
+					<li><a href="<%= url_for privacy_policy_path %>" target="_blank" title="Privacy">Privacy</a></li>
+					<li><a href="<%= url_for anti_spam_policy_path %>" title="Anti-Spam Policy">Anti-Spam Policy</a></li>
+					<li><a href="<%= url_for sms_marketing_pricing_path %>" title="Pricing">Pricing</a></li>
+					<li><a href="<%= url_for affiliate_path %>" title="Affiliate Program">Affiliate Program</a></li>
+					<li><a href="<%= url_for sitemap_path %>" title="Sitemap">Sitemap</a></li>
+				</ul>
+				
+			</div>
+			
+			
+			
+			
+
+		</div>
+	</div>
+	<% else %>
+		&nbsp;
+	<% end %>
+	
+	<div class="footer-content <%= render_body_class %>">
+		<div class="copy">
+			<p>
+				&copy; 2007 - <%= Time.now.year %> Tatango, Inc. All rights reserved.<br />
+				Msg&amp;Data rates may apply. To opt out, text STOP to 68398.<br /> <% if !@body_class or (@body_class.split(' ') & ['signup', 'free7day', 'big']).empty? %>
+          <%= link_to 'SMS Marketing', root_path %> Powered by Tatango.
+        <% end %>
+			</p>
+			<div class="newsletter">
+				  <form method="post" id="subscribe" action="http://tatango.us1.list-manage.com/subscribe/post?u=2f955de43e14473a70198f238&id=f25de1db39">
+					<fieldset>
+					  <legend>Sign up for our newsletter</legend>
+					  <span class="semibold">Sign up for our newsletter</span>
+					  <input class="email" type="text" id="email" name="EMAIL" value="Enter your e-mail address" onblur="if(this.value=='') this.value='Enter your e-mail address';" onfocus="if(this.value=='Enter your e-mail address') this.value='';" />
+					  <input class="btn" type="submit" name="Submit" value="" title="Go" />
+					</fieldset>
+				  </form>
+				 
+				<div class="social-btns">
+					<p class="icon gg"><a href="https://plus.google.com/112860852130190668337" rel="publisher" target="_blank">Find us on Google+</a></p>
+					<p class="icon tw"><a href="http://twitter.com/tatango" title="Twitter" target="_blank">Twitter</a></p>
+					<p class="icon fb"><a href="http://www.facebook.com/tatango" title="Facebook" target="_blank">Facebook</a></p>
+				</div>
+				  
+			</div>
+		</div>
+		<% if !(@body_class and !(@body_class.split(' ') & ['signup', 'free7day', 'big']).empty? ) %>
+		&nbsp;
+		<% else %>
+		<ul class="right">
+					<li><%= link_to 'Terms', terms_conditions_path, :target => (@body_class and (!(@body_class.split(' ') & ['signup', 'free7day', 'big']).empty?) ? '_blank' : nil) %></li>
+					<li><%= link_to 'Privacy', privacy_policy_path, :target => (@body_class and (!(@body_class.split(' ') & ['signup', 'free7day', 'big']).empty?) ? '_blank' : nil) %></li>
+					<li><%= link_to 'Anti-Spam Policy', anti_spam_policy_path, :target => (@body_class and (!(@body_class.split(' ') & ['signup', 'free7day', 'big']).empty?) ? '_blank' : nil) %></li>
+					<li class="last"><%= link_to 'Contact', contact_path, :target => (@body_class and (!(@body_class.split(' ') & ['signup', 'free7day', 'big']).empty?) ? '_blank' : nil) %></li>
+		</ul>
+		<% end %>
+    </div>
+
+</div><!-- #END of footer -->
+	
+<%= render 'layouts/javascript_in_footer' %>
+</body>
+</html>

@@ -1,0 +1,2 @@
+class SmsMarketingResourcesController < ApplicationController
+end

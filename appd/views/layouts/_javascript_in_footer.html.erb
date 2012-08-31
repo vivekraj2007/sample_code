@@ -1,0 +1,135 @@
+
+<% if Rails.env != 'production' and params[:firebug_lite] %>
+	<script type='text/javascript' src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'></script>
+<% end %>
+
+<% assign_i18n_for_javasrcipt %>
+
+<% js_var :DEBUG, !Rails.env.production? %>
+<% js_var :authenticity_token, form_authenticity_token %>
+
+<%= javascript_for_footer %>
+
+<% if Rails.env == 'production' %>
+  <script type="text/javascript">
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-2656767-2']);
+    _gaq.push(['_setCustomVar',1,'user-type','<%= logged_in? ? 'regular-user' : 'visitor' %>',1]);
+    _gaq.push(['_trackPageview']);
+    <%= flash[:purchase] %>
+    <% if flash[:purchase] == "true" and current_user.plan %>
+      _gaq.push(['_addTrans',
+        '<%= current_user.plan.id %>',
+        'Tatango Inc.',
+        '<%= current_user.plan.price.to_s %>',
+        '',
+        '',
+        '',
+        '',
+        ''
+      ]);
+      _gaq.push(['_addItem',
+        '<%= current_user.plan.id %>',
+        '<%= current_user.plan.handle %>',
+        '<%= current_user.plan.name %>',
+        'Tatango Plan',
+        '<%= current_user.plan.price.to_s %>',
+        '1'
+      ]);
+      _gaq.push(['_trackTrans']);
+    <% end %>
+    //_gaq.push(['_trackPageLoadTime']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+
+  </script>
+  <% if flash[:purchase] %>
+    <!-- Google Code for Plan Purchase/Upgrade Conversion Page -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1031912782;
+    var google_conversion_language = "en";
+    var google_conversion_format = "2";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "e5fECI7VmQIQzvqG7AM";
+    var google_conversion_value = <%= flash[:purchase] %>;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/1031912782/?label=e5fECI7VmQIQzvqG7AM&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+  <% end %>
+
+  <% if is_external_controller? %>
+    <% if request.ssl? %>
+      <!-- Google Code for Tatango Visitors Remarketing List -->
+      <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 1031912782;
+      var google_conversion_language = "en";
+      var google_conversion_format = "3";
+      var google_conversion_color = "ffffff";
+      var google_conversion_label = "gItXCPbVuwIQzvqG7AM";
+      var google_conversion_value = 0;
+      /* ]]> */
+      </script>
+      <script type="text/javascript" src="https://www.googleadservices.com/pagead/conversion.js">
+      </script>
+      <noscript>
+      <div style="display:inline;">
+      <img height="1" width="1" style="border-style:none;" alt="" src="https://www.googleadservices.com/pagead/conversion/1031912782/?label=gItXCPbVuwIQzvqG7AM&amp;guid=ON&amp;script=0"/>
+      </div>
+      </noscript>
+    <% else %>
+      <!-- Google Code for Tatango Visitors Remarketing List -->
+      <script type="text/javascript">
+      /* <![CDATA[ */
+      var google_conversion_id = 1031912782;
+      var google_conversion_language = "en";
+      var google_conversion_format = "3";
+      var google_conversion_color = "ffffff";
+      var google_conversion_label = "gItXCPbVuwIQzvqG7AM";
+      var google_conversion_value = 0;
+      /* ]]> */
+      </script>
+      <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+      </script>
+      <noscript>
+      <div style="display:inline;">
+      <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1031912782/?label=gItXCPbVuwIQzvqG7AM&amp;guid=ON&amp;script=0"/>
+      </div>
+      </noscript>
+    <% end %>
+
+    <!-- begin Marin Software Tracking Script -->
+    <script type='text/javascript'>
+        var _mTrack = _mTrack || [];
+        _mTrack.push(['trackPage']);
+
+        (function() {
+            var mClientId = 'i8te4erjj0';
+            var mProto = ('https:' == document.location.protocol ? 'https://' : 'http://');
+            var mHost = 'pro.marinsm.com';
+            var mt = document.createElement('script'); mt.type = 'text/javascript'; mt.async = true;
+            mt.src = mProto + mHost + '/tracker/async/' + mClientId + '.js';
+            var fscr = document.getElementsByTagName('script')[0]; fscr.parentNode.insertBefore(mt, fscr);
+        })();
+    </script>
+    <!-- end Copyright Marin Software -->
+  <% end %>
+<% end %>
+
+<script type="text/javascript">
+document.write(unescape("%3Cscript src='" + ((document.location.protocol=="https:")?"https://snapabug.appspot.com":"http://www.snapengage.com") + "/snapabug.js' type='text/javascript'%3E%3C/script%3E"));</script><script type="text/javascript">
+SnapABug.addButton("4540b5e8-9f23-4969-a2e9-0e0bab8a714e","1","55%",true);
+</script>
+

@@ -1,0 +1,9 @@
+//= require jquery
+//= require jquery_ujs
+//= require jquery.bxSlider.min
+//= require jquery.validate
+//= require showMore
+//= require tatango_base
+//= require tatango
+//= require jquery.DOMWindow
+//= require detect_timezone

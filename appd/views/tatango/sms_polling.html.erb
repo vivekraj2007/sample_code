@@ -1,0 +1,217 @@
+<%
+title 'SMS Polling'
+meta 'Use our SMS Polling to let customers submit feedback via text message. Learn more about Tatango SMS marketing products.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">Tatango Tour</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content tour-new-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2 class="select ">Products</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li class="active"><a href="<%= url_for sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<h2>Features</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for unlimited_text_messaging_path %>" title="Unlimited Text Messaging">Unlimited Text Messaging</a></li>
+								<li><a href="<%= url_for unlimited_sms_keywords_path %>" title="Unlimited SMS Keywords">Unlimited SMS Keywords</a></li>
+								<li><a href="<%= url_for sms_short_code_messaging_path %>" title="Short Code Messaging">Short Code Messaging</a></li>
+								<li><a href="<%= url_for sms_campaign_management_path %>" title="Campaign Management">Campaign Management</a></li>
+								<li><a href="<%= url_for subscriber_management_path %>" title="Subscriber Management">Subscriber Management</a></li>
+								<li><a href="<%= url_for sms_campaign_reports_path %>" title="Campaign Analytics">Campaign Analytics</a></li>
+								<li><a href="<%= url_for sms_delivery_reports_path %>" title="SMS Delivery Reports">SMS Delivery Reports</a></li>
+								<li><a href="<%= url_for social_sharing_tools_path %>" title="Social Sharing">Social Sharing</a></li>
+								<li><a href="<%= url_for customer_support_path %>" title="Amazing Customer Support">Amazing Customer Support</a></li>
+								<li><a href="<%= url_for best_practice_compliant_path %>" title="Best Practices Compliant">Best Practices Compliant</a></li>
+								<li><a href="<%= url_for advanced_features_path %>" title="Advanced Features">Advanced Features</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>SMS Polling</h1>
+					<p class="intro">
+						Want a better way to poll a large audience? Tatango allows you create an SMS poll, allowing people to vote for their favorite anything by sending a simple text message to place their vote.
+						<br /><br />
+						Learn how SMS Polling work and how you can use them for your own business in the video below, from the Tatango CEO himself, Derek Johnson.
+					</p>
+					
+					<div class="left-right-col border">
+						<div style="padding:13px 0 5px 10px;">
+							<div id="wistia_3bafd77100" class="wistia_embed" style="width:640px;height:360px;" data-video-width="640" data-video-height="360"><object id="wistia_3bafd77100_seo" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" style="display:block;height:360px;position:relative;width:640px;"><param name="movie" value="https://wistia.sslcs.cdngc.net/flash/embed_player_v2.0.swf?2012-06-01"></param><param name="allowfullscreen" value="true"></param><param name="allowscriptaccess" value="always"></param><param name="bgcolor" value="#000000"></param><param name="wmode" value="opaque"></param><param name="flashvars" value="controlsVisibleOnLoad=true&hdUrl%5Bheight%5D=720&hdUrl%5Btype%5D=hdflv&hdUrl%5Burl%5D=https%3A%2F%2Fwistia.sslcs.cdngc.net%2Fdeliveries%2Fd65ee69970d30bb6d20b4eb72bc4d580fac3dc9d.bin&hdUrl%5Bwidth%5D=1280&mediaDuration=76.08&stillUrl=https%3A%2F%2Fwistia.sslcs.cdngc.net%2Fdeliveries%2Fba9002f23eecd071dfbe71487fdb740f4ed227b6.jpg%3Fimage_crop_resized%3D640x360&unbufferedSeek=true&videoUrl=https%3A%2F%2Fwistia.sslcs.cdngc.net%2Fdeliveries%2F9fb53b0b8a4edef53a6352e489272ce411c0c9d9.bin"></param><embed src="https://wistia.sslcs.cdngc.net/flash/embed_player_v2.0.swf?2012-06-01" allowfullscreen="true" allowscriptaccess="always" bgcolor=#000000 flashvars="controlsVisibleOnLoad=true&hdUrl%5Bheight%5D=720&hdUrl%5Btype%5D=hdflv&hdUrl%5Burl%5D=https%3A%2F%2Fwistia.sslcs.cdngc.net%2Fdeliveries%2Fd65ee69970d30bb6d20b4eb72bc4d580fac3dc9d.bin&hdUrl%5Bwidth%5D=1280&mediaDuration=76.08&stillUrl=https%3A%2F%2Fwistia.sslcs.cdngc.net%2Fdeliveries%2Fba9002f23eecd071dfbe71487fdb740f4ed227b6.jpg%3Fimage_crop_resized%3D640x360&unbufferedSeek=true&videoUrl=https%3A%2F%2Fwistia.sslcs.cdngc.net%2Fdeliveries%2F9fb53b0b8a4edef53a6352e489272ce411c0c9d9.bin" name="wistia_3bafd77100_html" style="display:block;height:100%;position:relative;width:100%;" type="application/x-shockwave-flash" wmode="opaque"></embed></object></div>
+							<script charset="ISO-8859-1" src="https://fast.wistia.com/static/concat/E-v1.js"></script>
+							<script>
+							wistiaEmbed = Wistia.embed("3bafd77100", {
+							  version: "v1",
+							  videoWidth: 640,
+							  videoHeight: 360,
+							  controlsVisibleOnLoad: true
+							});
+							</script>
+							<script charset="ISO-8859-1" src="https://fast.wistia.com/embed/medias/3bafd77100/metadata.js"></script>
+						</div>
+					</div>
+					
+					<div class="borderbtm">
+						<h2>From the Customer's Perspective</h2>
+						<p>
+							Tatango makes it easy for consumers to participate in your SMS Poll directly from their mobile phones. To interact with your SMS Poll, a consumer must 
+							simply text your SMS Poll keyword to the short code 68398. See below for a nice little visualization.
+						</p>
+						<img src="<%= asset_path 'sms_polling_tryit.jpg' %>" width="664" height="360" alt="Example of Tatango SMS Polling campaign" />
+						
+						<div class="tour_contact_tryit">
+							<p class="lasttxt"><span style="">Try Tatango free for 7 days.<br>No credit card.</span></p>
+							<p class="try-it"><a href="/signup">Try it FREE for 7 days</a></p>
+						</div>
+					</div>
+					
+					<div class="borderbtm">
+						<h2>Real Businesses Using SMS Polls</h2>
+						<p>
+Want to see how real businesses are using Tatango SMS polls to engage and get instant feedback from their consumers? Click on any of the companies below to see how they're using SMS polls.
+						</p>
+						<div class="tour_client_new_wrap">
+							<div class="tour_client_new_box">
+								<div class="img">
+									<img src="<%= asset_path 'catalyst-conference-sms-marketing-campaign-color.jpg' %>" width="141" height="85" alt="Catalyst Conference" />
+								</div>
+								<p>
+									<a href="<%= url_for customers_sms_polling_path %>" title="Catalyst Conference">Catalyst Conference</a>
+								</p>
+							</div>
+							<div class="tour_client_new_box">
+								<div class="img">
+									<img src="<%= asset_path 'underground-conference.jpg' %>" width="141" height="85" alt="The Underground Conference" />
+								</div>
+								<p>
+									<a href="<%= url_for customers_sms_polling_path %>" title="The Underground Conference">The Underground Conference</a>
+								</p>
+							</div>
+						</div>
+					</div>
+					
+					<div class="borderbtm">
+						<h2>SMS Polls FAQ</h2>
+						<p>
+Below are some of the most frequently asked questions regarding Tatango SMS broadcasts. If you have questions that aren't covered here, <a href="javascript:;" onclick="SnapABug.startLink();">contact us</a> and we'll help you get an answer to your questions.
+						</p>
+						
+						<p class="semibold">
+How long does it take to create an SMS Poll?
+						</p>
+						<p>
+Do you have 60 seconds? Then you have enough time to launch a brand new SMS poll. It's really that easy! Don't trust us, sign up for a <a href="/signup">free trial</a> and try yourself.
+						</p>
+						
+						<p class="semibold">
+Can I customize the message consumers receive after voting?
+						</p>
+						<p>
+Yes, Tatango allows you to customize the text message mobile subscribers receive after they've voted in your SMS Poll. You get the full 160 characters, so go wild!
+						</p>
+						
+						<p class="semibold">
+Lets talk about price, how much?
+						</p>
+						<p>
+SMS Polls are billed monthly based on the total amount of mobile phone numbers you have in your Tatango account, whether it's for an SMS Poll or any of the other sweet product you get to use with any Tatango account. These include sweet SMS products include <a href="/tour/sms-broadcasts">SMS Broadcasts</a>, <a href="/tour/sms-contests">SMS Contests</a> and <a href="/tour/sms-autoresponders">SMS Autoresponders</a>. For more information on Tatango text message marketing pricing, see our <a href="/sms-marketing-pricing">plans page</a>.
+						</p>
+						
+						<p class="semibold">
+How many SMS Broadcast campaigns can I create?
+						</p>
+						<p>
+When you upgrade to any paid Tatango subscription plan you will have the ability to create an unlimited amount of SMS broadcast campaigns. There are no additional fees or limits when it comes to creating additional SMS Broadcasts. During the free trial, you're limited to just one SMS broadcast.
+						</p>
+						
+						<p class="semibold">
+What if I have more questions?
+						</p>
+						<p>
+Have additional questions about SMS Polls that aren't answered here, don't worry, <a href="javascript:;" onclick="SnapABug.startLink();">contact us</a> today.
+						</p>
+					</div>
+					
+					<div>
+						<h2>Don't forget these guys...</h2>
+						<p>
+Tatango offers more than just SMS Polling, they actually offer a complete suit of SMS marketing products. The best part, all the products below, including SMS Polls are free to use with a paid subscription. <a href="/sms-marketing-pricing">Learn more about pricing</a>.
+						</p>
+						<div class="four-offers">
+							<div class="four-offers-item">
+								<div class="four-item-img">
+									<a title="SMS Broadcasts powered by Tatango" class="blue" href="/tour/sms-broadcasts"><img width="93" height="92" alt="SMS Broadcasts powered by Tatango" src="/assets/sms-marketing-newsletters.png"></a>
+								</div>
+								<h3 class="orange semibold">SMS Broadcasts</h3>
+								<p>Send mass text messages to customers through our online SMS marketing software.</p>
+								<div class="clear"><!----></div>
+								<p class="offers-moredetails"><a href="/tour/sms-broadcasts">More details</a></p>
+							</div>
+							<div class="four-offers-item">
+								<div class="four-item-img">
+									<a title="SMS contests powered by Tatango" class="orange" href="/tour/sms-contests"><img width="93" height="92" alt="SMS contests powered by Tatango" src="/assets/sms-contests.png"></a>
+								</div>
+								<h3 class="orange semibold">SMS Contests</h3>
+								<p>Let customers enter a contest directly from their mobile phones via text message. </p>
+								<div class="clear"><!----></div>
+								<p class="offers-moredetails"><a href="/tour/sms-contests">More details</a></p>
+							</div>
+							<div class="four-offers-item">
+								<div class="four-item-img">
+									<a href="<%= url_for sms_autoresponders_path %>" class="green" title="SMS autoresponders powered by Tatango"><img src="<%= asset_path 'sms-autoresponders.png' %>" width="93" height="92" alt="SMS autoresponders powered by Tatango" /></a>
+								</div>
+								<h3 class="orange semibold">SMS Autoresponders</h3>
+								<p>Let customers get information from your business wherever, whenever with auto-replies.</p>
+								<div class="clear"><!----></div>
+								<p class="offers-moredetails"><a href="<%= url_for sms_autoresponders_path %>">More details</a></p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

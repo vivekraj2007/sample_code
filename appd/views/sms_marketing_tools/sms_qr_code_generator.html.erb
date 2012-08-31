@@ -1,0 +1,104 @@
+<% 
+title 'SMS QR Code Generator'
+meta "Create your free SMS marketing QR code provided by Tatango.com"
+body_class 'wide' 
+%>
+			
+<div class="wide-content-intro">
+  <h1 class="big">SMS Marketing Tools</h1>
+  <p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+</div>
+
+<!-- Wide content -->
+<div class="wide-content">
+				<h1 class="nopadding">SMS QR Code</h1>
+				<p class="wide-content-backlink"><%= link_to 'Back to Resources', sms_marketing_guide_path %></p>
+</div>
+<!-- #END of wide content -->
+
+<div class="content generate-code"> <!-- Yes, this time we put the same level div inside of the similar div -->
+  <div class="center">
+    
+    <!-- Wide content -->
+    <div class="wide-content">
+ 
+      <div class="generate-leftBox">
+        <h2>Generate SMS QR Code</h2>
+        <div class="generateQR-form">
+          <form id="formQr">
+            <fieldset>
+              <div class="box">
+                <label for="ShortCode">Short Code</label><br />
+                <input id="inputShortcode" type="text" tabindex="1" size="22" value="68398" name="ShortCode" /><span class="end"></span>
+              </div>
+              <div class="box">
+                <label for="KeywordListName">Keyword</label><br />
+                <input id="inputKeyword" class="longer" type="text" tabindex="2" size="22" maxlength="15" name="KeywordListName" <%= params[:keyword] ? "value=\"#{params[:keyword]}\" ".html_safe : " " %>/><span class="end"></span>
+                <input id="submitQr" class="generate" type="submit" value="Generate QR Code" tabindex="3" name="submit" />
+              </div>
+              
+            </fieldset>
+          </form>
+        </div>
+        <p class="red-txt">
+          Copy and paste the code below into the HTML of your website to display the QR code on the right:
+        </p>
+        <div class="generate-codeBox">
+          <p>
+            <code>
+              &lt;img src="http://www.tatango.com/sms-marketing-tools/sms-qr-code-image?keyword=<span id="urlKeyword"></span>&amp;shortcode=<span id="urlShortcode"></span>" alt="Powered by Tatango SMS Marketing" /&gt;
+            </code>
+          </p>
+        </div>
+      </div>
+      
+      <div class="generate-rightBox">
+        <p class="dl-image nopadding"><a id="downloadQr" href="" title="Download Image">Download Image</a></p>
+        <h2 class="grey aligncenter">Preview</h2>
+        <div class="qrcode-box">
+          <img id="imageQr" src="" alt="Code" />
+        </div>
+        <div class="qrcode-box-btm">
+        </div>
+        <div class="qrcode-shadow">&nbsp;</div>
+      </div>     
+      
+    </div>
+    <!-- #END of wide content -->
+
+  </div>
+</div>
+<!-- #END of content -->
+
+<script type="text/javascript">
+  var generateqr = function(){
+    keyword = $('#inputKeyword').val().toUpperCase();
+
+    $('#imageQr').attr('src', '/sms-marketing-tools/sms-qr-code-image?keyword=' + keyword + '&shortcode=' + $('#inputShortcode').val());
+    $('#downloadQr').attr('href', '/sms-marketing-tools/sms-qr-code-image?keyword=' + keyword + '&shortcode=' + $('#inputShortcode').val() + '&disposition=attachment');
+
+    $('#urlKeyword').html(keyword);
+    $('#urlShortcode').html($('#inputShortcode').val());
+
+    return false;
+  };
+
+  $(function(){
+    $('#inputShortcode').keydown(function(event){
+      if ( event.keyCode == 46 || event.keyCode == 8 ) {
+      } else {
+        if ((event.keyCode < 48 || event.keyCode > 57) && (event.keyCode < 96 || event.keyCode > 105 )) {
+          event.preventDefault(); 
+        }   
+      }
+    });
+
+    $('#inputShortcode').blur(generateqr);
+    $('#inputKeyword').blur(generateqr);
+    $('#submitQr').click(generateqr);
+
+    $('#formQr').submit(generateqr);
+  });
+
+  generateqr();
+</script>

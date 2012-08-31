@@ -1,0 +1,50 @@
+/* CSS Reset */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td { margin: 0; padding: 0; border: 0; outline: 0; font-weight: inherit; font-style: inherit; font-size: 100%; font-family: inherit; vertical-align: baseline; }
+
+:focus{ outline: 0; }
+body{ line-height: 1; }
+ol, ul{ list-style: none; }
+
+table{ border-collapse: collapse; border-spacing: 0; }
+
+caption, th, td{ text-align: left; font-weight: normal; }
+
+/* Basic Semantic Elements */
+html{ overflow-y: scroll; }
+body{ background: #f5f4fb repeat-x url(<%= asset_path 'login/background.png' %>); color: #22222C; font: 1em 'Helvetica Neue', Helvetica, Arial, Sans, sans-serif; }
+
+strong{ font-weight: bold; }
+
+a{ color: #0051BA; }
+	a:hover{ color: #D14414; }
+
+#content{ background: url(<%= asset_path 'login/form_background.png' %>) no-repeat center center; width: 346px; height: 309px; padding: 25px; margin: 100px auto 0; }
+	#content h1 a{ display: block; text-indent: -999em; padding: 25px 25px 0px 25px; height: 50px; }
+	
+	#content form{ margin: 0 25px; padding: 20px; }
+		#content form label{ display: block; color: #334; font-weight: 300; margin-bottom: 1px; }
+		#content form input[type=text], #content form input[type=password]{ display: block; width: 248px; border: 1px solid #99a; font: 1em 'Helvetica Neue', Helvetica, Arial, Sans, sans-serif; padding: 3px; color: #667; font-weight: 300; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1); -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1); box-shadow: 0 2px 5px rgba(0,0,0,.1); margin-bottom: 18px; background: #fff repeat-x url(<%= asset_path 'login/input_background.png' %>); }
+			#content form #phone_number_area{ float: left; width: 65px; margin-right: 10px; } 
+			#content form #phone_number_prefix{ float: left; width: 65px; margin-right: 10px; } 
+			#content form #phone_number_suffix{ float: left; width: 81px; } 
+			#content form input[type=text]:focus, #content form input[type=password]:focus{ border-color: #D14414; -webkit-box-shadow: 0 3px 6px rgba(0,0,0,.2); -moz-box-shadow: 0 3px 6px rgba(0,0,0,.2); box-shadow: 0 3px 6px rgba(0,0,0,.2); color: #334; outline: 0; }
+			#content form #forgot_password{ display: block; float: left; color: #667; font-size: .75em; line-height: 30px; text-decoration: none; }
+				#content form #forgot_password:hover{ color: #22222c; text-decoration: underline; }
+			#content form input[type=submit]{ display: block; float: right; background: url(<%= asset_path 'login/login.png' %>); width: 57px; height: 30px; border: 0; cursor: pointer; -webkit-box-shadow: 0 2px 5px rgba(0,0,0,.1); -moz-box-shadow: 0 2px 5px rgba(0,0,0,.1); box-shadow: 0 2px 5px rgba(0,0,0,.1); }
+				#content form input[type=submit]:focus{ outline: 0; margin-top: 1px; }			
+
+#footer{ text-align: center; font-size: .75em; margin-top: -40px; }
+	#footer a{ color: #993214; text-decoration: none; }
+		#footer a:hover{ color: #D14414; text-decoration: underline; }
+
+.no_zip { font-size: 0.75em; text-align: right; }
+
+.username_explain {
+  font-size: 0.85em;
+  margin-bottom: 20px;
+}
+
+.username_error {
+  font-size: 0.85em;
+  color: #993214; 
+}

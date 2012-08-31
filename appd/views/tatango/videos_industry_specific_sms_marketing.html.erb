@@ -1,0 +1,142 @@
+<%
+title 'Industry Specific Video Lessons'
+meta 'Learn more about using SMS marketing for different industries with Tatango video lessons.'
+body_class 'wide nopadding' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">SMS Marketing Resources</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+					
+						<h2>SMS Marketing Guides</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_guide_path %>" title="Beginner's Guide">Beginner's Guide</a></li>
+								<li><a href="<%= url_for qr_codes_guide_path %>" title="QR Codes">QR Codes</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Video Lessons</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for videos_sms_marketing_101_path %>" title="SMS 101">SMS 101</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_getting_started_path %>" title="Getting Started">Getting Started</a></li>
+								<li><a href="<%= url_for videos_sms_keyword_short_codes_path %>" title="Keywords/Short Codes">Keywords/Short Codes</a></li>
+								<li><a href="<%= url_for videos_sms_messaging_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_best_practices_path %>" title="Best Practices">Best Practices</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_integrations_path %>" title="Integrations">Integrations</a></li>
+								<li><a href="<%= url_for videos_advanced_sms_marketing_path %>" title="Advanced">Advanced</a></li>
+								<li class="active"><a href="<%= url_for videos_industry_specific_sms_marketing_path %>" title="Industry Specific">Industry Specific</a></li>
+								<li><a href="<%= url_for videos_sms_marketing_products_path %>" title="SMS Products">SMS Products</a></li>
+							</ul>
+						</div>
+						<h2>SMS Marketing Tools</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_flyer_generator_path %>" title="Flyer Generator">Flyer Generator</a></li>
+								<li><a href="<%= url_for sms_qr_code_generator_path %>" title="QR Code Generator">QR Code Generator</a></li>
+							</ul>
+						</div>
+						<h2>Industry</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_terms_path %>" title="SMS Marketing Terms">SMS Marketing Terms</a></li>
+							</ul>
+						</div>
+						<h2>FAQ's</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_marketing_trial_faq_path %>" title="Free Trial">Free Trial</a></li>
+								<li><a href="<%= url_for sms_campaign_setup_faq_path %>" title="Account Setup">Account Setup</a></li>
+								<li><a href="<%= url_for billing_faq_path %>" title="Billing">Billing</a></li>
+								<li><a href="<%= url_for sms_messaging_faq_path %>" title="Messaging">Messaging</a></li>
+								<li><a href="<%= url_for security_privacy_faq_path %>" title="Security/Privacy">Security/Privacy</a></li>
+								<li><a href="<%= url_for sms_subscriber_faq_path %>" title="Subscribers">Subscribers</a></li>
+							</ul>
+						</div>
+
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>SMS Marketing Lessons for Specific Industries</h1>
+					<p class="intro border">
+Need to know how to launch a text message marketing campaign for a specific industry? This collection of Tatango video lessons covers a wide variety of industries, ranging from real estate to restaurants, and covers the basics of text message marketing for each. Unfortunately, because of our CEO's fear of clowns, you won't see a video about clown text message marketing in a million years! Sorry!
+					</p>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_apartment_text_messaging_path %>" title="Apartment Management Text Messaging">Apartment Management Text Messaging</a></h2>
+							<p>
+Are you looking to take your apartment marketing mobile? Derek Johnson, CEO of Tatango explains how apartment complexes all across the country are using text messaging to not only cut their marketing costs, but attract more potential renters than ever before.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_apartment_text_messaging_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_apartment_text_messaging_path %>" title="Watch Video"><img src="<%= asset_path 'videos/apartment-management-text-messaging.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_download_apps_sms_path %>" title="Downloading Apps Via Text Messaging">Downloading Apps Via Text Messaging</a></h2>
+							<p>
+Do you have a mobile phone app that is looking to increase the amount of downloads? Derek Johnson, CEO of Tatango shows you how with text message marketing, you're able to decrease the friction experienced when downloading mobile phone apps, in-turn, increasing the amount of downloads of your app.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_download_apps_sms_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_download_apps_sms_path %>" title="Watch Video"><img src="<%= asset_path 'videos/downloading-apps-via-txt-messaging.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+					<div class="left-right-col video">
+						<div class="left-col">
+							<h2><a href="<%= url_for video_real_estate_text_messaging_path %>" title="Real Estate Text Messaging">Real Estate Text Messaging</a></h2>
+							<p>
+Are you a real estate agent or broker looking to use text message marketing to increase the amount of quality leads for your property listings? Derek Johnson, CEO of Tatango explains how real estate agents and brokers can use SMS autoresponders to not only increase interest in your property listings, but increase the amount of quality leads you receive.
+							</p>
+							<p><a class="link-arrow" href="<%= url_for video_real_estate_text_messaging_path %>" title="Watch Video">Watch Video</a></p>
+						</div>
+						<div class="right-col">
+							<a href="<%= url_for video_real_estate_text_messaging_path %>" title="Watch Video"><img src="<%= asset_path 'videos/real-estate-text-messaging.jpg' %>" width="330" height="189" alt="Watch Video" /></a>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

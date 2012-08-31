@@ -1,0 +1,135 @@
+<%
+title 'Social Sharing Tools'
+meta 'Tatango gives you the tools to share your SMS campaign with customers on Facebook, Twitter or by using a QR code or in-store signage.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<span class="big">Tatango Tour</span>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content tour-new-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2>Products</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<h2 class="select ">Features</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for unlimited_text_messaging_path %>" title="Unlimited Text Messaging">Unlimited Text Messaging</a></li>
+								<li><a href="<%= url_for unlimited_sms_keywords_path %>" title="Unlimited SMS Keywords">Unlimited SMS Keywords</a></li>
+								<li><a href="<%= url_for sms_short_code_messaging_path %>" title="Short Code Messaging">Short Code Messaging</a></li>
+								<li><a href="<%= url_for sms_campaign_management_path %>" title="Campaign Management">Campaign Management</a></li>
+								<li><a href="<%= url_for subscriber_management_path %>" title="Subscriber Management">Subscriber Management</a></li>
+								<li><a href="<%= url_for sms_campaign_reports_path %>" title="Campaign Analytics">Campaign Analytics</a></li>
+								<li><a href="<%= url_for sms_delivery_reports_path %>" title="SMS Delivery Reports">SMS Delivery Reports</a></li>
+								<li class="active"><a href="<%= url_for social_sharing_tools_path %>" title="Social Sharing">Social Sharing</a></li>
+								<li><a href="<%= url_for customer_support_path %>" title="Amazing Customer Support">Amazing Customer Support</a></li>
+								<li><a href="<%= url_for best_practice_compliant_path %>" title="Best Practices Compliant">Best Practices Compliant</a></li>
+								<li><a href="<%= url_for advanced_features_path %>" title="Advanced Features">Advanced Features</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+					
+				</div>
+				
+				<div class="wide-content-tour-new right">
+			
+					<h1>Social Sharing Tools</h1>
+					<img src="<%= asset_path 'tour_social_sharing.jpg' %>" width="664" height="380" alt="Social Sharing Tools" />
+					<p class="border normal">
+Growing your mobile subscriber list can be a challenge, which is why Tatango gives you a handful of tools to grow your list both on the internet and in-store. 
+Since Tatango makes it easy to grow your list, you just have to figure out what to send to all of your new SMS subscribers.
+					</p>
+					
+					<div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>Facebook Sharing</h2>
+								<p>
+Tatango gives you the ability to quickly and easily grow your SMS subscribers with one click by sharing your campaign on Facbook with all of your friends and likers. 
+The best part, Tatango pre-populates each Facebook post with exactly what is required by the wireless carriers to comply with their terms of service.
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_social_sharing_facebook.jpg' %>" width="322" height="214" alt="Facebook Sharing" />
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<img src="<%= asset_path 'tour_social_sharing_twitter.jpg' %>" width="322" height="214" alt="Twitter Sharing" />
+							</div>
+							<div class="tour-right-left-right">
+								<h2>Twitter Sharing</h2>
+								<p>
+Tatango allows you the ability to quickly and easily grow your SMS subscribers with one click by sharing your campaign on Twitter with all of your followers. 
+The best part, Tatango pre-populates each Twitter message with exactly what is required by the wireless carriers to comply with their terms of service.
+								</p>
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<h2>PDF Sharing</h2>
+								<p>
+The Tatango SMS Marketing Flyer Generator allows anyone to quickly and easily create an advertisement for their SMS marketing campaign that is not only beautifully designed, 
+but also complies with all text message marketing best practices. Create your own marketing flyer <a href="/resources/sms-marketing-flyer-generator">here</a>.
+								</p>
+							</div>
+							<div class="tour-right-left-right">
+								<img src="<%= asset_path 'tour_social_sharing_pdf.jpg' %>" width="322" height="214" alt="PDF Sharing" />
+							</div>
+						</div>
+						<div class="tour-right-left">
+							<div class="tour-right-left-left">
+								<img src="<%= asset_path 'tour_social_sharing_qrcode.jpg' %>" width="322" height="214" alt="QR Code Sharing" />
+							</div>
+							<div class="tour-right-left-right">
+								<h2>QR Code Sharing</h2>
+								<p>
+Need to make a QR code for your SMS marketing campaign? To make this process easier, Tatango has created the first free QR code generator specifically made for SMS marketing. 
+Create a QR code for your own SMS marketing campaign <a href="/resources/sms-qr-code-generator">here</a>.
+								</p>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>

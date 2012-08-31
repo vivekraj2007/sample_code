@@ -1,0 +1,116 @@
+<% body_class 'signup' %>
+		
+			<div class="steps-links">
+				<ul>
+					<li>Step 1 - Your Information</li>
+					<li>Step 2 - Email Confirmation</li>
+					<li class="active">Step 3 - Claim Your List Name</li>
+				</ul>
+			</div>
+	
+			<!-- LEFT CONTENT -->
+			<div class="content-left keyword">
+			
+				<h1>Claim Your List Name</h1>
+			
+				<p>
+					The last step is for you to claim your Tatango list name. People will text message your list name to Tatango to join your mobile campaign.
+				</p>
+				
+        <%= form_for(@list) do |f| %>
+          <div class="stripes-box">			
+            <div class="form-header">
+              <h2>List Name:</h2>
+            </div>
+            <div class="form-content">
+              <fieldset>
+                <legend>List Name</legend>
+                <div class="box" style="padding:10px 0px;">
+                  <label for="keyword_name">Enter your desired list name</label><br />
+                  <input id="keyword_name" type="text" required="required" tabindex="1" size="22" class="keyword_name_field" name="keyword[name]" maxlength="15" /><span class="end"></span>
+                </div>
+                <div class="clear">&nbsp;</div>
+                <div class="availablity-check">
+                  <div id="availability-yes" style="display: none;">
+                    <h1 class="check-word-yes"><span class="keyword_name_field"></span> is available!</h1>
+                    <p>
+                      Please complete registration within 60 seconds.<br />
+                      After 60 seconds, this list name we're holding will be released to others.
+                    </p>
+                  </div>
+                  <div id="availability-no" style="display: none;">
+                    <h1 class="check-word-not"><span class="keyword_name_field"></span> is not available!</h1>
+                  </div>
+                </div>
+                <div class="clear">&nbsp;</div>
+                <input id="claim_submit"  disabled="true" style="background-image: url('<%= asset_path 'btn-disabled.png' %>');" class="submit" type="submit" value="Claim Your List Name" tabindex="6" name="submit" />
+              </fieldset>
+            </div>
+          </div>
+        <% end %>
+				
+			</div>
+			<!-- #END of left content -->
+
+      <script type="text/javascript">
+        $(function(){
+          $('#keyword_name').keyup(function(event){
+            jsonQuery = $.getJSON('<%= test_keywords_path %>',{name: $(this).val()}, function(json){
+              if(typeof(json.name)=='string'){
+                $('#availability-yes').show();
+                $('#availability-no').hide();
+                $('#availability-yes .keyword_name_field').html($('#keyword_name').val());
+                $('#claim_submit').css("background-image", "");
+                $('#claim_submit').attr("disabled", false);
+              } else {
+                $('#availability-yes').hide();
+                $('#availability-no').show();
+                $('#availability-no .keyword_name_field').html($('#keyword_name').val());
+                $('#claim_submit').css("background-image", "url('<%= asset_path 'btn-disabled.png' %>')");
+                $('#claim_submit').attr("disabled", true);
+              }
+            });
+          });
+        });
+      </script>
+		
+		
+			<!-- RIGHT CONTENT -->
+            <div class="content-right keyword">
+                
+				<div class="keyword-tips">
+					<p class="semibold">List Name Selection Tips</p>
+					<ul>
+						<li>Pick something easy to spell</li>
+						<li>Try to avoid numbers</li>
+						<li>No spaces allowed!</li>
+						<li>Keep it short</li>
+						<li>Make it memorable</li>
+					</ul>
+					<ul>
+						<li class="asterisk">Don't worry you can always change your list name later.</li>
+					</ul>
+				</div>
+				
+				<div class="recent-keywords">
+					<p class="semibold">Recently Claimed List Names:</p>
+					<ul>
+						<li>SUSHI</li>
+						<li>TAN</li>
+						<li>BOWL</li>
+						<li>GAMES</li>
+						<li>TEAM</li>
+						<li>JEANS</li>
+						<li>VOTE</li>
+						<li>PARTY</li>
+						<li>BURGER</li>
+						<li>FIT</li>
+					</ul>
+					<ul>
+						<li class="asterisk">Claim your list name fast!</li>
+					</ul>
+				</div>
+
+            </div>
+            <!-- #END of right content -->
+

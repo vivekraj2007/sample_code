@@ -1,0 +1,153 @@
+<%
+title 'Marketing Agencies SMS Campaign Reviews'
+meta 'Marketing agencies use Tatango to launch and manage text message marketing campaigns for their clients.'
+body_class 'wide' 
+%>
+			
+			<div class="wide-content-intro nopadding">
+				<p class="big">Some of Our Successful Customers</p>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+			
+			<!-- Wide content -->
+			<div class="wide-content clients-shadow">
+			
+				<div class="wide-content-tour">
+				
+					<script type="text/javascript">
+						jQuery(document).ready(function($) {
+							jQuery(".tour-left-menu-accordion h2.select").addClass("active");
+							jQuery(".tour-left-menu-accordion div.tour-left-block-accordion:not(.select)").hide();
+							jQuery(".tour-left-menu-accordion h2").click(function() {
+								jQuery(this).next("div.tour-left-block-accordion").slideToggle("slow").siblings("div.tour-left-block-accordion:visible").slideUp("slow");
+							});
+						});
+					</script>
+					<div class="tour-left-menu-accordion">
+						<h2 class="select ">Customers by Industry</h2>
+						<div class="tour-left-block-accordion select">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for restaurant_text_messaging_path %>" title="Restaurants">Restaurants</a></li>
+								<li><a href="<%= url_for retail_sms_path %>" title="Retail">Retail</a></li>
+								<li><a href="<%= url_for salons_sms_path %>" title="Salons &amp; Spas">Salons &amp; Spas</a></li>
+								<li><a href="<%= url_for church_sms_path %>" title="Ministry">Ministry</a></li>
+								<li><a href="<%= url_for entertainment_sms_path %>" title="Entertainment">Entertainment</a></li>
+								<li><a href="<%= url_for political_sms_path %>" title="Political">Political</a></li>
+								<li><a href="<%= url_for conference_sms_path %>" title="Conferences">Conferences</a></li>
+								<li><a href="<%= url_for group_text_messaging_path %>" title="Groups &amp; Organizations">Groups &amp; Organizations</a></li>
+								<li class="active"><a href="<%= url_for marketing_agencies_sms_path %>" title="Agencies">Agencies</a></li>
+								<li><a href="<%= url_for emergency_sms_alerts_path %>" title="Emergency SMS Alerts">Emergency SMS Alerts</a></li>
+								<li><a href="<%= url_for proffesional_services_sms_path %>" title="Professional Services">Professional Services</a></li>
+								<li><a href="<%= url_for real_estate_sms_path %>" title="Real Estate">Real Estate</a></li>
+							</ul>
+						</div>
+						<h2>Customers by Product</h2>
+						<div class="tour-left-block-accordion">
+							<ul class="tour-left-menu">
+								<li><a href="<%= url_for customers_sms_broadcasts_path %>" title="SMS Broadcasts">SMS Broadcasts</a></li>
+								<li><a href="<%= url_for customers_sms_contests_path %>" title="SMS Contests">SMS Contests</a></li>
+								<li><a href="<%= url_for customers_sms_polling_path %>" title="SMS Polls">SMS Polls</a></li>
+								<li><a href="<%= url_for customers_sms_autoresponders_path %>" title="SMS Autoresponders">SMS Autoresponders</a></li>
+							</ul>
+						</div>
+						<div class="tour-left-menu-btm"><!----></div>
+					</div>
+
+					<p class="signupfree"><%= link_to "Sign Up Free", signup_path %></p>
+					<p class="call-grey">Call: (888) 517-6345</p>
+					
+				</div>
+				
+				<div class="wide-content-tour right clients">
+			
+					<h1>Marketing Agencies</h1>
+					<p class="intro">
+Are you a marketing agency looking for the perfect SMS marketing platform to launch and manage your clients' mobile marketing campaigns? Look no further than Tatango. Here at Tatango we work with marketing agencies of all sizes representing clients ranging from small businesses to Fortune 500 companies. 
+When your agency teams up with Tatango, not only does it receive a discount on SMS marketing services, it will also receive its own account manager to assist with proposals, strategy and SMS marketing execution. Find out more about the <a href="http://www.tatango.com/resources/agency-program">Tatango Agency Program</a>.
+					</p>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'nine-clouds-inc-profile.jpg' %>" width="141" height="85" alt="9 Clouds, Inc." />
+						</div>
+						<div class="txt">
+							<h2>9 Clouds, Inc.</h2>
+							<p class="location">Sioux Falls, SD</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a>, <a href="<%= url_for sms_polling_path %>">SMS Poll</a>, <a href="<%= url_for sms_contests_path %>">SMS Contest</a></p>
+							<p>
+9 Clouds, a social marketing firm came to Tatango looking for help in launching a text message marketing campaign for Nick’s Hamburgers, a 90-year-old small town hamburger shop. With their SMS campaign, they wanted to increase return visits from existing customers and to attract college students to build brand loyalty with the new residents.
+							</p>
+							<p>
+During the SMS campaign, Nick’s Hamburgers saw 4-5 customers a day redeem their SMS coupons, which resulted in a 15% redemption rate per SMS coupon. Customers loved the option to opt-in and opt-out of the SMS campaign at will, with the campaign having a less than 1% churn rate over the course of the four month campaign.
+							</p>
+							<p>
+Are you a marketing agency looking to launch a text message marketing campaign for one of your clients? Don't trust just any text message marketing provider, Tatango has 4+ years helping marketing agencies look like rock stars when it comes to SMS marketing.
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'launch-sme-agency-profile.jpg' %>" width="141" height="85" alt="" />
+						</div>
+						<div class="txt">
+							<h2>Launch | SME Agency</h2>
+							<p class="location">&nbsp;</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+Chris Faddis from Launch | SME Agency came to Tatango with only a couple weeks to plan, implement and launch a nationwide text message marketing campaign for one of their clients.
+							</p>
+							<p>
+"Other SMS marketing providers told me the campaign wouldn't be ready in such a short amount of time. Instead of making excuses, the team at Tatango started work on the campaign that very night, and it was ready when we needed it." - Chris Faddis (Launch | SME Agency)
+							</p>
+							<p>
+Any SMS marketing provider can send text messages, but Launch | SME quickly realized that Tatango's true value is in the fact that they sit down with each and every client and work with them on forming a strategy that utilizes all the available aspects of text message marketing. Because of this close interaction between Tatango and Launch | SME, their SMS campaign was a huge success, attracting above average engagement.
+							</p>
+							<p>
+Whether your client is small or large, or the campaign needs to be launched the next day or during the next year, let Tatango and its team of text message marketing experts help you and your agency look like all-stars. Don't worry, you can take all the praise from the client.
+							</p>
+						</div>
+					</div>
+					
+					<div class="client-new">
+						<div class="img">
+							<img src="<%= asset_path 'swiftcurrent-profile.jpg' %>" width="141" height="85" alt="" />
+						</div>
+						<div class="txt">
+							<h2>SwiftCurrent</h2>
+							<p class="location">Salem, MA</p>
+							<p class="location">Products Used: <a href="<%= url_for sms_broadcasts_path %>">SMS Broadcast</a></p>
+							<p>
+When a political candidate wants to win an election, they enlist the help of super political marketing strategists SwiftCurrent. When SwiftCurrent wants to take a political candidate mobile, they call Tatango. With the help of Tatango, this agency can quickly help a candidate reach their supporters, volunteers and team members all through the use of text messaging.
+							</p>
+							<p>
+Like many other marketing agencies, SwiftCurrent always has an eye on their clients' bottom line. "After checking out a few other options, what sealed the deal was that their pricing was very up-front and clearly advertised. The others made it very tricky to find their costs, which was a big red flag for us." - Rob Willington (SwiftCurrent)
+							</p>
+							<p>
+With over 98% of text messages being opened, SwiftCurrent leverages the power of text message marketing and Tatango to promote events, drum up support and most importantly, GOTV (Get Out The Vote) for the political candidates they represent.
+							</p>
+							<p>
+A campaign that has the power to mobilize thousands of supporters with the click of a mouse, wins elections. Let Tatango help win your next client by incorporating text message marketing into your next agency proposal.
+							</p>
+						</div>
+					</div>
+					
+				</div>
+				
+			</div>
+			<!-- #END of wide content -->
+			
+		</div>
+	</div>
+	
+	<div class="content btm">
+		<div class="center">
+		
+			<!-- #END of wide content -->
+			<div class="wide-content-btm">
+				<div>Try Tatango free for 7 days. No credit card. No obligations.</div>
+				<p class="try-it"><%= link_to "Try it FREE for 7 days", signup_path %></p>
+			</div>
+					
+		</div>
+	</div>
