@@ -1,7 +1,0 @@
-<% ([ :notice, :warning, :error ] << flash[:show]).compact.flatten.each do |key| %>
-  <% if is_external_controller? %>
-    <% flash[key]  %> <%# Don't show %>
-  <% else %>
-  	<%= content_tag :div, flash[key], :class => "flash #{key} hide#{' sticky' if ([] << flash[:sticky]).compact.flatten.include? key}" if flash[key] %> <%# ok, I agree, this has gotten pretty ugly %>
-  <% end %>
-<% end %>

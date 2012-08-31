@@ -1,9 +1,0 @@
-Congrats! You've received a vote in your SMS poll from someone who texted <%= @poll.resolved_name %>.
-
-
-<% for number in @numbers %>
-  Mobile Phone Number: <%= PhoneNumber.new(number).to_formatted_s %>
-<% end %>
-
-
-It feels good to be loved.

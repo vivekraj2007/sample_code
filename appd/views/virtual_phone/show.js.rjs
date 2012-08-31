@@ -1,3 +1,0 @@
-@for_us.each do |message|
-  page.insert_html :top, "phone_#{@phone.number}_messages", content_tag(:li,h(message[:message]).gsub("\n","<br/>"), :title => "Tags: #{message[:tags].join ', '}")
-end
