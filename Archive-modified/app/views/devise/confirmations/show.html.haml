@@ -1,0 +1,42 @@
+/[if lt IE 7]
+  <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+.mcrd-main
+  / Home corner
+  .mcrd-confirmation-corner
+    %a
+  / End of home corner
+  / Header
+  .mcrd-header.mcrd-confirmation-header
+    %div
+      .mcrd-header-logo.mcrd-cnfm-header-logo
+        %a{:href => "http://mycrowd.com"}
+  / End of header
+  / Section 1
+  #section-1.mcrd-section-1.mcrd-confirmation-section-1
+    %div
+      .row-1
+        %h1 Just one step before you begin...
+        .mcrd-confirmation-wrapper
+          %h2 1. Please enter a password
+          %p Password must include at least one number, one letter and one symbol.
+          %input{:type => "text"}/
+          %p Enter New Password
+          %input{:type => "text"}/
+          %p Confirm Password
+          %input{:type => "submit", :value => "Confirm Account"}/
+  / End of section 1
+  / Footer
+  .mcrd-footer.mcrd-confirmation-footer
+    %div
+      .fotter-bottom-part
+        .double-line
+          %div
+        Copyright © 2013 MyCrowd, Inc. San Francisco, CA | All Rights Reserved
+        %span.hidden | Terms and Conditions
+        .social-icons.hidden
+          %a.icon-1{:href => "#"}
+          %a.icon-2{:href => "#"}
+          %a.icon-3{:href => "#"}
+          %a.icon-4{:href => "#"}
+        .footer-transparent-logo
+  / End of footer

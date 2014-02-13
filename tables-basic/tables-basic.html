@@ -1,0 +1,541 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<!-- Apple devices fullscreen -->
+	<meta name="apple-mobile-web-app-capable" content="yes" />
+	<!-- Apple devices fullscreen -->
+	<meta names="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	
+
+	<!-- Bootstrap -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Bootstrap responsive -->
+	<link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+	<!-- jQuery UI -->
+	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery-ui.css">
+	<link rel="stylesheet" href="css/plugins/jquery-ui/smoothness/jquery.ui.theme.css">
+	<!-- Theme CSS -->
+	<link rel="stylesheet" href="css/style.css">
+	<!-- Color CSS -->
+	<link rel="stylesheet" href="css/themes.css">
+
+	<link rel="stylesheet" href="css/skin.css"/>
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+    <script src="js/jquery-migrate-1.2.1.min.js"></script> 
+	<!-- jQuery UI -->
+	<script src="js/plugins/jquery-ui/jquery.ui.core.min.js"></script>
+	<script src="js/plugins/jquery-ui/jquery.ui.widget.min.js"></script>
+	<script src="js/plugins/jquery-ui/jquery.ui.mouse.min.js"></script>
+	<script src="js/plugins/jquery-ui/jquery.ui.resizable.min.js"></script>
+    <script src="js/plugins/jquery-ui/jquery.ui.slider.js"></script>
+	<!-- slimScroll -->
+	<script src="js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Bootbox -->
+	<script src="js/plugins/bootbox/jquery.bootbox.js"></script>
+	<!-- Bootbox -->
+	<script src="js/plugins/form/jquery.form.min.js"></script>
+	<!-- Validation -->
+	<script src="js/plugins/validation/jquery.validate.min.js"></script>
+	<script src="js/plugins/validation/additional-methods.min.js"></script>
+
+	<!-- Theme framework -->
+	<script src="js/eakroko.min.js"></script>
+	<!-- Theme scripts -->
+	<script src="js/application.min.js"></script>
+	<!-- Just for demonstration -->
+	<!--<script src="js/demonstration.min.js"></script>-->
+    
+    <script type="text/javascript" src="js/jquery.jcarousel.min.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  /*  jQuery('#mycarousel').jcarousel();*/
+	$('.first-and-second-carousel').jcarousel();
+});
+
+</script>
+	<!-- Favicon -->
+	<link rel="shortcut icon" href="img/favicon.ico" />
+	<!-- Apple devices Homescreen icon -->
+	<link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-precomposed.png" />
+
+<title>Table Data</title></head>
+
+<body>
+	<div id="navigation">
+		<div class="container-fluid">
+			<a href="#" id="brand">Logo</a>
+			<a href="#" class="toggle-nav" rel="tooltip" data-placement="bottom" title="Toggle navigation"><i class="icon-reorder"></i></a>
+			<ul class='main-nav'>
+				<li>
+					<a href="#">
+						<i class="icon-home"></i>
+						<span>Dashboard</span>
+					</a>
+				</li>
+				<li class='active'>
+					<a href="#" data-toggle="dropdown" class='dropdown-toggle'>
+						<i class="icon-table"></i>
+						<span>Tables</span>
+						<span class="caret"></span>
+					</a>
+					<ul class="dropdown-menu">
+						<li class='active'>
+							<a href="tables-basic.html">Basic tables</a>
+						</li>
+					</ul>
+				</li>
+				
+				
+				
+				
+			</ul>
+			<div class="user">
+				<ul class="icon-nav">
+					<li class="dropdown sett">
+						<a href="#" class='dropdown-toggle' data-toggle="dropdown"><i class="icon-cog"></i></a>
+						<ul class="dropdown-menu pull-right theme-settings">
+							<li>
+								<span>Layout-width</span>
+								<div class="version-toggle">
+									<a href="#" class='set-fixed'>Fixed</a>
+									<a href="#" class="active set-fluid">Fluid</a>
+								</div>
+							</li>
+							<li>
+								<span>Topbar</span>
+								<div class="topbar-toggle">
+									<a href="#" class='set-topbar-fixed'>Fixed</a>
+									<a href="#" class="active set-topbar-default">Default</a>
+								</div>
+							</li>
+							<li>
+								<span>Sidebar</span>
+								<div class="sidebar-toggle">
+									<a href="#" class='set-sidebar-fixed'>Fixed</a>
+									<a href="#" class="active set-sidebar-default">Default</a>
+								</div>
+							</li>
+						</ul>
+					</li>
+					
+					<li>
+						<a href="more-locked.html" class='lock-screen' rel='tooltip' title="Lock screen" data-placement="bottom"><i class="icon-lock"></i></a>
+					</li>
+				</ul>
+				<div class="dropdown">
+					<a href="#" class='dropdown-toggle' data-toggle="dropdown">User <img src="img/demo/user-avatar.jpg" alt=""></a>
+					<ul class="dropdown-menu pull-right">
+						<li>
+							<a href="more-userprofile.html">Edit profile</a>
+						</li>
+						<li>
+							<a href="#">Account settings</a>
+						</li>
+						<li>
+							<a href="more-login.html">Sign out</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid" id="content">
+		<div id="left">
+			<form action="" method="GET" class='search-form'>
+				<div class="search-pane">
+					<input type="text" name="search" placeholder="Search here...">
+					<button type="submit"><i class="icon-search"></i></button>
+				</div>
+			</form>
+			<div class="subnav">
+				<div class="subnav-title">
+					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Group</span></a>
+				</div>
+				<ul class="subnav-menu">
+					<li>
+						<a href="#">Group One</a>
+					</li>
+					<li>
+						<a href="#">Group Two</a>
+					</li>
+					<li>
+						<a href="#">Group Three</a>
+					</li>
+					<li>
+						<a href="#">Group Four</a>
+					</li>
+				</ul>
+			</div>
+			<div class="subnav">
+				<div class="subnav-title">
+					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Gender</span></a>
+				</div>
+				<ul class="subnav-menu">
+					<li>
+						<a href="#">Male</a>
+					</li>
+					<li>
+						<a href="#">Female</a>
+					</li>
+				
+				</ul>
+			</div>
+            
+            <div class="subnav">
+				<div class="subnav-title">
+					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Relationship</span></a>
+				</div>
+				<ul class="subnav-menu">
+					<li>
+						<a href="#">Stated Single</a>
+					</li>
+					<li>
+						<a href="#">No Answer</a>
+					</li>
+				   <li>
+						<a href="#">Attached</a>
+					</li>
+				</ul>
+			</div>
+			
+            <div class="subnav">
+				<div class="subnav-title">
+					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Oreintation</span></a>
+				</div>
+				<ul class="subnav-menu">
+					<li>
+						<a href="#">Male</a>
+					</li>
+					<li>
+						<a href="#">Female</a>
+					</li>
+				   <li>
+						<a href="#">Both</a>
+					</li>
+				</ul>
+			</div>
+            
+            <div class="subnav">
+				<div class="subnav-title">
+					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Countries</span></a>
+				</div>
+				<ul class="subnav-menu">
+					<li>
+						<a href="#">US</a>
+					</li>
+					<li>
+						<a href="#">UK</a>
+					</li>
+				  
+				</ul>
+			</div>
+            <div class="subnav">
+				<div class="subnav-title">
+					<a href="#" class='toggle-subnav'><i class="icon-angle-down"></i><span>Age Range</span></a>
+				</div>
+				<ul class="subnav-menu">
+					<li>
+						<div class="control-group" style="margin:25px 12px 0 22px;">
+                                <div class="controls">
+                                    <div class="slider" data-step="5" data-min="0" data-max="75" data-range="true" data-rangestart="15" data-rangestop="45">
+                                        <div class="amount"></div>
+                                        <div class="slide"></div>
+                                    </div>
+                                </div>
+                        </div>
+					</li>
+					
+				  
+				</ul>
+			</div>
+            
+		</div>
+		<div id="main">
+			<div class="container-fluid">
+				<div class="page-header">
+					<div class="pull-left">
+						<h1>Table data</h1>
+					</div>
+					
+				</div>
+				<div class="breadcrumbs">
+					<ul>
+						<li>
+							<a href="more-login.html">Home</a>
+							<i class="icon-angle-right"></i>
+						</li>
+						<li>
+							<a href="tables-basic.html">Table Data</a>
+							<i class="icon-angle-right"></i>
+						</li>
+						
+					</ul>
+					<div class="close-bread">
+						<a href="#"><i class="icon-remove"></i></a>
+					</div>
+				</div>
+				<div class="row-fluid">
+					<div class="span12">
+						<div class="box">
+							<div class="box-title">
+								<h3>
+									<i class="icon-table"></i>
+									Table Data
+								</h3>
+							</div>
+							<div class="box-content nopadding">
+								<table class="table table-nomargin">
+									<thead>
+										<tr>
+                                            <th></th>
+											<th>Name</th>
+											<th>Age</th>
+                                            <th>Height</th>
+											<th>Body</th>
+                                            <th>Lang</th>
+											<th>Education</th>
+											<th class='hidden-350'>Occupation</th>
+											<th class='hidden-1024'>Seeking</th>
+											<th class='hidden-480'>Expect</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+                                            <td rowspan="2"><img src="img/music-1.jpg" width="63" height="63" /></td>
+											<td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+                                            <td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+                                            <td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+											<td class='hidden-350'>Win 95+</td>
+											<td class='hidden-1024'>4</td>
+											<td class='hidden-480'>X</td>
+										</tr>
+                                        <tr> 
+                                        	<td colspan="9">
+                                            <ul id="first-carousel" class="first-and-second-carousel jcarousel-skin-tango">
+         <li> <a href="#"><img src="img/music-1.jpg" width="63" height="63" /></a>
+        
+        </li>
+        <li> <a href="#"><img src="img/music-2.jpg" width="63" height="63" /></a>
+          
+        </li>
+        <li> <a href="#"><img src="img/music-3.jpg" width="63" height="63" /></a>
+         
+        </li>
+        <li> <a href="#"><img src="img/music-4.jpg" width="63" height="63" /></a>
+       
+        </li>
+        <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+      
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+         
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+          
+        </li>
+		 <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+          
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+          
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+         
+        </li>
+        <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+        
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+         
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+         
+        </li>
+      </ul>
+                                            </td>
+                                        </tr>
+										<tr>
+                                            <td rowspan="2"><img src="img/music-1.jpg" width="63" height="63" /></td>
+											<td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+                                            <td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+                                            <td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+											<td class='hidden-350'>Win 95+</td>
+											<td class='hidden-1024'>4</td>
+											<td class='hidden-480'>X</td>
+										</tr>
+                                        <tr> 
+                                        	<td colspan="9">
+                                            <ul id="second-carousel" class="first-and-second-carousel jcarousel-skin-tango">
+         <li> <a href="#"><img src="img/music-1.jpg" width="63" height="63" /></a>
+        
+        </li>
+        <li> <a href="#"><img src="img/music-2.jpg" width="63" height="63" /></a>
+          
+        </li>
+        <li> <a href="#"><img src="img/music-3.jpg" width="63" height="63" /></a>
+         
+        </li>
+        <li> <a href="#"><img src="img/music-4.jpg" width="63" height="63" /></a>
+       
+        </li>
+        <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+      
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+         
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+          
+        </li>
+		 <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+          
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+          
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+         
+        </li>
+        <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+        
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+         
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+         
+        </li>
+      </ul>
+                                            </td>
+                                        </tr>
+										<tr>
+                                            <td rowspan="2"><img src="img/music-1.jpg" width="63" height="63" /></td>
+											<td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+                                            <td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+                                            <td>Trident</td>
+											<td>
+												Internet
+												Explorer 4.0
+											</td>
+											<td class='hidden-350'>Win 95+</td>
+											<td class='hidden-1024'>4</td>
+											<td class='hidden-480'>X</td>
+										</tr>
+                                        <tr> 
+                                        	<td colspan="9">
+                                            <ul id="third-carousel" class="first-and-second-carousel jcarousel-skin-tango">
+         <li> <a href="#"><img src="img/music-1.jpg" width="63" height="63" /></a>
+        
+        </li>
+        <li> <a href="#"><img src="img/music-2.jpg" width="63" height="63" /></a>
+          
+        </li>
+        <li> <a href="#"><img src="img/music-3.jpg" width="63" height="63" /></a>
+         
+        </li>
+        <li> <a href="#"><img src="img/music-4.jpg" width="63" height="63" /></a>
+       
+        </li>
+        <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+      
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+         
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+          
+        </li>
+		 <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+          
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+          
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+         
+        </li>
+        <li> <a href="#"><img src="img/music-5.jpg" width="63" height="63" /></a>
+        
+        </li>
+        <li> <a href="#"><img src="img/music-6.jpg" width="63" height="63" /></a>
+         
+        </li>
+       
+        <li> <a href="#"><img src="img/music-7.jpg" width="63" height="63" /></a>
+         
+        </li>
+      </ul>
+                                            </td>
+                                        </tr>
+										<tr> <td></td>
+											<td>Misc</td>
+											<td>Lynx</td>
+                                            <td>Misc</td>
+											<td>Lynx</td>
+                                            <td>Misc</td>
+											<td>Lynx</td>
+											<td class='hidden-350'>Text only</td>
+											<td class='hidden-1024'>-</td>
+											<td class='hidden-480'>X</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	
+</body>
+
+</html>
+
