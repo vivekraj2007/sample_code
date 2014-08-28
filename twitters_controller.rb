@@ -16,7 +16,7 @@ class TwittersController < ApplicationController
        @client_followers <<  twt if i<=10
         i=i+1
    end
-  find_latest_tweets
+ # find_latest_tweets
   @homeheaderpart=Seo.find(:first,:select=>"title,description,keywords",:conditions=>["pagename LIKE ?","Twitter"])
 end
   
