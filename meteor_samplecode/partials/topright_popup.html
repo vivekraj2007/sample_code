@@ -1,0 +1,68 @@
+<Template name="topright_popup">
+	<div id="topright-popup">
+		{{# if display_register}}
+			{{> prompt_login_popup }}
+		{{/if}}
+		{{# if display_add_oauth}}
+			{{> prompt_add_oauth_popup}}
+		{{/if}}
+	 	{{> ban_popup }}
+		{{> merge_popup }}
+		{{> delete_topic_popup }}
+		{{> unarchive_topic_popup }}
+		{{> remove_thread_user_popup }}
+    {{# isolate }}
+      {{# if display_user_mention }}
+        {{> user_mention}}
+      {{/if}}
+    {{/ isolate }}
+    {{# isolate }}
+      {{> notification_center }}
+    {{/ isolate }}
+  </div>
+</Template>
+
+<Template name="ban_popup">
+  <div class="float-popup" id="ban-popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a>
+    <div><span></span> banned</div>
+    <button id="prompt-ban-undo" class="my-btn f-right">Undo Delete</button>
+    <div class="clear"></div>
+  </div>
+</Template>
+
+<Template name="merge_popup">
+  <div class="float-popup" id="merge-topic-popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a> 
+    <div>These spaces merged</div>
+    <button id="undo-merge-topic-button" class="my-btn f-right">Undo Merge</button>
+    <div class="clear"></div>
+  </div>
+</Template>
+
+<Template name="unarchive_topic_popup">
+  <div class="float-popup" id="unarchive-topic-popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a> 
+    <div>This topic archived</div>
+    <button id="undo-archive-topic-button" class="my-btn f-right">Undo Archive</button>
+    <div class="clear"></div>
+  </div>
+</Template>
+
+<Template name="delete_topic_popup">
+  <div class="float-popup" id="delete-topic-popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a> 
+    <div>Space Archived</div>
+    <button id="undo-delete-topic-button" class="my-btn f-right">Undo</button>
+    <div class="clear"></div>
+  </div>
+</Template>
+
+<Template name="remove_thread_user_popup">
+  <div class="float-popup" id="remove-thread-user-popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a> 
+    <div>User removed from topic</div>
+    <button id="undo-remove-thread-user-button" class="my-btn f-right">Undo Remove</button>
+    <div class="clear"></div>
+  </div>
+</Template>

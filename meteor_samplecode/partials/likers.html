@@ -1,0 +1,21 @@
+<Template name="likers">
+  <div class="overview">
+    <span>Upvotes: </span>
+    {{#each likers}}
+      {{#if gphoto_base64}}
+        <img alt="" src="data:image/jpeg;base64,{{gphoto_base64}}" />
+      {{else}}
+        {{#if gravatar_exist}}
+          <img alt="Milos" src="{{ liker_gavatar }}">
+        {{else}}
+          <span class="no-avatar-liker {{bgcolor}}">{{initialName}}</span>
+        {{/if}}
+      {{/if}}
+    {{/each}}
+
+    {{#if too_more}}
+       <span class="more">&nbsp;&amp; 10 more</span>
+     {{/if}}
+     <div class="clear"></div>
+  </div>
+</Template>

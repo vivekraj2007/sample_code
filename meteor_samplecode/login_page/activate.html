@@ -1,0 +1,44 @@
+<Template name="activate">
+<div class="color-bg">
+  <div class="loading-animation hidden">
+     <div class="loading-bar">
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+     </div>
+   </div>
+  <div id="active-box" class="box-container">
+    <div class="header">
+      <a class="logo" href="index.php"><img alt="Knotable logo" src="/images/_logo.png"></a>
+    </div>
+    <div class="box">
+      <div class="body">
+          {{#if is_actived}}
+	          <div class="activate-message">
+	          {{#if is_actived_success}}
+	          	<p>
+	          		You've actived. Click <a class="redirect-link" href="javascript:;" tabindex="4">here</a> to login into Knotable
+	          	</p>
+	          {{else}}
+	          	<p>
+	          		Could not active your account.
+	           </p>
+	          {{/if}}
+	          </div>
+	      {{else}}
+	          <div class='waiting-activate'>
+	            <p>Please waiting...</p>
+	          </div>
+          {{/if}}
+          
+      </div>
+    </div>
+  </div>
+</div>
+</Template>

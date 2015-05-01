@@ -1,0 +1,33 @@
+<Template name="notification_center">
+  <div class="notification-center">
+    <div>
+      {{#each notifications }}
+        {{> notification }}
+      {{/each}}
+    </div>
+  </div>
+</Template>
+
+<Template name="notification">
+  <div class="notification {{ type }}">
+    <a class="btn-close">&nbsp;</a>
+    <div class="body">{{{ getBodyTemplate }}}</div>
+    <div class="created-time">{{ formattedDateCreated }}</div>
+  </div>
+</Template>
+
+<Template name="default_notification">
+{{! The default template which appears when 'notification.data.templateName' property isn't ovrridden }}
+  <div class="default-notification">
+    Default notification
+  </div>
+</Template>
+
+<Template name="activity_notification">
+  <div class="activity-notification">
+    <div class="title">
+      <span title="{{ sender.username }}">{{ sender.fullname }}</span> on <a href="{{ url }}">{{ subject }}</a>
+    </div>
+    <div class="notification-message">{{{ message }}}</div>
+  </div>
+</Template>

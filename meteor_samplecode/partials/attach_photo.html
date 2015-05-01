@@ -1,0 +1,14 @@
+<Template name="attach_photo">
+  <form class="upload-photo-btn-container file_upload_s3" action="https://{{bucket}}.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+    <i class="fa fa-picture-o fa-3x"></i>
+    <input type="hidden" name="key" value="uploads/${filename}">
+    <input type="hidden" name="AWSAccessKeyId" value="YOUR_AWS_ACCESS_KEY">
+    <input type="hidden" name="acl" value="public-read">
+    <input type="hidden" name="success_action_redirect" value="URL">
+    <input type="hidden" name="policy" value="YOUR_POLICY_DOCUMENT_BASE64_ENCODED">
+    <input type="hidden" name="signature"  value="YOUR_CALCULATED_SIGNATURE">
+    <input type="hidden" name="Content-Type" value="image/jpeg">
+    <input name="file" class="upload-photo-btn-large transparent" type="file" style="display:none">
+    <input type="submit" class="hidden" value="Upload File to S3"> 
+  </form>
+</Template>

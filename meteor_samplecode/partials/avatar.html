@@ -1,0 +1,7 @@
+<Template name="avatar">
+  {{#if has_avatar }}
+    <img class='profile-avatar' src="{{ avatar_src }}" alt="{{ get_username }}" title="{{ get_username }}">
+  {{else}}
+    <span class="member-initials no-avatar {{ get_bgcolor }}" title='{{ get_username }}'>{{ initial_name }}</span>
+  {{/if}}
+</Template>

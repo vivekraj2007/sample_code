@@ -1,0 +1,128 @@
+<Template name="people_context_menu">
+  <div class="people context-menu-source-container">
+    <ul class="clearfix">
+      <li data-menu="unarchive" class="ban">UNARCHIVE</li>
+      <li data-menu="ban" class="context-menuarchive"><i class="fa fa-trash-o fa-2x"></i><br>ARCHIVE</li>
+      <li data-menu="profile" class="profile">PROFILE</li>
+    </ul>
+  </div>
+</Template>
+
+<Template name="topic_context_menu">
+  <div class="topic context-menu-source-container">
+    <ul class="clearfix">
+      <li data-menu="unarchive" class="icon-archive-white">UNARCHIVE</li>
+      <li data-menu="delete" class="context-menuarchive no-border"><i class="fa fa-trash-o fa-2x"></i><br>ARCHIVE</li>
+      <li data-menu="copy" style="width: 61px;" class="copy">COPY</li>
+      <li data-menu="undomerge" class="undomerge">UNDO MERGE</li>
+    </ul>
+  </div>
+</Template>
+
+<Template name="group_context_menu">
+  <div class="group context-menu-source-container">
+    <ul class="clearfix">
+      <li data-menu="profile" class="profile">View Group</li>
+      <li data-menu="delete" class="delete">DELETE</li>
+    </ul>
+  </div>
+</Template>
+
+<Template name="gear_menu_context_menu">
+  <div class="gear-menu context-menu-source-container vertical user-menu-dropdown">
+    <ul class="clearfix">
+      <li class="edit-profile hover-style menu-with-icon">
+      	<span class="icon"><i class="fa fa-lock"></i></span>Profile Settings
+      </li>
+      <li class="logout hover-style menu-with-icon">
+      	<span class="icon"><i class="fa fa-sign-out"></i></span>Logout
+      </li>
+      <li class="import-contact hover-style menu-with-icon">
+      	<span class="icon">+<i class="fa fa-user"></i></span>Invite your contacts
+      	<ul class="sub-menu">
+      		<li class="mail-client" ref="gmail"><img src="/images/gmail.png"/></li>
+      		<li class="mail-client" ref="yahoo"><img src="/images/yahoo.png"/></li>
+      		<li class="mail-client" ref="hotmail"><img src="/images/hotmail.png"/></li>
+      		<li class="mail-client" ref="other"><i class="fa fa-envelope-o"></i></li>
+      	</ul>
+      </li>
+      <li class="hover-style">Theme color
+      	<ul class="sub-menu themes">
+      		<li class="theme-red" ref="theme-red"><span></span></li>
+      		<li class="theme-red-blue" ref="theme-red-blue"><span></span></li>
+      		<li class="theme-green" ref="theme-green"><span></span></li>
+      		<li class="theme-blue" ref="theme-blue"><span></span></li>
+      		<li class="theme-green-blue" ref="theme-green-blue"><span></span></li>
+      		<li class="theme-teal-blue" ref="theme-teal-blue"><span></span></li>
+      		<li class="theme-teal" ref="theme-teal"><span></span></li>
+      		<li class="theme-black" ref="theme-black"><span></span></li>
+      	</ul>
+      </li>
+    </ul>
+  </div>
+
+  {{> activities}}
+
+  <div class="search-result context-menu-source-container vertical">
+    <ul class="clearfix">
+      <li class="search-cat">From This Knote</li>
+      <li class="result-item">Search term result 1</li>
+      <li class="result-item">Search term result 2</li>
+      <li class="result-item">Search term result 3</li>
+      <li class="search-cat all">From All Knotes</li>
+      <li class="result-item">Search term result 1</li>
+      <li class="result-item">Search term result 2</li>
+      <li class="result-item">Search term result 3</li>
+      <li class="search-cat">Topics</li>
+      <li class="result-item">Topic 1</li>
+      <li class="result-item">Topic 2</li>
+      <li class="result-item">Topic 3</li>
+      <li class="search-cat">People</li>
+      <li class="result-item user"><img src="/images/milos.jpg"/>User 1</li>
+      <li class="result-item user"><img src="/images/milos.jpg"/>User 2</li>
+      <li class="result-item user"><img src="/images/milos.jpg"/>User 3</li>
+    </ul>
+  </div>
+
+  <div class="user-menu">
+    {{#if avatar}}
+      <div class="thumb-wrapper">
+        <img alt="{{fullname}}" src="{{ avatar }}" title="{{fullname}}" class='avatar'>
+      </div>
+    {{else}}
+      {{#if gphoto_base64}}
+        <div class="thumb-wrapper">
+          <img alt="" src="data:image/jpeg;base64,{{gphoto_base64}}" class='avatar' style="height:34px"/>
+        </div>
+      {{else}}
+        {{#if gravatar_exist}}
+          <div class="thumb-wrapper">
+            <img alt="{{fullname}}" src="{{ gavatar_path }}" title="{{fullname}}" class='avatar'>
+          </div>
+        {{else}}
+          <span class="no-avatar-m {{bgcolor}}">{{initialName}}</span>
+        {{/if}}
+      {{/if}}
+    {{/if}}
+    <!-- <span class="user-name">{{ fullname }}</span> -->
+    <div class="f-right">
+	    <a class="search-icon" href="javascript:;"><i class="fa fa-search"></i></a>
+	    <a class="notification-icon toggle-dropdown" dropdown="notification-area" href="javascript:;"><i class="fa fa-bell"></i></a>
+        <a class="gear toggle-dropdown" dropdown="gear-menu" href="javascript:;"><i class="fa fa-gear"></i></a>
+        <a class="share-icon" href="javascript:;" style="display: none"><i class="fa fa-bars"></i></a>
+	  </div>
+    <div class="search-input"><div>
+      <i class="fa fa-search"></i>
+      <input type="text" autocomplete="off" placeholder="Search"/>
+    </div></div>
+ </div>
+</Template>
+
+<Template name="share_context_menu">
+  <div class="share context-menu-source-container">
+    <ul class="clearfix">
+      <li data-menu="remove" class="remove">REMOVE</li>
+      <li data-menu="profile" class="profile">PROFILE</li>
+    </ul>
+  </div>
+</Template>

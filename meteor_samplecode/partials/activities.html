@@ -1,0 +1,23 @@
+<Template name="activities">
+  <div class="notification-area context-menu-source-container vertical user-menu-dropdown">
+    <div class="heading">Activity
+      <a href="javascript:;" class="activity-settings"><i class="fa fa-gear"></i></a>
+      <div class="activity-settings-area">
+				<div><input type="checkbox" id="activity-settings-emails"/><label for="activity-settings-emails">Emails</label></div>
+				<div><input type="checkbox" id="activity-settings-in-app"/><label for="activity-settings-in-app">In-App</label></div>
+			</div>
+    </div>
+    <ul>
+      {{#each latest_activities}}
+      <li class="activity" data-topicid={{ topic_id }}>
+        {{#with contact}}
+          {{> avatar}}
+        {{/with}}
+        <div>{{{ description }}}</div>
+        <div class="notification-date">{{ fromNow }}</div>
+        <div class="clear"></div>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</Template>

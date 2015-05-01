@@ -1,0 +1,20 @@
+<Template name="share_popup">
+  <div class="popup" id="share-popup">
+    <input type="hidden" id='share_type' name='share_type' value=''>
+    <input type="hidden" id='share_subject' name='share_subject' value=''>
+    <a id='btn-close' class="btn-close" href="javascript:;">&nbsp;</a>
+    <div>
+      {{#if contacts}}
+        {{#each contacts}}
+          <a href="javascript:void(0);" class='media' data-id = "{{ _id }}" >
+            {{{ contact_avatar }}}
+          </a>
+        {{/each}}
+      {{/if}}
+    </div>
+    <div class="clear"></div>
+    <div>
+      <input type="button" id = 'submit_share' class="my-btn btn-close" value="OK" />
+    </div>
+  </div>
+</Template>

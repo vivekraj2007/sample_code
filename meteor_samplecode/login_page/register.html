@@ -1,0 +1,48 @@
+<template name="register">
+  <div id='register' class="hidden box-container">
+    <div class="header">
+      <a class="logo" href="index.php"><img alt="Knotable logo" src="/images/_logo.png"></a>
+    </div>
+    <div class="box loading hidden">
+      <div class="body">
+        <div class="title">Loading...</div>
+        <div class="loading-bar">
+          <div class="loader-dot dot1"></div>
+          <div class="loader-dot dot2"></div>
+          <div class="loader-dot dot3"></div>
+          <div class="loader-dot dot4"></div>
+          <div class="loader-dot dot5"></div>
+        </div>
+      </div>
+    </div>
+    <div class="box">
+      <div class="body">
+        <form class="fancy-label" id="register-form" autocomplete="off">
+          <div class="title">Sign Up</div>
+          <div class="form-message hidden"></div>
+	        <div class="input-wrapper user">
+            <div>
+	            <input type="text" value="" name="username" id='account-username' placeholder="Username">
+	            </div>
+           </div>
+          <div class="input-wrapper email">
+            <div>
+		          <input type="text" value="" name="eid" id="account-email"
+		          placeholder="E-Mail" />
+		        </div>
+          </div>
+          <div class="input-wrapper password">
+            <div>
+		          <input type="password" value="" name="passwd"
+		          id="account-password" placeholder="Password" />
+		        </div>
+		      </div>
+          <button type="submit" class="my-btn" id="create-account"><span>SIGN UP</span></button>
+          <p style="text-align: left;">
+            <a href="javascript:;" id="go-login">I already have an account</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>

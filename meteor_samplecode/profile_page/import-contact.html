@@ -1,0 +1,73 @@
+<Template name="importContact">
+  <div id="right">
+    <div class="show-left-menu-btn"></div>
+    <div class="show-right-menu-btn"></div>
+    <div class="right-inner">
+      <div class="top-container">
+        <div class="title-textbox-container">
+          <h2>Import Contacts and Invite</h2>
+        </div>
+        <div class="top-menu-bar">
+          {{> gear_menu_context_menu }}
+        </div>
+      </div>
+      <div class="container first">
+        <div>
+          <h3>See Who You Already Know on Knotable</h3>
+          <ul class="mail-clients clearfix">
+            <li class="active" ref="gmail"><img src="/images/gmail.png"/><span>Gmail</span></li>
+            <li style='display:none;' ref="yahoo"><img src="/images/yahoo.png"/><span>Yahoo! Mail</span></li>
+            <li style='display:none;' ref="hotmail"><img src="/images/hotmail.png"/><span>Hotmail</span></li>
+            <li style='display:none;' ref="other"><i class="fa fa-envelope-o"></i><span>Any Email</span></li>
+          </ul>
+          <div id="import-area">
+            {{# if gmailAccount}}
+              <div>Invite your friends through your gmail.</div>
+              <strong id='import-email' for="">{{ gmailAccount.services.google.email }}</strong>
+              <input type="button" class="my-btn normal loadcontacts-button" value="Find Your Friends"/>
+            {{else}}
+              <div>Get started by adding your email address.</div>
+              <input type="email" placeholder="Your email" class="textbox"/>
+              <input type="button" class="my-btn normal continue-button" value="Continue"/>
+            {{/if}}
+            <p>
+              <i class="fa fa-lock"></i>&nbsp;<b>Your contacts are safe with us!</b><br/><small>We'll import your address book to suggest connections and help you manage your contacts. And we won't store your password or email anyone without your permission.</small>
+            </p>
+          </div>
+        </div>
+        {{>  foundContacts }}
+      </div>
+
+    </div>
+</div>
+{{> right_menu_container }}
+</Template>
+
+<Template name="foundContacts">
+  <div>
+    <p>
+      We found {{ found_contacts }} people you know on {{ stage }}. Select the people you'd like to connect to.
+    </p>
+    <div class="scrollable-div mail-contacts">
+
+      <div class="bar">
+        <input type="checkbox" id="select-all"/>
+        <label for="select-all">Select All</label>
+      </div>
+
+      <div id='need-import-contacts' class="content">
+        {{#each contacts}}
+          <div class="mail-contact">
+            <div>
+              <input type="checkbox" value="{{email}}" />
+              <img src="/images/anil.jpg"/>
+              <span>{{ name }}</span>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+
+    </div>
+    <input type="button" class="my-btn normal invite-button" value="Invite friends"/>
+  </div>
+</Template>

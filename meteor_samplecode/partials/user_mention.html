@@ -1,0 +1,17 @@
+<Template name="user_mention">
+  <div class="float-popup user-mention" style="display: block">
+    <a class="btn-close" href="javascript:;">&nbsp;</a>
+    <div>
+      {{# each users}}
+          {{> user_mention_item}}
+      {{/each}}
+    </div>
+  </div>
+</Template>
+
+<Template name="user_mention_item">
+  <div class="mention-item {{# if isSelected }}selected{{/if}}" title="{{ fullname }}">
+    {{> avatar }}
+    <span>{{ formattedName }}</span>
+  </div>
+</Template>

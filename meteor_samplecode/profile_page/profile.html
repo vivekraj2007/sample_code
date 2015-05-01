@@ -1,0 +1,397 @@
+<Template name="profile">
+  <div id="right">
+    <div class="show-left-menu-btn"></div>
+    <div class="show-right-menu-btn"></div>
+    <div class="right-inner">
+      <div class="top-container">
+        {{> gear_menu_context_menu }}
+      </div>
+      {{> profile_info }}
+      {{> social_media_popup }}
+    </div>
+  </div>
+  {{> right_menu_container }}
+</Template>
+
+<Template name="profile_info">
+  <div id="main-container">
+    <form id="contact_profile" onsubmit='return false;'>
+      <div class="title-container container" id="title-container">
+        <div class="title-textbox-container">
+        </div>
+        <ul class="blue-icons no-bar">
+           <li class="talk"><span>ADD</span></li>
+        </ul>
+        <div class="clear"></div>
+      </div>
+
+      <div id="popup-container" class="container">
+        {{> compose_popup }}
+      </div>
+      <div class="message-container container">
+        <div class="message profile-item">
+          <div class="message-body">
+            <div class="user-info">
+              {{#if avatar}}
+                <div class="profile_avatar_holder">
+                  <div class="thumb-wrapper">
+                    <img src="{{mini}}"  class="profile_avatar" data-name="{{realName}}" alt="{{realName}}">
+                  </div>
+                  <div class="popup" id="avatar_popup">
+                  <div style="height:20%">
+                         <input type="button" value="Save" id="save_avatar" class="media save-avatar my-btn small-btn hidden">
+                         <input type="button" value="Cancel" id="cancel_avatar" class="media cancel-avatar my-btn small-btn hidden">
+                         <input type="button" value="Delete Picture" id="delete_avatar" class="media delete-avatar my-btn small-btn">
+                         <input type="button" value="Upload Picture" id="change_avatar" class="media change-avatar my-btn small-btn">
+                         <div class="clear" ><br /></div>
+                     </div>
+                     <div style="height:80%">
+                       <div class='photo_shadow_box'><img class="media" id="avatar_large" src='{{avatar}}'/></div>
+                     </div>
+                  </div>
+                </div>
+              {{else}}
+                {{#if gphoto_base64}}
+                <div class="profile_avatar_holder">
+                  <div class="thumb-wrapper">
+                    <img alt="" class="profile_avatar" src="data:image/jpeg;base64,{{gphoto_base64}}"/>
+                  </div>
+                  <div class="popup" id="avatar_popup">
+                        <div style="height:20%">
+                            <input type="button" value="Save" id="save_avatar" class="media save-avatar my-btn small-btn hidden">
+                            <input type="button" value="Cancel" id="cancel_avatar" class="media cancel-avatar my-btn small-btn hidden">
+                            <input type="button" value="Upload Picture" id="change_avatar" class="media change-avatar my-btn small-btn">
+                            <div class="clear" ><br /></div>
+                        </div>
+                        <div style="height:80%">
+                            <div class='photo_shadow_box'><img class="media" id="avatar_large" src='{{avatar}}'/></div>
+                        </div>
+                  </div>
+                </div>
+                {{else}}
+                  {{#if gravatar_exist}}
+                  <div class="profile_avatar_holder">
+                    <div class="thumb-wrapper">
+                      <img src="{{contact_avatar}}"  class="profile_avatar" data-name="{{realName}}" alt="{{realName}}">
+                    </div>
+                  </div>
+                  {{else}}
+                  <span id="profile_member_initials" class="member-initials no-avatar-m {{bgcolor}}" title="{{realName}}">{{initialName}}</span>
+                  <div class="popup" id="avatar_popup">
+                  <div style="height:20%">
+                         <input type="button" value="Save" id="save_avatar" class="media save-avatar my-btn small-btn hidden">
+                         <input type="button" value="Cancel" id="cancel_avatar" class="media cancel-avatar my-btn small-btn hidden">
+                         <input type="button" value="Upload Picture" id="change_avatar" class="media change-avatar my-btn small-btn">
+                         <div class="clear" ><br /></div>
+                     </div>
+                     <div style="height:80%">
+                       <div class='photo_shadow_box'><img class="media" id="avatar_large" src='{{avatar}}'/></div>
+                     </div>
+                  </div>
+                  {{/if}}
+                {{/if}}
+              {{/if}}
+
+            </div>
+            <div class="clear"></div>
+            <div class="message-content">
+              <input type="file" class="upload-avatar transparent" id="upload_avatar">
+              <div class="control-group">
+                <label class="control-label" for="contact-name">Name: </label>
+                {{#if is_my_profile}}
+                  <textarea data-orig="{{ realName }}" class="editable-profile my-textarea" type="text" name='contact-name' id='contact-name' title="Will display for everyone" style="margin-bottom: -7px;" >{{ realName }}</textarea>
+                {{else}}
+                  <div class="profile-value">
+                    {{ realName }}
+                  </div>
+                {{/if}}
+              </div>
+
+                <div class="control-group">
+                  <label class="control-label" for="user-name">User Name: </label>
+                  {{#if userName}}
+                    <div class="profile-blod">
+                    {{ userName }}<span style='color:gray; font-weight: normal'>@knotable.com</span>
+                    </div>
+                  {{else}}
+                    <div class="profile-value">
+                    This user gets emails from Knotable but hasn't activated yet.
+                    </div>
+                  {{/if}}
+                </div>
+              <div class="control-group">
+                <label class="control-label" for="contact-email">Email: </label>
+                <div class="profile-value">
+                  {{# each contact_emails}}
+                    {{this}}
+                    {{#if is_my_profile}}
+                  		<input type="button" value="X" data-email='{{this}}' class="my-btn small-btn remove-email">
+                  	{{/if}}
+                  {{/ each}}
+                  {{#if is_my_profile}}
+                  	<input type="button" value="+" class="my-btn small-btn add-email">
+                  	<div class="clear"></div>
+                  {{/if}}
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-email">Google account: </label>
+                <div class="profile-value">
+                {{#if is_my_profile}}
+                  {{#if contact_gmail_user}}
+                    {{ contact_gmail_user.services.google.email }}
+                    <input type="button" value="X" data-userid="{{ contact_gmail_user._id }}" class="my-btn small-btn remove-google-oauth">
+                    <a href="/importContact/gmail" class="my-btn small-btn">Invite</a>
+                  {{else}}
+                    <input type="button" value="+" class="my-btn small-btn add-google-oauth">
+                  {{/if}}
+                {{/if}}
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-email">Facebook account: </label>
+                <div class="profile-value">
+                  {{#if is_my_profile}}
+                    {{#if contact_facebook}}
+                      {{ contact_facebook }} <input type="button" value="X" class="my-btn small-btn remove-facebook-oauth">
+                    {{else}}
+                      <input type="button" value="+" class="my-btn small-btn add-facebook-oauth">
+                    {{/if}}
+                  {{/if}}
+                </div>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-phone">Phone: </label>
+                <textarea data-orig="{{ contact_phone }}" class="editable-profile my-textarea" type="text" name='contact-phone' id='contact-phone' {{editable}}>{{ contact_phone }}</textarea>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-website">Website: </label>
+                <textarea data-orig="{{ contact_website }}" class="editable-profile my-textarea" type="text" name='contact-website' id='contact-website' {{editable}}>{{ contact_website }}</textarea>
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-twitter-link">Twitter: </label>
+                {{#if is_editable}}
+                  <textarea data-orig="{{ contact_twitter_link }}" class="editable-profile my-textarea" type="text" name='contact-twitter-link' id='contact-twitter-link'>{{ contact_twitter_link }}</textarea>
+                {{else}}
+                	<a href="javascript:;" class="show-social-media" ref="twitter">{{ contact_twitter_link }}</a>
+                {{/if}}
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-facebook-link">Facebook: </label>
+                {{#if is_editable}}
+                	<textarea data-orig="{{ contact_facebook_link }}" class="editable-profile my-textarea" type="text" name='contact-facebook-link' id='contact-facebook-link'>{{ contact_facebook_link }}</textarea>
+                {{else}}
+                	<a href="javascript:;" class="show-social-media" ref="facebook">{{ contact_facebook_link }}</a>
+                {{/if}}
+              </div>
+
+              <div class="control-group">
+                <label class="control-label" for="contact-linkedin-link">LinkedIn: </label>
+                {{#if is_editable}}
+                	<textarea data-orig="{{ contact_linkedin_link }}" class="editable-profile my-textarea" type="text" name='contact-linkedin-link' id='contact-linkedin-link'>{{ contact_linkedin_link }}</textarea>
+                {{else}}
+                	<a href="javascript:;" class="show-social-media" ref="linkedin">{{ contact_linkedin_link }}</a>
+                {{/if}}
+              </div>
+              <br/>
+              {{#if is_my_profile}}
+                <div class="control-group">
+                <input type="button" value="Change Password" class="small-btn active change-password">
+              </div>
+
+                <div class="clear"><br /></div>
+
+                <div class="control-group">
+                  <a href="#" class="delete-account">Delete this account and all its messages</a>
+                </div>
+                <div class="clear"><br /></div>
+              {{else}}
+                {{#if is_my_contact}}
+                  <div class="control-group">
+                    <input type="button" value="+ Added to my contacts" class="my-btn my-btn_disabled" disabled="true">
+                  </div>
+                  <div class="clear"><br /></div>
+                {{else}}
+                  <div class="control-group">
+                    <input type="button" value="+ Add to my contacts" class="my-btn active add-contact">
+                  </div>
+                  <div class="clear"><br /></div>
+                {{/if}}
+              {{/ if}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    {{#if has_notes}}
+      <div class="message-container container">
+
+        {{#each cards}}
+          {{>knote}}
+        {{/each}}
+
+      </div>
+    {{/ if}}
+  </div>
+</Template>
+
+<Template name="social_media_popup">
+	<div class="popup" id="social-media-popup">
+		<a class="btn-close" href="javascript:;">&nbsp;</a>
+		<ul class="nav-tab">
+			<li ref="twitter"><a href="javascript:;">Twitter</a><div class="triangle"></div></li>
+			<li ref="facebook"><a href="javascript:;">Facebook</a><div class="triangle"></div></li>
+			<li ref="linkedin"><a href="javascript:;">LinkedIn</a><div class="triangle"></div></li>
+		</ul>
+		<div class="nav-content">
+			<div ref="twitter">
+				<div class="top-section">
+					<h1>
+						<a target="_blank" href="http://twitter.com/amolsarva">@amolsarva’s Tweets</a>
+					</h1>
+				</div>
+				<div class="section"></div>
+			</div>
+			<div ref="facebook">
+				<div class="top-section">
+					<h1>
+						<a target="_blank" href="facebook link here">@amolsarva’s Facebook</a>
+					</h1>
+				</div>
+				<div class="section"></div>
+			</div>
+			<div ref="linkedin">
+				<div class="top-section">
+					<h1>
+						<a target="_blank" href="http://www.linkedin.com/in/amolsarva">Amol Sarva’s LinkedIn</a>
+					</h1>
+				</div>
+				<div class="section"></div>
+			</div>
+		</div>
+	</div>
+</Template>
+
+<Template name="change_password_popup">
+  <div class="popup change_password_popup" id="change_password_popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a>
+    <form class="change-password-form" autocomplete="off">
+      <div>
+        <p><b>Make a personalized password:</b></p>
+        <p>Old password</p>
+        <input type="password" id="old-password" />
+        <p>New password</p>
+        <input type="password" id="new-password" />
+      </div>
+      <div>
+      <input type="button" class="my-btn f-right change_password_btn" value="Submit" />
+      </div>
+    </form>
+  </div>
+</Template>
+
+<Template name="delete_account_popup">
+  <div class="popup delete_account_popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a>
+    <p><b>Are you sure want to delete this account and all its messages?</b></p>
+
+    <p>
+      <a class="my-btn f-right btn-cancel" href="javascript:;">Cancel</a>
+      <a class="my-btn f-right btn-delete" href="javascript:;">Delete</a>
+
+    </p>
+  </div>
+</Template>
+
+<Template name="import_gmail_popup">
+  <div class="popup import_gmail_popup">
+    <a class="btn-close" href="javascript:;">&nbsp;</a>
+    <form>
+      <div>
+        <p><b>Import mails from gmail:</b></p>
+        <p><input type="checkbox" checked="checked"/>Starred mails in last 90 days (10).</p>
+        <p><input type="checkbox" checked="checked"/>Busy threads with 5+ replies (5).</p>
+        <p><input type="checkbox" checked="checked"/>Thread with over 2 attachments (3).</p>
+      </div>
+      <div>
+        <input type="button" class="my-btn f-right cancel_btn" value="Cancel" />
+        <input type="button" class="my-btn f-right ok_btn" value="OK" />
+      </div>
+    </form>
+  </div>
+</Template>
+
+<Template name="group">
+  <div id="right">
+    <div class="show-left-menu-btn"></div>
+    <div class="show-right-menu-btn"></div>
+    <div class="right-inner">
+        <div class="top-container">
+          <p class="g_name">{{gname}}</p>
+          {{> gear_menu_context_menu }}
+          <div class="icon new_group_profile" title="Add people">+</div>
+        </div>
+        <div id="main-container">
+
+
+
+          <div class="group_profiles">
+            {{#each contacts}}
+              <div class="group_profile" data-id="{{profile_id}}">
+                <div class="btn-delete" title="Remove {{realName}} from {{gname}} group"></div>
+                {{#if avatar}}
+                  <div class="profile_avatar_holder">
+                    <div class="thumb-wrapper">
+                      <img src="{{mini}}"  class="profile_avatar" data-name="{{realName}}" alt="{{realName}}">
+                    </div>
+                  </div>
+                {{else}}
+                  {{#if gphoto_base64}}
+                  <div class="profile_avatar_holder">
+                    <div class="thumb-wrapper">
+                      <img alt="" class="profile_avatar" src="data:image/jpeg;base64,{{gphoto_base64}}"/>
+                    </div>
+                  </div>
+                  {{else}}
+                    {{#if gravatar_exist}}
+                      <div class="profile_avatar_holder">
+                        <div class="thumb-wrapper">
+                          <img src="{{contact_avatar}}"  class="profile_avatar" data-name="{{realName}}" alt="{{realName}}">
+                        </div>
+                      </div>
+                    {{else}}<p>
+                      <span id="profile_member_initials" class="member-initials no-avatar-m {{bgcolor}}" title="{{realName}}">{{initialName}}</span>
+                      </p>
+                    {{/if}}
+                  {{/if}}
+                {{/if}}
+
+                <div class="message-content">
+
+                  <p><span class="labelvalue"> {{realName}}</span></p>
+
+                  <p> {{# each contact_emails}}
+                        <span class="labelvalue">
+                          {{this}}
+                        </span>
+                        <br>
+                      {{/ each}}
+                  </p>
+
+
+
+                </div>
+              </div>
+            {{/each}}
+          </div>
+        </div>
+    </div>
+  </div>
+</Template>
+

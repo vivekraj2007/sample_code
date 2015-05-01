@@ -1,0 +1,49 @@
+<template name="login">
+<div class="color-bg">
+  <div class="loading-animation hidden">
+     <div class="loading-bar">
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+       <div class="loader-dot"></div>
+     </div>
+   </div>
+  <div id="login-box" class="box-container">
+    <div class="header">
+      <a class="logo" href="index.php"><img alt="Knotable logo" src="/images/_logo.png"></a>
+    </div>
+    
+    <div class="box">
+      <div class="body">
+        <form class="fancy-label" id="login-form" autocomplete="off">
+          <div class="title">Login</div>
+          <div class="form-message hidden"></div>
+          <div class="input-wrapper user">
+            <div>
+		          <input type="text" value="" name="email" id="login-username"
+		          placeholder="Username" tabindex="1"/>
+	          </div>
+	        </div>
+          <div class="input-wrapper password">
+            <div>
+		          <input type="password" value="" name="password"
+		          id="login-password" placeholder="Password" tabindex="2"/>
+	          </div>
+          </div>
+          <a class="forget-password" href="/resetPassword" tabindex="4">Forgot password?</a>
+          <button type="submit" class="my-btn" id="login-button" tabindex="3"><span>LOGIN</span></button>
+          <p style="text-align: right;">
+             <a href="javascript:;" id="register-button" tabindex="5">Sign up</a>
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+  {{> register}}
+</div>
+</template>
